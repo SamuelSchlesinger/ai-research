@@ -258,3 +258,16 @@ $$ (2x_b-1)\sum_{r:Z_r(a)=0}v_r\operatorname{sgn}(\ell_r(x))>0 $$
 for every independent table and address, using $R=O(mN)$ rows. If such a family existed, its $2R+1$ gates would give $O(n^2/\log n)$ at balance. No such family was constructed, and no evidence that the requisite incidence/decoding lemma holds is claimed. The compiler alone is not an asymptotic construction. The missing ingredient is an exact all-table decoding identity for the row sets activated at every address, with a provably economical shared row family.
 
 Artifacts preserve the rank compiler, exact two-gate identity, illustrative three-bit threshold code and scalable counterexample checks. No solver or background job was launched by this task. User scope remains exact balanced asymptotics; further finite-record or approximation searches are outside that scope unless newly requested.
+
+
+## 13. Second asymptotic creative pass: scalar Walsh-compression blockers
+
+`experiments/asymptotic_creative_astra_pass2/report.md` records **no balanced exact asymptotic improvement**. The developed route was separable nonlinear Walsh decoding $F_\phi(y,b)=\sum_S\chi_S(b)\phi(h_S(y))$. Its failure is shown by explicit scalable tables, not merely solver timeouts. These hand proofs are architecture-specific and not unrestricted threshold lower bounds. The parent reran the saved exact spectrum, gate-identity and modulation/spike checks successfully.
+
+A five-point pattern in four binary coordinates has Walsh spectrum ten copies of -2 and six copies of 6. Repetition shows that hard clipping at any $B=o(N)$ fails universal sign decoding. Puncturing produces a defect $D_\phi=\phi(10)+10\phi(2)-5\phi(6)$; when positive and $\phi(t)=o(t)$, its linear-in-N negative contribution defeats the decoder. This rules out fixed sublinear powers and fixed logarithmic shrinkers, with the report's additional repetitions for the latter. An affine-repair lemma rules out rescuing these specific decoders with arbitrary affine raw-table/address terms at the top. It does not rule out multiple coupled coefficients, different bases, channel-dependent rules, asymmetric encodings or general mixed-sign circuits.
+
+The report also audits raw-gate costs: scalar amplitude compression alone does not remove the address-interaction cost, and nonlinear compressed forms cannot simply be substituted into identities requiring affine table forms. Thus even a successful table-only decoder would need separate subquadratic gate accounting.
+
+A proposed alternative uses nonlinear label permutations whose decoder characters expand into at most four ordinary Walsh characters. Same-control shears share a fixed slice on which the same puncture remains an obstruction. Different controls/global mixing have not been resolved, and sparse character expansion alone does not shorten the full address ladders. No positive asymptotic construction is claimed.
+
+The new blocker context was delivered to the currently running coefficient-language Astra task for its original language-design assignment. It is information for design, not a separate requested review. All task-owned processes from this completed pass finished. Report, checks and exploratory probes are archived.

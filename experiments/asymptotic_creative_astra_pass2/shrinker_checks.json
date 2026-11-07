@@ -1,0 +1,43 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "exact_spectrum_checks": "passed",
+  "sqrt_witness_N": 16384,
+  "sqrt_score": -2196.0189659161488,
+  "best_slope": 16.863989535702288,
+  "best_seed": [
+    1,
+    -1,
+    -1,
+    1,
+    -1,
+    1,
+    1,
+    1,
+    -1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    -1
+  ],
+  "best_punctured_spectrum": [
+    -10,
+    -2,
+    -2,
+    -2,
+    -2,
+    -2,
+    -2,
+    6,
+    -2,
+    -2,
+    -2,
+    6,
+    -2,
+    6,
+    6,
+    6
+  ]
+}

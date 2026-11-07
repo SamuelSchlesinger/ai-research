@@ -92,3 +92,8 @@ The creative worst-case-only Astra task completed and is archived as `experiment
 ## Latest user scope and asymptotic restart outcome
 
 The user is interested ONLY in asymptotic exact worst-case upper bounds for balanced growing-k Andreev, and asked for a highly creative restart. `experiments/asymptotic_creative_astra/report.md` records no improved asymptotic bound. It falsifies the small-channel periodic positional rank-repair idea and proposes, without proving, a separately gated threshold-code lemma that would yield $O(n^2/log n)$. Read RESEARCH_STATE.md section 12 for the precise limitations. Do not present its compiler or unproved target as an upper bound. No new jobs remain from this task, and no new task is implicitly authorized merely by its completion.
+
+
+## Coefficient-language design and latest blocker context
+
+The user now asks for an Astra design of multiple or parameterized coefficient-rule languages that control SMT difficulty while generating uniform exact circuit families. This is the active design task. Its brief includes all upper/lower blockers, direct independent raw-table inputs, shared rules across sizes, solver-fragment/normalization issues, and accurate prior runtimes. The separate completed asymptotic pass2 is archived as `experiments/asymptotic_creative_astra_pass2`; it yields no upper improvement but rules out specific scalar Walsh shrinkers, including raw-affine repair. This new context has also been sent to the language agent. Treat these as scoped architecture obstructions, not general no-go statements for a DSL.

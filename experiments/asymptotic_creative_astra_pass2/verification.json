@@ -1,0 +1,42 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "five_point_seed": [
+    1,
+    -1,
+    -1,
+    1,
+    -1,
+    1,
+    1,
+    1,
+    -1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    -1
+  ],
+  "seed_spectrum": [
+    6,
+    -2,
+    -2,
+    -2,
+    -2,
+    -2,
+    -2,
+    6,
+    -2,
+    -2,
+    -2,
+    6,
+    -2,
+    6,
+    6,
+    6
+  ],
+  "spectrum_extensions": "passed, M=1,2,4,8,16,32,64",
+  "raw_gate_checks": 1386,
+  "modulation_and_spike_checks": "passed"
+}
