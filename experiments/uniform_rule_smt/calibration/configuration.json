@@ -1,0 +1,33 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "kind": "calibration",
+  "types": 1,
+  "width": 2,
+  "parameters": [
+    "v",
+    "direct",
+    "cutoff"
+  ],
+  "sizes": [
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      2
+    ]
+  ],
+  "bottoms": [
+    2,
+    4
+  ],
+  "seed": 7,
+  "call_timeout_seconds": 30,
+  "outer_budget_seconds": 90,
+  "initial_points": 272,
+  "initial_activation_booleans": 0,
+  "solver_version": "5.3.3",
+  "gate_count_rule": "N for calibration; types*N*m otherwise",
+  "semantics": "arbitrary real shared coefficients, exact >= ties, no unit margins, no weight bounds"
+}

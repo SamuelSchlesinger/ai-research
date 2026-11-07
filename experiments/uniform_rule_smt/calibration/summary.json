@@ -1,0 +1,24 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "result": "VERIFIED_TRAINING_SIZES_ONLY",
+  "kind": "calibration",
+  "types": 1,
+  "width": 2,
+  "sizes": [
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      2
+    ]
+  ],
+  "parameters": 3,
+  "rounds": 1,
+  "examples": 272,
+  "activation_booleans": 0,
+  "solver_seconds": 0.0028817448765039444,
+  "wall_seconds": 0.1147367712110281,
+  "status_scope": "Finite training sizes in the declared rule family; not an all-size theorem"
+}

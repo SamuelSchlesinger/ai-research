@@ -1,0 +1,342 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "runs": [
+    {
+      "run": "calibration",
+      "Authors": "Christian Reitwiessner",
+      "result": "VERIFIED_TRAINING_SIZES_ONLY",
+      "kind": "calibration",
+      "types": 1,
+      "width": 2,
+      "sizes": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "parameters": 3,
+      "rounds": 1,
+      "examples": 272,
+      "activation_booleans": 0,
+      "solver_seconds": 0.0028817448765039444,
+      "wall_seconds": 0.1147367712110281,
+      "status_scope": "Finite training sizes in the declared rule family; not an all-size theorem",
+      "initial_examples": 272,
+      "sample_policy": "legacy",
+      "gate_counts": [
+        2,
+        4
+      ],
+      "learner_call_seconds": [
+        0.0009
+      ],
+      "checker_counterexamples": 0
+    },
+    {
+      "run": "coupled33",
+      "Authors": "Christian Reitwiessner",
+      "result": "UNKNOWN",
+      "kind": "coupled",
+      "types": 2,
+      "width": 3,
+      "sizes": [
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "parameters": 33,
+      "rounds": 1,
+      "examples": 187,
+      "activation_booleans": 13744,
+      "solver_seconds": 60.057479701936245,
+      "wall_seconds": 64.02255520038307,
+      "status_scope": "Finite training sizes in the declared rule family; not an all-size theorem",
+      "initial_examples": 187,
+      "sample_policy": "legacy",
+      "gate_counts": [
+        16,
+        48,
+        96,
+        128
+      ],
+      "learner_call_seconds": [
+        60.0575
+      ],
+      "checker_counterexamples": 0
+    },
+    {
+      "run": "coupled33_curriculum",
+      "Authors": "Christian Reitwiessner",
+      "result": "UNKNOWN",
+      "kind": "coupled",
+      "types": 2,
+      "width": 3,
+      "sizes": [
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "parameters": 33,
+      "rounds": 2,
+      "examples": 32,
+      "activation_booleans": 2304,
+      "solver_seconds": 72.94173940457404,
+      "wall_seconds": 73.70047183521092,
+      "status_scope": "Finite training sizes in the declared rule family; not an all-size theorem",
+      "initial_examples": 16,
+      "sample_policy": "legacy",
+      "gate_counts": [
+        16,
+        48,
+        96,
+        128
+      ],
+      "learner_call_seconds": [
+        12.887,
+        60.0023
+      ],
+      "checker_counterexamples": 16
+    },
+    {
+      "run": "coupled33_xor_curriculum",
+      "Authors": "Christian Reitwiessner",
+      "result": "UNKNOWN",
+      "kind": "coupled",
+      "types": 2,
+      "width": 3,
+      "sizes": [
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "parameters": 33,
+      "rounds": 2,
+      "examples": 64,
+      "activation_booleans": 4608,
+      "solver_seconds": 99.82483720779419,
+      "wall_seconds": 101.22120232321322,
+      "status_scope": "Finite training sizes in the declared rule family; not an all-size theorem",
+      "initial_examples": 48,
+      "sample_policy": "xor_corners",
+      "gate_counts": [
+        16,
+        48,
+        96,
+        128
+      ],
+      "learner_call_seconds": [
+        39.4627,
+        60.0002
+      ],
+      "checker_counterexamples": 16
+    },
+    {
+      "run": "frozen_bottom_diagnostic",
+      "Authors": "Christian Reitwiessner",
+      "result": "UNSAT_RESTRICTED_RULES_ON_SAMPLES",
+      "kind": "coupled",
+      "types": 2,
+      "width": 3,
+      "sizes": [
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "parameters": 15,
+      "rounds": 1,
+      "examples": 187,
+      "activation_booleans": 0,
+      "solver_seconds": 0.004604116082191467,
+      "wall_seconds": 0.7072062715888023,
+      "status_scope": "Finite training sizes in the declared rule family; not an all-size theorem",
+      "initial_examples": 187,
+      "sample_policy": "legacy",
+      "gate_counts": [
+        16,
+        48,
+        96,
+        128
+      ],
+      "learner_call_seconds": [
+        0.0046
+      ],
+      "checker_counterexamples": 0
+    },
+    {
+      "run": "frozen_xor_bottom_diagnostic",
+      "Authors": "Christian Reitwiessner",
+      "result": "UNSAT_RESTRICTED_RULES_ON_SAMPLES",
+      "kind": "coupled",
+      "types": 2,
+      "width": 3,
+      "sizes": [
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "parameters": 15,
+      "rounds": 1,
+      "examples": 218,
+      "activation_booleans": 0,
+      "solver_seconds": 0.00584627129137516,
+      "wall_seconds": 1.0948663391172886,
+      "status_scope": "Finite training sizes in the declared rule family; not an all-size theorem",
+      "initial_examples": 218,
+      "sample_policy": "xor_corners",
+      "gate_counts": [
+        16,
+        48,
+        96,
+        128
+      ],
+      "learner_call_seconds": [
+        0.0058
+      ],
+      "checker_counterexamples": 0
+    },
+    {
+      "run": "positional14",
+      "Authors": "Christian Reitwiessner",
+      "result": "UNKNOWN",
+      "kind": "positional",
+      "types": 1,
+      "width": 2,
+      "sizes": [
+        [
+          2,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "parameters": 14,
+      "rounds": 1,
+      "examples": 187,
+      "activation_booleans": 6872,
+      "solver_seconds": 60.029241962358356,
+      "wall_seconds": 61.61426139436662,
+      "status_scope": "Finite training sizes in the declared rule family; not an all-size theorem",
+      "initial_examples": 187,
+      "sample_policy": "legacy",
+      "gate_counts": [
+        8,
+        24,
+        48,
+        64
+      ],
+      "learner_call_seconds": [
+        60.0292
+      ],
+      "checker_counterexamples": 0
+    },
+    {
+      "run": "positional14_n32_long",
+      "Authors": "Christian Reitwiessner",
+      "result": "UNKNOWN",
+      "kind": "positional",
+      "types": 1,
+      "width": 2,
+      "sizes": [
+        [
+          4,
+          4
+        ]
+      ],
+      "parameters": 14,
+      "rounds": 1,
+      "examples": 48,
+      "activation_booleans": 3072,
+      "solver_seconds": 300.0129234865308,
+      "wall_seconds": 300.70896682702005,
+      "status_scope": "Finite training sizes in the declared rule family; not an all-size theorem",
+      "initial_examples": 48,
+      "sample_policy": "legacy",
+      "gate_counts": [
+        64
+      ],
+      "learner_call_seconds": [
+        300.0129
+      ],
+      "checker_counterexamples": 0
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "REFUTED_CANDIDATE_ONLY",
+  "sizes": [
+    {
+      "k": 2,
+      "m": 2,
+      "bottoms": 16,
+      "total_gates": 17,
+      "wires": 152,
+      "max_rational_bits": 23,
+      "active_top_terms": 16,
+      "nonliteral_table_rows": 16,
+      "globally_reorientable": false
+    },
+    {
+      "k": 3,
+      "m": 3,
+      "bottoms": 48,
+      "total_gates": 49,
+      "wires": 881,
+      "max_rational_bits": 23,
+      "active_top_terms": 48,
+      "nonliteral_table_rows": 48,
+      "globally_reorientable": false
+    },
+    {
+      "k": 4,
+      "m": 3,
+      "bottoms": 96,
+      "total_gates": 97,
+      "wires": 2812,
+      "max_rational_bits": 23,
+      "active_top_terms": 96,
+      "nonliteral_table_rows": 96,
+      "globally_reorientable": false
+    },
+    {
+      "k": 4,
+      "m": 4,
+      "bottoms": 128,
+      "total_gates": 129,
+      "wires": 4256,
+      "max_rational_bits": 23,
+      "active_top_terms": 128,
+      "nonliteral_table_rows": 128,
+      "globally_reorientable": false
+    }
+  ]
+}

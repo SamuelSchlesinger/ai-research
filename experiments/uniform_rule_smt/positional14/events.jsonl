@@ -1,0 +1,4 @@
+{"phase": "initialized", "parameters": 14, "examples": 187, "activation_booleans": 6872, "elapsed": 1.5846}
+{"phase": "learner", "round": 1, "status": "UNKNOWN", "seconds": 60.029241962358356, "examples": 187, "activation_booleans": 6872, "elapsed": 61.6141}
+{"phase": "reason", "reason": "timeout", "elapsed": 61.6142}
+{"phase": "finished", "Authors": "Christian Reitwiessner", "result": "UNKNOWN", "kind": "positional", "types": 1, "width": 2, "sizes": [[2, 2], [3, 3], [4, 3], [4, 4]], "parameters": 14, "rounds": 1, "examples": 187, "activation_booleans": 6872, "solver_seconds": 60.029241962358356, "wall_seconds": 61.61426139436662, "status_scope": "Finite training sizes in the declared rule family; not an all-size theorem", "elapsed": 61.6143}

@@ -102,3 +102,8 @@ The user now asks for an Astra design of multiple or parameterized coefficient-r
 ## Coefficient-language task completed
 
 Read `experiments/coefficient_language_astra/report.md` and RESEARCH_STATE.md section 14. Astra recommends an affine-hole public-index language plus a complementary additive atom language, with vector-valued nested resource bounds and alternative finite-state/decision/tensor generators. `rules.py` is a tested compiler/evaluator/miter-export prototype, NOT a completed synthesizer. Parent reran eight tests and three expected SMT outcomes successfully. The natural next engineering task, only when requested, is an exact shared-rule multi-size CEGIS learner using raw table bits, strict tie semantics and scoped grammar claims. No new upper-bound family was proved. All requested Astra tasks have now completed; historical detached processes require separate status checks.
+
+
+## Shared-rule experiment now completed
+
+The previously missing affine-hole learner has now been implemented and run at the user's request: `experiments/uniform_rule_smt`. Read its report and RESEARCH_STATE.md section15. Two shared multi-size skeletons plus curricula, a300s balanced n32-only run and frozen-bottom diagnostics found no new verified circuit. Calibration and four exact infrastructure tests passed. All actual constraints, counterexamples, parameters, initialization policies and runtimes are saved. No experiment-owned solver remains. Do not describe this as a full structural grammar search or unrestricted n32 circuit optimization; the unknowns are shared coefficients of fixed public feature menus.

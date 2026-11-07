@@ -1,0 +1,54 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "kind": "positional",
+  "types": 1,
+  "width": 2,
+  "parameters": [
+    "a0_0",
+    "a0_1",
+    "w0_0",
+    "w0_1",
+    "t0_0",
+    "t0_1",
+    "v0_0",
+    "v0_1",
+    "d_0",
+    "d_1",
+    "e_0",
+    "e_1",
+    "cutoff_0",
+    "cutoff_1"
+  ],
+  "sizes": [
+    [
+      2,
+      2
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      4,
+      3
+    ],
+    [
+      4,
+      4
+    ]
+  ],
+  "bottoms": [
+    8,
+    24,
+    48,
+    64
+  ],
+  "seed": 7,
+  "call_timeout_seconds": 60,
+  "outer_budget_seconds": 180,
+  "initial_points": 187,
+  "initial_activation_booleans": 6872,
+  "solver_version": "5.3.3",
+  "gate_count_rule": "N for calibration; types*N*m otherwise",
+  "semantics": "arbitrary real shared coefficients, exact >= ties, no unit margins, no weight bounds"
+}

@@ -1,0 +1,32 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "result": "UNSAT_RESTRICTED_RULES_ON_SAMPLES",
+  "kind": "coupled",
+  "types": 2,
+  "width": 3,
+  "sizes": [
+    [
+      2,
+      2
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      4,
+      3
+    ],
+    [
+      4,
+      4
+    ]
+  ],
+  "parameters": 15,
+  "rounds": 1,
+  "examples": 187,
+  "activation_booleans": 0,
+  "solver_seconds": 0.004604116082191467,
+  "wall_seconds": 0.7072062715888023,
+  "status_scope": "Finite training sizes in the declared rule family; not an all-size theorem"
+}

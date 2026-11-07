@@ -1,0 +1,28 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "theta": {
+    "v": "1/2",
+    "direct": "-1/2",
+    "cutoff": "1/2"
+  },
+  "stats": [
+    {
+      "k": 1,
+      "m": 2,
+      "bottoms": 2,
+      "total_gates": 3,
+      "wires": 9,
+      "max_rational_bits": 2,
+      "globally_reorientable": false
+    },
+    {
+      "k": 2,
+      "m": 2,
+      "bottoms": 4,
+      "total_gates": 5,
+      "wires": 26,
+      "max_rational_bits": 3,
+      "globally_reorientable": false
+    }
+  ]
+}

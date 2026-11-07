@@ -1,0 +1,32 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "result": "UNKNOWN",
+  "kind": "coupled",
+  "types": 2,
+  "width": 3,
+  "sizes": [
+    [
+      2,
+      2
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      4,
+      3
+    ],
+    [
+      4,
+      4
+    ]
+  ],
+  "parameters": 33,
+  "rounds": 2,
+  "examples": 64,
+  "activation_booleans": 4608,
+  "solver_seconds": 99.82483720779419,
+  "wall_seconds": 101.22120232321322,
+  "status_scope": "Finite training sizes in the declared rule family; not an all-size theorem"
+}

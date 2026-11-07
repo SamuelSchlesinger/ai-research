@@ -1,0 +1,6 @@
+{"phase": "initialized", "parameters": 3, "examples": 272, "activation_booleans": 0, "elapsed": 0.094}
+{"phase": "learner", "round": 1, "status": "SAT", "seconds": 0.0008551962673664093, "examples": 272, "activation_booleans": 0, "elapsed": 0.095}
+{"phase": "checker", "round": 1, "k": 1, "m": 2, "status": "VERIFIED", "points": [], "seconds": 0.0008001681417226791, "elapsed": 0.1072}
+{"phase": "checker", "round": 1, "k": 2, "m": 2, "status": "VERIFIED", "points": [], "seconds": 0.001226380467414856, "elapsed": 0.109}
+{"phase": "holdout", "k": 3, "m": 2, "status": "VERIFIED", "points": [], "seconds": 0.004269344732165337, "elapsed": 0.1147}
+{"phase": "finished", "Authors": "Christian Reitwiessner", "result": "VERIFIED_TRAINING_SIZES_ONLY", "kind": "calibration", "types": 1, "width": 2, "sizes": [[1, 2], [2, 2]], "parameters": 3, "rounds": 1, "examples": 272, "activation_booleans": 0, "solver_seconds": 0.0028817448765039444, "wall_seconds": 0.1147367712110281, "status_scope": "Finite training sizes in the declared rule family; not an all-size theorem", "elapsed": 0.1148}
