@@ -1,0 +1,15 @@
+./bench.sh V0_orig-like blocksym 2 1 2 400 --enc twosided --no-sym --no-cegar
+./bench.sh V1_sym blocksym 2 1 2 400 --enc twosided --no-cegar
+./bench.sh V2_sym+onesided blocksym 2 1 2 400 --enc onesided --no-cegar
+./bench.sh V3_sym+cegar blocksym 2 1 2 400 --enc twosided
+./bench.sh V4_all blocksym 2 1 2 400 --enc onesided
+./bench.sh V0_orig-like blocksym 2 2 2 400 --enc twosided --no-sym --no-cegar
+./bench.sh V1_sym blocksym 2 2 2 400 --enc twosided --no-cegar
+./bench.sh V2_sym+onesided blocksym 2 2 2 400 --enc onesided --no-cegar
+./bench.sh V3_sym+cegar blocksym 2 2 2 400 --enc twosided
+./bench.sh V4_all blocksym 2 2 2 400 --enc onesided
+./bench.sh V0_orig-like blocksym 2 2 3 400 --enc twosided --no-sym --no-cegar
+./bench.sh V1_sym blocksym 2 2 3 400 --enc twosided --no-cegar
+./bench.sh V2_sym+onesided blocksym 2 2 3 400 --enc onesided --no-cegar
+./bench.sh V3_sym+cegar blocksym 2 2 3 400 --enc twosided
+./bench.sh V4_all blocksym 2 2 3 400 --enc onesided

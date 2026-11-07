@@ -1,0 +1,2 @@
+ANDREEV k=2 m=2 S=2 cls=free tables=all intaddr=None sym=False: UNSAT (48.4s) {}
+  => every free circuit for this instance needs >= 3 bottom gates (proved)

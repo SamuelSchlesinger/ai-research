@@ -1,0 +1,2 @@
+full k=2 m=2 S=2: UNSAT (proved) [148.0s]
+RESULT full k=2 m=2 n=8 points=256: S=2 -> UNSAT

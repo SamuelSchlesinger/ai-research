@@ -1,0 +1,2 @@
+RESULT blocksym k=2 m=10 S=5 UNSAT time=296.8s cpu=206.6s cegar_rounds=1 points_used=1936/1936
+PROVEN (blocksym model, top-direct=True): no circuit with 5 (or fewer) gates => min >= 6

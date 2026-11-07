@@ -1,0 +1,4 @@
+{'blocks': (3, 3), 'candidates': 54, 'status': 'The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)'}
+{'blocks': (4, 4), 'candidates': 392, 'status': 'Optimization terminated successfully. (HiGHS Status 7: Optimal)', 'verified': True, 'windows': 48, 'unmerged_bottom_bound': 264}
+{'blocks': (2, 2, 2), 'candidates': 12, 'status': 'The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)'}
+{'blocks': (2, 2, 2, 2), 'candidates': 32, 'status': 'The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)'}

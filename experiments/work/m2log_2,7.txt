@@ -1,0 +1,3 @@
+{"R": 2, "T": 7, "restrict": null, "status": 1, "G": 181, "time": 3000.1, "dual": 9.0, "best": 12}
+HighsMipSolverData::transformNewIntegerFeasibleSolution tmpSolver.run();
+HighsMipSolverData::transformNewIntegerFeasibleSolution tmpSolver.run();

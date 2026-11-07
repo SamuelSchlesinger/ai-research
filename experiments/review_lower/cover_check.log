@@ -1,0 +1,10 @@
+LINES m=2: dichotomies=57 maximal cut-sets=4 max|set|=3  tau_m=2.0 (milp status 0: Optimization terminated successfully. (H)  LP=1.3333  dual=1.3333  dual weight on boundary=1.333 interior=0.000
+UPSETS m=2: maximal cut-sets=2 max|set|=3  cover number=2.0  LP=2.0000
+LINES m=3: dichotomies=173 maximal cut-sets=20 max|set|=5  tau_m=3.0 (milp status 0: Optimization terminated successfully. (H)  LP=2.0000  dual=2.0000  dual weight on boundary=2.000 interior=0.000
+UPSETS m=3: maximal cut-sets=12 max|set|=5  cover number=3.0  LP=3.0000
+LINES m=4: dichotomies=401 maximal cut-sets=60 max|set|=7  tau_m=3.999999999999992 (milp status 0: Optimization terminated successfully. (H)  LP=3.0000  dual=3.0000  dual weight on boundary=3.000 interior=0.000
+UPSETS m=4: maximal cut-sets=50 max|set|=7  cover number=4.0  LP=4.0000
+LINES m=5: dichotomies=837 maximal cut-sets=152 max|set|=9  tau_m=3.9999999999999516 (milp status 0: Optimization terminated successfully. (H)  LP=4.0000  dual=4.0000  dual weight on boundary=4.000 interior=-0.000
+UPSETS m=5: maximal cut-sets=194 max|set|=9  cover number=5.0  LP=5.0000
+LINES m=6: dichotomies=1497 maximal cut-sets=316 max|set|=11  tau_m=5.000000000000179 (milp status 0: Optimization terminated successfully. (H)  LP=5.0000  dual=5.0000  dual weight on boundary=5.000 interior=0.000
+UPSETS m=6: maximal cut-sets=742 max|set|=11  cover number=6.0  LP=6.0000

@@ -1,0 +1,22 @@
+  k          n     coh LB      bs LB  closed coh  closed bs      n^1.5  n^1.5/lg^2    5n^2/16 G_d (report formula)
+ 10   2.04e+03   5.60e+02   5.96e+02    3.38e+02   3.77e+02   9.24e+04    7.64e+02   1.31e+06      1.314e+06
+ 16   1.31e+05   4.82e+05   6.71e+05    3.49e+05   4.94e+05   4.75e+07    1.64e+05   5.37e+09      5.369e+09
+ 20   2.10e+06   6.00e+07   9.35e+07    4.58e+07   7.24e+07   3.04e+09    6.89e+06   1.37e+12      1.374e+12
+ 24   3.36e+07   8.57e+09   1.47e+10    6.79e+09   1.18e+10   1.94e+11    3.11e+08   3.52e+14            nan
+ 30   2.15e+09   1.73e+13   3.31e+13    1.42e+13   2.76e+13   9.95e+13    1.04e+11   1.44e+18            nan
+ 36   1.37e+11   4.00e+16   8.38e+16    3.37e+16   7.16e+16   5.10e+16    3.72e+13   5.90e+21            nan
+ 40   2.20e+12   7.36e+18   1.63e+19    6.30e+18   1.41e+19   3.26e+18    1.94e+15   1.51e+24            nan
+ 50   2.25e+15   3.85e+24   9.53e+24    3.38e+24   8.45e+24   1.07e+23    4.11e+19   1.58e+30            nan
+coherent: exceeds n^1.5/log2(n)^2 from k=12; exceeds n^1.5 from k=37
+blocksym: exceeds n^1.5/log2(n)^2 from k=11; exceeds n^1.5 from k=35
+balanced k=8: N(N-3k-1)/(3k^3)=3.850e+01  N(N-3k-1)/(6sqrt2 k^2.5)=3.850e+01  n^2/(12 log2^3 n)=2.997e+01   self-consistent: coh 7.600e+01 bs 6.900e+01  (5/16)n^2=8.192e+04
+balanced k=16: N(N-3k-1)/(3k^3)=3.493e+05  N(N-3k-1)/(6sqrt2 k^2.5)=4.939e+05  n^2/(12 log2^3 n)=2.914e+05   self-consistent: coh 4.816e+05 bs 6.707e+05  (5/16)n^2=5.369e+09
+balanced k=32: N(N-3k-1)/(3k^3)=1.876e+14  N(N-3k-1)/(6sqrt2 k^2.5)=3.753e+14  n^2/(12 log2^3 n)=1.711e+14   self-consistent: coh 2.261e+14 bs 4.466e+14  (5/16)n^2=2.306e+19
+k=2 m=1: Theorem E bound m-1=0  vs solver value 3 (exact min)  ok=True
+k=2 m=2: Theorem E bound m-1=1  vs solver value 3 (exact min)  ok=True
+k=2 m=3: Theorem E bound m-1=2  vs solver value 5 (lower bound only)  ok=True
+k=2 m=4: Theorem E bound m-1=3  vs solver value 5 (lower bound only)  ok=True
+k=2 m=5: Theorem E bound m-1=4  vs solver value 5 (lower bound only)  ok=True
+k=2 m=6: Theorem E bound m-1=5  vs solver value 6 (lower bound only)  ok=True
+k=2 m=8: Theorem E bound m-1=7  vs solver value 6 (lower bound only)  ok=True
+k=2 m=10: Theorem E bound m-1=9  vs solver value 6 (lower bound only)  ok=True

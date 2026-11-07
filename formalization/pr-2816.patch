@@ -1,0 +1,2394 @@
+diff --git a/Complexity.lean b/Complexity.lean
+index 8189c062ed..c4930cfb85 100644
+--- a/Complexity.lean
++++ b/Complexity.lean
+@@ -1060,12 +1060,14 @@ public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.Compone
+ public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.Cut
+ public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.DepthTwo
+ public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.InnerProduct
++public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.KaneWilliamsB
+ public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.LTF
+ public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.Menus
+ public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.PendingBias
+ public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.Potential
+ public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.RandomRestriction
+ public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.ScalarActivity
++public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.SharedBottom
+ public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.SupportBound
+ public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.SupportBoundAsymptotics
+ public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.ThresholdCounting
+@@ -3556,6 +3558,7 @@ public import Complexity.Foundations.Analysis.ENNRealTsum
+ public import Complexity.Foundations.Analysis.Fourier.ZModProd
+ public import Complexity.Foundations.Analysis.HarmonicMean
+ public import Complexity.Foundations.Analysis.InnerProductSpace.Basic
++public import Complexity.Foundations.Analysis.InnerProductSpace.NearlyOrthogonal
+ public import Complexity.Foundations.Analysis.Lattice.Covolume
+ public import Complexity.Foundations.Analysis.Lattice.Dual
+ public import Complexity.Foundations.Analysis.Lattice.Fourier
+@@ -3782,6 +3785,7 @@ public import Complexity.Foundations.Data.BitString.Combination
+ public import Complexity.Foundations.Data.BitString.Convolution
+ public import Complexity.Foundations.Data.BitString.Counter
+ public import Complexity.Foundations.Data.BitString.CoverCoding
++public import Complexity.Foundations.Data.BitString.Discriminator
+ public import Complexity.Foundations.Data.BitString.Enumeration
+ public import Complexity.Foundations.Data.BitString.Flip
+ public import Complexity.Foundations.Data.BitString.Hamming
+@@ -4537,6 +4541,7 @@ public import Complexity.Probability.Rewinding
+ public import Complexity.Probability.Rewinding.Consistency
+ public import Complexity.Probability.Shearer
+ public import Complexity.Probability.SmallBias
++public import Complexity.Probability.SmallBias.Correlation
+ public import Complexity.Probability.SmallBias.Powering
+ public import Complexity.Probability.SmallBias.Random
+ public import Complexity.Probability.StatisticalDistance
+diff --git a/Complexity/Computability/Circuit/Boolean/WeightedThreshold/KaneWilliamsB.lean b/Complexity/Computability/Circuit/Boolean/WeightedThreshold/KaneWilliamsB.lean
+new file mode 100644
+index 0000000000..3f3b4b3101
+--- /dev/null
++++ b/Complexity/Computability/Circuit/Boolean/WeightedThreshold/KaneWilliamsB.lean
+@@ -0,0 +1,1295 @@
++/-
++Copyright (c) 2026 Christian Reitwiessner. All rights reserved.
++Released under Apache 2.0 license as described in the file LICENSE.
++Authors: Christian Reitwiessner
++-/
++
++module
++-- upstream: candidate
++
++public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.SharedBottom
++public import Complexity.Foundations.Data.BitString.Parity
++public import Complexity.Foundations.Data.BitString.Threshold
++public import Complexity.Probability.SmallBias
++import Complexity.Foundations.Data.BitString.Discriminator
++import Complexity.Probability.SmallBias.Correlation
++import Complexity.Probability.SmallBias.Powering
++
++/-!
++# The Kane–Williams depth-three function: gate, wire and correlation bounds
++
++Kane and Williams ([KaneWilliams2016], `arXiv:1511.07860v1`, Section 6) replace the multiplexer in
++Andreev's function by a code with small bias. The `n + k * ℓ` inputs are a message
++`x ∈ {0,1}^n` and `k` blocks of `ℓ` bits; with `z ∈ {0,1}^k` the block parities and rows
++`r : BitString k → BitString n`, the value is `B(x, a) = ⟨r_z, x⟩` (`kaneWilliamsB`,
++[KaneWilliams2016], Definition 6.1, whose rows form a small-bias set as in their Proposition 2
++and Corollary 6.1). For `δ`-biased rows, at most `1 / (γ ^ 2 - δ)` messages have a word
++`z ↦ ⟨r_z, x⟩` with correlation `γ` with any fixed word
++(`Cslib.BitString.card_le_abs_sum_signVal_mul_signVal_dotProduct_mul_le`, an explicit form of
++[KaneWilliams2016], Lemma 6.1).
++
++## Headline bounds
++
++Take, as Kane and Williams do, a message of `n` bits and `n` block bits, here `k = 16 p` blocks of
++`ℓ` bits with `n = 16 p ℓ ≤ 2 ^ p` (they take `k = 16 log₂ n`), and `2 ^ (-7 p)`-biased rows, which
++the powering construction provides (`exists_isSmallBias_kaneWilliamsRows`). Let
++`R = 272 p ^ 2 + 54 p + 3` and `R' = 272 p ^ 2 + 57 p + 3`.
++
++* **Worst case** (`size_ge_of_threshold_eval_eq_kaneWilliamsB_balanced`,
++  `wireCount_ge_of_threshold_eval_eq_kaneWilliamsB_balanced`): if an unweighted threshold gate of
++  fan-in `t ≤ n ^ 3 / 4` over the outputs of a depth-two weighted threshold circuit `c` computes
++  the function, then `n (n - R) ≤ 4864 p ^ 2 * c.size * √(2 n)` and
++  `n √n (n - R) ≤ 19456 p ^ 2 √p * c.wireCount`.
++* **Average case** (`card_eval_eq_kaneWilliamsB_le_balanced_size`,
++  `card_eval_eq_kaneWilliamsB_le_balanced_wireCount`): if `n > R'`, a depth-two weighted
++  threshold circuit `c` agrees with the function on at most a
++  `1 / 2 + 2 ^ (-3 p) + 2432 p ^ 2 * c.size * √(2 n) / (n (n - R'))`, respectively
++  `1 / 2 + 2 ^ (-3 p) + 9728 p ^ 2 √p * c.wireCount / (n √n (n - R'))`, fraction of the inputs.
++
++For `p ≥ 9` and `ℓ = ⌊2 ^ p / (16 p)⌋`, `2 ^ (p - 1) < n ≤ 2 ^ p`, so `p = ⌈log₂ n⌉`. The bounds
++then say that `MAJ ∘ THR ∘ THR` circuits computing the function need `Ω(n ^ (3 / 2) / log² n)` gates
++and `Ω(n ^ (5 / 2) / log^(5/2) n)` wires, one logarithmic factor more than the
++`Ω(n ^ (3 / 2) / log³ n)` gates and `Ω(n ^ (5 / 2) / log^(7/2) n)` wires of [KaneWilliams2016],
++Theorem 1.3, and that a depth-two circuit with `s` gates agrees with the function on at most a
++`1 / 2 + O(s log² n / n ^ (3 / 2)) + n ^ (-3)` fraction of the inputs. Kane and Williams state no
++average-case bound for this function. These improvements are original. All endpoints are explicit
++finite inequalities, not formal asymptotic statements.
++
++## The argument
++
++Kane and Williams first fix a message that is bad for *all* small depth-two circuits
++([KaneWilliams2016], Corollary 6.2), counting arbitrary threshold circuits at `Θ(k ^ 2)` bits per
++bottom gate. Here the circuit is fixed first; this change of quantifiers and its consequences below
++are original. A block restriction `(σ, w)` leaves one live input per block, keeps the message `x`
++of `w`, and shifts the block parities by the residual parities `c`, so the restricted function is
++`u ↦ ⟨r_{u + c}, x⟩` (`kaneWilliamsB_embedUpdate`). The restricted circuit lies in
++`IsDepthTwoOverWeights (W σ) q`, where the weight vectors `W σ` depend only on the circuit and
++`σ`, and `q` counts the surviving bottom gates. For `q ≤ Q` and `#(W σ) < M`, these classes and the
++`2 ^ k` translations number at most
++`C = ℓ ^ k * 2 ^ k * ((2 ^ k + 1) * M) ^ Q * (2 ^ k + 1) ^ (Q + k + 1)`, that is
++`O(Q (k + log M) + k ^ 2)` bits, so at most `C / (γ ^ 2 - δ)` messages are bad for the circuit.
++The expected number of survivors is at most `4 (1 / ℓ) c.size √(n + k ℓ)` or
++`4 c.wireCount (1 / ℓ) √(1 / ℓ)` (the repaired restriction lemmas, [KaneWilliams2016], Lemmas 1.1
++and 3.1), and Markov's inequality bounds the restrictions with more than `Q` survivors.
++
++* **Average case**: a depth-two circuit agrees with `B` on at most a
++  `(1 + γ) / 2 + C / ((γ ^ 2 - δ) 2 ^ n) + (expected survivors) / (Q + 1)` fraction of the inputs
++  (`card_eval_eq_kaneWilliamsB_le_of_depth_le_two_size`,
++  `card_eval_eq_kaneWilliamsB_le_of_depth_le_two_wireCount`).
++* **Worst case**: let the `t` outputs of a depth-two circuit, sharing their bottom gates, feed an
++  unweighted threshold gate `threshold t θ` (for instance majority) that computes `B`. On a
++  restriction with a good message and at most `Q` survivors, every output has correlation below
++  `γ`, while the discriminator lemma (`Cslib.sub_le_sum_sum_signVal_mul_of_threshold_eq`) needs
++  a total correlation of `1 - (t + 1) δ`. Hence
++  `1 ≤ C / ((γ ^ 2 - δ) 2 ^ n) + (expected survivors) / (Q + 1)` whenever
++  `t γ + (t + 1) δ < 1` (`one_le_of_threshold_eval_eq_kaneWilliamsB_size`,
++  `one_le_of_threshold_eval_eq_kaneWilliamsB_wireCount`).
++
++With `k = 16 p`, `γ = 2 ^ (-3 p)`, `δ = 2 ^ (-7 p)` and `n, ℓ ≤ 2 ^ p`, the largest `Q` with
++`(36 p + 2) Q + R ≤ n` makes the counting term at most `1 / 2`. This gives, for any block length
++`ℓ`, `ℓ (n - R) ≤ 304 p * c.size * √(n + 16 p ℓ)` and `ℓ √ℓ (n - R) ≤ 304 p * c.wireCount` for top
++fan-in `t ≤ 2 ^ (3 p) / 4` (`size_ge_of_threshold_eval_eq_kaneWilliamsB_of_le_two_pow`,
++`wireCount_ge_of_threshold_eval_eq_kaneWilliamsB_of_le_two_pow`), and agreement at most
++`1 / 2 + 2 ^ (-3 p) + 152 p * c.size * √(n + 16 p ℓ) / (ℓ (n - R'))`, respectively
++`1 / 2 + 2 ^ (-3 p) + 152 p * c.wireCount / (ℓ √ℓ (n - R'))`
++(`card_eval_eq_kaneWilliamsB_le_of_le_two_pow_size`,
++`card_eval_eq_kaneWilliamsB_le_of_le_two_pow_wireCount`). The balanced bounds above are the case
++`n = 16 p ℓ`.
++
++## Model and limitations
++
++A `MAJ ∘ THR ∘ THR` circuit is modeled as a depth-two weighted threshold circuit
++`c : Circuit signature N t` together with an unweighted threshold gate `threshold t θ` over its
++`t` outputs; it has `c.size + 1` gates and `c.wireCount + t` wires, and the bounds count only
++`c.size` and `c.wireCount`. The outputs share their bottom gates; an output may be an input wire,
++and outputs may repeat, so `t` counts the top gate's wires with multiplicity. The top gate must be
++unweighted, and its fan-in enters the hypotheses: `t ≤ n ^ 3 / 4` in the balanced bounds. In the
++`MAJ ∘ THR ∘ THR` circuits of [KaneWilliams2016], Theorem 1.3, the fan-in of the top gate is at
++most the number of gates. The bounds hold for every list of `δ`-biased rows. The powering rows
++exist for all parameters, but neither they nor the function are certified here to be computable in
++polynomial time, as Kane and Williams state for their construction.
++
++## Main definitions
++
++* `Cslib.Circuits.Boolean.kaneWilliamsB`: the Kane–Williams function, with its input layout
++  `Cslib.Circuits.Boolean.kaneWilliamsMessage` and `Cslib.Circuits.Boolean.kaneWilliamsParities`.
++* `WeightedThreshold.kaneWilliamsLiveVar`, `WeightedThreshold.kaneWilliamsResidualParities`:
++  block restrictions.
++
++## Main results
++
++* `WeightedThreshold.size_ge_of_threshold_eval_eq_kaneWilliamsB_balanced`,
++  `WeightedThreshold.wireCount_ge_of_threshold_eval_eq_kaneWilliamsB_balanced`: the worst-case
++  gate and wire bounds for `n = 16 p ℓ`.
++* `WeightedThreshold.card_eval_eq_kaneWilliamsB_le_balanced_size`,
++  `WeightedThreshold.card_eval_eq_kaneWilliamsB_le_balanced_wireCount`: the average-case bounds
++  for `n = 16 p ℓ`.
++* `WeightedThreshold.size_ge_of_threshold_eval_eq_kaneWilliamsB_of_le_two_pow`,
++  `WeightedThreshold.card_eval_eq_kaneWilliamsB_le_of_le_two_pow_size` and their wire versions:
++  the same bounds for any block length `ℓ ≤ 2 ^ p`.
++* `WeightedThreshold.card_eval_eq_kaneWilliamsB_le_of_depth_le_two_size`,
++  `WeightedThreshold.one_le_of_threshold_eval_eq_kaneWilliamsB_size` and their `wireCount`
++  versions: bounds for all parameters, with a free survivor budget `Q`.
++* `WeightedThreshold.card_eval_eq_kaneWilliamsB_le_of_unforced_mean_le`,
++  `WeightedThreshold.one_le_of_threshold_eq_kaneWilliamsB_of_unforced_mean_le`: the average-case
++  and worst-case cores, for functions that collapse under block restrictions.
++* `WeightedThreshold.kaneWilliamsB_embedUpdate`: the restricted function.
++* `WeightedThreshold.exists_isSmallBias_kaneWilliamsRows`: rows exist.
++
++## References
++
++* [D. M. Kane and R. Williams, *Super-Linear Gate and Super-Quadratic Wire Lower Bounds for
++  Depth-Two and Depth-Three Threshold Circuits*][KaneWilliams2016], `arXiv:1511.07860v1`,
++  Theorem 1.3, Lemmas 1.1 and 3.1, and Section 6: Proposition 2, Corollaries 6.1 and 6.2,
++  Lemma 6.1 and Definition 6.1
++* [N. Alon, O. Goldreich, J. Håstad, R. Peralta, *Simple constructions of almost `k`-wise
++  independent random variables*][AlonGoldreichHastadPeralta1992]
++* [A. Hajnal, W. Maass, P. Pudlák, M. Szegedy, G. Turán, *Threshold circuits of bounded
++  depth*][HMPST1993]
++-/
++public section
++
++namespace Cslib.Circuits.Boolean
++
++open BitString Finset
++
++/-! ### The function and its input layout -/
++
++/-- The `i`-th message coordinate among the `n + k * ℓ` inputs of the Kane–Williams function. -/
++@[expose] def kaneWilliamsMessageIndex (n k ℓ : ℕ) (i : Fin n) : Fin (n + k * ℓ) :=
++  Fin.castAdd (k * ℓ) i
++
++/-- The `t`-th variable of the `j`-th parity block among the `n + k * ℓ` inputs of the
++Kane–Williams function. -/
++@[expose] def kaneWilliamsBlockVar (n k ℓ : ℕ) (j : Fin k) (t : Fin ℓ) : Fin (n + k * ℓ) :=
++  Fin.natAdd n (finProdFinEquiv (j, t))
++
++/-- The message `x`: the first `n` of the `n + k * ℓ` inputs. -/
++@[expose] def kaneWilliamsMessage (n k ℓ : ℕ) (y : BitString (n + k * ℓ)) : BitString n :=
++  fun i => y (kaneWilliamsMessageIndex n k ℓ i)
++
++/-- The block parities `z`: the parities of the `k` blocks of `ℓ` inputs after the message. -/
++@[expose] def kaneWilliamsParities (n k ℓ : ℕ) (y : BitString (n + k * ℓ)) : BitString k :=
++  fun j => parity ℓ fun t => y (kaneWilliamsBlockVar n k ℓ j t)
++
++/-- **The Kane–Williams function** `B(x, a) = ⟨r_z, x⟩` on `n + k * ℓ` bits, for a list of rows
++`r : BitString k → BitString n` ([KaneWilliams2016], `arXiv:1511.07860v1`, Definition 6.1): the
++first `n` bits are a message `x`, the remaining `k * ℓ` bits form `k` blocks of `ℓ` bits whose
++parities form `z : BitString k`, and the value is the inner product modulo two of the row `r z`
++with `x`. Kane and Williams take the rows of an `ε`-biased set, `ℓ = n / k` and `k = 16 log₂ n`. -/
++@[expose] def kaneWilliamsB {n k : ℕ} (r : BitString k → BitString n) (ℓ : ℕ) :
++    BooleanFunction (n + k * ℓ) :=
++  fun y => r (kaneWilliamsParities n k ℓ y) ⬝ᵥ kaneWilliamsMessage n k ℓ y
++
++/-- The block variables are jointly injective in the block and the slot. -/
++theorem kaneWilliamsBlockVar_joint_injective (n k ℓ : ℕ) (j₁ : Fin k) (t₁ : Fin ℓ)
++    (j₂ : Fin k) (t₂ : Fin ℓ)
++    (h : kaneWilliamsBlockVar n k ℓ j₁ t₁ = kaneWilliamsBlockVar n k ℓ j₂ t₂) :
++    j₁ = j₂ ∧ t₁ = t₂ :=
++  Prod.ext_iff.mp (finProdFinEquiv.injective (Fin.natAdd_injective (k * ℓ) n h))
++
++/-- No message coordinate is a block variable. -/
++theorem kaneWilliamsMessageIndex_ne_blockVar (n k ℓ : ℕ) (i : Fin n) (j : Fin k) (t : Fin ℓ) :
++    kaneWilliamsMessageIndex n k ℓ i ≠ kaneWilliamsBlockVar n k ℓ j t := fun h => by
++  have hval := congrArg Fin.val h
++  simp only [kaneWilliamsMessageIndex, kaneWilliamsBlockVar, Fin.val_castAdd,
++    Fin.val_natAdd] at hval
++  omega
++
++/-- The message of an input is the first component of its split into message and blocks. -/
++theorem kaneWilliamsMessage_eq_fst (n k ℓ : ℕ) (y : BitString (n + k * ℓ)) :
++    kaneWilliamsMessage n k ℓ y = ((Fin.appendEquiv n (k * ℓ)).symm y).1 := by
++  funext i
++  conv_lhs => rw [← (Fin.appendEquiv n (k * ℓ)).apply_symm_apply y]
++  simp [kaneWilliamsMessage, kaneWilliamsMessageIndex, Fin.appendEquiv]
++
++/-- Each message is the message of `2 ^ (k * ℓ)` inputs:
++`#{y | kaneWilliamsMessage n k ℓ y ∈ S} = #S * 2 ^ (k * ℓ)`. -/
++theorem card_filter_kaneWilliamsMessage_mem (n k ℓ : ℕ) (S : Finset (BitString n)) :
++    #{y : BitString (n + k * ℓ) | kaneWilliamsMessage n k ℓ y ∈ S} = #S * 2 ^ (k * ℓ) := by
++  classical
++  calc #{y : BitString (n + k * ℓ) | kaneWilliamsMessage n k ℓ y ∈ S}
++      = #(S ×ˢ (univ : Finset (BitString (k * ℓ)))) :=
++        card_equiv (Fin.appendEquiv n (k * ℓ)).symm fun y => by
++          simp [kaneWilliamsMessage_eq_fst]
++    _ = #S * 2 ^ (k * ℓ) := by
++        rw [card_product, card_univ, Fintype.card_fun, Fintype.card_bool, Fintype.card_fin]
++
++end Cslib.Circuits.Boolean
++
++namespace Cslib.Circuits.Boolean.WeightedThreshold
++
++open BitString Finset Probability Cslib.Combinatorics.LittlewoodOfford
++
++/-! ### Block restrictions of the Kane–Williams function -/
++
++/-- The live coordinate `kaneWilliamsBlockVar n k ℓ j (σ j)` of block `j` chosen by
++`σ : Fin k → Fin ℓ`. -/
++@[expose] def kaneWilliamsLiveVar (n k ℓ : ℕ) (σ : Fin k → Fin ℓ) (j : Fin k) : Fin (n + k * ℓ) :=
++  kaneWilliamsBlockVar n k ℓ j (σ j)
++
++/-- For every block selection, the live coordinates are distinct. -/
++theorem kaneWilliamsLiveVar_injective (n k ℓ : ℕ) (σ : Fin k → Fin ℓ) :
++    Function.Injective (kaneWilliamsLiveVar n k ℓ σ) :=
++  fun j₁ j₂ h => (kaneWilliamsBlockVar_joint_injective n k ℓ j₁ (σ j₁) j₂ (σ j₂) h).1
++
++/-- The live coordinates of `σ` form `blockLiveSet (kaneWilliamsBlockVar n k ℓ) σ`. -/
++theorem univ_image_kaneWilliamsLiveVar_eq_blockLiveSet (n k ℓ : ℕ) (σ : Fin k → Fin ℓ) :
++    univ.image (kaneWilliamsLiveVar n k ℓ σ) = blockLiveSet (kaneWilliamsBlockVar n k ℓ) σ :=
++  rfl
++
++/-- The `k`-bit vector of residual block parities of `w` outside the live slots `σ j`. -/
++@[expose] def kaneWilliamsResidualParities (n k ℓ : ℕ) (σ : Fin k → Fin ℓ)
++    (w : BitString (n + k * ℓ)) : BitString k :=
++  fun j => parityOn (univ.erase (σ j)) fun t => w (kaneWilliamsBlockVar n k ℓ j t)
++
++/-- Updating the live coordinates leaves the message unchanged. -/
++theorem kaneWilliamsMessage_embedUpdate (n k ℓ : ℕ) (σ : Fin k → Fin ℓ)
++    (w : BitString (n + k * ℓ)) (u : BitString k) :
++    kaneWilliamsMessage n k ℓ (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u) =
++      kaneWilliamsMessage n k ℓ w := by
++  funext i
++  refine embedUpdate_of_notMem w u ?_
++  simp only [mem_image, mem_univ, true_and, not_exists]
++  exact fun j hj => kaneWilliamsMessageIndex_ne_blockVar n k ℓ i j (σ j) hj.symm
++
++/-- Updating the live coordinates with `u` shifts the block parities by `u`. -/
++theorem kaneWilliamsParities_embedUpdate (n k ℓ : ℕ) (σ : Fin k → Fin ℓ)
++    (w : BitString (n + k * ℓ)) (u : BitString k) :
++    kaneWilliamsParities n k ℓ (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u) =
++      u + kaneWilliamsResidualParities n k ℓ σ w := by
++  funext j
++  change parityOn univ
++      (fun t => embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u (kaneWilliamsBlockVar n k ℓ j t)) =
++    (u j ^^ kaneWilliamsResidualParities n k ℓ σ w j)
++  rw [parityOn_eq_xor_erase (mem_univ (σ j))]
++  congr 1
++  · exact embedUpdate_emb (kaneWilliamsLiveVar_injective n k ℓ σ) w u j
++  · refine parityOn_congr fun t ht => embedUpdate_of_notMem w u ?_
++    simp only [mem_image, mem_univ, true_and, not_exists]
++    intro j' hj'
++    obtain ⟨rfl, h2⟩ := kaneWilliamsBlockVar_joint_injective n k ℓ j' (σ j') j t hj'
++    exact (mem_erase.mp ht).1 h2.symm
++
++/-- Along `u ↦ embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u`, the Kane–Williams function reads
++the row `r (u + c)` for the residual parities `c` of `w`. -/
++theorem kaneWilliamsB_embedUpdate {n k : ℕ} (r : BitString k → BitString n) (ℓ : ℕ)
++    (σ : Fin k → Fin ℓ) (w : BitString (n + k * ℓ)) (u : BitString k) :
++    kaneWilliamsB r ℓ (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u) =
++      r (u + kaneWilliamsResidualParities n k ℓ σ w) ⬝ᵥ kaneWilliamsMessage n k ℓ w := by
++  rw [kaneWilliamsB, kaneWilliamsParities_embedUpdate, kaneWilliamsMessage_embedUpdate]
++
++/-! ### Messages correlated with a restricted circuit -/
++
++section Core
++
++variable {n k ℓ : ℕ}
++
++/-- Twice the agreement of two Boolean functions is `|Z|` plus their sign correlation. -/
++private theorem two_mul_card_eq_add_sum_signVal {Z : Type*} [Fintype Z] (f g : Z → Bool) :
++    2 * (#{z | f z = g z} : ℝ) = Fintype.card Z + ∑ z, signVal (f z) * signVal (g z) := by
++  classical
++  have h (z : Z) : signVal (f z) * signVal (g z) = 2 * (if f z = g z then 1 else 0) - 1 := by
++    rw [signVal_mul_signVal]; split_ifs <;> norm_num
++  rw [sum_congr rfl fun z _ => h z, sum_sub_distrib, ← mul_sum, sum_boole, sum_const, card_univ,
++    nsmul_eq_mul, mul_one]
++  ring
++
++/-- Translating the first argument of a sign correlation translates the second. -/
++private theorem sum_signVal_add_eq (h F : BitString k → Bool) (c : BitString k) :
++    ∑ u, signVal (h (u + c)) * signVal (F u) = ∑ u, signVal (h u) * signVal (F (u + c)) := by
++  have hcc : c + c = 0 := funext fun i => BooleanRing.add_self (c i)
++  refine Fintype.sum_equiv (Equiv.addRight c) _ _ fun u => ?_
++  simp only [Equiv.coe_addRight, add_assoc, hcc, add_zero]
++
++/-- **Markov's inequality** for counts: at most `(∑ U) / (Q + 1)` points have `U > Q`. -/
++private theorem add_one_mul_card_filter_lt_le {α : Type*} (s : Finset α) (U : α → ℕ) (Q : ℕ) :
++    ((Q : ℝ) + 1) * #{a ∈ s | Q < U a} ≤ ∑ a ∈ s, (U a : ℝ) := by
++  classical
++  calc ((Q : ℝ) + 1) * #{a ∈ s | Q < U a} = #{a ∈ s | Q < U a} • ((Q : ℝ) + 1) := by
++        rw [nsmul_eq_mul, mul_comm]
++    _ ≤ ∑ a ∈ s with Q < U a, (U a : ℝ) := card_nsmul_le_sum _ _ _ fun a ha => by
++        exact_mod_cast Nat.succ_le_of_lt (mem_filter.mp ha).2
++    _ ≤ ∑ a ∈ s, (U a : ℝ) :=
++        sum_le_sum_of_subset_of_nonneg (filter_subset _ _) fun _ _ _ => Nat.cast_nonneg _
++
++open scoped Classical in
++/-- The messages `x` whose word `u ↦ r u ⬝ᵥ x` has sign correlation at least `γ 2 ^ k` in absolute
++value with a translate `u ↦ h (u + c)` of a function `h` in `IsDepthTwoOverWeights (W σ) Q`, for
++some block selection `σ`. -/
++private noncomputable def badMessages (r : BitString k → BitString n)
++    (W : (Fin k → Fin ℓ) → Finset (Fin k → ℝ)) (Q : ℕ) (γ : ℝ) : Finset (BitString n) :=
++  univ.filter fun x => ∃ σ : Fin k → Fin ℓ, ∃ c : BitString k, ∃ h : BitString k → Bool,
++    IsDepthTwoOverWeights (W σ) Q h ∧
++      γ * 2 ^ k ≤ |∑ u, signVal (h (u + c)) * signVal (r u ⬝ᵥ x)|
++
++/-- **Few messages are bad**: the fixed weight vectors of the restricted circuits leave at most
++`ℓ ^ k * 2 ^ k * ((2 ^ k + 1) * M) ^ Q * (2 ^ k + 1) ^ (Q + k + 1)` restricted functions and
++translations, and each correlates with at most `1 / (γ ^ 2 - δ)` words. -/
++private theorem card_badMessages_mul_le {r : BitString k → BitString n} {δ γ : ℝ} (hδ : 0 ≤ δ)
++    (hγ : 0 ≤ γ) (hr : IsSmallBias δ ((PMF.uniformOfFintype (BitString k)).map r))
++    (W : (Fin k → Fin ℓ) → Finset (Fin k → ℝ)) {M : ℕ} (hM : ∀ σ, #(W σ) + 1 ≤ M) (Q : ℕ) :
++    (#(badMessages r W Q γ) : ℝ) * (γ ^ 2 - δ) ≤
++      (ℓ : ℝ) ^ k * 2 ^ k * ((((2 ^ k + 1) * M) ^ Q * (2 ^ k + 1) ^ (Q + k + 1) : ℕ) : ℝ) := by
++  classical
++  rcases le_or_gt (γ ^ 2 - δ) 0 with hneg | hpos
++  · exact (mul_nonpos_of_nonneg_of_nonpos (Nat.cast_nonneg _) hneg).trans (by positivity)
++  set C : ℕ := ((2 ^ k + 1) * M) ^ Q * (2 ^ k + 1) ^ (Q + k + 1) with hC
++  let H : (Fin k → Fin ℓ) → Finset (BitString k → Bool) := fun σ =>
++    univ.filter (IsDepthTwoOverWeights (W σ) Q)
++  let L : (BitString k → Bool) → BitString k → Finset (BitString n) := fun h c =>
++    univ.filter fun x => γ * Fintype.card (BitString k) ≤
++      |∑ u, signVal (h (u + c)) * signVal (r u ⬝ᵥ x)|
++  have hcardZ : (Fintype.card (BitString k) : ℝ) = 2 ^ k := by simp
++  have hsub : badMessages r W Q γ ⊆
++      univ.biUnion fun σ => univ.biUnion fun c => (H σ).biUnion fun h => L h c := by
++    intro x hx
++    obtain ⟨σ, c, h, hh, hcorr⟩ := (mem_filter.mp hx).2
++    refine mem_biUnion.mpr ⟨σ, mem_univ σ, mem_biUnion.mpr ⟨c, mem_univ c,
++      mem_biUnion.mpr ⟨h, mem_filter.mpr ⟨mem_univ h, hh⟩, mem_filter.mpr ⟨mem_univ x, ?_⟩⟩⟩⟩
++    rw [hcardZ]
++    exact hcorr
++  have hL (h : BitString k → Bool) (c : BitString k) : (#(L h c) : ℝ) * (γ ^ 2 - δ) ≤ 1 :=
++    card_le_abs_sum_signVal_mul_signVal_dotProduct_mul_le hδ hγ hr fun u => h (u + c)
++  have hH (σ : Fin k → Fin ℓ) : (#(H σ) : ℝ) ≤ C := by
++    have hcount := card_isDepthTwoOverWeights_le (κ := Fin k) (W σ) Q
++    rw [Fintype.card_fin] at hcount
++    exact_mod_cast hcount.trans (Nat.mul_le_mul_right _ (Nat.pow_le_pow_left
++      (Nat.mul_le_mul_left _ ((min_le_left _ _).trans (hM σ))) Q))
++  have hcard : (#(badMessages r W Q γ) : ℝ) ≤ ∑ σ, ∑ c, ∑ h ∈ H σ, (#(L h c) : ℝ) := by
++    exact_mod_cast (card_le_card hsub).trans (card_biUnion_le.trans (sum_le_sum fun σ _ =>
++      card_biUnion_le.trans (sum_le_sum fun c _ => card_biUnion_le)))
++  calc (#(badMessages r W Q γ) : ℝ) * (γ ^ 2 - δ)
++      ≤ (∑ σ, ∑ c, ∑ h ∈ H σ, (#(L h c) : ℝ)) * (γ ^ 2 - δ) :=
++        mul_le_mul_of_nonneg_right hcard hpos.le
++    _ = ∑ σ, ∑ c, ∑ h ∈ H σ, (#(L h c) : ℝ) * (γ ^ 2 - δ) := by simp only [sum_mul]
++    _ ≤ ∑ σ : Fin k → Fin ℓ, ∑ _c : BitString k, ∑ _h ∈ H σ, (1 : ℝ) :=
++        sum_le_sum fun σ _ => sum_le_sum fun c _ => sum_le_sum fun h _ => hL h c
++    _ ≤ ∑ _σ : Fin k → Fin ℓ, ∑ _c : BitString k, (C : ℝ) :=
++        sum_le_sum fun σ _ => sum_le_sum fun _ _ => by rw [sum_const, nsmul_one]; exact hH σ
++    _ = (ℓ : ℝ) ^ k * 2 ^ k * (C : ℝ) := by
++        simp only [sum_const, card_univ, Fintype.card_fun, Fintype.card_fin, Fintype.card_bool,
++          nsmul_eq_mul]
++        push_cast
++        ring
++
++/-- The zero message is bad: its word is constantly `false`, like the constant function. -/
++private theorem zero_mem_badMessages (r : BitString k → BitString n) (hℓ : 0 < ℓ)
++    (W : (Fin k → Fin ℓ) → Finset (Fin k → ℝ)) (Q : ℕ) {γ : ℝ} (hγ1 : γ ≤ 1) :
++    0 ∈ badMessages r W Q γ := by
++  classical
++  refine mem_filter.mpr ⟨mem_univ _, fun _ => ⟨0, hℓ⟩, 0, fun _ => false,
++    isDepthTwoOverWeights_const _ Q false, ?_⟩
++  have h0 : signVal (0 : Bool) = 1 := rfl
++  simp only [dotProduct_zero, signVal_false, h0, mul_one, sum_const, card_univ, Fintype.card_fun,
++    Fintype.card_bool, Fintype.card_fin, nsmul_eq_mul]
++  push_cast
++  rw [abs_of_nonneg (by positivity)]
++  nlinarith [(by positivity : (0 : ℝ) < 2 ^ k)]
++
++/-- The bad messages occupy at most a `#bad / 2 ^ n` fraction of the inputs, bounded by the
++counting term. -/
++private theorem card_filter_badMessages_le {r : BitString k → BitString n} {δ γ : ℝ}
++    (hδ : 0 ≤ δ) (hγ : 0 ≤ γ) (hγδ : δ < γ ^ 2)
++    (hr : IsSmallBias δ ((PMF.uniformOfFintype (BitString k)).map r))
++    (W : (Fin k → Fin ℓ) → Finset (Fin k → ℝ)) {M : ℕ} (hM : ∀ σ, #(W σ) + 1 ≤ M) (Q : ℕ) :
++    (#{w : BitString (n + k * ℓ) | kaneWilliamsMessage n k ℓ w ∈ badMessages r W Q γ} : ℝ) ≤
++      2 ^ (n + k * ℓ) * ((ℓ : ℝ) ^ k * 2 ^ k *
++        ((((2 ^ k + 1) * M) ^ Q * (2 ^ k + 1) ^ (Q + k + 1) : ℕ) : ℝ) /
++          ((γ ^ 2 - δ) * 2 ^ n)) := by
++  have hbad := card_badMessages_mul_le (ℓ := ℓ) hδ hγ hr W hM Q
++  have hpos : 0 < γ ^ 2 - δ := sub_pos.mpr hγδ
++  rw [card_filter_kaneWilliamsMessage_mem]
++  push_cast
++  rw [pow_add, mul_div_assoc', le_div_iff₀ (by positivity)]
++  calc (#(badMessages r W Q γ) : ℝ) * 2 ^ (k * ℓ) * ((γ ^ 2 - δ) * 2 ^ n)
++      = (#(badMessages r W Q γ) : ℝ) * (γ ^ 2 - δ) * (2 ^ n * 2 ^ (k * ℓ)) := by ring
++    _ ≤ (ℓ : ℝ) ^ k * 2 ^ k * ((((2 ^ k + 1) * M) ^ Q * (2 ^ k + 1) ^ (Q + k + 1) : ℕ) : ℝ) *
++        (2 ^ n * 2 ^ (k * ℓ)) := mul_le_mul_of_nonneg_right (by exact_mod_cast hbad) (by positivity)
++    _ = _ := by push_cast; ring
++
++/-- On a block restriction with message `x = kaneWilliamsMessage n k ℓ w` and residual parities `c`,
++twice the agreement of `h` with the Kane–Williams function is `2 ^ k` plus the sign correlation of
++the translate `u ↦ h (u + c)` with the word of `x`. -/
++private theorem two_mul_card_agree_eq {r : BitString k → BitString n} (σ : Fin k → Fin ℓ)
++    (w : BitString (n + k * ℓ)) (h : BitString k → Bool) :
++    2 * (#{u : BitString k | h u =
++        kaneWilliamsB r ℓ (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u)} : ℝ) =
++      2 ^ k + ∑ u, signVal (h (u + kaneWilliamsResidualParities n k ℓ σ w)) *
++        signVal (r u ⬝ᵥ kaneWilliamsMessage n k ℓ w) := by
++  simp_rw [kaneWilliamsB_embedUpdate]
++  rw [two_mul_card_eq_add_sum_signVal, sum_signVal_add_eq]
++  simp
++
++/-- **Average-case core** (original): let `f` collapse, under every block restriction `(σ, w)`, to
++a function in `IsDepthTwoOverWeights (W σ) (U σ w)` with `#(W σ) < M`, and let the mean of `U` be
++at most `B`. If the rows `r` are `δ`-biased and `δ < γ ^ 2`, then for every `Q`, `f` agrees with
++the Kane–Williams function on at most a `(1 + γ) / 2 + C / ((γ ^ 2 - δ) 2 ^ n) + B / (Q + 1)`
++fraction of the inputs, where
++`C = ℓ ^ k * 2 ^ k * ((2 ^ k + 1) * M) ^ Q * (2 ^ k + 1) ^ (Q + k + 1)`. The terms bound the
++correlation on a restriction with at most `Q` survivors, the bad messages, and the restrictions
++with more survivors (Markov's inequality). -/
++theorem card_eval_eq_kaneWilliamsB_le_of_unforced_mean_le (hℓ : 0 < ℓ)
++    {r : BitString k → BitString n} {δ γ : ℝ} (hδ : 0 ≤ δ) (hγ : 0 ≤ γ) (hγδ : δ < γ ^ 2)
++    (hr : IsSmallBias δ ((PMF.uniformOfFintype (BitString k)).map r))
++    (f : BitString (n + k * ℓ) → Bool) (W : (Fin k → Fin ℓ) → Finset (Fin k → ℝ)) {M : ℕ}
++    (hM : ∀ σ, #(W σ) + 1 ≤ M) (U : (Fin k → Fin ℓ) → BitString (n + k * ℓ) → ℕ)
++    (hU : ∀ σ w, IsDepthTwoOverWeights (W σ) (U σ w)
++      fun u => f (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u))
++    {B : ℝ} (hmean : (∑ σ : Fin k → Fin ℓ, ∑ w : BitString (n + k * ℓ), (U σ w : ℝ)) ≤
++      (Fintype.card (Fin k → Fin ℓ) : ℝ) * 2 ^ (n + k * ℓ) * B) (Q : ℕ) :
++    (#{y | f y = kaneWilliamsB r ℓ y} : ℝ) ≤ 2 ^ (n + k * ℓ) * ((1 + γ) / 2 +
++      (ℓ : ℝ) ^ k * 2 ^ k * ((((2 ^ k + 1) * M) ^ Q * (2 ^ k + 1) ^ (Q + k + 1) : ℕ) : ℝ) /
++        ((γ ^ 2 - δ) * 2 ^ n) + B / (Q + 1)) := by
++  classical
++  set bad := badMessages r W Q γ with hbad
++  set CT : ℝ := (ℓ : ℝ) ^ k * 2 ^ k *
++    ((((2 ^ k + 1) * M) ^ Q * (2 ^ k + 1) ^ (Q + k + 1) : ℕ) : ℝ) / ((γ ^ 2 - δ) * 2 ^ n)
++  set N : ℝ := 2 ^ (n + k * ℓ) with hN
++  set A : ℝ := (#{y | f y = kaneWilliamsB r ℓ y} : ℝ) with hA
++  have h2k : (0 : ℝ) < 2 ^ k := by positivity
++  -- the agreement on each restriction
++  have hpt (σ : Fin k → Fin ℓ) (w : BitString (n + k * ℓ)) :
++      (#{u : BitString k | f (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u) =
++        kaneWilliamsB r ℓ (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u)} : ℝ) ≤
++      2 ^ k * ((1 + γ) / 2) + 2 ^ k * (if kaneWilliamsMessage n k ℓ w ∈ bad then 1 else 0) +
++        2 ^ k * (if Q < U σ w then 1 else 0) := by
++    have hle : (#{u : BitString k | f (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u) =
++        kaneWilliamsB r ℓ (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u)} : ℝ) ≤ 2 ^ k := by
++      exact_mod_cast (card_le_univ _).trans_eq (by simp)
++    have hγ2 : 0 ≤ 2 ^ k * ((1 + γ) / 2) := by positivity
++    by_cases hb : kaneWilliamsMessage n k ℓ w ∈ bad
++    · have : (0 : ℝ) ≤ 2 ^ k * (if Q < U σ w then 1 else 0) := by positivity
++      simp only [hb, ↓reduceIte]
++      linarith
++    by_cases hq : Q < U σ w
++    · simp only [hq, ↓reduceIte]
++      have : (0 : ℝ) ≤ 2 ^ k * (if kaneWilliamsMessage n k ℓ w ∈ bad then 1 else 0) := by
++        positivity
++      linarith
++    simp only [hb, hq, ↓reduceIte, mul_zero, add_zero]
++    have hh : IsDepthTwoOverWeights (W σ) Q
++        fun u => f (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u) :=
++      (hU σ w).mono (not_lt.mp hq)
++    have hcorr : |∑ u, signVal (f (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w
++        (u + kaneWilliamsResidualParities n k ℓ σ w))) *
++          signVal (r u ⬝ᵥ kaneWilliamsMessage n k ℓ w)| < γ * 2 ^ k := by
++      by_contra hge
++      exact hb (mem_filter.mpr ⟨mem_univ _, σ, _, _, hh, not_lt.mp hge⟩)
++    have hagree := two_mul_card_agree_eq (r := r) σ w
++      fun u => f (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u)
++    nlinarith [le_abs_self (∑ u, signVal (f (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w
++        (u + kaneWilliamsResidualParities n k ℓ σ w))) *
++          signVal (r u ⬝ᵥ kaneWilliamsMessage n k ℓ w))]
++  -- summing over the fixed values, for each block selection
++  have hbadw : (#{w : BitString (n + k * ℓ) | kaneWilliamsMessage n k ℓ w ∈ bad} : ℝ) ≤
++      N * CT := card_filter_badMessages_le hδ hγ hγδ hr W hM Q
++  have hσ (σ : Fin k → Fin ℓ) : 2 ^ k * A ≤ N * (2 ^ k * ((1 + γ) / 2)) +
++      2 ^ k * (N * CT) + 2 ^ k * (#{w : BitString (n + k * ℓ) | Q < U σ w} : ℝ) := by
++    have hsum := sum_card_filter_embedUpdate (kaneWilliamsLiveVar_injective n k ℓ σ)
++      fun y => f y = kaneWilliamsB r ℓ y
++    rw [Fintype.card_fin] at hsum
++    have hA' : 2 ^ k * A = ∑ w : BitString (n + k * ℓ),
++        (#{u : BitString k | f (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u) =
++          kaneWilliamsB r ℓ (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u)} : ℝ) := by
++      rw [hA]; exact_mod_cast hsum.symm
++    rw [hA']
++    refine (sum_le_sum fun w _ => hpt σ w).trans ?_
++    rw [sum_add_distrib, sum_add_distrib, sum_const, card_univ, nsmul_eq_mul, ← mul_sum,
++      ← mul_sum, sum_boole, sum_boole]
++    have hcardN : (Fintype.card (BitString (n + k * ℓ)) : ℝ) = N := by rw [hN]; simp
++    rw [hcardN]
++    nlinarith
++  -- summing over the block selections, with Markov's inequality for the survivors
++  set S : ℝ := (Fintype.card (Fin k → Fin ℓ) : ℝ) with hS
++  have hS0 : 0 < S := by
++    rw [hS, Fintype.card_fun, Fintype.card_fin, Fintype.card_fin]; positivity
++  have hmarkov : ((Q : ℝ) + 1) * ∑ σ : Fin k → Fin ℓ, (#{w : BitString (n + k * ℓ) | Q < U σ w} : ℝ)
++      ≤ S * N * B := by
++    rw [mul_sum]
++    exact (sum_le_sum fun σ _ => add_one_mul_card_filter_lt_le univ (U σ) Q).trans hmean
++  have hsumσ := sum_le_sum fun σ (_ : σ ∈ (univ : Finset (Fin k → Fin ℓ))) => hσ σ
++  rw [sum_const, card_univ, nsmul_eq_mul, sum_add_distrib, sum_add_distrib, sum_const, sum_const,
++    card_univ, nsmul_eq_mul, nsmul_eq_mul, ← mul_sum, ← hS] at hsumσ
++  have hQ : (0 : ℝ) < Q + 1 := by positivity
++  have hmarkov' : (∑ σ : Fin k → Fin ℓ, (#{w : BitString (n + k * ℓ) | Q < U σ w} : ℝ)) ≤
++      S * N * (B / (Q + 1)) := by
++    rw [mul_div_assoc', le_div_iff₀ hQ]; linarith
++  have hkey : S * (2 ^ k * A) ≤ S * (2 ^ k * (N * ((1 + γ) / 2 + CT + B / (Q + 1)))) := by
++    have := mul_le_mul_of_nonneg_left hmarkov' h2k.le
++    nlinarith
++  exact le_of_mul_le_mul_left (le_of_mul_le_mul_left hkey hS0) h2k
++
++/-- **Worst-case core** (original; [KaneWilliams2016], `arXiv:1511.07860v1`, Theorem 1.3 fixes the
++message first): let `v` be `t` votes whose unweighted threshold vote `threshold t θ (v y)`
++computes the Kane–Williams function, and let every vote collapse, under every block restriction
++`(σ, w)`, to a function in `IsDepthTwoOverWeights (W σ) (U σ w)`, one count `U σ w` for all votes,
++with `#(W σ) < M` and the mean of `U` at most `B`. If the rows are `δ`-biased, `0 ≤ γ ≤ 1`,
++`δ < γ ^ 2` and `t γ + (t + 1) δ < 1`, then every `Q` satisfies
++`1 ≤ C / ((γ ^ 2 - δ) 2 ^ n) + B / (Q + 1)` with `C` as in
++`card_eval_eq_kaneWilliamsB_le_of_unforced_mean_le`. Otherwise some restriction has a good
++message and at most `Q` survivors; there every vote has correlation below `γ` with the restricted
++function, while the discriminator lemma needs a total correlation of `1 - (t + 1) δ`. -/
++theorem one_le_of_threshold_eq_kaneWilliamsB_of_unforced_mean_le {t : ℕ} (hℓ : 0 < ℓ)
++    {r : BitString k → BitString n} {δ γ : ℝ} (hδ : 0 ≤ δ) (hγ : 0 ≤ γ) (hγ1 : γ ≤ 1)
++    (hγδ : δ < γ ^ 2) (htγδ : t * γ + (t + 1) * δ < 1)
++    (hr : IsSmallBias δ ((PMF.uniformOfFintype (BitString k)).map r))
++    (v : BitString (n + k * ℓ) → BitString t) {θ : ℕ}
++    (hv : ∀ y, threshold t θ (v y) = kaneWilliamsB r ℓ y)
++    (W : (Fin k → Fin ℓ) → Finset (Fin k → ℝ)) {M : ℕ} (hM : ∀ σ, #(W σ) + 1 ≤ M)
++    (U : (Fin k → Fin ℓ) → BitString (n + k * ℓ) → ℕ)
++    (hU : ∀ σ w o, IsDepthTwoOverWeights (W σ) (U σ w)
++      fun u => v (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u) o)
++    {B : ℝ} (hmean : (∑ σ : Fin k → Fin ℓ, ∑ w : BitString (n + k * ℓ), (U σ w : ℝ)) ≤
++      (Fintype.card (Fin k → Fin ℓ) : ℝ) * 2 ^ (n + k * ℓ) * B) (Q : ℕ) :
++    1 ≤ (ℓ : ℝ) ^ k * 2 ^ k * ((((2 ^ k + 1) * M) ^ Q * (2 ^ k + 1) ^ (Q + k + 1) : ℕ) : ℝ) /
++        ((γ ^ 2 - δ) * 2 ^ n) + B / (Q + 1) := by
++  classical
++  set bad := badMessages r W Q γ with hbad
++  set CT : ℝ := (ℓ : ℝ) ^ k * 2 ^ k *
++    ((((2 ^ k + 1) * M) ^ Q * (2 ^ k + 1) ^ (Q + k + 1) : ℕ) : ℝ) / ((γ ^ 2 - δ) * 2 ^ n)
++  set N : ℝ := 2 ^ (n + k * ℓ) with hN
++  set S : ℝ := (Fintype.card (Fin k → Fin ℓ) : ℝ) with hS
++  have hS0 : 0 < S := by
++    rw [hS, Fintype.card_fun, Fintype.card_fin, Fintype.card_fin]; positivity
++  have hN0 : 0 < N := by positivity
++  have h2k : (0 : ℝ) < 2 ^ k := by positivity
++  have hcardZ : (Fintype.card (BitString k) : ℝ) = 2 ^ k := by simp
++  by_contra hlt
++  push Not at hlt
++  -- some restriction has a good message and at most `Q` survivors
++  obtain ⟨σ, w, hgood, hq⟩ : ∃ σ w, kaneWilliamsMessage n k ℓ w ∉ bad ∧ U σ w ≤ Q := by
++    by_contra hno
++    push Not at hno
++    have hcover (σ : Fin k → Fin ℓ) : N ≤
++        (#{w : BitString (n + k * ℓ) | kaneWilliamsMessage n k ℓ w ∈ bad} : ℝ) +
++          #{w : BitString (n + k * ℓ) | Q < U σ w} := by
++      have hsub : (univ : Finset (BitString (n + k * ℓ))) ⊆
++          (univ.filter fun w => kaneWilliamsMessage n k ℓ w ∈ bad) ∪
++            univ.filter fun w => Q < U σ w := fun w _ => by
++        by_cases hb : kaneWilliamsMessage n k ℓ w ∈ bad
++        · exact mem_union_left _ (mem_filter.mpr ⟨mem_univ w, hb⟩)
++        · exact mem_union_right _ (mem_filter.mpr ⟨mem_univ w, hno σ w hb⟩)
++      have hcard := (card_le_card hsub).trans (card_union_le _ _)
++      rw [card_univ] at hcard
++      have hcardN : (Fintype.card (BitString (n + k * ℓ)) : ℝ) = N := by rw [hN]; simp
++      rw [← hcardN]
++      exact_mod_cast hcard
++    have hbadw : (#{w : BitString (n + k * ℓ) | kaneWilliamsMessage n k ℓ w ∈ bad} : ℝ) ≤
++        N * CT := card_filter_badMessages_le hδ hγ hγδ hr W hM Q
++    have hQ : (0 : ℝ) < Q + 1 := by positivity
++    have hmarkov : ((Q : ℝ) + 1) *
++        ∑ σ : Fin k → Fin ℓ, (#{w : BitString (n + k * ℓ) | Q < U σ w} : ℝ) ≤ S * N * B := by
++      rw [mul_sum]
++      exact (sum_le_sum fun σ _ => add_one_mul_card_filter_lt_le univ (U σ) Q).trans hmean
++    have hsumσ := sum_le_sum fun σ (_ : σ ∈ (univ : Finset (Fin k → Fin ℓ))) => hcover σ
++    rw [sum_const, card_univ, nsmul_eq_mul, sum_add_distrib, sum_const, card_univ,
++      nsmul_eq_mul, ← hS] at hsumσ
++    have hmarkov' : (∑ σ : Fin k → Fin ℓ, (#{w : BitString (n + k * ℓ) | Q < U σ w} : ℝ)) ≤
++        S * N * (B / (Q + 1)) := by
++      rw [mul_div_assoc', le_div_iff₀ hQ]; linarith
++    have hkey : S * N * 1 ≤ S * N * (CT + B / (Q + 1)) := by
++      nlinarith [mul_le_mul_of_nonneg_left hbadw hS0.le]
++    have := le_of_mul_le_mul_left hkey (mul_pos hS0 hN0)
++    linarith
++  set x := kaneWilliamsMessage n k ℓ w with hx
++  set c := kaneWilliamsResidualParities n k ℓ σ w with hc
++  have hx0 : x ≠ 0 := fun h0 => hgood (h0 ▸ zero_mem_badMessages r hℓ W Q hγ1)
++  have hcc : c + c = 0 := funext fun i => BooleanRing.add_self (c i)
++  -- on the restriction, the translated votes compute the word of `x`
++  set V : BitString k → BitString t :=
++    fun u => v (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w (u + c)) with hVdef
++  have hV (u : BitString k) : threshold t θ (V u) = r u ⬝ᵥ x := by
++    rw [hVdef, hv, kaneWilliamsB_embedUpdate, add_assoc, hcc, add_zero]
++  have hdisc := sub_le_sum_sum_signVal_mul_of_threshold_eq V (fun u => r u ⬝ᵥ x) hV
++  rw [hcardZ] at hdisc
++  -- the word of `x ≠ 0` is nearly balanced
++  have hbal : |∑ u, signVal (r u ⬝ᵥ x)| ≤ δ * 2 ^ k := by
++    have h := abs_sum_signVal_dotProduct_le hr hx0
++    rwa [hcardZ] at h
++  -- every restricted vote has correlation below `γ`
++  have hsmall (o : Fin t) : ∑ u, signVal (V u o) * signVal (r u ⬝ᵥ x) ≤ γ * 2 ^ k := by
++    have hh : IsDepthTwoOverWeights (W σ) Q
++        fun u => v (embedUpdate (kaneWilliamsLiveVar n k ℓ σ) w u) o := (hU σ w o).mono hq
++    by_contra hgt
++    push Not at hgt
++    exact hgood (mem_filter.mpr ⟨mem_univ _, σ, c, _, hh, hgt.le.trans (le_abs_self _)⟩)
++  have hsum : ∑ o, ∑ u, signVal (V u o) * signVal (r u ⬝ᵥ x) ≤ t * (γ * 2 ^ k) := by
++    refine (sum_le_sum fun o _ => hsmall o).trans ?_
++    rw [sum_const, card_univ, Fintype.card_fin, nsmul_eq_mul]
++  have ht0 : (0 : ℝ) ≤ t + 1 := by positivity
++  have hcomb : 2 ^ k * (1 - (t + 1) * δ) ≤ 2 ^ k * (t * γ) := by
++    nlinarith [mul_le_mul_of_nonneg_left hbal ht0]
++  have := le_of_mul_le_mul_left hcomb h2k
++  linarith
++
++/-! ### Average case: depth-two circuits correlate weakly with the function -/
++
++/-- **Average-case gate bound**: a depth-two weighted threshold circuit `c` agrees with the
++Kane–Williams function of `δ`-biased rows on at most a
++`(1 + γ) / 2 + ℓ ^ k * 2 ^ k * ((2 ^ k + 1) * (c.size + 1)) ^ Q * (2 ^ k + 1) ^ (Q + k + 1) /
++((γ ^ 2 - δ) 2 ^ n) + 4 * (1 / ℓ) * c.size * √(n + k ℓ) / (Q + 1)` fraction of the inputs, for
++every `Q` and `δ < γ ^ 2`. -/
++theorem card_eval_eq_kaneWilliamsB_le_of_depth_le_two_size (hℓ : 0 < ℓ)
++    {r : BitString k → BitString n} {δ γ : ℝ} (hδ : 0 ≤ δ) (hγ : 0 ≤ γ) (hγδ : δ < γ ^ 2)
++    (hr : IsSmallBias δ ((PMF.uniformOfFintype (BitString k)).map r))
++    (c : Circuit signature (n + k * ℓ) 1) (hd : c.depth ≤ 2) (o : Fin 1) (Q : ℕ) :
++    (#{y | c.eval interpretation y o = kaneWilliamsB r ℓ y} : ℝ) ≤ 2 ^ (n + k * ℓ) *
++      ((1 + γ) / 2 + (ℓ : ℝ) ^ k * 2 ^ k *
++        ((((2 ^ k + 1) * (c.size + 1)) ^ Q * (2 ^ k + 1) ^ (Q + k + 1) : ℕ) : ℝ) /
++          ((γ ^ 2 - δ) * 2 ^ n) +
++        4 * (1 / (ℓ : ℝ)) * c.size * Real.sqrt ((n + k * ℓ : ℕ) : ℝ) / (Q + 1)) := by
++  classical
++  refine card_eval_eq_kaneWilliamsB_le_of_unforced_mean_le hℓ hδ hγ hγδ hr
++    (fun y => c.eval interpretation y o)
++    (fun σ => circuitLiveWeights c o (kaneWilliamsLiveVar n k ℓ σ))
++    (fun σ => Nat.add_le_add_right (card_circuitLiveWeights_le_size c o _) 1)
++    (fun σ w => circuitUnforcedConstCount c o (blockLiveSet (kaneWilliamsBlockVar n k ℓ) σ) w)
++    (fun σ w => by
++      rw [← univ_image_kaneWilliamsLiveVar_eq_blockLiveSet]
++      exact isDepthTwoOverWeights_eval_embedUpdate_const c hd o
++        (kaneWilliamsLiveVar_injective n k ℓ σ) w) ?_ Q
++  simpa [Fintype.card_fin] using sum_circuitUnforcedConstCount_blockLiveSet_le c o
++    (kaneWilliamsBlockVar n k ℓ) (kaneWilliamsBlockVar_joint_injective n k ℓ)
++
++/-- **Average-case wire bound**: as `card_eval_eq_kaneWilliamsB_le_of_depth_le_two_size`, with
++`c.wireCount` in the counting term and the survivor term
++`4 * c.wireCount * (1 / ℓ) * √(1 / ℓ) / (Q + 1)`. -/
++theorem card_eval_eq_kaneWilliamsB_le_of_depth_le_two_wireCount (hℓ : 0 < ℓ)
++    {r : BitString k → BitString n} {δ γ : ℝ} (hδ : 0 ≤ δ) (hγ : 0 ≤ γ) (hγδ : δ < γ ^ 2)
++    (hr : IsSmallBias δ ((PMF.uniformOfFintype (BitString k)).map r))
++    (c : Circuit signature (n + k * ℓ) 1) (hd : c.depth ≤ 2) (o : Fin 1) (Q : ℕ) :
++    (#{y | c.eval interpretation y o = kaneWilliamsB r ℓ y} : ℝ) ≤ 2 ^ (n + k * ℓ) *
++      ((1 + γ) / 2 + (ℓ : ℝ) ^ k * 2 ^ k *
++        ((((2 ^ k + 1) * (c.wireCount + 1)) ^ Q * (2 ^ k + 1) ^ (Q + k + 1) : ℕ) : ℝ) /
++          ((γ ^ 2 - δ) * 2 ^ n) +
++        4 * (c.wireCount : ℝ) * (1 / (ℓ : ℝ)) * Real.sqrt (1 / (ℓ : ℝ)) / (Q + 1)) := by
++  classical
++  refine card_eval_eq_kaneWilliamsB_le_of_unforced_mean_le hℓ hδ hγ hγδ hr
++    (fun y => c.eval interpretation y o)
++    (fun σ => circuitLiveWeights c o (kaneWilliamsLiveVar n k ℓ σ))
++    (fun σ => Nat.add_le_add_right (card_circuitLiveWeights_le_wireCount c o _) 1)
++    (fun σ w => circuitUnforcedAtMostOneCount c o (blockLiveSet (kaneWilliamsBlockVar n k ℓ) σ) w)
++    (fun σ w => by
++      rw [← univ_image_kaneWilliamsLiveVar_eq_blockLiveSet]
++      exact isDepthTwoOverWeights_eval_embedUpdate c hd o
++        (kaneWilliamsLiveVar_injective n k ℓ σ) w) ?_ Q
++  simpa [Fintype.card_fin] using sum_circuitUnforcedAtMostOneCount_blockLiveSet_le c o
++    (kaneWilliamsBlockVar n k ℓ) (kaneWilliamsBlockVar_joint_injective n k ℓ)
++
++/-! ### Worst case: unweighted threshold votes of depth-two circuits -/
++
++/-- **Worst-case gate bound**: suppose the `t` outputs of a depth-two weighted threshold circuit
++`c`, which share their bottom gates, feed an unweighted threshold gate `threshold t θ` (for
++instance majority) that computes the Kane–Williams function of `δ`-biased rows. If `0 ≤ γ ≤ 1`,
++`δ < γ ^ 2` and `t γ + (t + 1) δ < 1`, then every `Q` satisfies
++`1 ≤ ℓ ^ k * 2 ^ k * ((2 ^ k + 1) * (c.size + 1)) ^ Q * (2 ^ k + 1) ^ (Q + k + 1) /
++((γ ^ 2 - δ) 2 ^ n) + 4 * (1 / ℓ) * c.size * √(n + k ℓ) / (Q + 1)`. -/
++theorem one_le_of_threshold_eval_eq_kaneWilliamsB_size {t : ℕ} (hℓ : 0 < ℓ)
++    {r : BitString k → BitString n} {δ γ : ℝ} (hδ : 0 ≤ δ) (hγ : 0 ≤ γ) (hγ1 : γ ≤ 1)
++    (hγδ : δ < γ ^ 2) (htγδ : t * γ + (t + 1) * δ < 1)
++    (hr : IsSmallBias δ ((PMF.uniformOfFintype (BitString k)).map r))
++    (c : Circuit signature (n + k * ℓ) t) (hd : c.depth ≤ 2) (θ : ℕ)
++    (hc : ∀ y, threshold t θ (c.eval interpretation y) = kaneWilliamsB r ℓ y) (Q : ℕ) :
++    1 ≤ (ℓ : ℝ) ^ k * 2 ^ k *
++        ((((2 ^ k + 1) * (c.size + 1)) ^ Q * (2 ^ k + 1) ^ (Q + k + 1) : ℕ) : ℝ) /
++          ((γ ^ 2 - δ) * 2 ^ n) +
++        4 * (1 / (ℓ : ℝ)) * c.size * Real.sqrt ((n + k * ℓ : ℕ) : ℝ) / (Q + 1) := by
++  classical
++  refine one_le_of_threshold_eq_kaneWilliamsB_of_unforced_mean_le hℓ hδ hγ hγ1 hγδ htγδ hr
++    (c.eval interpretation) hc
++    (fun σ => circuitBottomWeights c (kaneWilliamsLiveVar n k ℓ σ))
++    (fun σ => Nat.add_le_add_right
++      ((card_circuitBottomWeights_le c _).trans (card_circuitBottomGates_le_size c)) 1)
++    (fun σ w => circuitBottomUnforcedConstCount c (blockLiveSet (kaneWilliamsBlockVar n k ℓ) σ) w)
++    (fun σ w o => by
++      rw [← univ_image_kaneWilliamsLiveVar_eq_blockLiveSet]
++      exact isDepthTwoOverWeights_eval_embedUpdate_circuitBottom_const c hd
++        (kaneWilliamsLiveVar_injective n k ℓ σ) w o) ?_ Q
++  simpa [Fintype.card_fin] using sum_circuitBottomUnforcedConstCount_blockLiveSet_le c
++    (kaneWilliamsBlockVar n k ℓ) (kaneWilliamsBlockVar_joint_injective n k ℓ)
++
++/-- **Worst-case wire bound**: as `one_le_of_threshold_eval_eq_kaneWilliamsB_size`, with
++`c.wireCount` in the counting term and the survivor term
++`4 * c.wireCount * (1 / ℓ) * √(1 / ℓ) / (Q + 1)`. The top gate's `t` wires are not counted. -/
++theorem one_le_of_threshold_eval_eq_kaneWilliamsB_wireCount {t : ℕ} (hℓ : 0 < ℓ)
++    {r : BitString k → BitString n} {δ γ : ℝ} (hδ : 0 ≤ δ) (hγ : 0 ≤ γ) (hγ1 : γ ≤ 1)
++    (hγδ : δ < γ ^ 2) (htγδ : t * γ + (t + 1) * δ < 1)
++    (hr : IsSmallBias δ ((PMF.uniformOfFintype (BitString k)).map r))
++    (c : Circuit signature (n + k * ℓ) t) (hd : c.depth ≤ 2) (θ : ℕ)
++    (hc : ∀ y, threshold t θ (c.eval interpretation y) = kaneWilliamsB r ℓ y) (Q : ℕ) :
++    1 ≤ (ℓ : ℝ) ^ k * 2 ^ k *
++        ((((2 ^ k + 1) * (c.wireCount + 1)) ^ Q * (2 ^ k + 1) ^ (Q + k + 1) : ℕ) : ℝ) /
++          ((γ ^ 2 - δ) * 2 ^ n) +
++        4 * (c.wireCount : ℝ) * (1 / (ℓ : ℝ)) * Real.sqrt (1 / (ℓ : ℝ)) / (Q + 1) := by
++  classical
++  refine one_le_of_threshold_eq_kaneWilliamsB_of_unforced_mean_le hℓ hδ hγ hγ1 hγδ htγδ hr
++    (c.eval interpretation) hc
++    (fun σ => circuitBottomWeights c (kaneWilliamsLiveVar n k ℓ σ))
++    (fun σ => Nat.add_le_add_right
++      ((card_circuitBottomWeights_le c _).trans (card_circuitBottomGates_le_wireCount c)) 1)
++    (fun σ w =>
++      circuitBottomUnforcedAtMostOneCount c (blockLiveSet (kaneWilliamsBlockVar n k ℓ) σ) w)
++    (fun σ w o => by
++      rw [← univ_image_kaneWilliamsLiveVar_eq_blockLiveSet]
++      exact isDepthTwoOverWeights_eval_embedUpdate_circuitBottom c hd
++        (kaneWilliamsLiveVar_injective n k ℓ σ) w o) ?_ Q
++  simpa [Fintype.card_fin] using sum_circuitBottomUnforcedAtMostOneCount_blockLiveSet_le c
++    (kaneWilliamsBlockVar n k ℓ) (kaneWilliamsBlockVar_joint_injective n k ℓ)
++
++end Core
++
++/-! ### Concrete parameters: `16 p` blocks and rows of bias `2 ^ (-7 p)` -/
++
++section Concrete
++
++variable {p n ℓ : ℕ}
++
++/-- At `k = 16 p`, `γ = 2 ^ (-3 p)`, `δ = 2 ^ (-7 p)`, `ℓ ≤ 2 ^ p` and `M ≤ 2 ^ (4 p)`, the
++counting term is at most `2 ^ ((36 p + 2) Q + 272 p ^ 2 + 54 p + 2) / 2 ^ n`. -/
++private theorem countTerm_le (hp : 1 ≤ p) (hℓp : ℓ ≤ 2 ^ p) {M : ℕ} (hM : M ≤ 2 ^ (4 * p))
++    (Q : ℕ) :
++    (ℓ : ℝ) ^ (16 * p) * 2 ^ (16 * p) *
++        ((((2 ^ (16 * p) + 1) * M) ^ Q * (2 ^ (16 * p) + 1) ^ (Q + 16 * p + 1) : ℕ) : ℝ) /
++          ((((1 / 2 : ℝ) ^ (3 * p)) ^ 2 - (1 / 2) ^ (7 * p)) * 2 ^ n) ≤
++      2 ^ ((36 * p + 2) * Q + 272 * p ^ 2 + 54 * p + 2) / 2 ^ n := by
++  have h2 : 2 ^ (16 * p) + 1 ≤ 2 ^ (16 * p + 1) := by
++    rw [pow_succ]; have := Nat.one_le_two_pow (n := 16 * p); omega
++  have hnat : ℓ ^ (16 * p) * 2 ^ (16 * p) *
++      (((2 ^ (16 * p) + 1) * M) ^ Q * (2 ^ (16 * p) + 1) ^ (Q + 16 * p + 1)) ≤
++      2 ^ ((36 * p + 2) * Q + 272 * p ^ 2 + 48 * p + 1) := by
++    calc ℓ ^ (16 * p) * 2 ^ (16 * p) *
++          (((2 ^ (16 * p) + 1) * M) ^ Q * (2 ^ (16 * p) + 1) ^ (Q + 16 * p + 1))
++        ≤ (2 ^ p) ^ (16 * p) * 2 ^ (16 * p) *
++          ((2 ^ (16 * p + 1) * 2 ^ (4 * p)) ^ Q * (2 ^ (16 * p + 1)) ^ (Q + 16 * p + 1)) := by
++          gcongr
++      _ = 2 ^ ((36 * p + 2) * Q + 272 * p ^ 2 + 48 * p + 1) := by ring
++  have hnat' : (ℓ : ℝ) ^ (16 * p) * 2 ^ (16 * p) *
++      ((((2 ^ (16 * p) + 1) * M) ^ Q * (2 ^ (16 * p) + 1) ^ (Q + 16 * p + 1) : ℕ) : ℝ) ≤
++      2 ^ ((36 * p + 2) * Q + 272 * p ^ 2 + 48 * p + 1) := by
++    exact_mod_cast hnat
++  have hden : (1 / 2 : ℝ) ^ (6 * p + 1) ≤ ((1 / 2 : ℝ) ^ (3 * p)) ^ 2 - (1 / 2) ^ (7 * p) := by
++    have h7 : (1 / 2 : ℝ) ^ (7 * p) ≤ (1 / 2) ^ (6 * p + 1) :=
++      pow_le_pow_of_le_one (by norm_num) (by norm_num) (by omega)
++    have h6 : ((1 / 2 : ℝ) ^ (3 * p)) ^ 2 = 2 * (1 / 2) ^ (6 * p + 1) := by
++      rw [← pow_mul, pow_succ]; ring_nf
++    linarith
++  have hpos : (0 : ℝ) < (1 / 2) ^ (6 * p + 1) := by positivity
++  calc (ℓ : ℝ) ^ (16 * p) * 2 ^ (16 * p) *
++        ((((2 ^ (16 * p) + 1) * M) ^ Q * (2 ^ (16 * p) + 1) ^ (Q + 16 * p + 1) : ℕ) : ℝ) /
++          ((((1 / 2 : ℝ) ^ (3 * p)) ^ 2 - (1 / 2) ^ (7 * p)) * 2 ^ n)
++      ≤ 2 ^ ((36 * p + 2) * Q + 272 * p ^ 2 + 48 * p + 1) /
++          ((1 / 2 : ℝ) ^ (6 * p + 1) * 2 ^ n) := by
++        refine div_le_div₀ (by positivity) hnat' (by positivity) ?_
++        exact mul_le_mul_of_nonneg_right hden (by positivity)
++    _ = 2 ^ ((36 * p + 2) * Q + 272 * p ^ 2 + 54 * p + 2) / 2 ^ n := by
++        rw [one_div_pow, div_mul_eq_mul_div, one_mul, div_div_eq_mul_div, ← pow_add]
++        congr 2
++        ring
++
++/-- Under `4 t ≤ 2 ^ (3 p)`, the parameters `γ = 2 ^ (-3 p)` and `δ = 2 ^ (-7 p)` satisfy the
++discriminator condition `t γ + (t + 1) δ < 1`. -/
++private theorem discriminator_condition (hp : 1 ≤ p) {t : ℕ} (ht : 4 * t ≤ 2 ^ (3 * p)) :
++    (t : ℝ) * (1 / 2) ^ (3 * p) + (t + 1) * (1 / 2) ^ (7 * p) < 1 := by
++  set a : ℝ := (1 / 2) ^ (3 * p) with ha
++  have ha0 : 0 < a := by positivity
++  have ha8 : a ≤ 1 / 8 := by
++    calc a ≤ (1 / 2) ^ 3 := pow_le_pow_of_le_one (by norm_num) (by norm_num) (by omega)
++      _ = 1 / 8 := by norm_num
++  have hta : (t : ℝ) * a ≤ 1 / 4 := by
++    have hcast : (4 : ℝ) * t ≤ 2 ^ (3 * p) := by exact_mod_cast ht
++    rw [ha, one_div_pow, ← div_eq_mul_one_div, div_le_iff₀ (by positivity)]
++    linarith
++  have h7 : (1 / 2 : ℝ) ^ (7 * p) ≤ a ^ 2 := by
++    rw [ha, ← pow_mul]; exact pow_le_pow_of_le_one (by norm_num) (by norm_num) (by omega)
++  have : ((t : ℝ) + 1) * (1 / 2) ^ (7 * p) ≤ ((t : ℝ) + 1) * a ^ 2 :=
++    mul_le_mul_of_nonneg_left h7 (by positivity)
++  nlinarith
++
++/-- The parameters `γ = 2 ^ (-3 p)` and `δ = 2 ^ (-7 p)` satisfy `δ < γ ^ 2`. -/
++private theorem bias_lt_sq (hp : 1 ≤ p) :
++    (1 / 2 : ℝ) ^ (7 * p) < ((1 / 2 : ℝ) ^ (3 * p)) ^ 2 := by
++  rw [← pow_mul]
++  exact pow_lt_pow_right_of_lt_one₀ (by norm_num) (by norm_num) (by omega)
++
++/-- If `E + j ≤ n`, then `2 ^ E / 2 ^ n ≤ (1 / 2) ^ j`. -/
++private theorem two_pow_div_two_pow_le {E j : ℕ} (h : E + j ≤ n) :
++    (2 : ℝ) ^ E / 2 ^ n ≤ (1 / 2) ^ j := by
++  rw [div_le_iff₀ (by positivity), one_div_pow, div_mul_eq_mul_div, one_mul,
++    le_div_iff₀ (by positivity), ← pow_add]
++  exact pow_le_pow_right₀ (by norm_num) h
++
++/-- The survivor budget `Q = (n - R) / (36 p + 2)` satisfies `(36 p + 2) Q + R ≤ n` and
++`n - R ≤ (36 p + 2) (Q + 1)`. -/
++private theorem exists_survivorBudget {R : ℕ} (hR : R ≤ n) :
++    ∃ Q : ℕ, (36 * p + 2) * Q + R ≤ n ∧ (n : ℝ) - R ≤ (36 * p + 2) * (Q + 1) := by
++  refine ⟨(n - R) / (36 * p + 2), ?_, ?_⟩
++  · have := Nat.mul_div_le (n - R) (36 * p + 2)
++    omega
++  · have h := (Nat.lt_mul_div_succ (n - R) (by omega : 0 < 36 * p + 2)).le
++    have h' : ((n - R : ℕ) : ℝ) ≤ ((36 * p + 2) * ((n - R) / (36 * p + 2) + 1) : ℕ) := by
++      exact_mod_cast h
++    rw [Nat.cast_sub hR] at h'
++    push_cast at h'
++    exact h'
++
++/-- **`MAJ ∘ THR ∘ THR` gate lower bound** at `k = 16 p` blocks (original, improving
++[KaneWilliams2016], `arXiv:1511.07860v1`, Theorem 1.3 by one logarithmic factor): let the rows
++`r : BitString (16 p) → BitString n` be `2 ^ (-7 p)`-biased (such rows exist,
++`exists_isSmallBias_kaneWilliamsRows`), `n, ℓ ≤ 2 ^ p`, and let an unweighted threshold gate of
++fan-in `t ≤ 2 ^ (3 p) / 4` over the outputs of a depth-two weighted threshold circuit `c` compute
++the Kane–Williams function. Then `ℓ (n - 272 p ^ 2 - 54 p - 3) ≤ 304 p * c.size * √(n + 16 p ℓ)`.
++With `p = ⌈log₂ n⌉` and `ℓ = n / (16 p)` this is `c.size = Ω(n ^ (3 / 2) / log² n)`. -/
++theorem size_ge_of_threshold_eval_eq_kaneWilliamsB_of_le_two_pow {t : ℕ} (hp : 1 ≤ p)
++    (hn : n ≤ 2 ^ p) (hℓ : 0 < ℓ) (hℓp : ℓ ≤ 2 ^ p) (ht : 4 * t ≤ 2 ^ (3 * p))
++    {r : BitString (16 * p) → BitString n}
++    (hr : IsSmallBias ((1 / 2) ^ (7 * p)) ((PMF.uniformOfFintype (BitString (16 * p))).map r))
++    (c : Circuit signature (n + 16 * p * ℓ) t) (hd : c.depth ≤ 2) (θ : ℕ)
++    (hc : ∀ y, threshold t θ (c.eval interpretation y) = kaneWilliamsB r ℓ y) :
++    (ℓ : ℝ) * (n - (272 * p ^ 2 + 54 * p + 3)) ≤
++      304 * p * c.size * Real.sqrt ((n + 16 * p * ℓ : ℕ) : ℝ) := by
++  set S : ℝ := Real.sqrt ((n + 16 * p * ℓ : ℕ) : ℝ) with hS
++  have hℓ0 : (0 : ℝ) < ℓ := by exact_mod_cast hℓ
++  have hp1 : (1 : ℝ) ≤ p := by exact_mod_cast hp
++  have hS1 : (1 : ℝ) ≤ S :=
++    Real.one_le_sqrt.mpr (by exact_mod_cast (show 1 ≤ n + 16 * p * ℓ by nlinarith))
++  have hℓ' : (ℓ : ℝ) ≤ 2 ^ p := by exact_mod_cast hℓp
++  have hn' : (n : ℝ) ≤ 2 ^ p := by exact_mod_cast hn
++  have hsize0 : (0 : ℝ) ≤ c.size := Nat.cast_nonneg _
++  -- the bound is trivial for short messages
++  by_cases hnR : n < 272 * p ^ 2 + 54 * p + 3
++  · have hneg : (n : ℝ) - (272 * p ^ 2 + 54 * p + 3) ≤ 0 := by
++      have : (n : ℝ) < ((272 * p ^ 2 + 54 * p + 3 : ℕ) : ℝ) := by exact_mod_cast hnR
++      push_cast at this
++      linarith
++    exact (mul_nonpos_of_nonneg_of_nonpos hℓ0.le hneg).trans (by positivity)
++  push Not at hnR
++  have hlhs : (ℓ : ℝ) * (n - (272 * p ^ 2 + 54 * p + 3)) ≤ 2 ^ p * 2 ^ p :=
++    mul_le_mul hℓ' (by linarith [(by positivity : (0 : ℝ) ≤ 272 * p ^ 2 + 54 * p + 3)])
++      (by have : ((272 * p ^ 2 + 54 * p + 3 : ℕ) : ℝ) ≤ n := by exact_mod_cast hnR
++          push_cast at this; linarith) (by positivity)
++  -- and for circuits with more than `2 ^ (4 p)` gates
++  by_cases hM : 2 ^ (4 * p) < c.size + 1
++  · have hs : (2 : ℝ) ^ (4 * p) ≤ c.size := by exact_mod_cast (show 2 ^ (4 * p) ≤ c.size by omega)
++    have hpow : (2 : ℝ) ^ p * 2 ^ p ≤ 2 ^ (4 * p) := by
++      rw [← pow_add]; exact pow_le_pow_right₀ (by norm_num) (by omega)
++    calc (ℓ : ℝ) * (n - (272 * p ^ 2 + 54 * p + 3)) ≤ c.size := (hlhs.trans hpow).trans hs
++      _ ≤ c.size * S := le_mul_of_one_le_right hsize0 hS1
++      _ ≤ 304 * p * (c.size * S) := le_mul_of_one_le_left (by positivity) (by linarith)
++      _ = 304 * p * c.size * S := by ring
++  push Not at hM
++  -- choose the survivor budget `Q` as large as the counting allows
++  obtain ⟨Q, hQ1, hQ2⟩ := exists_survivorBudget (p := p) hnR
++  push_cast at hQ2
++  have hmain := one_le_of_threshold_eval_eq_kaneWilliamsB_size hℓ (by positivity) (by positivity)
++    (pow_le_one₀ (by norm_num) (by norm_num)) (bias_lt_sq hp) (discriminator_condition hp ht)
++    hr c hd θ hc Q
++  have hCT := (countTerm_le (n := n) hp hℓp hM Q).trans
++    (two_pow_div_two_pow_le (j := 1) (by omega))
++  rw [pow_one] at hCT
++  -- so many survivors are expected: `(Q + 1) ℓ ≤ 8 c.size √N`
++  have hB : (Q + 1 : ℝ) * ℓ ≤ 8 * c.size * S := by
++    have h1 : (1 / 2 : ℝ) ≤ 4 * (1 / (ℓ : ℝ)) * c.size * S / (Q + 1) := by linarith
++    rw [le_div_iff₀ (by positivity)] at h1
++    have h2 : 4 * (1 / (ℓ : ℝ)) * c.size * S * ℓ = 4 * c.size * S := by field_simp
++    nlinarith
++  calc (ℓ : ℝ) * (n - (272 * p ^ 2 + 54 * p + 3)) ≤ ℓ * ((36 * p + 2) * (Q + 1)) :=
++        mul_le_mul_of_nonneg_left hQ2 hℓ0.le
++    _ = (36 * p + 2) * ((Q + 1 : ℝ) * ℓ) := by ring
++    _ ≤ (36 * p + 2) * (8 * c.size * S) := mul_le_mul_of_nonneg_left hB (by positivity)
++    _ = (288 * p + 16) * (c.size * S) := by ring
++    _ ≤ 304 * p * (c.size * S) := mul_le_mul_of_nonneg_right (by linarith) (by positivity)
++    _ = 304 * p * c.size * S := by ring
++
++/-- **`MAJ ∘ THR ∘ THR` wire lower bound** at `k = 16 p` blocks (original, improving
++[KaneWilliams2016], `arXiv:1511.07860v1`, Theorem 1.3 by one logarithmic factor): under the
++hypotheses of `size_ge_of_threshold_eval_eq_kaneWilliamsB_of_le_two_pow`,
++`ℓ √ℓ (n - 272 p ^ 2 - 54 p - 3) ≤ 304 p * c.wireCount`. The `t` wires of the top gate are not
++counted. With `p = ⌈log₂ n⌉` and `ℓ = n / (16 p)` this is
++`c.wireCount = Ω(n ^ (5 / 2) / log^(5/2) n)`. -/
++theorem wireCount_ge_of_threshold_eval_eq_kaneWilliamsB_of_le_two_pow {t : ℕ} (hp : 1 ≤ p)
++    (hn : n ≤ 2 ^ p) (hℓ : 0 < ℓ) (hℓp : ℓ ≤ 2 ^ p) (ht : 4 * t ≤ 2 ^ (3 * p))
++    {r : BitString (16 * p) → BitString n}
++    (hr : IsSmallBias ((1 / 2) ^ (7 * p)) ((PMF.uniformOfFintype (BitString (16 * p))).map r))
++    (c : Circuit signature (n + 16 * p * ℓ) t) (hd : c.depth ≤ 2) (θ : ℕ)
++    (hc : ∀ y, threshold t θ (c.eval interpretation y) = kaneWilliamsB r ℓ y) :
++    (ℓ : ℝ) * Real.sqrt ℓ * (n - (272 * p ^ 2 + 54 * p + 3)) ≤ 304 * p * c.wireCount := by
++  have hℓ0 : (0 : ℝ) < ℓ := by exact_mod_cast hℓ
++  have hℓ1 : (1 : ℝ) ≤ ℓ := by exact_mod_cast hℓ
++  have hp1 : (1 : ℝ) ≤ p := by exact_mod_cast hp
++  have hℓ' : (ℓ : ℝ) ≤ 2 ^ p := by exact_mod_cast hℓp
++  have hn' : (n : ℝ) ≤ 2 ^ p := by exact_mod_cast hn
++  have hsℓ : Real.sqrt ℓ ≤ ℓ := (Real.sqrt_le_left hℓ0.le).mpr (by nlinarith)
++  have hsℓ0 : 0 < Real.sqrt ℓ := Real.sqrt_pos.mpr hℓ0
++  have hw0 : (0 : ℝ) ≤ c.wireCount := Nat.cast_nonneg _
++  by_cases hnR : n < 272 * p ^ 2 + 54 * p + 3
++  · have hneg : (n : ℝ) - (272 * p ^ 2 + 54 * p + 3) ≤ 0 := by
++      have : (n : ℝ) < ((272 * p ^ 2 + 54 * p + 3 : ℕ) : ℝ) := by exact_mod_cast hnR
++      push_cast at this
++      linarith
++    exact (mul_nonpos_of_nonneg_of_nonpos (by positivity) hneg).trans (by positivity)
++  push Not at hnR
++  have hlhs : (ℓ : ℝ) * Real.sqrt ℓ * (n - (272 * p ^ 2 + 54 * p + 3)) ≤
++      2 ^ p * 2 ^ p * 2 ^ p :=
++    mul_le_mul (mul_le_mul hℓ' (hsℓ.trans hℓ') hsℓ0.le (by positivity))
++      (by linarith [(by positivity : (0 : ℝ) ≤ 272 * p ^ 2 + 54 * p + 3)])
++      (by have : ((272 * p ^ 2 + 54 * p + 3 : ℕ) : ℝ) ≤ n := by exact_mod_cast hnR
++          push_cast at this; linarith) (by positivity)
++  by_cases hM : 2 ^ (4 * p) < c.wireCount + 1
++  · have hs : (2 : ℝ) ^ (4 * p) ≤ c.wireCount := by
++      exact_mod_cast (show 2 ^ (4 * p) ≤ c.wireCount by omega)
++    have hpow : (2 : ℝ) ^ p * 2 ^ p * 2 ^ p ≤ 2 ^ (4 * p) := by
++      rw [← pow_add, ← pow_add]; exact pow_le_pow_right₀ (by norm_num) (by omega)
++    calc (ℓ : ℝ) * Real.sqrt ℓ * (n - (272 * p ^ 2 + 54 * p + 3)) ≤ c.wireCount :=
++          (hlhs.trans hpow).trans hs
++      _ ≤ 304 * p * c.wireCount := le_mul_of_one_le_left hw0 (by linarith)
++  push Not at hM
++  obtain ⟨Q, hQ1, hQ2⟩ := exists_survivorBudget (p := p) hnR
++  push_cast at hQ2
++  have hmain := one_le_of_threshold_eval_eq_kaneWilliamsB_wireCount hℓ (by positivity)
++    (by positivity) (pow_le_one₀ (by norm_num) (by norm_num)) (bias_lt_sq hp)
++    (discriminator_condition hp ht) hr c hd θ hc Q
++  have hCT := (countTerm_le (n := n) hp hℓp hM Q).trans
++    (two_pow_div_two_pow_le (j := 1) (by omega))
++  rw [pow_one] at hCT
++  have hB : (Q + 1 : ℝ) * (ℓ * Real.sqrt ℓ) ≤ 8 * c.wireCount := by
++    have h1 : (1 / 2 : ℝ) ≤ 4 * (c.wireCount : ℝ) * (1 / (ℓ : ℝ)) * Real.sqrt (1 / (ℓ : ℝ)) /
++        (Q + 1) := by linarith
++    rw [le_div_iff₀ (by positivity)] at h1
++    have h2 : 4 * (c.wireCount : ℝ) * (1 / (ℓ : ℝ)) * Real.sqrt (1 / (ℓ : ℝ)) *
++        (ℓ * Real.sqrt ℓ) = 4 * c.wireCount := by
++      rw [Real.sqrt_div' _ hℓ0.le, Real.sqrt_one]
++      field_simp
++    nlinarith [mul_le_mul_of_nonneg_right h1 (by positivity : (0 : ℝ) ≤ ℓ * Real.sqrt ℓ)]
++  calc (ℓ : ℝ) * Real.sqrt ℓ * (n - (272 * p ^ 2 + 54 * p + 3)) ≤
++        ℓ * Real.sqrt ℓ * ((36 * p + 2) * (Q + 1)) :=
++        mul_le_mul_of_nonneg_left hQ2 (by positivity)
++    _ = (36 * p + 2) * ((Q + 1 : ℝ) * (ℓ * Real.sqrt ℓ)) := by ring
++    _ ≤ (36 * p + 2) * (8 * c.wireCount) := mul_le_mul_of_nonneg_left hB (by positivity)
++    _ = (288 * p + 16) * c.wireCount := by ring
++    _ ≤ 304 * p * c.wireCount := mul_le_mul_of_nonneg_right (by linarith) hw0
++
++/-- **Average-case gate bound** at `k = 16 p` blocks (original; [KaneWilliams2016] state no
++average-case bound for this function): under `2 ^ (-7 p)`-biased rows, `n, ℓ ≤ 2 ^ p` and
++`n > 272 p ^ 2 + 57 p + 3`, a depth-two weighted threshold circuit agrees with the Kane–Williams
++function on at most a
++`1 / 2 + 2 ^ (-3 p) + 152 p * c.size * √(n + 16 p ℓ) / (ℓ (n - 272 p ^ 2 - 57 p - 3))`
++fraction of the inputs. With `p = ⌈log₂ n⌉` and `ℓ = n / (16 p)` this is
++`1 / 2 + O(c.size log² n / n ^ (3 / 2)) + n ^ (-3)`. -/
++theorem card_eval_eq_kaneWilliamsB_le_of_le_two_pow_size (hp : 1 ≤ p) (hn : n ≤ 2 ^ p)
++    (hℓ : 0 < ℓ) (hℓp : ℓ ≤ 2 ^ p) (hnR : 272 * p ^ 2 + 57 * p + 3 < n)
++    {r : BitString (16 * p) → BitString n}
++    (hr : IsSmallBias ((1 / 2) ^ (7 * p)) ((PMF.uniformOfFintype (BitString (16 * p))).map r))
++    (c : Circuit signature (n + 16 * p * ℓ) 1) (hd : c.depth ≤ 2) (o : Fin 1) :
++    (#{y | c.eval interpretation y o = kaneWilliamsB r ℓ y} : ℝ) ≤ 2 ^ (n + 16 * p * ℓ) *
++      (1 / 2 + (1 / 2) ^ (3 * p) + 152 * p * c.size * Real.sqrt ((n + 16 * p * ℓ : ℕ) : ℝ) /
++        (ℓ * (n - (272 * p ^ 2 + 57 * p + 3)))) := by
++  classical
++  set S : ℝ := Real.sqrt ((n + 16 * p * ℓ : ℕ) : ℝ) with hS
++  set D : ℝ := (n : ℝ) - (272 * p ^ 2 + 57 * p + 3) with hDdef
++  have hℓ0 : (0 : ℝ) < ℓ := by exact_mod_cast hℓ
++  have hp1 : (1 : ℝ) ≤ p := by exact_mod_cast hp
++  have hℓ' : (ℓ : ℝ) ≤ 2 ^ p := by exact_mod_cast hℓp
++  have hn' : (n : ℝ) ≤ 2 ^ p := by exact_mod_cast hn
++  have hS1 : (1 : ℝ) ≤ S :=
++    Real.one_le_sqrt.mpr (by exact_mod_cast (show 1 ≤ n + 16 * p * ℓ by omega))
++  have hsize0 : (0 : ℝ) ≤ c.size := Nat.cast_nonneg _
++  have hD : 0 < D := by
++    have : ((272 * p ^ 2 + 57 * p + 3 : ℕ) : ℝ) < n := by exact_mod_cast hnR
++    push_cast at this
++    linarith
++  have hall : (#{y | c.eval interpretation y o = kaneWilliamsB r ℓ y} : ℝ) ≤
++      2 ^ (n + 16 * p * ℓ) := by
++    exact_mod_cast (card_le_univ _).trans_eq (by simp)
++  have h3 : (0 : ℝ) ≤ (1 / 2) ^ (3 * p) := by positivity
++  by_cases hM : 2 ^ (4 * p) < c.size + 1
++  · -- a circuit with more than `2 ^ (4 p)` gates makes the bound trivial
++    have hs : (2 : ℝ) ^ (4 * p) ≤ c.size := by exact_mod_cast (show 2 ^ (4 * p) ≤ c.size by omega)
++    have hpow : (2 : ℝ) ^ p * 2 ^ p ≤ 2 ^ (4 * p) := by
++      rw [← pow_add]; exact pow_le_pow_right₀ (by norm_num) (by omega)
++    have hden : (ℓ : ℝ) * D ≤ 2 ^ p * 2 ^ p :=
++      mul_le_mul hℓ' (by linarith [(by positivity : (0 : ℝ) ≤ 272 * p ^ 2 + 57 * p + 3)])
++        hD.le (by positivity)
++    have hterm : 1 ≤ 152 * p * c.size * S / (ℓ * D) := by
++      rw [le_div_iff₀ (by positivity), one_mul]
++      calc (ℓ : ℝ) * D ≤ c.size := (hden.trans hpow).trans hs
++        _ ≤ c.size * S := le_mul_of_one_le_right hsize0 hS1
++        _ ≤ 152 * p * (c.size * S) := le_mul_of_one_le_left (by positivity) (by linarith)
++        _ = 152 * p * c.size * S := by ring
++    exact hall.trans (le_mul_of_one_le_right (by positivity) (by linarith))
++  push Not at hM
++  obtain ⟨Q, hQ1, hQ2⟩ := exists_survivorBudget (p := p) hnR.le
++  push_cast at hQ2
++  have hmain := card_eval_eq_kaneWilliamsB_le_of_depth_le_two_size hℓ (by positivity)
++    (by positivity) (bias_lt_sq hp) hr c hd o Q
++  have hCT := (countTerm_le (n := n) hp hℓp hM Q).trans
++    (two_pow_div_two_pow_le (j := 3 * p + 1) (by omega))
++  have hγ : (1 + (1 / 2 : ℝ) ^ (3 * p)) / 2 + (1 / 2) ^ (3 * p + 1) =
++      1 / 2 + (1 / 2) ^ (3 * p) := by
++    rw [pow_succ]; ring
++  -- the survivor term
++  have hsurv : 4 * (1 / (ℓ : ℝ)) * c.size * S / (Q + 1) ≤ 152 * p * c.size * S / (ℓ * D) := by
++    rw [div_le_div_iff₀ (by positivity) (by positivity)]
++    have hkey : 4 * (1 / (ℓ : ℝ)) * c.size * S * (ℓ * D) = 4 * (c.size * S) * D := by
++      field_simp
++    rw [hkey]
++    calc 4 * (c.size * S) * D ≤ 4 * (c.size * S) * ((36 * p + 2) * (Q + 1)) :=
++          mul_le_mul_of_nonneg_left hQ2 (by positivity)
++      _ = (144 * p + 8) * ((c.size * S) * (Q + 1)) := by ring
++      _ ≤ 152 * p * ((c.size * S) * (Q + 1)) :=
++          mul_le_mul_of_nonneg_right (by linarith) (by positivity)
++      _ = 152 * p * c.size * S * (Q + 1) := by ring
++  refine hmain.trans (mul_le_mul_of_nonneg_left ?_ (by positivity))
++  linarith
++
++/-- **Average-case wire bound** at `k = 16 p` blocks (original): under the hypotheses of
++`card_eval_eq_kaneWilliamsB_le_of_le_two_pow_size`, a depth-two weighted threshold circuit agrees
++with the Kane–Williams function on at most a
++`1 / 2 + 2 ^ (-3 p) + 152 p * c.wireCount / (ℓ √ℓ (n - 272 p ^ 2 - 57 p - 3))` fraction of the
++inputs; with `p = ⌈log₂ n⌉` and `ℓ = n / (16 p)` this is
++`1 / 2 + O(c.wireCount log^(5/2) n / n ^ (5 / 2)) + n ^ (-3)`. -/
++theorem card_eval_eq_kaneWilliamsB_le_of_le_two_pow_wireCount (hp : 1 ≤ p) (hn : n ≤ 2 ^ p)
++    (hℓ : 0 < ℓ) (hℓp : ℓ ≤ 2 ^ p) (hnR : 272 * p ^ 2 + 57 * p + 3 < n)
++    {r : BitString (16 * p) → BitString n}
++    (hr : IsSmallBias ((1 / 2) ^ (7 * p)) ((PMF.uniformOfFintype (BitString (16 * p))).map r))
++    (c : Circuit signature (n + 16 * p * ℓ) 1) (hd : c.depth ≤ 2) (o : Fin 1) :
++    (#{y | c.eval interpretation y o = kaneWilliamsB r ℓ y} : ℝ) ≤ 2 ^ (n + 16 * p * ℓ) *
++      (1 / 2 + (1 / 2) ^ (3 * p) + 152 * p * c.wireCount /
++        (ℓ * Real.sqrt ℓ * (n - (272 * p ^ 2 + 57 * p + 3)))) := by
++  classical
++  set D : ℝ := (n : ℝ) - (272 * p ^ 2 + 57 * p + 3) with hDdef
++  have hℓ0 : (0 : ℝ) < ℓ := by exact_mod_cast hℓ
++  have hℓ1 : (1 : ℝ) ≤ ℓ := by exact_mod_cast hℓ
++  have hp1 : (1 : ℝ) ≤ p := by exact_mod_cast hp
++  have hℓ' : (ℓ : ℝ) ≤ 2 ^ p := by exact_mod_cast hℓp
++  have hn' : (n : ℝ) ≤ 2 ^ p := by exact_mod_cast hn
++  have hsℓ : Real.sqrt ℓ ≤ ℓ := (Real.sqrt_le_left hℓ0.le).mpr (by nlinarith)
++  have hsℓ0 : 0 < Real.sqrt ℓ := Real.sqrt_pos.mpr hℓ0
++  have hw0 : (0 : ℝ) ≤ c.wireCount := Nat.cast_nonneg _
++  have hD : 0 < D := by
++    have : ((272 * p ^ 2 + 57 * p + 3 : ℕ) : ℝ) < n := by exact_mod_cast hnR
++    push_cast at this
++    linarith
++  have hall : (#{y | c.eval interpretation y o = kaneWilliamsB r ℓ y} : ℝ) ≤
++      2 ^ (n + 16 * p * ℓ) := by
++    exact_mod_cast (card_le_univ _).trans_eq (by simp)
++  have h3 : (0 : ℝ) ≤ (1 / 2) ^ (3 * p) := by positivity
++  by_cases hM : 2 ^ (4 * p) < c.wireCount + 1
++  · have hs : (2 : ℝ) ^ (4 * p) ≤ c.wireCount := by
++      exact_mod_cast (show 2 ^ (4 * p) ≤ c.wireCount by omega)
++    have hpow : (2 : ℝ) ^ p * 2 ^ p * 2 ^ p ≤ 2 ^ (4 * p) := by
++      rw [← pow_add, ← pow_add]; exact pow_le_pow_right₀ (by norm_num) (by omega)
++    have hden : (ℓ : ℝ) * Real.sqrt ℓ * D ≤ 2 ^ p * 2 ^ p * 2 ^ p :=
++      mul_le_mul (mul_le_mul hℓ' (hsℓ.trans hℓ') hsℓ0.le (by positivity))
++        (by linarith [(by positivity : (0 : ℝ) ≤ 272 * p ^ 2 + 57 * p + 3)]) hD.le
++        (by positivity)
++    have hterm : 1 ≤ 152 * p * c.wireCount / (ℓ * Real.sqrt ℓ * D) := by
++      rw [le_div_iff₀ (by positivity), one_mul]
++      calc (ℓ : ℝ) * Real.sqrt ℓ * D ≤ c.wireCount := (hden.trans hpow).trans hs
++        _ ≤ 152 * p * c.wireCount := le_mul_of_one_le_left hw0 (by linarith)
++    exact hall.trans (le_mul_of_one_le_right (by positivity) (by linarith))
++  push Not at hM
++  obtain ⟨Q, hQ1, hQ2⟩ := exists_survivorBudget (p := p) hnR.le
++  push_cast at hQ2
++  have hmain := card_eval_eq_kaneWilliamsB_le_of_depth_le_two_wireCount hℓ (by positivity)
++    (by positivity) (bias_lt_sq hp) hr c hd o Q
++  have hCT := (countTerm_le (n := n) hp hℓp hM Q).trans
++    (two_pow_div_two_pow_le (j := 3 * p + 1) (by omega))
++  have hγ : (1 + (1 / 2 : ℝ) ^ (3 * p)) / 2 + (1 / 2) ^ (3 * p + 1) =
++      1 / 2 + (1 / 2) ^ (3 * p) := by
++    rw [pow_succ]; ring
++  have hsurv : 4 * (c.wireCount : ℝ) * (1 / (ℓ : ℝ)) * Real.sqrt (1 / (ℓ : ℝ)) / (Q + 1) ≤
++      152 * p * c.wireCount / (ℓ * Real.sqrt ℓ * D) := by
++    rw [div_le_div_iff₀ (by positivity) (by positivity)]
++    have hkey : 4 * (c.wireCount : ℝ) * (1 / (ℓ : ℝ)) * Real.sqrt (1 / (ℓ : ℝ)) *
++        (ℓ * Real.sqrt ℓ * D) = 4 * c.wireCount * D := by
++      rw [Real.sqrt_div' _ hℓ0.le, Real.sqrt_one]
++      field_simp
++    rw [hkey]
++    calc 4 * (c.wireCount : ℝ) * D ≤ 4 * (c.wireCount : ℝ) * ((36 * p + 2) * (Q + 1)) :=
++          mul_le_mul_of_nonneg_left hQ2 (by positivity)
++      _ = (144 * p + 8) * ((c.wireCount : ℝ) * (Q + 1)) := by ring
++      _ ≤ 152 * p * ((c.wireCount : ℝ) * (Q + 1)) :=
++          mul_le_mul_of_nonneg_right (by linarith) (by positivity)
++      _ = 152 * p * c.wireCount * (Q + 1) := by ring
++  refine hmain.trans (mul_le_mul_of_nonneg_left ?_ (by positivity))
++  linarith
++
++/-! ### The balanced function on `2 n` inputs -/
++
++/-- In the balanced case `n = 16 p ℓ ≤ 2 ^ p`, also `ℓ ≤ 2 ^ p`. -/
++private theorem le_two_pow_of_balanced (hp : 1 ≤ p) (hnℓ : n = 16 * p * ℓ) (hn : n ≤ 2 ^ p) :
++    ℓ ≤ 2 ^ p :=
++  calc ℓ ≤ 16 * p * ℓ := Nat.le_mul_of_pos_left ℓ (by omega)
++    _ = n := hnℓ.symm
++    _ ≤ 2 ^ p := hn
++
++/-- In the balanced case `n = 16 p ℓ`, `√n = 4 √p √ℓ`. -/
++private theorem sqrt_balanced (hnℓ : n = 16 * p * ℓ) :
++    Real.sqrt n = 4 * Real.sqrt p * Real.sqrt ℓ := by
++  have h16 : Real.sqrt 16 = 4 := by
++    rw [show (16 : ℝ) = 4 ^ 2 by norm_num, Real.sqrt_sq (by norm_num)]
++  rw [hnℓ, Nat.cast_mul, Nat.cast_mul, Nat.cast_ofNat,
++    Real.sqrt_mul (show (0 : ℝ) ≤ 16 * p by positivity),
++    Real.sqrt_mul (show (0 : ℝ) ≤ 16 by norm_num), h16]
++
++/-- **`MAJ ∘ THR ∘ THR` gate lower bound for the balanced function** (original, improving
++[KaneWilliams2016], `arXiv:1511.07860v1`, Theorem 1.3 from `Ω(n ^ (3 / 2) / log³ n)` to
++`Ω(n ^ (3 / 2) / log² n)` gates): as in [KaneWilliams2016], Definition 6.1, let the message and
++the block bits have `n` bits each, here `k = 16 p` blocks of `ℓ` bits with `n = 16 p ℓ ≤ 2 ^ p`,
++and let the rows be `2 ^ (-7 p)`-biased (such rows exist, `exists_isSmallBias_kaneWilliamsRows`).
++If an unweighted threshold gate of fan-in `t ≤ n ^ 3 / 4` over the outputs of a depth-two weighted
++threshold circuit `c` computes the Kane–Williams function, then
++`n (n - 272 p ^ 2 - 54 p - 3) ≤ 4864 p ^ 2 * c.size * √(2 n)`.
++For `p ≥ 9` and `ℓ = ⌊2 ^ p / (16 p)⌋`, `2 ^ (p - 1) < n ≤ 2 ^ p`, so `p = ⌈log₂ n⌉` and
++`c.size ≥ (1 - o(1)) n ^ (3 / 2) / (4864 √2 log₂² n)`. -/
++theorem size_ge_of_threshold_eval_eq_kaneWilliamsB_balanced {t : ℕ} (hp : 1 ≤ p)
++    (hnℓ : n = 16 * p * ℓ) (hn : n ≤ 2 ^ p) (ht : 4 * t ≤ n ^ 3)
++    {r : BitString (16 * p) → BitString n}
++    (hr : IsSmallBias ((1 / 2) ^ (7 * p)) ((PMF.uniformOfFintype (BitString (16 * p))).map r))
++    (c : Circuit signature (n + 16 * p * ℓ) t) (hd : c.depth ≤ 2) (θ : ℕ)
++    (hc : ∀ y, threshold t θ (c.eval interpretation y) = kaneWilliamsB r ℓ y) :
++    (n : ℝ) * (n - (272 * p ^ 2 + 54 * p + 3)) ≤
++      4864 * p ^ 2 * c.size * Real.sqrt (2 * n) := by
++  rcases Nat.eq_zero_or_pos ℓ with rfl | hℓ
++  · have hn0 : n = 0 := by simpa using hnℓ
++    subst hn0
++    simp only [Nat.cast_zero, zero_mul]
++    positivity
++  have ht' : 4 * t ≤ 2 ^ (3 * p) := ht.trans (by rw [pow_mul']; exact Nat.pow_le_pow_left hn 3)
++  have h := size_ge_of_threshold_eval_eq_kaneWilliamsB_of_le_two_pow hp hn hℓ
++    (le_two_pow_of_balanced hp hnℓ hn) ht' hr c hd θ hc
++  have hN : ((n + 16 * p * ℓ : ℕ) : ℝ) = 2 * n := by rw [← hnℓ]; push_cast; ring
++  rw [hN] at h
++  have hn' : (n : ℝ) = 16 * p * ℓ := by exact_mod_cast hnℓ
++  calc (n : ℝ) * (n - (272 * p ^ 2 + 54 * p + 3)) =
++        16 * p * (ℓ * (n - (272 * p ^ 2 + 54 * p + 3))) := by nth_rewrite 1 [hn']; ring
++    _ ≤ 16 * p * (304 * p * c.size * Real.sqrt (2 * n)) :=
++        mul_le_mul_of_nonneg_left h (by positivity)
++    _ = 4864 * p ^ 2 * c.size * Real.sqrt (2 * n) := by ring
++
++/-- **`MAJ ∘ THR ∘ THR` wire lower bound for the balanced function** (original, improving
++[KaneWilliams2016], `arXiv:1511.07860v1`, Theorem 1.3 from `Ω(n ^ (5 / 2) / log^(7/2) n)` to
++`Ω(n ^ (5 / 2) / log^(5/2) n)` wires): under the hypotheses of
++`size_ge_of_threshold_eval_eq_kaneWilliamsB_balanced`,
++`n √n (n - 272 p ^ 2 - 54 p - 3) ≤ 19456 p ^ 2 √p * c.wireCount`. The `t` wires of the top gate
++are not counted. -/
++theorem wireCount_ge_of_threshold_eval_eq_kaneWilliamsB_balanced {t : ℕ} (hp : 1 ≤ p)
++    (hnℓ : n = 16 * p * ℓ) (hn : n ≤ 2 ^ p) (ht : 4 * t ≤ n ^ 3)
++    {r : BitString (16 * p) → BitString n}
++    (hr : IsSmallBias ((1 / 2) ^ (7 * p)) ((PMF.uniformOfFintype (BitString (16 * p))).map r))
++    (c : Circuit signature (n + 16 * p * ℓ) t) (hd : c.depth ≤ 2) (θ : ℕ)
++    (hc : ∀ y, threshold t θ (c.eval interpretation y) = kaneWilliamsB r ℓ y) :
++    (n : ℝ) * Real.sqrt n * (n - (272 * p ^ 2 + 54 * p + 3)) ≤
++      19456 * p ^ 2 * Real.sqrt p * c.wireCount := by
++  rcases Nat.eq_zero_or_pos ℓ with rfl | hℓ
++  · have hn0 : n = 0 := by simpa using hnℓ
++    subst hn0
++    simp only [Nat.cast_zero, zero_mul]
++    positivity
++  have ht' : 4 * t ≤ 2 ^ (3 * p) := ht.trans (by rw [pow_mul']; exact Nat.pow_le_pow_left hn 3)
++  have h := wireCount_ge_of_threshold_eval_eq_kaneWilliamsB_of_le_two_pow hp hn hℓ
++    (le_two_pow_of_balanced hp hnℓ hn) ht' hr c hd θ hc
++  have hn' : (n : ℝ) = 16 * p * ℓ := by exact_mod_cast hnℓ
++  rw [sqrt_balanced hnℓ]
++  calc (n : ℝ) * (4 * Real.sqrt p * Real.sqrt ℓ) * (n - (272 * p ^ 2 + 54 * p + 3)) =
++        64 * p * Real.sqrt p * (ℓ * Real.sqrt ℓ * (n - (272 * p ^ 2 + 54 * p + 3))) := by
++        nth_rewrite 1 [hn']; ring
++    _ ≤ 64 * p * Real.sqrt p * (304 * p * c.wireCount) :=
++        mul_le_mul_of_nonneg_left h (by positivity)
++    _ = 19456 * p ^ 2 * Real.sqrt p * c.wireCount := by ring
++
++/-- **Average-case gate bound for the balanced function** (original; [KaneWilliams2016] state no
++average-case bound for this function): with `n = 16 p ℓ ≤ 2 ^ p`, `2 ^ (-7 p)`-biased rows and
++`n > 272 p ^ 2 + 57 p + 3`, a depth-two weighted threshold circuit agrees with the Kane–Williams
++function on at most a
++`1 / 2 + 2 ^ (-3 p) + 2432 p ^ 2 * c.size * √(2 n) / (n (n - 272 p ^ 2 - 57 p - 3))` fraction of
++the `2 ^ (2 n)` inputs. With `p = ⌈log₂ n⌉` this is
++`1 / 2 + O(c.size log² n / n ^ (3 / 2)) + n ^ (-3)`. -/
++theorem card_eval_eq_kaneWilliamsB_le_balanced_size (hp : 1 ≤ p) (hnℓ : n = 16 * p * ℓ)
++    (hn : n ≤ 2 ^ p) (hnR : 272 * p ^ 2 + 57 * p + 3 < n)
++    {r : BitString (16 * p) → BitString n}
++    (hr : IsSmallBias ((1 / 2) ^ (7 * p)) ((PMF.uniformOfFintype (BitString (16 * p))).map r))
++    (c : Circuit signature (n + 16 * p * ℓ) 1) (hd : c.depth ≤ 2) (o : Fin 1) :
++    (#{y | c.eval interpretation y o = kaneWilliamsB r ℓ y} : ℝ) ≤ 2 ^ (2 * n) *
++      (1 / 2 + (1 / 2) ^ (3 * p) + 2432 * p ^ 2 * c.size * Real.sqrt (2 * n) /
++        (n * (n - (272 * p ^ 2 + 57 * p + 3)))) := by
++  have hℓ : 0 < ℓ := Nat.pos_of_ne_zero fun h0 => by subst h0; omega
++  have h := card_eval_eq_kaneWilliamsB_le_of_le_two_pow_size hp hn hℓ
++    (le_two_pow_of_balanced hp hnℓ hn) hnR hr c hd o
++  have h2n : n + 16 * p * ℓ = 2 * n := by omega
++  have hpow : (2 : ℝ) ^ (n + 16 * p * ℓ) = 2 ^ (2 * n) := by rw [h2n]
++  have hN : ((n + 16 * p * ℓ : ℕ) : ℝ) = 2 * n := by rw [h2n]; push_cast; ring
++  have hℓ0 : (0 : ℝ) < ℓ := by exact_mod_cast hℓ
++  have hn0 : (0 : ℝ) < n := by exact_mod_cast (show 0 < n by omega)
++  have hD : (0 : ℝ) < n - (272 * p ^ 2 + 57 * p + 3) := by
++    have : ((272 * p ^ 2 + 57 * p + 3 : ℕ) : ℝ) < n := by exact_mod_cast hnR
++    push_cast at this
++    linarith
++  have hn' : (n : ℝ) = 16 * p * ℓ := by exact_mod_cast hnℓ
++  have hfrac : 152 * p * c.size * Real.sqrt ((n + 16 * p * ℓ : ℕ) : ℝ) /
++      (ℓ * (n - (272 * p ^ 2 + 57 * p + 3))) =
++      2432 * p ^ 2 * c.size * Real.sqrt (2 * n) / (n * (n - (272 * p ^ 2 + 57 * p + 3))) := by
++    rw [hN, div_eq_div_iff (mul_pos hℓ0 hD).ne' (mul_pos hn0 hD).ne', hn']
++    ring
++  rwa [hpow, hfrac] at h
++
++/-- **Average-case wire bound for the balanced function** (original): under the hypotheses of
++`card_eval_eq_kaneWilliamsB_le_balanced_size`, a depth-two weighted threshold circuit agrees with
++the Kane–Williams function on at most a
++`1 / 2 + 2 ^ (-3 p) + 9728 p ^ 2 √p * c.wireCount / (n √n (n - 272 p ^ 2 - 57 p - 3))` fraction
++of the inputs, that is, `1 / 2 + O(c.wireCount log^(5/2) n / n ^ (5 / 2)) + n ^ (-3)`. -/
++theorem card_eval_eq_kaneWilliamsB_le_balanced_wireCount (hp : 1 ≤ p) (hnℓ : n = 16 * p * ℓ)
++    (hn : n ≤ 2 ^ p) (hnR : 272 * p ^ 2 + 57 * p + 3 < n)
++    {r : BitString (16 * p) → BitString n}
++    (hr : IsSmallBias ((1 / 2) ^ (7 * p)) ((PMF.uniformOfFintype (BitString (16 * p))).map r))
++    (c : Circuit signature (n + 16 * p * ℓ) 1) (hd : c.depth ≤ 2) (o : Fin 1) :
++    (#{y | c.eval interpretation y o = kaneWilliamsB r ℓ y} : ℝ) ≤ 2 ^ (2 * n) *
++      (1 / 2 + (1 / 2) ^ (3 * p) + 9728 * p ^ 2 * Real.sqrt p * c.wireCount /
++        (n * Real.sqrt n * (n - (272 * p ^ 2 + 57 * p + 3)))) := by
++  have hℓ : 0 < ℓ := Nat.pos_of_ne_zero fun h0 => by subst h0; omega
++  have h := card_eval_eq_kaneWilliamsB_le_of_le_two_pow_wireCount hp hn hℓ
++    (le_two_pow_of_balanced hp hnℓ hn) hnR hr c hd o
++  have h2n : n + 16 * p * ℓ = 2 * n := by omega
++  have hpow : (2 : ℝ) ^ (n + 16 * p * ℓ) = 2 ^ (2 * n) := by rw [h2n]
++  have hℓ0 : (0 : ℝ) < ℓ := by exact_mod_cast hℓ
++  have hp0 : (0 : ℝ) < p := by exact_mod_cast hp
++  have hD : (0 : ℝ) < n - (272 * p ^ 2 + 57 * p + 3) := by
++    have : ((272 * p ^ 2 + 57 * p + 3 : ℕ) : ℝ) < n := by exact_mod_cast hnR
++    push_cast at this
++    linarith
++  have hsℓ : 0 < Real.sqrt ℓ := Real.sqrt_pos.mpr hℓ0
++  have hsp : 0 < Real.sqrt p := Real.sqrt_pos.mpr hp0
++  have hn' : (n : ℝ) = 16 * p * ℓ := by exact_mod_cast hnℓ
++  have hfrac : 152 * p * c.wireCount / (ℓ * Real.sqrt ℓ * (n - (272 * p ^ 2 + 57 * p + 3))) =
++      9728 * p ^ 2 * Real.sqrt p * c.wireCount /
++        (n * Real.sqrt n * (n - (272 * p ^ 2 + 57 * p + 3))) := by
++    have hden : (0 : ℝ) < n * (4 * Real.sqrt p * Real.sqrt ℓ) * (n - (272 * p ^ 2 + 57 * p + 3)) :=
++      mul_pos (mul_pos (by rw [hn']; positivity) (by positivity)) hD
++    rw [sqrt_balanced hnℓ, div_eq_div_iff (mul_pos (mul_pos hℓ0 hsℓ) hD).ne' hden.ne', hn']
++    ring
++  rwa [hpow, hfrac] at h
++
++/-- **Rows exist**: for `p ≥ 1` and `n ≤ 2 ^ p` there are `2 ^ (-7 p)`-biased rows
++`r : BitString (16 p) → BitString n`, namely the powering construction of
++[Alon, Goldreich, Håstad and Peralta][AlonGoldreichHastadPeralta1992] over a field with
++`2 ^ (8 p)` elements (`Cslib.BitString.exists_isSmallBias_uniformOfFintype_map`), whose bias is at
++most `(n - 1) / 2 ^ (8 p)`. Its efficient computation is not certified here. -/
++theorem exists_isSmallBias_kaneWilliamsRows (hp : 1 ≤ p) (hn : n ≤ 2 ^ p) :
++    ∃ r : BitString (16 * p) → BitString n,
++      IsSmallBias ((1 / 2) ^ (7 * p)) ((PMF.uniformOfFintype (BitString (16 * p))).map r) := by
++  obtain ⟨g, hg⟩ := exists_isSmallBias_uniformOfFintype_map n (m := 8 * p) (by omega)
++  let e : BitString (16 * p) ≃ BitString (2 * (8 * p)) :=
++    Equiv.arrowCongr (finCongr (by ring)) (Equiv.refl Bool)
++  refine ⟨g ∘ e, ?_⟩
++  rw [← PMF.map_comp, PMF.uniformOfFintype_map_equiv]
++  refine hg.mono ?_
++  have hn1 : ((n - 1 : ℕ) : ℝ) ≤ 2 ^ p := by exact_mod_cast (Nat.sub_le n 1).trans hn
++  rw [one_div_pow, div_le_div_iff₀ (by positivity) (by positivity), one_mul]
++  calc ((n - 1 : ℕ) : ℝ) * 2 ^ (7 * p) ≤ 2 ^ p * 2 ^ (7 * p) :=
++        mul_le_mul_of_nonneg_right hn1 (by positivity)
++    _ = 2 ^ (8 * p) := by rw [← pow_add]; ring_nf
++
++end Concrete
++
++end Cslib.Circuits.Boolean.WeightedThreshold
+diff --git a/Complexity/Computability/Circuit/Boolean/WeightedThreshold/SharedBottom.lean b/Complexity/Computability/Circuit/Boolean/WeightedThreshold/SharedBottom.lean
+new file mode 100644
+index 0000000000..ced553f6bf
+--- /dev/null
++++ b/Complexity/Computability/Circuit/Boolean/WeightedThreshold/SharedBottom.lean
+@@ -0,0 +1,285 @@
++/-
++Copyright (c) 2026 Christian Reitwiessner. All rights reserved.
++Released under Apache 2.0 license as described in the file LICENSE.
++Authors: Christian Reitwiessner
++-/
++
++module
++-- upstream: candidate
++
++public import Complexity.Computability.Circuit.Boolean.WeightedThreshold.ThresholdCounting
++
++/-!
++# Restricting depth-two threshold circuits with several outputs
++
++A weighted threshold circuit `c : Circuit signature n t` of depth at most two is a family of `t`
++depth-two circuits (`THR ∘ THR`) that share their bottom gates. The *bottom gates*
++(`circuitBottomGates`) are the gates read with nonzero weight by the gate of some designated
++output; they have depth at most one. Feeding the `t` outputs into one more unweighted threshold
++gate gives the `MAJ ∘ THR ∘ THR` circuits of [KaneWilliams2016], `arXiv:1511.07860v1`, Section 6.
++
++Fix every input outside `univ.image emb`, for an injective `emb : κ → Fin n`, to the values of
++`w`. Every output then collapses to a function in `IsDepthTwoOverWeights (circuitBottomWeights c
++emb) q` (`isDepthTwoOverWeights_eval_embedUpdate_circuitBottom`). Here `circuitBottomWeights c emb`
++are the weight vectors of the bottom gates on the live coordinates, which do not depend on `w`, and
++`q` is the number of bottom gates of the whole circuit that the restriction does not force to a
++function of at most one input (`circuitBottomUnforcedAtMostOneCount`). The same `q` serves all
++outputs at once. Since a bottom gate forced to a constant is forced to at most one input, `q` may
++also be the number of bottom gates not forced to a constant (`circuitBottomUnforcedConstCount`,
++`isDepthTwoOverWeights_eval_embedUpdate_circuitBottom_const`).
++
++Averaged over the block-partition restrictions `blockLiveSet blockVar σ` and all `w`, these counts
++are at most `4 * (1 / |τ|) * c.size * √n` and `4 * c.wireCount * (1 / |τ|) * √(1 / |τ|)`
++(`sum_circuitBottomUnforcedConstCount_blockLiveSet_le`,
++`sum_circuitBottomUnforcedAtMostOneCount_blockLiveSet_le`), by the repaired gate and wire
++restriction lemmas ([KaneWilliams2016], Lemmas 1.1 and 3.1). For a single output these are the
++statements of `ThresholdCounting.lean` with every bottom gate of the circuit counted.
++
++## Main definitions
++
++* `Cslib.Circuits.Boolean.WeightedThreshold.circuitBottomGates`: the gates read by output gates.
++* `Cslib.Circuits.Boolean.WeightedThreshold.circuitBottomWeights`: their live weight vectors.
++* `Cslib.Circuits.Boolean.WeightedThreshold.circuitBottomUnforcedConstCount`,
++  `Cslib.Circuits.Boolean.WeightedThreshold.circuitBottomUnforcedAtMostOneCount`: the bottom gates
++  surviving a restriction.
++
++## Main results
++
++* `Cslib.Circuits.Boolean.WeightedThreshold.card_circuitBottomGates_le_size`,
++  `Cslib.Circuits.Boolean.WeightedThreshold.card_circuitBottomGates_le_wireCount`: there are at
++  most `c.size` and at most `c.wireCount` bottom gates.
++* `WeightedThreshold.isDepthTwoOverWeights_eval_embedUpdate_circuitBottom`,
++  `WeightedThreshold.isDepthTwoOverWeights_eval_embedUpdate_circuitBottom_const`: restricted
++  outputs over the fixed bottom weights, with one survivor count for all outputs.
++* Expected survivors under block-partition restrictions:
++  `Cslib.Circuits.Boolean.WeightedThreshold.sum_circuitBottomUnforcedConstCount_blockLiveSet_le`,
++  `Cslib.Circuits.Boolean.WeightedThreshold.sum_circuitBottomUnforcedAtMostOneCount_blockLiveSet_le`
++
++## References
++
++* [D. M. Kane and R. Williams, *Super-Linear Gate and Super-Quadratic Wire Lower Bounds for
++  Depth-Two and Depth-Three Threshold Circuits*][KaneWilliams2016], `arXiv:1511.07860v1`,
++  Lemmas 1.1 and 3.1 and Section 6
++-/
++
++public section
++
++namespace Cslib.Circuits.Boolean.WeightedThreshold
++
++open Finset Cslib.Combinatorics.LittlewoodOfford
++
++variable {n t : ℕ}
++
++/-! ### Bottom gates and their live weight vectors -/
++
++/-- The **bottom gates** of a weighted threshold circuit: the gates with nonzero weight in the gate
++of some designated output. An output that is an input wire contributes none. -/
++noncomputable def circuitBottomGates (c : Circuit signature n t) : Finset (Fin c.size) :=
++  univ.biUnion fun o => (c.outputs o).elim (fun _ => ∅) (gateSupport c.program)
++
++/-- The gates read by the gate of an output are bottom gates. -/
++theorem gateSupport_subset_circuitBottomGates (c : Circuit signature n t) {o : Fin t}
++    {top : Fin c.size} (h : c.outputs o = .gate top) :
++    gateSupport c.program top ⊆ circuitBottomGates c := fun k hk =>
++  mem_biUnion.mpr ⟨o, mem_univ o, by rw [h]; exact hk⟩
++
++/-- A bottom gate is read by the gate of some designated output. -/
++theorem exists_mem_gateSupport_of_mem_circuitBottomGates (c : Circuit signature n t)
++    {k : Fin c.size} (hk : k ∈ circuitBottomGates c) :
++    ∃ o top, c.outputs o = .gate top ∧ k ∈ gateSupport c.program top := by
++  obtain ⟨o, -, ho⟩ := mem_biUnion.mp hk
++  cases h : c.outputs o with
++  | input _ => rw [h] at ho; exact absurd ho (notMem_empty k)
++  | gate top => rw [h] at ho; exact ⟨o, top, h, ho⟩
++
++/-- A circuit has at most `c.size` bottom gates. -/
++theorem card_circuitBottomGates_le_size (c : Circuit signature n t) :
++    #(circuitBottomGates c) ≤ c.size :=
++  (card_le_univ _).trans_eq (Fintype.card_fin _)
++
++/-- A circuit has at most `c.wireCount` bottom gates: every bottom gate has an active wire into a
++gate. -/
++theorem card_circuitBottomGates_le_wireCount (c : Circuit signature n t) :
++    #(circuitBottomGates c) ≤ c.wireCount := by
++  classical
++  have hsub : circuitBottomGates c ⊆ univ.biUnion (gateSupport c.program) := fun k hk => by
++    obtain ⟨o, top, -, hk⟩ := exists_mem_gateSupport_of_mem_circuitBottomGates c hk
++    exact mem_biUnion.mpr ⟨top, mem_univ top, hk⟩
++  calc #(circuitBottomGates c) ≤ ∑ gate, #(gateSupport c.program gate) :=
++        (card_le_card hsub).trans card_biUnion_le
++    _ ≤ c.wireCount := by
++        rw [Circuit.wireCount, wireCount_eq_inputWireCount_add]
++        exact Nat.le_add_left _ _
++
++/-- The **live weight vectors** of the bottom gates along `emb : κ → Fin n`: the restrictions
++`fun j => inputWeight c.program k (emb j)` of their input weight vectors. They depend on `emb` but
++not on the values of the fixed inputs. -/
++noncomputable def circuitBottomWeights {κ : Type*} [Fintype κ] (c : Circuit signature n t)
++    (emb : κ → Fin n) : Finset (κ → ℝ) :=
++  (circuitBottomGates c).image fun k j => inputWeight c.program k (emb j)
++
++/-- There are at most as many live weight vectors as bottom gates. -/
++theorem card_circuitBottomWeights_le {κ : Type*} [Fintype κ] (c : Circuit signature n t)
++    (emb : κ → Fin n) : #(circuitBottomWeights c emb) ≤ #(circuitBottomGates c) :=
++  card_image_le
++
++/-! ### Surviving bottom gates -/
++
++/-- The number of bottom gates whose linear threshold function is not forced to a constant outside
++`B` by `w`. -/
++noncomputable def circuitBottomUnforcedConstCount (c : Circuit signature n t)
++    (B : Finset (Fin n)) (w : Fin n → Bool) : ℕ :=
++  #{k ∈ circuitBottomGates c |
++    ¬ ForcedToConst (ltfEval (inputWeight c.program k) (c.program.lines k).op.threshold) B w}
++
++/-- The number of bottom gates whose linear threshold function is not forced to a function of at
++most one input outside `B` by `w`. -/
++noncomputable def circuitBottomUnforcedAtMostOneCount (c : Circuit signature n t)
++    (B : Finset (Fin n)) (w : Fin n → Bool) : ℕ :=
++  #{k ∈ circuitBottomGates c |
++    ¬ ForcedToAtMostOne (ltfEval (inputWeight c.program k) (c.program.lines k).op.threshold) B w}
++
++/-- Fewer bottom gates survive as functions of two or more inputs than as nonconstant functions. -/
++theorem circuitBottomUnforcedAtMostOneCount_le_circuitBottomUnforcedConstCount
++    (c : Circuit signature n t) (B : Finset (Fin n)) (w : Fin n → Bool) :
++    circuitBottomUnforcedAtMostOneCount c B w ≤ circuitBottomUnforcedConstCount c B w :=
++  card_le_card fun _ hk => mem_filter.mpr
++    ⟨(mem_filter.mp hk).1, fun h => (mem_filter.mp hk).2 h.forcedToAtMostOne⟩
++
++/-! ### Collapse of every output over the shared bottom weights -/
++
++/-- The single-output circuit with the program of `c` and output `o`. -/
++private def outputCircuit (c : Circuit signature n t) (o : Fin t) : Circuit signature n 1 :=
++  ⟨c.program, fun _ => c.outputs o⟩
++
++private theorem depth_outputCircuit_le (c : Circuit signature n t) (o : Fin t) :
++    (outputCircuit c o).depth ≤ c.depth :=
++  (Circuit.depth_le_iff _).mpr fun _ => c.outputDepths_le_depth o
++
++private theorem circuitLiveWeights_outputCircuit_subset {κ : Type*} [Fintype κ]
++    (c : Circuit signature n t) (o : Fin t) (emb : κ → Fin n) :
++    circuitLiveWeights (outputCircuit c o) 0 emb ⊆ circuitBottomWeights c emb := by
++  classical
++  unfold circuitLiveWeights circuitBottomWeights outputCircuit
++  dsimp only
++  cases h : c.outputs o with
++  | input _ => exact empty_subset _
++  | gate top => exact image_subset_image (gateSupport_subset_circuitBottomGates c h)
++
++private theorem circuitUnforcedAtMostOneCount_outputCircuit_le (c : Circuit signature n t)
++    (o : Fin t) (B : Finset (Fin n)) (w : Fin n → Bool) :
++    circuitUnforcedAtMostOneCount (outputCircuit c o) 0 B w ≤
++      circuitBottomUnforcedAtMostOneCount c B w := by
++  classical
++  unfold circuitUnforcedAtMostOneCount outputCircuit
++  dsimp only
++  cases h : c.outputs o with
++  | input _ => exact Nat.zero_le _
++  | gate top =>
++    exact card_le_card (filter_subset_filter _ (gateSupport_subset_circuitBottomGates c h))
++
++/-- **Depth-two collapse over shared bottom weights**: for a weighted threshold circuit `c` of
++depth at most `2` with any number of outputs and an injective `emb : κ → Fin n`, restricting
++outside `univ.image emb` to `w` turns every output into a function in
++`IsDepthTwoOverWeights (circuitBottomWeights c emb) q` with
++`q = circuitBottomUnforcedAtMostOneCount c (univ.image emb) w`, the same for all outputs. -/
++theorem isDepthTwoOverWeights_eval_embedUpdate_circuitBottom {κ : Type*} [Fintype κ]
++    (c : Circuit signature n t) (hd : c.depth ≤ 2) {emb : κ → Fin n}
++    (hinj : Function.Injective emb) (w : Fin n → Bool) (o : Fin t) :
++    IsDepthTwoOverWeights (circuitBottomWeights c emb)
++      (circuitBottomUnforcedAtMostOneCount c (univ.image emb) w)
++      (fun u : κ → Bool => c.eval interpretation (embedUpdate emb w u) o) :=
++  ((isDepthTwoOverWeights_eval_embedUpdate (outputCircuit c o)
++    ((depth_outputCircuit_le c o).trans hd) 0 hinj w).mono_weights
++      (circuitLiveWeights_outputCircuit_subset c o emb)).mono
++    (circuitUnforcedAtMostOneCount_outputCircuit_le c o _ w)
++
++/-- Variant of `isDepthTwoOverWeights_eval_embedUpdate_circuitBottom` counting the bottom gates
++not forced to a constant. -/
++theorem isDepthTwoOverWeights_eval_embedUpdate_circuitBottom_const {κ : Type*} [Fintype κ]
++    (c : Circuit signature n t) (hd : c.depth ≤ 2) {emb : κ → Fin n}
++    (hinj : Function.Injective emb) (w : Fin n → Bool) (o : Fin t) :
++    IsDepthTwoOverWeights (circuitBottomWeights c emb)
++      (circuitBottomUnforcedConstCount c (univ.image emb) w)
++      (fun u : κ → Bool => c.eval interpretation (embedUpdate emb w u) o) :=
++  (isDepthTwoOverWeights_eval_embedUpdate_circuitBottom c hd hinj w o).mono
++    (circuitBottomUnforcedAtMostOneCount_le_circuitBottomUnforcedConstCount c _ w)
++
++/-! ### Expected survivors under block-partition restrictions -/
++
++/-- Averaging `circuitBottomUnforcedConstCount c (blockLiveSet blockVar σ) w` over all block
++selections `σ : κ → τ` and assignments `w : Fin n → Bool` gives at most
++`|κ → τ| * 2 ^ n * (4 * (1 / |τ|) * c.size * √n)`. -/
++theorem sum_circuitBottomUnforcedConstCount_blockLiveSet_le {κ τ : Type*}
++    [Fintype κ] [DecidableEq κ] [Fintype τ] (c : Circuit signature n t)
++    (blockVar : κ → τ → Fin n)
++    (hinj : ∀ j₁ t₁ j₂ t₂, blockVar j₁ t₁ = blockVar j₂ t₂ → j₁ = j₂ ∧ t₁ = t₂) :
++    (∑ σ : κ → τ, ∑ w : Fin n → Bool,
++      (circuitBottomUnforcedConstCount c (blockLiveSet blockVar σ) w : ℝ)) ≤
++      (Fintype.card (κ → τ) : ℝ) * (2 : ℝ) ^ n *
++        (4 * (1 / (Fintype.card τ : ℝ)) * (c.size : ℝ) * Real.sqrt (n : ℝ)) := by
++  classical
++  have hswap : (∑ σ : κ → τ, ∑ w : Fin n → Bool,
++      (circuitBottomUnforcedConstCount c (blockLiveSet blockVar σ) w : ℝ)) =
++      ∑ k ∈ circuitBottomGates c, ∑ σ : κ → τ, (#{w : Fin n → Bool | ¬ ForcedToConst
++        (ltfEval (inputWeight c.program k) (c.program.lines k).op.threshold)
++        (blockLiveSet blockVar σ) w} : ℝ) := by
++    simp_rw [circuitBottomUnforcedConstCount, ← sum_boole]
++    exact (sum_congr rfl fun _ _ => sum_comm).trans sum_comm
++  rw [hswap]
++  have hgate (k : Fin c.size) : (∑ σ : κ → τ, (#{w : Fin n → Bool | ¬ ForcedToConst
++      (ltfEval (inputWeight c.program k) (c.program.lines k).op.threshold)
++      (blockLiveSet blockVar σ) w} : ℝ)) ≤ (Fintype.card (κ → τ) : ℝ) * (2 : ℝ) ^ n *
++        (4 * (1 / (Fintype.card τ : ℝ)) * Real.sqrt (n : ℝ)) := by
++    refine (sum_card_not_forcedToConst_blockLiveSet_le blockVar hinj _ _).trans ?_
++    rw [Fintype.card_fin]
++    refine mul_le_mul_of_nonneg_left
++      (mul_le_mul_of_nonneg_left (Real.sqrt_le_sqrt ?_) (by positivity)) (by positivity)
++    exact_mod_cast (card_le_univ _).trans_eq (by simp)
++  refine (sum_le_sum fun k _ => hgate k).trans ?_
++  rw [sum_const, nsmul_eq_mul]
++  have hcard : (#(circuitBottomGates c) : ℝ) ≤ (c.size : ℝ) := by
++    exact_mod_cast card_circuitBottomGates_le_size c
++  nlinarith [(by positivity : (0 : ℝ) ≤ (Fintype.card (κ → τ) : ℝ) * (2 : ℝ) ^ n *
++    (4 * (1 / (Fintype.card τ : ℝ)) * Real.sqrt (n : ℝ)))]
++
++/-- Averaging `circuitBottomUnforcedAtMostOneCount c (blockLiveSet blockVar σ) w` over all block
++selections `σ : κ → τ` and assignments `w : Fin n → Bool` gives at most
++`|κ → τ| * 2 ^ n * (4 * c.wireCount * (1 / |τ|) * √(1 / |τ|))`. -/
++theorem sum_circuitBottomUnforcedAtMostOneCount_blockLiveSet_le {κ τ : Type*}
++    [Fintype κ] [DecidableEq κ] [Fintype τ] (c : Circuit signature n t)
++    (blockVar : κ → τ → Fin n)
++    (hinj : ∀ j₁ t₁ j₂ t₂, blockVar j₁ t₁ = blockVar j₂ t₂ → j₁ = j₂ ∧ t₁ = t₂) :
++    (∑ σ : κ → τ, ∑ w : Fin n → Bool,
++      (circuitBottomUnforcedAtMostOneCount c (blockLiveSet blockVar σ) w : ℝ)) ≤
++      (Fintype.card (κ → τ) : ℝ) * (2 : ℝ) ^ n * (4 * (c.wireCount : ℝ) *
++        (1 / (Fintype.card τ : ℝ)) * Real.sqrt (1 / (Fintype.card τ : ℝ))) := by
++  classical
++  have hswap : (∑ σ : κ → τ, ∑ w : Fin n → Bool,
++      (circuitBottomUnforcedAtMostOneCount c (blockLiveSet blockVar σ) w : ℝ)) =
++      ∑ k ∈ circuitBottomGates c, ∑ σ : κ → τ, (#{w : Fin n → Bool | ¬ ForcedToAtMostOne
++        (ltfEval (inputWeight c.program k) (c.program.lines k).op.threshold)
++        (blockLiveSet blockVar σ) w} : ℝ) := by
++    simp_rw [circuitBottomUnforcedAtMostOneCount, ← sum_boole]
++    exact (sum_congr rfl fun _ _ => sum_comm).trans sum_comm
++  rw [hswap]
++  refine (sum_le_sum fun k _ =>
++    sum_card_not_forcedToAtMostOne_blockLiveSet_le blockVar hinj _ _).trans ?_
++  rw [Fintype.card_fin]
++  have hwire : (∑ k ∈ circuitBottomGates c,
++      (#(ltfSupport (inputWeight c.program k)) : ℝ)) ≤ (c.wireCount : ℝ) := by
++    simp_rw [ltfSupport_inputWeight_eq_inputSupport]
++    exact_mod_cast (sum_le_univ_sum_of_nonneg fun _ => Nat.zero_le _).trans
++      c.inputWireCount_le_wireCount
++  have hfactor : (∑ k ∈ circuitBottomGates c, (Fintype.card (κ → τ) : ℝ) * (2 : ℝ) ^ n *
++      (4 * (#(ltfSupport (inputWeight c.program k)) : ℝ) *
++        (1 / (Fintype.card τ : ℝ)) * Real.sqrt (1 / (Fintype.card τ : ℝ)))) =
++      (Fintype.card (κ → τ) : ℝ) * (2 : ℝ) ^ n *
++        (4 * (1 / (Fintype.card τ : ℝ)) * Real.sqrt (1 / (Fintype.card τ : ℝ))) *
++        ∑ k ∈ circuitBottomGates c, (#(ltfSupport (inputWeight c.program k)) : ℝ) := by
++    rw [mul_sum]; exact sum_congr rfl fun k _ => by ring
++  rw [hfactor]
++  nlinarith [(by positivity : (0 : ℝ) ≤ (Fintype.card (κ → τ) : ℝ) * (2 : ℝ) ^ n *
++    (4 * (1 / (Fintype.card τ : ℝ)) * Real.sqrt (1 / (Fintype.card τ : ℝ))))]
++
++end Cslib.Circuits.Boolean.WeightedThreshold
+diff --git a/Complexity/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean b/Complexity/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean
+index a928e82355..00dcfd0db1 100644
+--- a/Complexity/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean
++++ b/Complexity/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean
+@@ -28,8 +28,11 @@ weighted threshold circuits ([KaneWilliams2016], `arXiv:1511.07860v1`, Theorem 2
+    `(2 ^ |κ| + 1) ^ ((|κ| + 2) * q + |κ| + 1)` functions in `IsDepthTwoWithGates q`.
+    The original fixed-weight refinement `IsDepthTwoOverWeights` counts threshold shifts from a
+    fixed finite family `W`: `card_isThresholdShift_le`, `card_isWeightShift_le`, and
+-   `card_isDepthTwoOverWeights_le`. Its per-survivor description costs `O(|κ| + log (#W + 1))`
+-   bits. This refinement is not attributed to Kane–Williams.
++   `card_isDepthTwoOverWeights_le`; it is monotone in `q` and `W`
++   (`IsDepthTwoOverWeights.mono`, `IsDepthTwoOverWeights.mono_weights`) and contains the
++   constants (`isDepthTwoOverWeights_const`). Its per-survivor
++   description costs `O(|κ| + log (#W + 1))` bits. This refinement is not attributed to
++   Kane–Williams.
+ 3. **Depth-two circuit collapse under subcube restrictions (`embedUpdate`,
+    `sum_card_filter_embedUpdate`, `isDepthTwoWithGates_eval_embedUpdate`,
+    `isDepthTwoWithGates_eval_embedUpdate_const`,
+@@ -354,6 +357,19 @@ theorem IsDepthTwoOverWeights.mono {κ : Type*} [Fintype κ] {W : Finset (κ →
+   rcases padFeatures_eq g r with ⟨r', hr'⟩ | hr' <;> rw [hr']
+   exacts [hg r', Or.inl rfl]
+ 
++/-- `IsDepthTwoOverWeights W q` is monotone in the set `W` of bottom weight vectors. -/
++theorem IsDepthTwoOverWeights.mono_weights {κ : Type*} [Fintype κ] {W₁ W₂ : Finset (κ → ℝ)}
++    (hW : W₁ ⊆ W₂) {q : ℕ} {f : (κ → Bool) → Bool} (hf : IsDepthTwoOverWeights W₁ q f) :
++    IsDepthTwoOverWeights W₂ q f := by
++  rcases hf with ⟨g, hg, hthr⟩
++  exact ⟨g, fun r => (hg r).imp_right fun ⟨β, hβ, hshift⟩ => ⟨β, hW hβ, hshift⟩, hthr⟩
++
++/-- Every constant Boolean function belongs to `IsDepthTwoOverWeights W q`. -/
++theorem isDepthTwoOverWeights_const {κ : Type*} [Fintype κ] (W : Finset (κ → ℝ)) (q : ℕ)
++    (b : Bool) : IsDepthTwoOverWeights W q fun _ => b := by
++  refine ⟨fun _ _ => false, fun _ => Or.inl rfl, 0, if b then 0 else 1, fun u => ?_⟩
++  cases b <;> simp [ltfEval]
++
+ /-- **Counting depth-two threshold functions over fixed bottom weight vectors**: there are at most
+ `((2 ^ |κ| + 1) * min (#W + 1) ((2 ^ |κ| + 1) ^ |κ|)) ^ q * (2 ^ |κ| + 1) ^ (q + |κ| + 1)`
+ functions in `IsDepthTwoOverWeights W q`. Each bottom gate costs `O(|κ| + log #W)` bits, compared
+diff --git a/Complexity/Foundations/Analysis/InnerProductSpace/NearlyOrthogonal.lean b/Complexity/Foundations/Analysis/InnerProductSpace/NearlyOrthogonal.lean
+new file mode 100644
+index 0000000000..95041daf57
+--- /dev/null
++++ b/Complexity/Foundations/Analysis/InnerProductSpace/NearlyOrthogonal.lean
+@@ -0,0 +1,123 @@
++/-
++Copyright (c) 2026 Christian Reitwiessner. All rights reserved.
++Released under Apache 2.0 license as described in the file LICENSE.
++Authors: Christian Reitwiessner
++-/
++
++module
++-- upstream: candidate (Mathlib, `Mathlib/Analysis/InnerProductSpace/Basic.lean`)
++
++public import Complexity.Foundations.Analysis.InnerProductSpace.Basic
++
++/-!
++# Few nearly orthogonal vectors correlate with a fixed vector
++
++Let `v i`, `i ∈ s`, be vectors of squared norm at most `A > 0` whose pairwise inner products are
++at most `δ A` in absolute value, and let `T` be a vector of squared norm at most `A` with
++`|⟪T, v i⟫| ≥ γ A` for every `i ∈ s`, where `γ ≥ 0`. Then
++`#s * γ ^ 2 ≤ 1 + (#s - 1) * δ` (`card_mul_sq_le_of_abs_inner_ge`), so
++`#s * (γ ^ 2 - δ) ≤ 1` when `δ ≥ 0` (`card_mul_sub_le_one_of_abs_inner_ge`): at most
++`1 / (γ ^ 2 - δ)` of the vectors correlate with `T` once `γ ^ 2 > δ`.
++
++The proof is the Cauchy–Schwarz inequality for `T` and the signed sum `U = ∑ i ∈ s, ε i • v i`
++with `ε i = ±1` the sign of `⟪T, v i⟫`: on one side `⟪T, U⟫ = ∑ i ∈ s, |⟪T, v i⟫| ≥ #s γ A`, on
++the other `‖U‖ ^ 2 ≤ #s A + #s (#s - 1) δ A` by expanding the square (`norm_sum_sq_real`). This
++is a Cauchy–Schwarz form of the Gram-matrix argument of Kane and Williams ([KaneWilliams2016],
++`arXiv:1511.07860v1`, Lemma 6.1), stated here with explicit constants for vectors in any real
++inner product space.
++
++## Main results
++
++* `card_mul_sq_le_of_abs_inner_ge`: `#s * γ ^ 2 ≤ 1 + (#s - 1) * δ`.
++* `card_mul_sub_le_one_of_abs_inner_ge`: `#s * (γ ^ 2 - δ) ≤ 1` for `δ ≥ 0`.
++
++## References
++
++* [D. M. Kane and R. Williams, *Super-Linear Gate and Super-Quadratic Wire Lower Bounds for
++  Depth-Two and Depth-Three Threshold Circuits*][KaneWilliams2016], `arXiv:1511.07860v1`,
++  Lemma 6.1 (`uncorrAgreeLem`)
++-/
++
++public section
++
++open Finset
++open scoped RealInnerProductSpace
++
++variable {V ι : Type*} [NormedAddCommGroup V] [InnerProductSpace ℝ V]
++
++/-- **Few nearly orthogonal vectors correlate with a fixed vector**: if `v i`, `i ∈ s`, have squared
++norms at most `A > 0` and pairwise inner products at most `δ A` in absolute value, and `T` has
++squared norm at most `A` and `|⟪T, v i⟫| ≥ γ A` for all `i ∈ s` with `γ ≥ 0`, then
++`#s * γ ^ 2 ≤ 1 + (#s - 1) * δ` ([KaneWilliams2016], `arXiv:1511.07860v1`, Lemma 6.1, with
++explicit constants). -/
++theorem card_mul_sq_le_of_abs_inner_ge {s : Finset ι} (hs : s.Nonempty) (v : ι → V) (T : V)
++    {A δ γ : ℝ} (hA : 0 < A) (hγ : 0 ≤ γ) (hT : ‖T‖ ^ 2 ≤ A) (hv : ∀ i ∈ s, ‖v i‖ ^ 2 ≤ A)
++    (hδ : ∀ i ∈ s, ∀ j ∈ s, i ≠ j → |⟪v i, v j⟫| ≤ δ * A)
++    (hTv : ∀ i ∈ s, γ * A ≤ |⟪T, v i⟫|) :
++    (#s : ℝ) * γ ^ 2 ≤ 1 + (#s - 1) * δ := by
++  classical
++  -- the signs of the correlations
++  set ε : ι → ℝ := fun i => if 0 ≤ ⟪T, v i⟫ then 1 else -1 with hε
++  have hε_abs (i : ι) : |ε i| = 1 := by
++    by_cases h : 0 ≤ ⟪T, v i⟫ <;> simp [ε, h]
++  have hε_mul (i : ι) : ε i * ⟪T, v i⟫ = |⟪T, v i⟫| := by
++    by_cases h : 0 ≤ ⟪T, v i⟫
++    · simp [ε, h, abs_of_nonneg h]
++    · simp [ε, h, abs_of_neg (not_le.mp h)]
++  set U : V := ∑ i ∈ s, ε i • v i with hU
++  -- the signed sum correlates with `T` by at least `#s γ A`
++  have hlow : (#s : ℝ) * (γ * A) ≤ ⟪T, U⟫ := by
++    have hTU : ⟪T, U⟫ = ∑ i ∈ s, |⟪T, v i⟫| := by
++      rw [hU, inner_sum]
++      exact sum_congr rfl fun i _ => by rw [real_inner_smul_right, hε_mul]
++    rw [hTU, ← nsmul_eq_mul, ← sum_const]
++    exact sum_le_sum hTv
++  -- and has squared norm at most `#s A + (#s ^ 2 - #s) δ A`
++  have hUsq : ‖U‖ ^ 2 ≤ (#s : ℝ) * A + ((#s : ℝ) * #s - #s) * (δ * A) := by
++    rw [hU, norm_sum_sq_real]
++    have hdiag : ∑ i ∈ s, ‖ε i • v i‖ ^ 2 ≤ (#s : ℝ) * A := by
++      calc ∑ i ∈ s, ‖ε i • v i‖ ^ 2 = ∑ i ∈ s, ‖v i‖ ^ 2 :=
++            sum_congr rfl fun i _ => by rw [norm_smul, Real.norm_eq_abs, hε_abs, one_mul]
++        _ ≤ ∑ _i ∈ s, A := sum_le_sum hv
++        _ = (#s : ℝ) * A := by rw [sum_const, nsmul_eq_mul]
++    have hoff : ∑ p ∈ s.offDiag, ⟪ε p.1 • v p.1, ε p.2 • v p.2⟫ ≤
++        ((#s : ℝ) * #s - #s) * (δ * A) := by
++      calc ∑ p ∈ s.offDiag, ⟪ε p.1 • v p.1, ε p.2 • v p.2⟫ ≤ ∑ _p ∈ s.offDiag, δ * A := by
++            refine sum_le_sum fun p hp => ?_
++            obtain ⟨h1, h2, hne⟩ := mem_offDiag.mp hp
++            rw [real_inner_smul_left, real_inner_smul_right]
++            calc ε p.1 * (ε p.2 * ⟪v p.1, v p.2⟫) ≤ |ε p.1 * (ε p.2 * ⟪v p.1, v p.2⟫)| :=
++                  le_abs_self _
++              _ = |⟪v p.1, v p.2⟫| := by rw [abs_mul, abs_mul, hε_abs, hε_abs, one_mul, one_mul]
++              _ ≤ δ * A := hδ _ h1 _ h2 hne
++        _ = ((#s : ℝ) * #s - #s) * (δ * A) := by
++            rw [sum_const, offDiag_card, nsmul_eq_mul, Nat.cast_sub (Nat.le_mul_self _),
++              Nat.cast_mul]
++    linarith
++  -- Cauchy–Schwarz
++  have hcs : ⟪T, U⟫ ^ 2 ≤ ‖T‖ ^ 2 * ‖U‖ ^ 2 := by
++    rw [← mul_pow]
++    exact sq_le_sq' (abs_le.mp (abs_real_inner_le_norm T U)).1 (real_inner_le_norm T U)
++  have hcard : (0 : ℝ) < #s := by exact_mod_cast hs.card_pos
++  have hkey : ((#s : ℝ) * (γ * A)) ^ 2 ≤ A * ((#s : ℝ) * A + ((#s : ℝ) * #s - #s) * (δ * A)) :=
++    (pow_le_pow_left₀ (by positivity) hlow 2).trans
++      (hcs.trans (mul_le_mul hT hUsq (sq_nonneg _) hA.le))
++  have hfactor : ((#s : ℝ) * (γ * A)) ^ 2 = (#s : ℝ) * A ^ 2 * ((#s : ℝ) * γ ^ 2) := by ring
++  have hfactor' : A * ((#s : ℝ) * A + ((#s : ℝ) * #s - #s) * (δ * A)) =
++      (#s : ℝ) * A ^ 2 * (1 + (#s - 1) * δ) := by ring
++  rw [hfactor, hfactor'] at hkey
++  exact le_of_mul_le_mul_left hkey (by positivity)
++
++/-- **Few nearly orthogonal vectors correlate with a fixed vector**, list-size form: under the
++hypotheses of `card_mul_sq_le_of_abs_inner_ge` with `δ ≥ 0` (and `s` possibly empty),
++`#s * (γ ^ 2 - δ) ≤ 1`. Once `γ ^ 2 > δ`, at most `1 / (γ ^ 2 - δ)` vectors correlate with
++`T`. -/
++theorem card_mul_sub_le_one_of_abs_inner_ge (s : Finset ι) (v : ι → V) (T : V)
++    {A δ γ : ℝ} (hA : 0 < A) (hδ0 : 0 ≤ δ) (hγ : 0 ≤ γ) (hT : ‖T‖ ^ 2 ≤ A)
++    (hv : ∀ i ∈ s, ‖v i‖ ^ 2 ≤ A) (hδ : ∀ i ∈ s, ∀ j ∈ s, i ≠ j → |⟪v i, v j⟫| ≤ δ * A)
++    (hTv : ∀ i ∈ s, γ * A ≤ |⟪T, v i⟫|) :
++    (#s : ℝ) * (γ ^ 2 - δ) ≤ 1 := by
++  rcases s.eq_empty_or_nonempty with rfl | hs
++  · simp
++  · have h := card_mul_sq_le_of_abs_inner_ge hs v T hA hγ hT hv hδ hTv
++    nlinarith
+diff --git a/Complexity/Foundations/Data/BitString/Discriminator.lean b/Complexity/Foundations/Data/BitString/Discriminator.lean
+new file mode 100644
+index 0000000000..3c634d953a
+--- /dev/null
++++ b/Complexity/Foundations/Data/BitString/Discriminator.lean
+@@ -0,0 +1,109 @@
++/-
++Copyright (c) 2026 Christian Reitwiessner. All rights reserved.
++Released under Apache 2.0 license as described in the file LICENSE.
++Authors: Christian Reitwiessner
++-/
++
++module
++-- upstream: candidate
++
++public import Complexity.Foundations.Data.BitString.Sign
++public import Complexity.Foundations.Data.BitString.Threshold
++public import Mathlib.Algebra.Order.BigOperators.Group.Finset
++import Mathlib.Algebra.Order.Field.Basic
++import Mathlib.Tactic.Linarith
++
++/-!
++# The discriminator lemma for unweighted threshold votes
++
++Suppose that on every point `u` of a finite set `U`, the threshold vote `threshold t θ (v u)` of
++`t` voters `v u i` equals a target bit `F u`. In `±1` signs, the votes then correlate with the
++target in total: `∑ i, ∑ u, signVal (v u i) * signVal (F u) ≥ |U| - (t + 1) |∑ u, signVal (F u)|`
++(`Cslib.sub_le_sum_sum_signVal_mul_of_threshold_eq`). If the target is nearly balanced, some voter
++therefore has correlation about `|U| / t` with it; this is the correlation form of the
++discriminator lemma of [Hajnal et al.][HMPST1993] for unweighted threshold gates, with any
++threshold `θ`, including majority with either tie rule.
++
++The proof is pointwise: with `c = 2 θ - 1 - t`, the signed margin
++`signVal (F u) * (c + ∑ i, signVal (v u i))` is at least `1` at every point `u`, and
++`|c| ≤ t + 1` unless the vote is constantly `false`.
++
++## Main results
++
++* `Cslib.BitString.sum_signVal_eq_sub_two_mul_weight`: the sign sum of a bit string is its length
++  minus twice its weight.
++* `Cslib.sub_le_sum_sum_signVal_mul_of_threshold_eq`: the discriminator lemma.
++
++## References
++
++* [A. Hajnal, W. Maass, P. Pudlák, M. Szegedy, G. Turán, *Threshold circuits of bounded
++  depth*][HMPST1993]
++-/
++
++public section
++
++namespace Cslib
++
++open Finset BitString
++
++/-- The sign sum of a bit string is its length minus twice its weight. -/
++theorem BitString.sum_signVal_eq_sub_two_mul_weight {t : ℕ} (x : BitString t) :
++    ∑ i, signVal (x i) = t - 2 * (weight x : ℝ) := by
++  have h (i : Fin t) : signVal (x i) = 1 - 2 * ((x i).toNat : ℝ) := by
++    cases x i <;> norm_num
++  rw [sum_congr rfl fun i _ => h i, sum_sub_distrib, ← mul_sum, weight_eq_sum_toNat]
++  simp
++
++/-- **The discriminator lemma for unweighted threshold votes**: if the threshold vote
++`threshold t θ (v u)` equals `F u` at every point `u` of a finite type `U`, then the votes
++correlate with `F` in total by at least `|U| - (t + 1) |∑ u, signVal (F u)|`. This is a
++correlation form of the discriminator lemma of [Hajnal et al.][HMPST1993]. -/
++theorem sub_le_sum_sum_signVal_mul_of_threshold_eq {U : Type*} [Fintype U] {t θ : ℕ}
++    (v : U → BitString t) (F : U → Bool) (h : ∀ u, threshold t θ (v u) = F u) :
++    (Fintype.card U : ℝ) - (t + 1) * |∑ u, signVal (F u)| ≤
++      ∑ i, ∑ u, signVal (v u i) * signVal (F u) := by
++  rw [sum_comm]
++  by_cases hθ : t + 1 < θ
++  · -- the vote is constantly `false`
++    have hF (u : U) : F u = false := by
++      rw [← h u]
++      exact threshold_eq_false_of_lt (by omega) (v u)
++    have hsum : |∑ u, signVal (F u)| = Fintype.card U := by
++      simp [hF]
++    have hlow (u : U) : -(t : ℝ) ≤ ∑ i, signVal (v u i) * signVal (F u) := by
++      rw [hF, signVal_false]
++      simp only [mul_one]
++      have := weight_le_length (v u)
++      rw [sum_signVal_eq_sub_two_mul_weight]
++      have : (weight (v u) : ℝ) ≤ t := by exact_mod_cast this
++      linarith
++    calc (Fintype.card U : ℝ) - (t + 1) * |∑ u, signVal (F u)| = ∑ _u : U, -(t : ℝ) := by
++          rw [hsum, sum_const, card_univ, nsmul_eq_mul]
++          ring
++      _ ≤ _ := sum_le_sum fun u _ => hlow u
++  · -- the signed margin is at least one at every point
++    set c : ℝ := 2 * θ - 1 - t with hc
++    have hc_abs : |c| ≤ t + 1 := by
++      have : (θ : ℝ) ≤ t + 1 := by exact_mod_cast not_lt.mp hθ
++      rw [abs_le]
++      constructor <;> linarith [(Nat.cast_nonneg θ : (0 : ℝ) ≤ θ)]
++    have hmargin (u : U) :
++        1 ≤ signVal (F u) * c + ∑ i, signVal (v u i) * signVal (F u) := by
++      rw [← sum_mul, sum_signVal_eq_sub_two_mul_weight, ← h u, threshold_apply]
++      by_cases hle : θ ≤ weight (v u)
++      · have : (θ : ℝ) ≤ weight (v u) := by exact_mod_cast hle
++        simp only [hle, decide_true, signVal_true, hc]
++        linarith
++      · have : (weight (v u) : ℝ) + 1 ≤ θ := by exact_mod_cast not_le.mp hle
++        simp only [hle, decide_false, signVal_false, hc]
++        linarith
++    have hsum := sum_le_sum fun u (_ : u ∈ univ) => hmargin u
++    rw [sum_add_distrib, ← sum_mul, sum_const, card_univ, nsmul_eq_mul, mul_one] at hsum
++    have hcS : (∑ u, signVal (F u)) * c ≤ (t + 1) * |∑ u, signVal (F u)| := by
++      calc (∑ u, signVal (F u)) * c ≤ |(∑ u, signVal (F u)) * c| := le_abs_self _
++        _ = |c| * |∑ u, signVal (F u)| := by rw [abs_mul, mul_comm]
++        _ ≤ (t + 1) * |∑ u, signVal (F u)| :=
++            mul_le_mul_of_nonneg_right hc_abs (abs_nonneg _)
++    linarith
++
++end Cslib
+diff --git a/Complexity/Probability/SmallBias/Correlation.lean b/Complexity/Probability/SmallBias/Correlation.lean
+new file mode 100644
+index 0000000000..9598390ec3
+--- /dev/null
++++ b/Complexity/Probability/SmallBias/Correlation.lean
+@@ -0,0 +1,126 @@
++/-
++Copyright (c) 2026 Christian Reitwiessner. All rights reserved.
++Released under Apache 2.0 license as described in the file LICENSE.
++Authors: Christian Reitwiessner
++-/
++
++module
++-- upstream: candidate
++
++public import Complexity.Probability.SmallBias
++import Complexity.Foundations.Analysis.InnerProductSpace.NearlyOrthogonal
++import Mathlib.Analysis.InnerProductSpace.PiL2
++
++/-!
++# Codes from small-bias lists: nearly uncorrelated codewords and short correlation lists
++
++A list `r : Z → ι → Bool` of bit strings, indexed by a finite type `Z`, encodes a message
++`x : ι → Bool` as the word `z ↦ r z ⬝ᵥ x` of inner products modulo two: the linear code whose
++generator matrix has the rows `r z`. Suppose the list is `δ`-biased, that is, the uniform
++distribution over the list is `δ`-biased (`Cslib.BitString.IsSmallBias`). Then the word of a
++nonzero message is nearly balanced, `|∑ z, signVal (r z ⬝ᵥ x)| ≤ δ |Z|`
++(`Cslib.BitString.abs_sum_signVal_dotProduct_le`), and the words of distinct messages are nearly
++uncorrelated (`Cslib.BitString.abs_sum_signVal_mul_signVal_dotProduct_le`), since their exclusive
++or is the word of the nonzero message `x + y`. This is the code of [KaneWilliams2016],
++`arXiv:1511.07860v1`, Proposition 2 and Corollary 6.1 (labels `eps-biased` and `uncorrFunctCor`),
++in `±1` correlation form.
++
++Few codewords then correlate with any fixed word `T : Z → Bool`: for `δ, γ ≥ 0`, at most
++`1 / (γ ^ 2 - δ)` messages `x` have `|∑ z, signVal (T z) * signVal (r z ⬝ᵥ x)| ≥ γ |Z|`
++(`Cslib.BitString.card_le_abs_sum_signVal_mul_signVal_dotProduct_mul_le`). This is
++[KaneWilliams2016], Lemma 6.1 (label `uncorrAgreeLem`), with explicit constants; it follows from
++`card_mul_sub_le_one_of_abs_inner_ge` for the `±1` words in `EuclideanSpace ℝ Z`.
++
++## Main results
++
++* `Cslib.BitString.sum_signVal_dotProduct_eq`: the sign sum of a word is `|Z|` times a bias of the
++  list.
++* `Cslib.BitString.abs_sum_signVal_dotProduct_le`: the word of a nonzero message is nearly
++  balanced.
++* `Cslib.BitString.abs_sum_signVal_mul_signVal_dotProduct_le`: the words of distinct messages are
++  nearly uncorrelated.
++* `Cslib.BitString.card_le_abs_sum_signVal_mul_signVal_dotProduct_mul_le`: few codewords correlate
++  with a fixed word.
++
++## References
++
++* [D. M. Kane and R. Williams, *Super-Linear Gate and Super-Quadratic Wire Lower Bounds for
++  Depth-Two and Depth-Three Threshold Circuits*][KaneWilliams2016], `arXiv:1511.07860v1`,
++  Section 6
++* [N. Alon, O. Goldreich, J. Håstad, R. Peralta, *Simple constructions of almost `k`-wise
++  independent random variables*][AlonGoldreichHastadPeralta1992]
++-/
++
++public section
++
++namespace Cslib.BitString
++
++open Finset Probability
++open scoped RealInnerProductSpace
++
++variable {ι Z : Type*} [Fintype ι] [DecidableEq ι] [Fintype Z]
++
++/-- The sign sum of the word `z ↦ r z ⬝ᵥ x` is `|Z|` times the bias of the list `r` at the
++support of `x`. -/
++theorem sum_signVal_dotProduct_eq [Nonempty Z] (r : Z → ι → Bool) (x : ι → Bool) :
++    ∑ z, signVal (r z ⬝ᵥ x) =
++      Fintype.card Z * bias ((PMF.uniformOfFintype Z).map r) {i | x i} := by
++  have hZ : (Fintype.card Z : ℝ) ≠ 0 := by exact_mod_cast Fintype.card_ne_zero
++  rw [bias_uniformOfFintype_map, Fintype.expect_eq_sum_div_card, mul_div_cancel₀ _ hZ]
++  exact sum_congr rfl fun z _ => by rw [dotProduct_comm, signVal_dotProduct]
++
++/-- **The word of a nonzero message is nearly balanced**: if the list `r` is `δ`-biased and
++`x ≠ 0`, then `|∑ z, signVal (r z ⬝ᵥ x)| ≤ δ |Z|`. -/
++theorem abs_sum_signVal_dotProduct_le [Nonempty Z] {δ : ℝ} {r : Z → ι → Bool}
++    (hr : IsSmallBias δ ((PMF.uniformOfFintype Z).map r)) {x : ι → Bool} (hx : x ≠ 0) :
++    |∑ z, signVal (r z ⬝ᵥ x)| ≤ δ * Fintype.card Z := by
++  rw [sum_signVal_dotProduct_eq, abs_mul, Nat.abs_cast, mul_comm]
++  refine mul_le_mul_of_nonneg_right (hr _ ?_) (Nat.cast_nonneg _)
++  obtain ⟨i, hi⟩ := Function.ne_iff.mp hx
++  refine ⟨i, mem_filter.mpr ⟨mem_univ i, ?_⟩⟩
++  revert hi
++  cases x i <;> simp
++
++/-- **The words of distinct messages are nearly uncorrelated** ([KaneWilliams2016],
++`arXiv:1511.07860v1`, Corollary 6.1, in `±1` form): if the list `r` is `δ`-biased and `x ≠ y`,
++then `|∑ z, signVal (r z ⬝ᵥ x) * signVal (r z ⬝ᵥ y)| ≤ δ |Z|`. -/
++theorem abs_sum_signVal_mul_signVal_dotProduct_le [Nonempty Z] {δ : ℝ} {r : Z → ι → Bool}
++    (hr : IsSmallBias δ ((PMF.uniformOfFintype Z).map r)) {x y : ι → Bool} (hxy : x ≠ y) :
++    |∑ z, signVal (r z ⬝ᵥ x) * signVal (r z ⬝ᵥ y)| ≤ δ * Fintype.card Z := by
++  have hsum : ∑ z, signVal (r z ⬝ᵥ x) * signVal (r z ⬝ᵥ y) = ∑ z, signVal (r z ⬝ᵥ (x + y)) :=
++    sum_congr rfl fun z _ => by rw [dotProduct_add, ← signVal_xor]; rfl
++  rw [hsum]
++  exact abs_sum_signVal_dotProduct_le hr fun h =>
++    hxy (funext fun i => (BooleanRing.add_eq_zero' (x i) (y i)).mp (congrFun h i))
++
++/-- The `±1` word of a Boolean function, as a vector of `EuclideanSpace ℝ Z`. -/
++private noncomputable def signWord (f : Z → Bool) : EuclideanSpace ℝ Z :=
++  WithLp.toLp 2 fun z => signVal (f z)
++
++private theorem inner_signWord (f g : Z → Bool) :
++    ⟪signWord f, signWord g⟫ = ∑ z, signVal (f z) * signVal (g z) := by
++  simp [signWord, PiLp.inner_apply, mul_comm]
++
++private theorem norm_signWord_sq (f : Z → Bool) : ‖signWord f‖ ^ 2 = Fintype.card Z := by
++  rw [← real_inner_self_eq_norm_sq, inner_signWord]
++  simp [signVal_mul_self]
++
++/-- **Few codewords correlate with a fixed word** ([KaneWilliams2016], `arXiv:1511.07860v1`,
++Lemma 6.1, with explicit constants): if the list `r` is `δ`-biased with `δ ≥ 0` and `γ ≥ 0`, then
++the messages `x` whose words have correlation at least `γ |Z|` in absolute value with a fixed word
++`T` number at most `1 / (γ ^ 2 - δ)`, in the form `#{x | …} * (γ ^ 2 - δ) ≤ 1`. -/
++theorem card_le_abs_sum_signVal_mul_signVal_dotProduct_mul_le [Nonempty Z] {δ γ : ℝ} (hδ : 0 ≤ δ)
++    (hγ : 0 ≤ γ) {r : Z → ι → Bool} (hr : IsSmallBias δ ((PMF.uniformOfFintype Z).map r))
++    (T : Z → Bool) :
++    (#{x : ι → Bool | γ * Fintype.card Z ≤ |∑ z, signVal (T z) * signVal (r z ⬝ᵥ x)|} : ℝ) *
++      (γ ^ 2 - δ) ≤ 1 := by
++  have hZ : (0 : ℝ) < Fintype.card Z := by exact_mod_cast Fintype.card_pos
++  refine card_mul_sub_le_one_of_abs_inner_ge _ (fun x => signWord fun z => r z ⬝ᵥ x)
++    (signWord T) hZ hδ hγ (norm_signWord_sq T).le (fun x _ => (norm_signWord_sq _).le)
++    (fun x _ y _ hxy => ?_) (fun x hx => ?_)
++  · rw [inner_signWord]
++    exact abs_sum_signVal_mul_signVal_dotProduct_le hr hxy
++  · rw [inner_signWord]
++    exact (mem_filter.mp hx).2
++
++end Cslib.BitString
+diff --git a/ComplexityTests/KaneWilliamsB.lean b/ComplexityTests/KaneWilliamsB.lean
+new file mode 100644
+index 0000000000..eb58fd48ad
+--- /dev/null
++++ b/ComplexityTests/KaneWilliamsB.lean
+@@ -0,0 +1,300 @@
++/-
++Copyright (c) 2026 Christian Reitwiessner. All rights reserved.
++Released under Apache 2.0 license as described in the file LICENSE.
++Authors: Christian Reitwiessner
++-/
++
++import Complexity.Computability.Circuit.Boolean.WeightedThreshold.KaneWilliamsB
++import Complexity.Foundations.Data.BitString.Basic
++import Complexity.Foundations.Data.BitString.Discriminator
++import Complexity.Probability.SmallBias.Correlation
++import Mathlib.Tactic.FinCases
++
++/-! Tests for the Kane–Williams depth-three function: its values on concrete inputs, tightness of
++the correlation-list bound (Kane–Williams Lemma 6.1) for the full list of rows, the discriminator
++lemma on a majority vote, a depth-two circuit computing the function (so that the hypotheses of the
++worst-case bounds can all hold), and the gate, wire and agreement bounds at `p = 20`. -/
++
++open Cslib Cslib.BitString Cslib.Circuits Cslib.Circuits.Boolean
++  Cslib.Circuits.Boolean.WeightedThreshold Finset Probability
++
++namespace KaneWilliamsBTests
++
++/-! ### The function on concrete inputs -/
++
++/-- Two rows of length two, indexed by one parity bit. -/
++private def rows : BitString 1 → BitString 2 :=
++  fun z => if z 0 then ![true, true] else ![true, false]
++
++-- Message `(1, 0)` and block `(1, 0)` of parity `1` read the row `(1, 1)`: the value is `1`.
++example : kaneWilliamsB rows 2 ![true, false, true, false] = true := by decide
++
++-- Message `(0, 1)` and block `(1, 1)` of parity `0` read the row `(1, 0)`: the value is `0`.
++example : kaneWilliamsB rows 2 ![false, true, true, true] = false := by decide
++
++example : kaneWilliamsMessage 2 1 2 ![false, true, true, true] = ![false, true] := by decide
++
++example : kaneWilliamsParities 2 1 2 ![false, true, true, true] = ![false] := by decide
++
++/-! ### The correlation-list bound is attained by the full list -/
++
++private theorem sum_bitString_two (f : BitString 2 → ℝ) :
++    ∑ z, f z = f ![false, false] + f ![false, true] + (f ![true, false] + f ![true, true]) := by
++  rw [← (finTwoArrowEquiv Bool).symm.sum_comp, Fintype.sum_prod_type]
++  simp only [finTwoArrowEquiv_symm_apply, Fintype.sum_bool]
++  ring
++
++private theorem dotProduct_two (a b c d : Bool) :
++    ![a, b] ⬝ᵥ ![c, d] = ((a && c) ^^ (b && d)) := by
++  decide +revert
++
++private theorem eq_two (x : BitString 2) : x = ![x 0, x 1] := by
++  ext i; fin_cases i <;> rfl
++
++/-- The full list of rows `BitString 2 → BitString 2` is unbiased. -/
++private theorem isSmallBias_id : IsSmallBias 0 ((PMF.uniformOfFintype (BitString 2)).map id) := by
++  rw [PMF.map_id]
++  exact isSmallBias_uniformOfFintype
++
++/-- The bent word `z 0 && z 1` has correlation `±2 = ±|Z| / 2` with all four codewords. -/
++private theorem card_bent :
++    (#{x : BitString 2 | (1 / 2 : ℝ) * Fintype.card (BitString 2) ≤
++      |∑ z, signVal (z 0 && z 1) * signVal (id z ⬝ᵥ x)|} : ℝ) = 4 := by
++  have h (x : BitString 2) : (1 / 2 : ℝ) * Fintype.card (BitString 2) ≤
++      |∑ z, signVal (z 0 && z 1) * signVal (id z ⬝ᵥ x)| := by
++    rw [sum_bitString_two, eq_two x]
++    simp only [id, dotProduct_two, Matrix.cons_val_zero, Matrix.cons_val_one]
++    cases x 0 <;> cases x 1 <;> norm_num
++  rw [filter_true_of_mem fun x _ => h x]
++  simp
++
++-- Lemma 6.1 at `γ = 1 / 2` and `δ = 0` allows at most `1 / γ ^ 2 = 4` messages whose codewords
++-- correlate with a fixed word by `γ |Z|`; the bent word attains this.
++example : (#{x : BitString 2 | (1 / 2 : ℝ) * Fintype.card (BitString 2) ≤
++      |∑ z, signVal (z 0 && z 1) * signVal (id z ⬝ᵥ x)|} : ℝ) * ((1 / 2) ^ 2 - 0) = 1 := by
++  rw [card_bent]; norm_num
++
++example : (#{x : BitString 2 | (1 / 2 : ℝ) * Fintype.card (BitString 2) ≤
++      |∑ z, signVal (z 0 && z 1) * signVal (id z ⬝ᵥ x)|} : ℝ) * ((1 / 2) ^ 2 - 0) ≤ 1 :=
++  card_le_abs_sum_signVal_mul_signVal_dotProduct_mul_le le_rfl (by norm_num) isSmallBias_id _
++
++-- Only one codeword, that of `(1, 0)`, correlates perfectly with the dictator word `z 0`.
++example : (#{x : BitString 2 | (1 : ℝ) * Fintype.card (BitString 2) ≤
++      |∑ z, signVal (z 0) * signVal (id z ⬝ᵥ x)|} : ℝ) = 1 := by
++  have hle := card_le_abs_sum_signVal_mul_signVal_dotProduct_mul_le le_rfl zero_le_one
++    isSmallBias_id fun z => z 0
++  have hmem : ![true, false] ∈ ({x : BitString 2 | (1 : ℝ) * Fintype.card (BitString 2) ≤
++      |∑ z, signVal (z 0) * signVal (id z ⬝ᵥ x)|} : Finset (BitString 2)) := by
++    refine mem_filter.mpr ⟨mem_univ _, ?_⟩
++    rw [sum_bitString_two]
++    simp only [id, dotProduct_two, Matrix.cons_val_zero]
++    norm_num
++  have hpos : (1 : ℝ) ≤ #({x : BitString 2 | (1 : ℝ) * Fintype.card (BitString 2) ≤
++      |∑ z, signVal (z 0) * signVal (id z ⬝ᵥ x)|} : Finset (BitString 2)) := by
++    exact_mod_cast card_pos.mpr ⟨_, hmem⟩
++  have hle' : (#({x : BitString 2 | (1 : ℝ) * Fintype.card (BitString 2) ≤
++      |∑ z, signVal (z 0) * signVal (id z ⬝ᵥ x)|} : Finset (BitString 2)) : ℝ) ≤ 1 := by
++    simpa only [one_pow, sub_zero, mul_one] using hle
++  exact le_antisymm hle' hpos
++
++/-! ### The discriminator lemma on a majority vote -/
++
++/-- The majority of the votes `(u 0, u 0, u 1)` is `u 0`. -/
++private theorem majority_votes (u : BitString 2) : threshold 3 2 ![u 0, u 0, u 1] = u 0 := by
++  rw [eq_two u]
++  cases u 0 <;> cases u 1 <;> decide
++
++-- The target `u 0` is balanced, so the votes correlate with it by at least `|U| = 4` in total.
++example : (4 : ℝ) ≤ ∑ i, ∑ u : BitString 2, signVal (![u 0, u 0, u 1] i) * signVal (u 0) := by
++  have h := sub_le_sum_sum_signVal_mul_of_threshold_eq (fun u : BitString 2 => ![u 0, u 0, u 1])
++    (fun u => u 0) majority_votes
++  have hbal : ∑ u : BitString 2, signVal (u 0) = 0 := by
++    rw [sum_bitString_two]; norm_num
++  rw [hbal] at h
++  norm_num at h
++  exact h
++
++-- A unanimous threshold vote of one voter correlates fully with its target.
++example (F : BitString 2 → Bool) :
++    (4 : ℝ) - 2 * |∑ u, signVal (F u)| ≤ ∑ i : Fin 1, ∑ u, signVal (![F u] i) * signVal (F u) := by
++  have h := sub_le_sum_sum_signVal_mul_of_threshold_eq (θ := 1) (fun u : BitString 2 => ![F u]) F
++    fun u => by cases F u <;> decide
++  norm_num at h ⊢
++  linarith
++
++/-! ### The hypotheses of the worst-case bounds can hold
++
++Every Boolean function has a depth-two weighted threshold circuit: an `OR` gate over minterm gates.
++Below it computes the Kane–Williams function at `p = 20` under a top gate `threshold 1 1`, which
++passes its single input through. -/
++
++/-- The minterm gate of `a`: `∑ i, ±x i ≥ weight a`, with `+` exactly where `a` is true. -/
++private abbrev mintermOp {N : ℕ} (a : BitString N) : WeightedThreshold.Op :=
++  ⟨N, fun i => if a i then 1 else -1, (weight a : ℝ)⟩
++
++/-- The minterm gate of `a` is true exactly at `a`. -/
++private theorem interpretation_mintermOp {N : ℕ} (a x : BitString N) :
++    WeightedThreshold.interpretation (mintermOp a) x = decide (x = a) := by
++  have hterm (i : Fin N) :
++      (if a i then (1 : ℝ) else -1) * ((x i).toNat : ℝ) ≤ ((a i).toNat : ℝ) := by
++    cases a i <;> cases x i <;> norm_num
++  have hweight : (weight a : ℝ) = ∑ i, ((a i).toNat : ℝ) := by
++    rw [weight_eq_sum_toNat]; push_cast; rfl
++  change decide ((weight a : ℝ) ≤ ∑ i, (if a i then (1 : ℝ) else -1) * ((x i).toNat : ℝ)) = _
++  rw [hweight, Bool.eq_iff_iff, decide_eq_true_iff, decide_eq_true_iff]
++  constructor
++  · intro h
++    have heq := (sum_eq_sum_iff_of_le fun i _ => hterm i).mp
++      (le_antisymm (sum_le_sum fun i _ => hterm i) h)
++    funext i
++    have hi := heq i (mem_univ i)
++    revert hi
++    cases a i <;> cases x i <;> norm_num
++  · rintro rfl
++    exact le_of_eq (sum_congr rfl fun i _ => by cases x i <;> norm_num)
++
++/-- The disjunctive normal form of `f` as a depth-two weighted threshold circuit: an `OR` gate over
++the minterm gates of all points, with weight one exactly at the points where `f` is true. -/
++private noncomputable def dnfCircuit {N : ℕ} (f : BitString N → Bool) :
++    Circuit WeightedThreshold.signature N 1 :=
++  depthTwo ⟨2 ^ N, fun j => if f ((BitString.equivFin N).symm j) then 1 else 0, 1⟩
++    (fun j => mintermOp ((BitString.equivFin N).symm j)) fun _ => id
++
++private theorem eval_dnfCircuit {N : ℕ} (f : BitString N → Bool) (x : BitString N) :
++    (dnfCircuit f).eval WeightedThreshold.interpretation x 0 = f x := by
++  rw [dnfCircuit, eval_depthTwo]
++  simp only [interpretation_mintermOp, id]
++  change decide ((1 : ℝ) ≤ ∑ j : Fin (2 ^ N),
++    (if f ((BitString.equivFin N).symm j) then (1 : ℝ) else 0) *
++      ((decide ((fun a => x a) = (BitString.equivFin N).symm j)).toNat : ℝ)) = f x
++  rw [Fintype.sum_equiv (BitString.equivFin N).symm _
++    (fun a => (if f a then (1 : ℝ) else 0) * ((decide (x = a)).toNat : ℝ)) fun j => rfl,
++    sum_eq_single x (fun a _ hax => by simp [Ne.symm hax]) (by simp)]
++  cases f x <;> norm_num
++
++private theorem threshold_one_one (v : BitString 1) : threshold 1 1 v = v 0 := by
++  revert v; decide
++
++-- At `p = 20` and `n = 16 * 20 * 3276 = 1048320 ≤ 2 ^ 20`, the rows of bias `2 ^ (-140)` exist and
++-- a depth-two circuit computes the Kane–Williams function with top fan-in `t = 1`: the hypotheses
++-- of `size_ge_of_threshold_eval_eq_kaneWilliamsB_balanced` hold together.
++example : ∃ (r : BitString (16 * 20) → BitString (16 * 20 * 3276))
++    (c : Circuit WeightedThreshold.signature (16 * 20 * 3276 + 16 * 20 * 3276) 1),
++    IsSmallBias ((1 / 2) ^ (7 * 20)) ((PMF.uniformOfFintype (BitString (16 * 20))).map r) ∧
++      c.depth ≤ 2 ∧
++      ∀ y, threshold 1 1 (c.eval WeightedThreshold.interpretation y) = kaneWilliamsB r 3276 y := by
++  obtain ⟨r, hr⟩ := exists_isSmallBias_kaneWilliamsRows (p := 20) (n := 16 * 20 * 3276)
++    (by norm_num) (by norm_num)
++  exact ⟨r, dnfCircuit (kaneWilliamsB r 3276), hr, depth_depthTwo_le _ _ _,
++    fun y => by rw [threshold_one_one, eval_dnfCircuit]⟩
++
++/-! ### Balanced bounds at `p = 20`: `n = 1048320`, so `2 n = 2096640` inputs -/
++
++private theorem sqrt_two_mul_le : Real.sqrt (2 * ((16 * 20 * 3276 : ℕ) : ℝ)) ≤ 1448 := by
++  rw [Real.sqrt_le_left (by norm_num)]
++  norm_num
++
++-- Every unweighted threshold gate of fan-in at most `n ^ 3 / 4` over a depth-two circuit computing
++-- the function needs at least `350` gates in the depth-two circuit.
++example {t : ℕ} (ht : 4 * t ≤ (16 * 20 * 3276) ^ 3)
++    {r : BitString (16 * 20) → BitString (16 * 20 * 3276)}
++    (hr : IsSmallBias ((1 / 2) ^ (7 * 20)) ((PMF.uniformOfFintype (BitString (16 * 20))).map r))
++    (c : Circuit WeightedThreshold.signature (16 * 20 * 3276 + 16 * 20 * 3276) t)
++    (hd : c.depth ≤ 2) (θ : ℕ)
++    (hc : ∀ y, threshold t θ (c.eval WeightedThreshold.interpretation y) = kaneWilliamsB r 3276 y) :
++    350 ≤ c.size := by
++  have h := size_ge_of_threshold_eval_eq_kaneWilliamsB_balanced (p := 20) (n := 16 * 20 * 3276)
++    (ℓ := 3276) (by norm_num) rfl (by norm_num) ht hr c hd θ hc
++  by_contra hlt
++  have hs : (c.size : ℝ) ≤ 349 := by exact_mod_cast (show c.size ≤ 349 by omega)
++  have hprod := mul_le_mul hs sqrt_two_mul_le (Real.sqrt_nonneg _) (by norm_num)
++  norm_num at h hprod
++  nlinarith
++
++-- ... and more than `28 * 10 ^ 6` wires, about `13` per input.
++example {t : ℕ} (ht : 4 * t ≤ (16 * 20 * 3276) ^ 3)
++    {r : BitString (16 * 20) → BitString (16 * 20 * 3276)}
++    (hr : IsSmallBias ((1 / 2) ^ (7 * 20)) ((PMF.uniformOfFintype (BitString (16 * 20))).map r))
++    (c : Circuit WeightedThreshold.signature (16 * 20 * 3276 + 16 * 20 * 3276) t)
++    (hd : c.depth ≤ 2) (θ : ℕ)
++    (hc : ∀ y, threshold t θ (c.eval WeightedThreshold.interpretation y) = kaneWilliamsB r 3276 y) :
++    28 * 10 ^ 6 < c.wireCount := by
++  have h := wireCount_ge_of_threshold_eval_eq_kaneWilliamsB_balanced (p := 20)
++    (n := 16 * 20 * 3276) (ℓ := 3276) (by norm_num) rfl (by norm_num) ht hr c hd θ hc
++  have hsn : (1023 : ℝ) ≤ Real.sqrt ((16 * 20 * 3276 : ℕ) : ℝ) :=
++    Real.le_sqrt_of_sq_le (by norm_num)
++  have hsp : Real.sqrt ((20 : ℕ) : ℝ) ≤ 448 / 100 := by
++    rw [Real.sqrt_le_left (by norm_num)]
++    norm_num
++  by_contra hlt
++  have hw : (c.wireCount : ℝ) ≤ 28 * 10 ^ 6 := by
++    exact_mod_cast (show c.wireCount ≤ 28 * 10 ^ 6 by omega)
++  have hprod := mul_le_mul hsp hw (Nat.cast_nonneg _) (by norm_num)
++  norm_num at h hsn hprod
++  nlinarith
++
++-- A depth-two circuit with at most `10` gates agrees with the function on at most `52%` of the
++-- inputs.
++example {r : BitString (16 * 20) → BitString (16 * 20 * 3276)}
++    (hr : IsSmallBias ((1 / 2) ^ (7 * 20)) ((PMF.uniformOfFintype (BitString (16 * 20))).map r))
++    (c : Circuit WeightedThreshold.signature (16 * 20 * 3276 + 16 * 20 * 3276) 1)
++    (hd : c.depth ≤ 2) (hs : c.size ≤ 10) :
++    (#{y | c.eval WeightedThreshold.interpretation y 0 = kaneWilliamsB r 3276 y} : ℝ) ≤
++      2 ^ (2 * (16 * 20 * 3276)) * (52 / 100) := by
++  have h := card_eval_eq_kaneWilliamsB_le_balanced_size (p := 20) (n := 16 * 20 * 3276)
++    (ℓ := 3276) (by norm_num) rfl (by norm_num) (by norm_num) hr c hd 0
++  refine h.trans (mul_le_mul_of_nonneg_left ?_ (by positivity))
++  have hs' : (c.size : ℝ) ≤ 10 := by exact_mod_cast hs
++  have hprod := mul_le_mul hs' sqrt_two_mul_le (Real.sqrt_nonneg _) (by norm_num)
++  norm_num at hprod ⊢
++  have key : 972800 * (c.size : ℝ) * Real.sqrt 2096640 / 983719376640 ≤
++      972800 * 14480 / 983719376640 :=
++    div_le_div_of_nonneg_right (by linarith) (by norm_num)
++  linarith
++
++/-! ### Bounds for any block length at `p = 20`: `2 ^ 20` message bits, blocks of `3276` bits -/
++
++-- Rows of bias `2 ^ (-140)` exist for messages of `2 ^ 20` bits.
++example : ∃ r : BitString (16 * 20) → BitString (2 ^ 20),
++    IsSmallBias ((1 / 2) ^ (7 * 20)) ((PMF.uniformOfFintype (BitString (16 * 20))).map r) :=
++  exists_isSmallBias_kaneWilliamsRows (by norm_num) le_rfl
++
++private theorem sqrt_inputs_le : Real.sqrt ((2 ^ 20 + 16 * 20 * 3276 : ℕ) : ℝ) ≤ 1449 := by
++  rw [Real.sqrt_le_left (by norm_num)]
++  norm_num
++
++-- With `2 ^ 20` message bits and blocks of `3276` bits (`2 ^ 21 - 256` inputs), every unweighted
++-- threshold gate of fan-in at most `2 ^ 58` over a depth-two circuit computing the function needs
++-- at least `350` gates in the depth-two circuit.
++example {t : ℕ} (ht : t ≤ 2 ^ 58) {r : BitString (16 * 20) → BitString (2 ^ 20)}
++    (hr : IsSmallBias ((1 / 2) ^ (7 * 20)) ((PMF.uniformOfFintype (BitString (16 * 20))).map r))
++    (c : Circuit WeightedThreshold.signature (2 ^ 20 + 16 * 20 * 3276) t) (hd : c.depth ≤ 2) (θ : ℕ)
++    (hc : ∀ y, threshold t θ (c.eval WeightedThreshold.interpretation y) = kaneWilliamsB r 3276 y) :
++    350 ≤ c.size := by
++  have h := size_ge_of_threshold_eval_eq_kaneWilliamsB_of_le_two_pow (p := 20) (by norm_num)
++    le_rfl (by norm_num) (by norm_num) (by omega) hr c hd θ hc
++  by_contra hlt
++  have hs : (c.size : ℝ) ≤ 349 := by exact_mod_cast (show c.size ≤ 349 by omega)
++  have hprod := mul_le_mul hs sqrt_inputs_le (Real.sqrt_nonneg _) (by norm_num)
++  norm_num at h hprod
++  nlinarith
++
++-- A depth-two circuit with at most `10` gates agrees with the function on at most `52%` of the
++-- inputs.
++example {r : BitString (16 * 20) → BitString (2 ^ 20)}
++    (hr : IsSmallBias ((1 / 2) ^ (7 * 20)) ((PMF.uniformOfFintype (BitString (16 * 20))).map r))
++    (c : Circuit WeightedThreshold.signature (2 ^ 20 + 16 * 20 * 3276) 1) (hd : c.depth ≤ 2)
++    (hs : c.size ≤ 10) :
++    (#{y | c.eval WeightedThreshold.interpretation y 0 = kaneWilliamsB r 3276 y} : ℝ) ≤
++      2 ^ (2 ^ 20 + 16 * 20 * 3276) * (52 / 100) := by
++  have h := card_eval_eq_kaneWilliamsB_le_of_le_two_pow_size (p := 20) (by norm_num) le_rfl
++    (by norm_num) (by norm_num) (by norm_num) hr c hd 0
++  refine h.trans (mul_le_mul_of_nonneg_left ?_ (by positivity))
++  have hs' : (c.size : ℝ) ≤ 10 := by exact_mod_cast hs
++  have hprod := mul_le_mul hs' sqrt_inputs_le (Real.sqrt_nonneg _) (by norm_num)
++  norm_num at hprod ⊢
++  have key : 3040 * (c.size : ℝ) * Real.sqrt 2096896 / 3074961708 ≤ 3040 * 14490 / 3074961708 :=
++    div_le_div_of_nonneg_right (by linarith) (by norm_num)
++  linarith
++
++end KaneWilliamsBTests
+diff --git a/ROADMAP.md b/ROADMAP.md
+index 7f262aa34b..873aab86a1 100644
+--- a/ROADMAP.md
++++ b/ROADMAP.md
+@@ -698,6 +698,16 @@ DLOGTIME-uniform AC⁰ under explicit conventions.
+ - Uniform and nonuniform NC, AC and TC, circuit-to-machine bridges, algorithm-to-lower-bound
+   arguments, and barriers such as natural proofs and algebrization. NC simulation of unrestricted
+   `TCⁱ` needs Muroga's threshold weight-bounding theorem.
++- **Depth-three threshold circuits for the Kane–Williams function** ([#2812]): for the function
++  `B_n` of arXiv:1511.07860v1, Definition 6.1, with `16 p` parity blocks and any
++  `2 ^ (-7 p)`-biased rows, `MAJ ∘ THR ∘ THR` circuits with top fan-in at most `n ^ 3 / 4` need
++  `Ω(n ^ (3 / 2) / log² n)` gates and `Ω(n ^ (5 / 2) / log ^ (5 / 2) n)` wires, and a depth-two
++  circuit with `s` gates agrees with `B_n` on at most a
++  `1 / 2 + O(s log² n / n ^ (3 / 2)) + n ^ (-3)` fraction of inputs
++  (`WeightedThreshold/KaneWilliamsB.lean`; Kane and Williams, Theorem 1.3, have `log³ n` and
++  `log ^ (7 / 2) n`). Still open: a certified polynomial-time construction of the rows, so that
++  `B_n` is in `P` as Kane and Williams state, and bounds that allow arbitrary top weights
++  (`THR ∘ THR ∘ THR`).
+ - Formula lower bounds beyond Andreev's, following Jukna; Raz–Wigderson's monotone depth bound for
+   matching on general graphs.
+ - **Monotone circuits versus P:** Razborov's `n ^ Ω(log n)` monotone bound for bipartite perfect
+@@ -1199,3 +1209,4 @@ not planned, not as proved.
+ [#2652]: https://github.com/cslib-community/complexitylib/issues/2652
+ 
+ [#2661]: https://github.com/cslib-community/complexitylib/issues/2661
++[#2812]: https://github.com/cslib-community/complexitylib/issues/2812
+diff --git a/manual/circuits-logic-and-other-models/circuits-and-formulas.md b/manual/circuits-logic-and-other-models/circuits-and-formulas.md
+index e9c5828b5c..cafc303e02 100644
+--- a/manual/circuits-logic-and-other-models/circuits-and-formulas.md
++++ b/manual/circuits-logic-and-other-models/circuits-and-formulas.md
+@@ -52,6 +52,8 @@ Repeated wires have genuine meaning for symmetric gates. [MultOp](https://github
+ 
+ For standalone linear threshold functions, import [WeightedThreshold/LTF](../../Complexity/Computability/Circuit/Boolean/WeightedThreshold/LTF.lean) for `ltfEval`, nonzero support and magnitude ranks, including equal-magnitude ties. [The direct-import client](../../ComplexityTests/WeightedThresholdLTF.lean) checks a threshold tie, opposite coefficients and a zero coefficient without importing the depth-two constructor; `RandomRestriction` uses this smaller interface too.
+ 
++Depth-three bounds use [WeightedThreshold/KaneWilliamsB](../../Complexity/Computability/Circuit/Boolean/WeightedThreshold/KaneWilliamsB.lean). Its function `kaneWilliamsB r ℓ` is the Kane–Williams function of `arXiv:1511.07860v1`, Definition 6.1: the first `n` inputs are a message `x`, the remaining `k * ℓ` inputs form `k` blocks whose parities `z` select a row of `r : BitString k → BitString n`, and the value is `r z ⬝ᵥ x`. A `MAJ ∘ THR ∘ THR` circuit is a depth-two circuit `c : Circuit WeightedThreshold.signature N t` (`c.depth ≤ 2`) whose `t` outputs feed an unweighted gate `threshold t θ`, written `∀ y, threshold t θ (c.eval interpretation y) = kaneWilliamsB r ℓ y`. The outputs share their bottom gates ([SharedBottom](../../Complexity/Computability/Circuit/Boolean/WeightedThreshold/SharedBottom.lean)); the bounds count `c.size` and `c.wireCount` but not the top gate, and the top fan-in `t`, counted with multiplicity, is a hypothesis. For `k = 16 p` blocks with `n = 16 p ℓ ≤ 2 ^ p` (`2 n` inputs), `2 ^ (-7 p)`-biased rows (they exist by `exists_isSmallBias_kaneWilliamsRows`) and `4 t ≤ n ^ 3`, `size_ge_of_threshold_eval_eq_kaneWilliamsB_balanced` proves `n (n - 272 p^2 - 54 p - 3) ≤ 4864 p^2 · c.size · √(2 n)` and `wireCount_ge_of_threshold_eval_eq_kaneWilliamsB_balanced` proves `n √n (n - 272 p^2 - 54 p - 3) ≤ 19456 p^2 √p · c.wireCount`: `Ω(n^(3/2) / log² n)` gates and `Ω(n^(5/2) / log^(5/2) n)` wires, where Kane and Williams (Theorem 1.3) have `log³ n` and `log^(7/2) n`. `card_eval_eq_kaneWilliamsB_le_balanced_size` bounds the fraction of inputs on which a depth-two circuit agrees with the function by `1/2 + 2^(-3p) + 2432 p^2 · c.size · √(2 n) / (n (n - 272 p^2 - 57 p - 3))`, and `card_eval_eq_kaneWilliamsB_le_balanced_wireCount` is its wire version. These improvements are original: the circuit is fixed before the message, and the restricted circuits are counted over the circuit's fixed bottom weights (`IsDepthTwoOverWeights`). The `_of_le_two_pow` versions allow any block length `ℓ ≤ 2 ^ p`, and the cores `card_eval_eq_kaneWilliamsB_le_of_unforced_mean_le` and `one_le_of_threshold_eq_kaneWilliamsB_of_unforced_mean_le` take the parameters `δ`, `γ` and the survivor budget `Q` freely. The rows are only shown to exist; a polynomial-time construction is not certified. [The client](../../ComplexityTests/KaneWilliamsB.lean) builds a depth-two circuit for the function, so the hypotheses can all hold, and evaluates the bounds at `p = 20`.
++
+ [existsGuess](https://github.com/cslib-community/complexitylib/blob/13e6a31951bf1c89a1a6258c44f9444aecbbefd8/Complexity/Computability/Circuit/Boolean/Nondeterminism.lean#L42) supplies existential and universal auxiliary-input semantics. Eliminating p guessed bits by trying all assignments yields the explicit bound `2^p (C+3)+1`. [econondeterministicAndComplexity](https://github.com/cslib-community/complexitylib/blob/13e6a31951bf1c89a1a6258c44f9444aecbbefd8/Complexity/Computability/Circuit/Boolean/Conondeterministic.lean#L47) minimizes only AND cost over universally quantified verifiers with unrestricted finite auxiliary-bit count. Both polarities of inputs, constants and OR gates are free. This is an intentional special measure used by cover theorems, not ordinary all-gate verifier size.
+ 
+ [complexity_le_of_boundedError](https://github.com/cslib-community/complexitylib/blob/13e6a31951bf1c89a1a6258c44f9444aecbbefd8/Complexity/Computability/Circuit/Boolean/BoundedError.lean#L113) instead treats auxiliary bits as uniform randomness and asks for correctness on every input with probability at least two thirds. Adleman's circuit argument hardwires a collection of seeds, giving ordinary circuits of size `O(n(C+n))`; at the family level bounded-error randomness preserves P/poly. The result does not give a uniform method for finding the successful seeds.

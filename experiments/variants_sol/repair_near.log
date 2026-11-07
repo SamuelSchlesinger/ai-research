@@ -1,0 +1,6 @@
+REPAIR_NEAR 8
+CEGIS 2 3 8 learner unsat round 1 points 1024
+REPAIR_NEAR 9
+CEGIS 2 3 9 learner unknown round 1 points 1024
+REPAIR_NEAR 10
+CEGIS 2 3 10 learner unknown round 1 points 1024

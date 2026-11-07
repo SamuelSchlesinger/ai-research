@@ -1,0 +1,4 @@
+k=2: threshold functions found = 14 (known: k=2 -> 14, k=3 -> 104)
+k=2: functions computable with <=1 bottom gate (integer search) = 16 of 16;  C_2 = 1
+k=3: threshold functions found = 104 (known: k=2 -> 14, k=3 -> 104)
+k=3: functions computable with <=1 bottom gate (integer search) = 256 of 256;  C_3 = 1

@@ -1,0 +1,4349 @@
+SIZE{DEPTH TRADEOFFS FOR THRESHOLD CIRCUITS\003RUSSELL IMPAGLIAZZOy, RAMAMOHAN PATURIy,ANDMICHAEL E. SAKSz
+SIAM J. COMPUT.c
+\0151997 Society for Industrial and Applied Mathematics
+Vol. 26, No. 3, pp. 693{707, June 1997
+006Abstract.
+The following size{depth tradeo\013 for threshold circuits is obtained: any threshold
+circuit of depth
+d
+that computes the parity function on
+n
+variables must have at least
+n1+
+c\022\000
+dedges,
+where
+c>
+0 and
+\022
+\024
+3 are constants independent of
+n
+and
+d
+. Previously known constructions show
+that up to the choice of
+c
+and
+\022
+this bound is best possible. In particular, the lower bound implies an
+a\016rmative answer to the conjecture of Paturi and Saks that a bounded-depth threshold circuit that
+computes parity requires a superlinear number of edges. This is the \014rst superlinear lower bound
+for an explicit function that holds for any \014xed depth and the \014rst that applies to threshold circuits
+with unrestricted weights.
+The tradeo\013 is obtained as a consequence of a general restriction theorem for threshold circuits
+with a small number of edges: For any threshold circuit with
+n
+inputs, depth
+d
+, and at most
+kn
+edges, there exists a partial assignment to the inputs that \014xes the output of the circuit to a constant
+while leaving
+b
+n=
+(
+c1k
+)c2\022dc
+variables un\014xed, where
+c1;c2>
+0 and
+\022
+\024
+3 are constants independent
+of
+n
+,
+k
+, and
+d
+.
+A tradeo\013 between the number of gates and depth is also proved: any threshold circuit of depth
+d
+that computes the parity of
+n
+variables has at least (
+n=
+2)1
+=
+2(
+d
+\000
+1)gates. This tradeo\013, which is
+essentially the best possible, was proved previously (with a better constant in the exponent) for the
+case of threshold circuits with polynomially bounded weights in [K. Siu, V. Roychowdury, and T.
+Kailath,
+IEEE Trans. Inform. Theory
+, 40 (1994), pp. 455{466]; the result in the present paper holds
+for unrestricted weights.
+Key words.
+threshold circuits, circuit complexity, lower bounds
+AMS subject classi\014cation.
+68Q15
+PII.
+S00975397922829651. Introduction.
+A fundamental problem in complexity theory is to prove lower
+bounds on the size and the depth of general Boolean circuits for speci\014c problems of
+interest such as arithmetic operations, graph reachability, linear programming, and
+satis\014ability [11, 8, 5]. Unfortunately, current research has not begun to provide lower
+bounds for such computationally signi\014cant problems in general models. For example,
+the best known lower bound on the size of Boolean circuits over the standard basis
+f
+AND, OR, NOT
+g
+for any problem in
+NP
+isa4
+n
+\000
+4 bound on the parity function
+[20]; over the basis of all two-input functions, the best known lower bound is 3
+n
+\000
+3
+[4].
+Since proving bounds for general circuits seems very di\016cult, it is interesting
+to look at restricted families of circuits, for example, small-depth circuits over var-
+ious bases. Some of these classes of circuits are interesting on their own. For ex-
+ample, the size and the depth required for unbounded-fan-in circuits over the basis
+f
+AND, OR, NOT
+g
+to compute a function
+f
+are the same as the number of processors
+(up to a polynomial factor) and the parallel time (up to a constant factor) required
+to compute
+f
+on a CREW PRAM model.\003Received by the editors August 1, 1992; accepted for publication (in revised form) July 11, 1995.
+http://www.siam.org/journals/sicomp/26-3/28296.htmlyDepartment of Computer Science and Engineering, University of California at San Diego, La
+Jolla, CA 92093 (rimpagliazzo@ucsd.edu, paturi@cs.ucsd.edu).zDepartment of Computer Science and Engineering, University of California at San Diego, La
+Jolla, CA 92093 and Department of Mathematics, Rutgers University, New Brunswick, NJ 08903
+(saks@math.rutgers.edu). The research of this author was supported in part by NSF grant CCR-
+8911388, AFOSR grants 89-0512 and 90-0008, and DIMACS, which is funded by NSF grant STC-
+91-19999.
+693
+=====PAGE=====
+694R. IMPAGLIAZZO, R. PATURI, AND M. E. SAKSAnother basis of interest is the family of linear threshold gates. Circuits over
+this basis, threshold circuits, have attracted interest as a model for neural networks
+[14, 12] and because of the potential that hardware implementations of threshold cir-
+cuits might become a reality [15]. Bounded-depth threshold circuits are also appealing
+theoretically since they provide a surprisingly strong bounded-depth computational
+model. Indeed, it has been shown that basic operations like addition, multiplication,
+division, and sorting can be performed by bounded-depth polynomial-size threshold
+circuits [7, 17, 22, 5, 2, 6, 24, 27, 13]. On the other hand, unbounded-fan-in bounded-
+depth polynomial-size circuits over the standard basis (even when supplemented with
+mod
+p
+gates for prime
+p
+) cannot compute majority [5, 21, 25]. Therefore, separating
+the class of functions computable by bounded-depth polynomial-size threshold cir-
+cuits,
+TC0, from those computable by polynomial-time Turing machines would be an
+extremely interesting result in complexity theory.
+In this paper, we give the \014rst superlinear separation between bounded-depth
+threshold circuits and
+P
+. More precisely, our main result (Theorem 1 and its re\014ne-
+ment, Theorem 3) says that for any threshold circuit with
+n
+inputs, depth
+d
+,and
+kn
+edges, there exists a partial assignment to the inputs that \014xes the output of
+the circuit to a constant while leaving at least
+b
+n=
+(
+c1k
+)c2\022dc
+variables un\014xed, where
+c1;c2>
+0and
+\022
+\024
+3 are constants. In particular, this implies (Corollary 2 and its
+re\014nement, Corollary 4) that any depth-
+d
+circuit that computes the parity function
+on
+n
+variables must have at least
+n1+
+c\022\000
+dedges for the same
+\022
+and some constant
+c>
+0, proving the conjecture of Paturi and Saks [18]. (The value of
+\022
+obtained in this
+paperis1+
+p2=2
+:
+414
+:::
+, as compared to the value (1 +
+p5)
+=
+2=1
+:
+618
+:::
+in the
+upper bound given in [18].) In particular, any linear-size threshold circuit for parity
+requires depth \012(loglog
+n
+), matching the upper bound given in [18].
+The only lower bounds known previously for the number of edges needed to com-
+pute the parity function were for depth-2 and depth-3 circuits with polynomial-size
+weights. In [18], it is proved that \012(
+n2=
+log2n
+) edges are required for depth-2 thresh-
+old circuits and \012(
+n1
+:
+2=
+log5
+=
+3n
+) edges are required for depth-3 circuits. These results
+are obtained by showing that small-size depth-2 and depth-3 threshold circuits can
+be approximated by low-degree rational functions. The results in this paper are more
+general in that they hold for threshold circuits with arbitrary weights and all depths.
+However, for the special cases mentioned above, our techniques yield weaker bounds.
+Our proof uses a random restriction method as in [1, 9, 26, 10, 16]. However,
+unlike previous proofs, our proof uses a distribution on the partial assignments that
+depends on the structure of the circuit. The main restriction lemma (Lemma 3.1)
+shows that for any family of linear threshold gates on a common set of
+n
+variables
+with a total of
+\016n
+edges, there is a partial assignment that leaves
+n=
+(4
+\0162+2) variables
+free and makes every gate in the family dependent on at most one variable. Given
+a threshold circuit, this lemma can be applied to the set of gates at the \014rst level in
+order to reduce the depth of the circuit by 1. A straightforward induction argument
+then yields the main result with
+\022
+= 3. A more careful induction argument improves
+this to
+\022
+=1+
+p2.
+In fact, the restriction lemma applies to a more general class of functions than
+threshold functions, called
+generalized monotone
+functions. A Boolean function
+f
+(
+~
+x
+)
+is
+generalized monotone
+if
+f
+(
+~
+x
+)=
+g
+(
+~
+x
+\010
+~
+b
+) for some monotone Boolean function
+g
+and Boolean vector
+~
+b
+, where
+\010
+represents the componentwise addition mod 2. (These
+functions are sometimes referred to in the literature as \\unate.")
+We also prove analogous results for the number of gates in a small-depth threshold
+=====PAGE=====
+SIZE{DEPTH TRADEOFFS FOR THRESHOLD CIRCUITS695
+circuit. We prove a lemma (Lemma 3.2) that is analogous to Lemma 3.1 and says
+that for any family of
+N
+generalized monotone function gates on a common set of
+n
+variables there is a partial assignment that leaves
+n=
+(
+N2+ 1) variables free and \014xes
+all of the functions. This result, together with a simple induction argument, proves
+Theorem 2|that for any threshold circuit with
+n
+inputs, depth
+d
+,and
+N
+gates, there
+exists a partial assignment to the inputs that \014xes the output of the circuit to a
+constant while leaving at least
+b
+n=
+2
+N2(
+d
+\000
+1)c
+variables un\014xed. This theorem easily
+implies a (
+n=
+2)1
+=
+2(
+d
+\000
+1)bound on the number of threshold gates required to compute
+parity by a depth-
+d
+threshold circuit (Corollary 3). A similar bound (\012(
+dn1
+=d=
+log2n
+))
+was obtained previously in [23] in the special case of circuits with polynomial-size
+weights. Beigel [3] obtains similar bounds for a more general circuit model that
+allows any subexponential number of AND, OR, and NOT gates.
+Section 2 contains de\014nitions and some preliminary observations. In section 3, we
+state the main restriction theorem with
+\022
+= 3 and show how it follows from Lemma
+3.1. We also formalize the statement of Theorem 2 and show how it follows from
+Lemma 3.2. These two lemmas are proved in the succeeding two sections. In section
+6, a more careful argument is used to improve the value of
+\022
+in the main restriction
+theorem to 1+
+p2. In the last section, we present some related combinatorial results
+and discuss some possible strengthenings.
+2. Preliminaries.
+A
+threshold gate
+with fan-in
+n
+is an (
+n
++ 1)-tuple
+g
+=(
+~
+w
+;
+b
+),
+where
+~
+w
+2
+Rnand
+b
+2
+R
+.
+wiis called the
+weight
+of variable
+i
+and
+b
+is called the
+threshold value
+for the gate. The Boolean function
+fg:
+f
+0
+;
+1
+gn!f
+0
+;
+1
+g
+computed
+by
+g
+is de\014ned on input (
+x1;:::;xn)=
+~
+x
+2f
+0
+;
+1
+gnby
+fg(
+~
+x
+) = sgn(
+g
+(
+~
+x
+)), where the
+weighted sum
+g
+(
+~
+x
+)isgivenby
+g
+(
+~
+x
+)=
+h
+~
+w;~
+x
+i\000
+b
+=
+Pn
+i
++1wixi\000
+b
+and sgn :
+R
+!f
+0
+;
+1
+g
+is de\014ned as
+sgn(
+\013
+)=
+\032
+1if
+\013>
+0,
+0 otherwise.
+A Boolean function
+f
+which is representable as
+fgfor some threshold gate is called
+a
+threshold function
+.
+A threshold circuit
+T
+on
+n
+inputs is a directed acyclic graph with a designated
+node (output) and exactly
+n
+source
+nodes, one for each input. Each nonsource node
+is labeled by a threshold gate with its fan-in equal to the in-degree of the node. The
+function
+fv(
+x1;:::;xn) computed by the node
+v
+is obtained by functional composition
+in the obvious way. The function
+fT:
+f
+0
+;
+1
+gn!f
+0
+;
+1
+g
+computed by
+T
+is the function
+computed by the designated output node.
+The
+gate complexity
+of
+T
+is de\014ned as the number of nonsource nodes of
+T
+.The
+edge complexity
+of
+T
+is de\014ned as the number of edges in
+T
+.
+The
+level
+ofanodeinacircuit
+T
+is de\014ned inductively. The level of each source
+node is 0. The level of any other node
+i
+is one more than the maximum level of its
+immediate predecessors. The
+depth
+of
+T
+is the level of the output node. The circuit
+T
+is
+layered
+if the inputs to each gate are from gates of level one less.
+It will be convenient to \014x a variable set
+X
+of cardinality
+n
+and de\014ne an
+as-
+signment
+of
+X
+to be a function
+\013
+:
+X
+!f
+0
+;
+1
+g
+. Letting
+A
+(
+X
+) denote the set of
+assignments, we then view an
+n
+-variable Boolean function
+f
+as a function from
+A
+(
+X
+)
+to
+f
+0
+;
+1
+g
+. We say that
+f
+depends on
+variable
+x
+2
+X
+if there are two assignments
+\013
+and
+\014
+that di\013er only in their values at
+x
+such that
+f
+(
+\013
+)
+6
+=
+f
+(
+\014
+). The set of variables
+that
+f
+depends on is denoted by
+S
+(
+f
+), and
+s
+(
+f
+)=
+j
+S
+(
+f
+)
+j
+.
+=====PAGE=====
+696R. IMPAGLIAZZO, R. PATURI, AND M. E. SAKSAs usual, we write
+\013
+\024
+\014
+if
+\013
+(
+x
+)
+\024
+\014
+(
+x
+) for all
+x
+2
+X
+, and we denote the
+complement of
+\013
+by\013
+. A monotone Boolean function
+h
+is one that satis\014es
+h
+(
+\013
+)
+\024
+h
+(
+\014
+) whenever
+\013
+\024
+\014
+. The sum
+\013
+\010
+\014
+of two assignments is de\014ned by (
+\013
+\010
+\014
+)(
+x
+)=
+(
+\013
+(
+x
+)+
+\013
+(
+y
+)) mod 2. A Boolean function
+f
+is a
+generalized monotone
+function if
+there exists an assignment
+\014
+and a monotone function
+h
+such that
+f
+(
+\013
+)=
+h
+(
+\013
+\010
+\014
+).
+The assignment
+\014
+is called an
+orientation
+of
+f
+. It is easy to see that any threshold
+function is a generalized monotone function
+g
+and
+\014
+is an orientation of
+g
+if and only
+for each in variable
+x
+in
+S
+(
+f
+),
+\014
+(
+x
+) = sgn(
+wx), where
+wxis the weight of the variable
+x
+.
+A
+partial assignment
+\013
+of
+X
+is a function from a subset
+Y
+of
+X
+to
+f
+0
+;
+1
+g
+.The
+domain
+Y
+of
+\013
+is denoted \001(
+\013
+), and elements
+x
+2
+Y
+are said to be
+assigned
+or
+\014xed
+by
+\013
+. The variables in the set \010(
+\013
+)=
+X
+\000
+\001(
+\013
+)aresaidtobe
+unassigned
+or
+free
+.
+We denote by
+P
+(
+X
+) the set of all partial assignments of
+X
+. This set contains
+A
+(
+X
+);
+if we wish to emphasize that an assignment
+\013
+is in
+A
+(
+X
+),wesaythatitisa
+total
+assignment
+.If
+Y
+is a subset of variables and
+\013
+is a total assignment, then
+\013Ydenotes
+the partial assignment with domain
+Y
+and
+\013Y(
+x
+)=
+\013
+(
+x
+)for
+x
+2
+Y
+.
+If
+\013
+and
+\014
+are partial assignments such that \001(
+\014
+)
+\022
+\001(
+\013
+)and
+\014
+(
+x
+)=
+\013
+(
+x
+)
+for
+x
+2
+\001(
+\014
+), then we say that
+\013
+extends
+or is an
+extension
+of
+\014
+.If
+\013
+and
+\014
+are
+partial assignments that \014x disjoint sets of variables, then the partial assignment
+\013\014
+is the unique minimal extension of both
+\013
+and
+\014
+. For a Boolean function
+f
+and a
+partial assignment
+\013
+, the
+restriction of
+f
+induced by
+\013
+, written as
+f
+(
+\013
+), is the Boolean
+function with variable set \010(
+\013
+) obtained by assigning the variables in \001(
+\013
+) according
+to
+\013
+.
+An
+ordering
+of a set
+Y
+is a bijection \000 : [
+j
+Y
+j
+]
+!
+Y
+, where [
+k
+] denotes the set
+f
+1
+;
+2
+;:::;k
+g
+. Given \000, we refer to \000(
+i
+) as the
+i
+th element of
+Y
+. Also, \000(
+\024
+i
+) denotes
+the set
+f
+\000(
+j
+):
+j
+\024
+i
+and
+j
+2
+[
+j
+Y
+j
+]
+g
+and \000(
+\025
+i
+) denotes the set
+f
+\000(
+j
+):
+j
+\025
+i
+and
+j
+2
+[
+j
+Y
+j
+]
+g
+.
+The following simple lemma states the main property of the generalized monotone
+functions that is used in this paper.
+Lemma 2.1.
+Let f be a nonconstant generalized monotone function on
+X
+with an
+orientation
+\014
+, and let
+\000
+be an ordering of
+X
+. Then there exists a
+j
+2f
+0
+;
+1
+;:::;n
+g
+such that
+f
+(
+\014\000(
+\024
+j
+))
+is identically
+0
+and
+f
+(
+\026
+\014\000(
+\025
+j
+))
+is identically
+1
+.
+Proof
+. Label the elements of
+X
+as
+x1;:::;xnaccording to the ordering \000. Any
+assignment
+\013
+is identi\014ed with the vector (
+\013
+(
+x1)
+;:::;\013
+(
+xn)). Consider \014rst the case
+that
+f
+is monotone, i.e.,
+\014
+=0n. Since
+f
+is not a constant function, we have
+f
+(0n)=0
+and
+f
+(1n)=1. Let
+j
+be the least index such that
+f
+(0j1n
+\000
+j) = 0 . This implies
+that
+f
+(
+\014\000(
+\024
+j
+)) is identically 0.
+j
+\025
+1 since
+f
+is not a constant function. Then
+f
+(0j
+\000
+11n
+\000
+j
++1) = 1, which implies that
+f
+(
+\026
+\014\000(
+\025
+j
+)) is identically 1 by monotonicity since
+every total assignment that extends
+\026
+\014\000(
+\025
+j
+)is greater than or equal to 0j
+\000
+11n
+\000
+j
++1.
+In the case that
+f
+is not monotone, the desired result follows immediately by
+applying the previous argument to the monotone function
+h
+(
+\013
+)=
+f
+(
+\013
+\010
+\014
+).One useful consequence of this lemma is the following.
+Corollary 1.
+Any generalized monotone function
+f
+on
+n
+variables has a partial
+assignment
+\013
+that leaves at least
+b
+n=
+2
+c
+variables free, such that
+f
+(
+\013
+)
+is constant.
+3. Results.
+Our main result concerns the computational power of depth-
+d
+thresh-
+old circuits with a small number of edges.
+Theorem 1.
+Let
+C
+be an
+n
+-input threshold circuit with depth
+d
+and
+nk
+edges,
+where
+k
+\025
+1
+.Let
+f
+denote the function computed by
+C
+. Then there exists a partial
+assignment
+\013
+that leaves at least
+b
+n=
+(2(3
+k
+)3d
+\000
+1\000
+1)
+c
+variables free such that
+f
+(
+\013
+)
+is a
+=====PAGE=====
+SIZE{DEPTH TRADEOFFS FOR THRESHOLD CIRCUITS697
+constant function.
+If
+f
+is the parity function, then
+f
+(
+\013
+) is constant only if
+\013
+is a total assignment.
+Thus it follows from Theorem 1 that if
+C
+is a depth-
+d
+circuit with
+nk
+edges that
+computes the parity function on
+n
+variables, then
+n<
+2(3
+k
+)3d
+\000
+1\000
+1. This yields the
+following result.
+Corollary 2.
+Any threshold circuit of depth
+d
+that computes parity of
+n
+vari-
+ables has at least
+n1+1
+=
+(3d
+\000
+1\000
+1)=
+(3
+p2)
+edges.
+The key to proving Theorem 1 is the following.
+Lemma 3.1 (
+main lemma).
+Let
+F
+be a collection of generalized monotone func-
+tions on
+n
+variables and let
+\016
+=(1
+=n
+)
+Pf
+2
+Fs
+(
+f
+)
+(so the total support of the functions
+is
+n\016
+). Then there exists a partial assignment
+\013
+that leaves at least
+n=
+(4
+\0162+2)
+vari-
+ables free such that for every
+f
+2
+F
+,
+f
+(
+\013
+)
+depends on at most one variable.
+Proof of Theorem
+1
+from main lemma
+. We proceed by induction on the depth
+d
+of
+the circuit. If
+d
+= 1, the circuit consists of a single threshold gate and the conclusion
+follows from Corollary 1. For
+d>
+1, let
+F
+be the family of functions corresponding
+to the gates at depth 1. By hypothesis, the sum of the fan-ins of these gates is at
+most
+nk
+. Lemma 3.1 implies that there is a partial assignment that leaves at least
+n0=
+n=
+(4
+k2+2)
+\025
+n=
+(6
+k2) variables free such that the induced restriction of each
+function in
+F
+depends on at most one variable. We may then collapse the \014rst level
+of the circuit, i.e., if
+g
+is a gate at depth 2, then each input to
+g
+is either an input
+to the circuit or the output of a gate at level 1, which after the restriction is equal to
+a variable or its complement. Thus each gate
+g
+at depth 2 can now be reexpressed
+as a threshold gate that depends only on the original inputs. (Note that
+g
+may have
+several edges entering which depend on the same variable, but these can be combined
+into one edge by adjusting the weights of
+g
+.) Hence we obtain a depth-(
+d
+\000
+1) circuit
+C0on at least
+n0variables with at most
+n0k0edges, where
+k0=6
+k3and
+nk
+=
+n0k0.
+By the induction hypothesis, there exists a partial assignment to the variables of
+C0such that the number of free variables is at least
+\026
+n02(3
+k0)3d
+\000
+2\000
+1\027
+\025
+\026
+n=
+(6
+k2)2(3(6
+k3))3d
+\000
+2\000
+1\027
+\025
+\026
+n2(3
+k
+)3d
+\000
+1\000
+1\027
+;
+as required to prove the theorem.Remark
+. Since the main lemma applies to generalized monotone functions, it
+might appear that Theorem 1 could be generalized to apply to circuits whose gates
+compute arbitrary generalized monotone functions. However, the proof fails to gen-
+eralize because when the circuit is collapsed in the induction step, a level-2 gate may
+have more than one input corresponding to the same variable. In that case, it is not
+true that the gate computes a generalized monotone function of the original variables;
+indeed, it is easy to see that
+every
+n
+-variable Boolean function can be represented as a
+single generalized monotone function on 2
+n
+variables by identifying variables in pairs.
+To bound the number of gates in a small-depth circuit instead of the number of
+edges, we use the following (simpler) relative of Lemma 3.1.
+Lemma 3.2.
+Let
+F
+be a collection of generalized monotone functions on
+n
+vari-
+ables. Then there exists a partial assignment
+\013
+that leaves at least
+b
+n=
+(
+j
+F
+j2+1)
+c
+variables free such that for each
+f
+2
+F
+,
+f
+(
+\013
+)
+is a constant function.
+This leads to the following result for threshold circuits with a small number of
+gates. In this case, the result holds for generalized monotone functions.
+=====PAGE=====
+698R. IMPAGLIAZZO, R. PATURI, AND M. E. SAKSTheorem 2.
+Let
+C
+be a circuit consisting of generalized monotone function gates
+of depth
+d
+on
+n
+inputs with at most
+N
+gates. Then there exists a partial assignment
+\013
+leaving
+b
+n=
+2
+N2(
+d
+\000
+1)c
+variables free such that
+fC(
+\013
+)
+is constant.
+Proof of Theorem
+2
+from Lemma
+3.2. We proceed by induction on the depth
+d
+of the circuit, as in the proof of Theorem 1. If
+d
+= 1, the circuit consists of a
+single threshold gate and the conclusion follows from Corollary 1. For
+d>
+1, consider
+the family
+F
+of threshold functions corresponding to the depth-1 gates. Note that
+j
+F
+j\024
+N
+\000
+1. We apply Lemma 3.2 to
+F
+to obtain a partial assignment that leaves
+at least
+n0=
+b
+n=
+(
+j
+F
+j2+1)
+c\025b
+n=N2c
+variables free such that the induced restriction
+of each function in
+F
+is constant. After the restriction, the only nonconstant inputs
+to the second-level gates are the inputs to the circuit. Thus the resulting circuit
+C0has depth at most
+d
+\000
+1, at most
+N
+gates, and at least
+n0variables. By the induction
+hypothesis, there exists a partial assignment of the variables of
+C0whichleavesat
+least
+b
+n0=
+2(
+N
+)2(
+d
+\000
+2)c\025b
+n=
+2(
+N
+)2(
+d
+\000
+1)c
+variables free (where the inequality follows
+from the fact that for positive integers
+n
+,
+A
+,and
+B
+,
+bb
+n=A
+c
+=B
+c
+=
+b
+n=AB
+c
+).Again using the fact that the only partial assignments that make the parity func-
+tion constant are the total assignments, we deduce that the number
+N
+of gates of a
+depth-
+d
+parity circuit satis\014es 2
+N2(
+d
+\000
+1)\025
+n
+, and thus we have the following.
+Corollary 3.
+Any circuit of depth
+d
+consisting of generalized monotone function
+gates that computes the parity of
+n
+inputs has at least
+(
+n=
+2)1
+=
+2(
+d
+\000
+1)gates.
+Slightly stronger bounds (removing the half from the exponent of the lower bound)
+than those obtained in Theorem 2 and Corollary 3 were previously proved in [17, 23]
+for the case of threshold circuits with polynomially bounded weights.
+It remains to prove Lemmas 3.1 and 3.2, and these proofs constitute the main
+part of the paper. The proofs of these lemmas are similar; both use a probabilistic
+method to demonstrate the existence of the required partial assignment.
+The proof of Lemma 3.2 is somewhat simpler, so we present the proof in the next
+section. The proof of Lemma 3.1 will be presented in section 5.
+4. Proof of Lemma 3.2.
+In the probabilistic arguments in this section and the
+next, we adopt the following notational convention. Random variables are denoted
+by placing a~over the identi\014er. When we refer to a speci\014c value that a random
+variable may assume, we denote that value by an identi\014er without a~.
+We have a family
+F
+of Boolean generalized monotone functions on
+n
+variables
+and seek a partial assignment that makes all of the functions constant. It will be
+convenient to \014x an indexing
+f1;f2;:::;fmof the functions in
+F
+. Let
+\014ibe an
+orientation for
+fi.
+Fix an ordered partition
+Y1;Y2;:::;Yqof the variable set
+X
+into
+q
+=
+m2+1 blocks
+of nearly equal size (each having
+b
+n=q
+c
+or
+b
+n=q
+c
++ 1 variables). The desired partial
+assignment will be obtained by \014xing the variables in all but one of the blocks. We
+describe a randomized procedure
+P
+which produces such a partial assignment ~
+\013
+and
+show that with positive probability
+fi(~
+\013
+) is constant for all
+i
+2
+[
+m
+].
+The procedure
+P
+is as follows. Let
+U
+be a symbol (meaning \\unallocated").
+Choose uniformly at random a 1{1 function
+~
+M
+from [
+m
+]
+\002
+[
+m
+]
+[fUg
+to [
+q
+]. Intuitively,
+we think of
+~
+M
+as \\allocating" sets
+Y~
+M
+(
+i;
+1);:::;Y~
+M
+(
+i;m
+)to function
+fi, while leaving
+set
+Y~
+M
+(
+U
+)unallocated. In addition, choose a vector (
+~
+t1;
+~
+t2;:::;
+~
+tm) uniformly from
+the set
+f
+0
+;
+1
+;
+2
+;:::;m
+gm. For each 1
+\024
+i;j
+\024
+m
+,if
+j
+\024
+~
+ti, then \014x the variables in
+Y~
+M
+(
+i;j
+)according to
+\014i, and if
+j>
+~
+ti, then \014x the variables in
+Y~
+M
+(
+i;j
+)according to
+\026
+\014i.
+Thus all of the variables except those in the unique block
+Y~
+M
+(
+U
+)are \014xed. Call the
+resulting partial assignment ~
+\013
+.
+=====PAGE=====
+SIZE{DEPTH TRADEOFFS FOR THRESHOLD CIRCUITS699
+The key property of this distribution is given by the following lemma.
+Lemma 4.1.
+For each
+h
+2
+[
+m
+]
+, the probability that
+fh(~
+\013
+)
+is not constant is at
+most
+1
+=
+(
+m
++1)
+.
+It follows from this lemma that the probability that there exists
+i
+2
+[
+m
+] with
+fi(~
+\013
+) not constant is at most
+m=
+(
+m
++ 1). Thus there exists a particular
+\013
+such that
+fi(
+\013
+) is constant for all
+i
+2
+[
+m
+], and this
+\013
+satis\014es the conclusion of Lemma 3.2.
+ProofofLemma
+4.1. Fix
+h
+2
+[
+m
+]. We de\014ne a modi\014cation
+Phof the procedure
+P
+.
+It will be easy to see that this modi\014ed construction produces the same distribution;
+we then use the modi\014ed construction to verify the conclusion of the lemma.
+The modi\014ed construction is as follows. Choose
+~
+t0
+i2f
+0
+;:::;m
+g
+uniformly at
+random for
+i
+6
+=
+h
+, and pick
+~
+t0
+h2f
+1
+;:::;m
++1
+g
+uniformly at random. Pick
+~
+M0,a
+random 1{1 function from [
+m
+]
+\002
+[
+m
+]
+[f
+(
+h;m
++1)
+g
+to [
+q
+]. For
+i
+6
+=
+h
+, assign variables
+in
+Y~
+M0(
+i;j
+)as before, according to
+\014iif
+j
+\024
+~
+t0
+iand according to
+\026
+\014iotherwise. For
+j<
+~
+t0
+h, assign the variables in
+Y~
+M0(
+h;j
+)according to
+\014h, and for
+j>
+~
+t0
+h, assign them
+according to
+\026
+\014h. We leave the variables in
+Y~
+M0(
+h;
+~
+t0
+h)unassigned.
+As in the original procedure, each gate is allocated
+m
+random sets of variables,
+with one random set of variables being unallocated. For each gate, the number of
+these sets \014xed according to the orientation of the gate is randomly chosen between
+0and
+m
+, and the rest are set according to the negation of the orientation. Thus the
+two distributions are identical. More formally, we could de\014ne
+~
+M
+(
+i;j
+)=
+~
+M0(
+i;j
+)for
+i
+6
+=
+h
+,
+~
+M
+(
+h;j
+)=
+~
+M0(
+h;j
+)for
+j<
+~
+th
+0,
+~
+M
+(
+h;j
+)=
+~
+M0(
+h;j
++1)for
+~
+t0
+h<j
+\024
+m
+,and
+~
+M
+(
+U
+)=
+~
+M0(
+h;
+~
+th
+0) and de\014ne
+~
+ti=
+~
+t0
+ifor
+i
+6
+=
+h
+,
+~
+th=
+~
+t0
+h\000
+1. Then the distributions on
+~
+M
+and
+~
+t
+are identical to those in the original process, and all values
+M
+and
+t1;:::;tmof these random variables, if chosen by the original process, would determine the same
+value of
+\013
+as
+M0and the
+t0
+i's do in the modi\014ed process.
+Thus it will su\016ce to upper bound the probability that
+fh(~
+\013
+) is not constant
+when ~
+\013
+is constructed according to
+Ph. For this, \014x any value
+M0for
+~
+M0, and \014x
+values
+t0
+ifor
+~
+t0
+i,
+i
+6
+=
+h
+. This determines the setting of ~
+\013
+for all the variables in
+YM0(
+i;j
+)for
+i
+6
+=
+h
+. We will show that, given the above information, the probability that
+fhis
+nonconstant when restricted by ~
+\013
+is at most 1
+=m
++ 1. Let
+g
+be
+fhrestricted to the
+variables in the blocks
+Yh;j,1
+\024
+j
+\024
+m
++ 1, with the other variables set according to
+~
+\013
+. (As we noted before, the value of ~
+\013
+at all other variables has been \014xed by the
+information that we are conditioning on.)
+g
+is a generalized monotone function with
+the same orientation
+\014has
+fh.
+For each block
+YM0(
+h;j
+), \014x an arbitrary order on variables of the block; extend
+these orders to an ordering \000 on all the variables for
+g
+by ordering the blocks according
+to
+j
+. Then we can apply Lemma 2.1 to obtain an index
+l
+such that the functions
+g
+(
+\014h
+\000(
+\024
+l
+))and
+g
+(
+\026
+\014h
+\000(
+\025
+l
+)) are both constant. Let 0
+\024
+r
+\024
+m
++ 1 be such that \000(
+l
+)
+2
+YM0(
+h;r
+), i.e., the
+l
+th variable is in the
+r
+th block allocated to
+fh. We claim that
+g
+(~
+\013
+)|and hence
+fh(~
+\013
+)|is constant unless
+~
+t0
+h=
+r
+, an event which happens with
+probability 1
+=
+(
+m
++ 1) (since
+~
+t0
+h2
+[
+m
++ 1] is chosen independently from
+~
+M0and the
+~
+t0
+i's for
+i
+6
+=
+h
+.). If
+~
+t0
+h>r
+, all variables in blocks labeled
+r
+or less are \014xed by ~
+\013
+to
+\014h,so~
+\013
+extends
+\014h
+\000(
+\024
+l
+),so
+g
+(~
+\013
+) is constant. Similarly, if
+~
+t0
+h<r
+,~
+\013
+extends
+\026
+\014h
+\000(
+\025
+l
+)and
+g
+(~
+\013
+) is constant. Thus with probability 1
+\000
+1
+=
+(
+m
++1),
+fh(~
+\013
+)=
+g
+(~
+\013
+) is constant,
+as required to complete the proof of Lemma 4.1 and hence of Lemma 3.2.5. Proof of the main lemma.
+Again, index the functions in
+F
+as
+f1;:::;fmand let
+\014idenote an orientation for
+fi. For each variable
+x
+,let
+Dxbe the subfamily
+of
+F
+that consists of those functions that depend on variable
+x
+and let
+\016x=
+j
+Dxj
+.
+=====PAGE=====
+700R. IMPAGLIAZZO, R. PATURI, AND M. E. SAKSThus the quantity
+\016
+=(1
+=n
+)
+Pf
+2
+Fs
+(
+f
+) in the lemma is also the average of the
+\016x's.
+We seek a partial assignment
+\013
+that leaves at least
+n=
+(4
+\0162+2) variables free and such
+that for every
+f
+2
+F
+,
+f
+(
+\013
+) depends on at most one variable.
+We will describe a randomized algorithm
+A
+(
+L
+), where
+L
+is a positive real param-
+eter, for constructing a partial assignment ~
+\013
+and show that, for an appropriate choice
+of
+L
+,~
+\013
+has the desired properties with positive probability. The random procedure in
+the previous proof can be viewed as associating a fraction
+m=
+(
+m2+1) of the variables
+to each function and then \014xing the variables associated with a function in a way that
+is determined by the orientation of the function. We will do something similar here;
+however, here we will require that the set of variables assigned to
+fiis a subset of
+S
+(
+fi), the set of variables on which
+fidepends.
+Procedure
+A
+(
+L
+).
+1.
+Partition the variables.
+(Intuitively, this step assigns each function a set of
+variables in proportion to its support size, leaving a few variables unassigned.) Con-
+struct a random partition of the variable set
+X
+into
+m
++1 parts
+~
+R;
+~
+C1;
+~
+C2;:::;
+~
+Cm.For
+each variable
+x
+, the block of the partition containing
+x
+is determined independently
+according to the following rule. With probability 1
+=
+(1+
+L\016x),
+x
+2
+~
+R
+. Otherwise,
+x
+is
+assigned to block
+~
+C~
+i
+(
+x
+), where
+~
+i
+(
+x
+) is the index of a uniformly chosen element of
+Dx.
+In other words, for each
+fi2
+Dx, the probability that
+x
+2
+~
+Ciis
+L=
+(1 +
+L\016x). Let
+~
+r
+=
+j
+~
+R
+j
+and for each
+i
+2
+[
+m
+], let ~
+ci=
+j
+~
+Cij
+.
+2.
+For each
+i
+2
+[
+m
+]
+, \014x all of the variables in
+~
+Ci.
+(Intuitively, this step \014xes
+the variables assigned to each
+fiso that any particular function
+fibecomes constant
+with a good probability.) For each
+i
+2
+[
+m
+], choose
+~
+biuniformly at random from
+f
+0
+;
+1
+;:::;
+~
+cig
+. Choose a subset
+~
+Biof
+~
+Ciuniformly from all
+~
+bi-element subsets of
+~
+Ci.
+Let ~
+\015idenote the partial assignment which \014xes the variables of
+~
+Biaccording to
+\014iand \014xes the variables of
+~
+Ci\000
+~
+Biaccording to
+\026
+\014i. Let ~
+\015
+be the union of the partial
+assignments ~
+\015i;i
+2
+[
+m
+].
+3.
+Fix some of the variables in
+~
+R
+.
+(Intuitively, this step cleans up the few
+remaining functions that are still nonconstant so that they depend on at most one
+variable.) For each
+i
+2
+[
+m
+], let
+~
+Tidenote the set of variables on which
+fi(~
+\015
+) depends,
+and if
+~
+Ti6
+=
+;
+,let
+~
+T0
+ibe an arbitrary subset containing all but one element of
+~
+Ti;
+otherwise,
+~
+T0
+i=
+;
+. Let ~
+\013
+be the restriction obtained from ~
+\015
+by setting all the
+elements of each
+~
+T0
+ito 1.
+The third step above ensures that the partial assignment ~
+\013
+has the required
+property that
+fi(~
+\013
+) depends on at most one variable for each
+i
+. Thus it remains to
+show that with positive probability the number
+~
+\036
+of variables left free is su\016ciently
+large.
+The set of free variables of ~
+\013
+consists of those variables in
+~
+R
+that are not \014xed
+during step 3. Thus
+~
+\036
+\025
+~
+r
+\000
+Pm
+i
+=1max
+f
+0
+;
+j
+~
+Tij\000
+1
+g
+:
+Our goal is to obtain a lower
+bound on the expectation of
+~
+\036
+. Note that
+E
+[~
+r
+]=
+Px
+2
+X1
+=
+(
+L\016x+1).
+The harder part is to upper bound the expectation of
+a
+(
+j
+~
+Tij
+), where
+a
+(
+m
+)=
+max
+f
+0
+;m
+\000
+1
+g
+. The key lemma of this section is the following.
+Lemma 5.1.
+For each
+h
+2
+[
+m
+]
+,
+E
+[
+a
+(
+j
+~
+Thj
+)]
+\024
+1L
+Xx
+2
+S
+(
+fh)1L\016x+1
+:
+Assuming this lemma for the moment, we have
+=====PAGE=====
+SIZE{DEPTH TRADEOFFS FOR THRESHOLD CIRCUITS701
+E
+[
+~
+\036
+]
+\025
+E
+[~
+r
+]
+\000mXi
+=1E
+[
+a
+(
+j
+~
+Tij
+)]
+\025
+Xx
+2
+X1(
+Ldx+1)
+\000mXi
+=11L
+Xx
+2
+S
+(
+fi)1L\016x+1
+\025
+Xx
+2
+X1(
+Ldx+1)
+\000
+1L
+Xx
+2
+XXfi2
+Dx1L\016x+1
+\025
+Xx
+2
+X1(
+Ldx+1)
+\000
+Xx
+2
+X\016x=LL\016x+1
+=
+Xx
+2
+X1
+\000
+\016x=LL\016x+1
+\025
+n
+\022
+1
+\000
+\016=LL\016
++1
+\023
+;
+where the last inequality follows from the convexity of the function
+\025
+(
+z
+)=(1
+\000
+z=L
+)
+=
+(
+Lz
++ 1) for positive
+z
+and the fact (Jensen's inequality) that the arithmetic
+mean of a convex function on a set is at least the function evaluated at the mean
+value of the set. Choosing the parameter
+L
+=2
+\016
+to (approximately) maximize this
+quantity, we will have that the expectation of
+~
+\036
+is at least
+n=
+(4
+\0162+ 2). Thus among
+the partial assignments that could be produced by the procedure
+A
+(2
+\016
+), there must
+exist a partial assignment that leaves at least
+n=
+(4
+\0162+ 2) variables free, as required
+to prove the main lemma.
+It remains to prove Lemma 5.1. Fix
+h
+2
+[
+m
+]. Let ~
+\037hdenote the random variable
+which is 1 if the
+h
+th function is not \014xed after step 2, i.e., if
+fh(~
+\015
+) is not constant,
+andis0if
+fh(~
+\015
+) is constant. Clearly,
+~
+This empty if ~
+\037h= 0, and otherwise
+~
+This a
+subset of the set
+~
+Uh=
+~
+R
+\)Tj
+/F17 1 Tf
+0.889 0 TD
+(S
+(
+fh). Letting ~
+uhdenote the cardinality of
+j
+~
+Uhj
+,wehave
+a
+(
+j
+~
+Thj
+)
+\024
+~
+\037ha
+(~
+uh). Lemma 5.1 is an immediate consequence of the following Lemma.
+Lemma 5.2.
+Let
+h
+2
+[
+m
+]
+and let
+q
+be an arbitrary nonnegative-valued function
+de\014ned on the natural numbers. Then
+E
+[~
+\037hq
+(~
+uh)]
+\024
+1L
+E
+[
+q
+(~
+uh+1)]
+:
+Applying this lemma with
+q
+=
+a
+, the right-hand side of the inequality is just
+E
+[~
+uh]
+=L
+, which by linearity of expectation is
+1L
+Xx
+2
+S
+(
+fh)P
+[
+x
+2
+~
+R
+]=
+1L
+Xx
+2
+S
+(
+fh)1L\016x+1
+;
+as required to prove Lemma 5.1.
+ProofofLemma
+5.2. Let
+~
+K
+=
+~
+Ch[
+~
+Uh, i.e., the set of variables on which
+fhdepends that are assigned to either
+~
+Chor
+~
+R
+. Let
+~
+k
+=
+j
+~
+K
+j
+.
+Fix a particular instantiation
+Ciand
+Bifor all
+i
+6
+=
+h
+and let \004 denote the event
+that
+~
+Ci=
+Ciand
+~
+Bi=
+Bifor all
+i
+6
+=
+h
+. Note that \004 determines the value
+K
+of
+~
+K
+and also determines ~
+\015
+on all variables in
+S
+(
+fh)
+\000
+~
+K
+.Thuslet
+g
+be the function of
+the variables in
+K
+determined by restricting
+fhaccording to ~
+\015ifor each
+i
+6
+=
+h
+.
+=====PAGE=====
+702R. IMPAGLIAZZO, R. PATURI, AND M. E. SAKSWe will show that for any such event \004,
+E
+[~
+\037hq
+(~
+uh)
+j
+\004]
+\024
+1L
+E
+[
+q
+(~
+uh+1)
+j
+\004]
+:
+The lemma then follows by deconditioning the expectation.
+Given \004, the variables in
+K
+are partitioned into the two sets
+~
+Chand
+~
+Uhas follows:
+for
+x
+2
+K
+, the conditional probability given \004 that
+x
+is in
+~
+R
+(and hence in
+~
+Uh)is
+p
+=1
+=
+(
+L
++ 1), and otherwise (with probability
+L=
+(
+L
++1))
+x
+is in
+~
+Ch. Furthermore,
+these events are independently determined for each
+x
+2
+K
+. Thus the conditional
+distribution given \004 of ~
+uhis a binomial distribution
+B
+(
+k;p
+), i.e.,
+P
+[~
+uh=
+i
+j
+\004] =
+\000k
+i\001
+pi(1
+\000
+p
+)k
+\000
+i.Wehave
+E
+[~
+\037hq
+(~
+uh)
+j
+\004]
+\024kXi
+=0q
+(
+i
+)
+P
+[~
+uh=
+i
+j
+\004]
+P
+[
+g
+(~
+\015
+) is not constant
+j
+\004
+^
+(~
+uh=
+i
+)]
+=kXi
+=1q
+(
+i
+)
+\022
+k
+i
+\023
+pi(1
+\000
+p
+)k
+\000
+iP
+[
+g
+(~
+\015
+) is not constant
+j
+\004
+^
+(~
+uh=
+i
+)]
+:
+We next determine an upper bound for
+P
+[
+g
+(~
+\015
+)is not constant
+j
+\004
+^
+(~
+uh=
+i
+)].
+The conditional distribution of
+~
+Ch;
+~
+Bhgiven \004
+^
+(~
+uh=
+i
+) can be described as
+follows.
+~
+Chis a uniformly chosen (
+k
+\000
+i
+)-element subset of
+K
+,
+~
+bhis chosen uniformly
+at random from
+f
+0
+;
+1
+;:::;k
+\000
+i
+g
+,and
+~
+Bhis a uniformly chosen
+~
+bh-element subset of
+~
+Ch.
+An alternative way to generate this same distribution on
+~
+Bh;
+~
+Chis as follows:
+Choose an order
+~
+\000 of the elements of
+K
+uniformly at random. Choose
+~
+bhuniformly
+from
+f
+0
+;
+1
+;:::;k
+\000
+i
+g
+. Let
+~
+Bhbe the \014rst
+~
+bhelements of
+K
+and let
+~
+Chconsist of
+~
+Bhtogether with the last
+k
+\000
+i
+\000
+~
+bhelements of
+K
+. It is clear that this distribution is
+equivalent to the one described in the previous paragraph.
+We want to determine the conditional probability that
+g
+is not constant given \004
+and ~
+uh=
+i
+. Lemma 2.1 applied to the function
+g
+and the ordering
+~
+\000of
+K
+implies
+that there is an index
+~
+j
+=
+~
+j
+(
+~
+\000) in
+f
+0
+;
+1
+;:::;k
+g
+such that
+f
+(
+\014h
+~
+\000(
+\024
+~
+j
+)) is identically 0
+and
+f
+(
+\026
+\014h
+~
+\000(
+\025
+~
+j
+)) is identically 1. Now observe that if
+~
+bhis chosen to be greater than
+or equal to
+~
+j
+, then the partial assignment ~
+\015his an extension of
+\014h
+~
+\000(
+\024
+~
+j
+)and
+f
+(~
+\015h)is
+thus identically 0. Similarly, if
+~
+bhis chosen to be less than
+~
+j
+\000
+i
+, then the partial
+assignment ~
+\015his an extension of
+\026
+\014h
+~
+\000(
+\025
+~
+j
+)and
+f
+(~
+\015h) is thus identically 1. Thus the
+only way that
+~
+\004hcan be nonzero is if
+~
+bhsatis\014es
+~
+j
+\000
+i
+\024
+~
+bh\024
+~
+j
+\000
+1, and since
+~
+bhis
+chosen uniformly in the range
+f
+0
+;
+1
+;:::;k
+\000
+i
+g
+, this happens with probability at most
+i=
+(
+k
+\000
+i
++ 1). We conclude that the conditional probability given \004
+^
+(~
+uh=
+i
+) that
+g
+is not constant is at most
+i=
+(
+k
+\000
+i
++ 1). Using this probability, we can rewrite the
+expression for the conditional expectation of ~
+\037hq
+(~
+uh)as
+E
+[~
+\037hq
+(~
+uh)
+j
+\004]
+\024kXi
+=1q
+(
+i
+)
+\022
+k
+i
+\023
+pi(1
+\000
+p
+)k
+\000
+iik
+\000
+i
++1
+=
+p1
+\000
+pkXi
+=1q
+(
+i
+)
+\022
+k
+i
+\000
+1
+\023
+pi
+\000
+1(1
+\000
+p
+)k
+\000
+(
+i
+\000
+1)=
+p1
+\000
+pk
+\000
+1Xi0=0q
+(
+i0+1)
+\022
+k
+i0\023
+pi0(1
+\000
+p
+)k
+\000
+i0
+=====PAGE=====
+SIZE{DEPTH TRADEOFFS FOR THRESHOLD CIRCUITS703
+=
+p1
+\000
+pk
+\000
+1Xi0=0q
+(
+i0+1)
+P
+[~
+uh=
+i0j
+\004]
+\024
+p1
+\000
+p
+E
+[
+q
+(~
+uh+1)
+j
+\004]
+=
+1L
+E
+[
+q
+(~
+uh+1)
+j
+\004]
+;
+as required to complete the proof of Lemma 5.2, which in turn completes the proofs
+of Lemma 5.1 and the main lemma.6. An improved lower bound.
+In this section, we present re\014ned versions of
+Theorem 1 and Corollary 2 for which the parameter
+\022
+is reduced from 3 to 1 +
+p2.
+In the following, our results are stated for layered threshold circuits. This is su\016cient
+for our purposes since an arbitrary threshold circuit can be converted to a layered one
+that computes the same function by increasing the number of edges by a factor of at
+most
+d
+.
+To state the improvement of Theorem 1, de\014ne
+\027ifor
+i
+\025
+1 to be the solution
+to the recurrence equation
+\027i
++2=2
+\027i
++1+
+\027iwith the initial conditions
+\0271= 1 and
+\0272= 3. Note that the explicit expression for
+\027iis of the form
+A
+(1+
+p2)i+
+B
+(1
+\000
+p2)i,
+where
+A
+6
+= 0 and
+B
+are easily determined constants, and so
+\027i2
+\002((1 +
+p2)i).
+Theorem 3.
+Let
+C
+be a layered depth-
+d
+threshold circuit with
+n
+inputs
+d
+and
+nk
+edges, where
+k
+\025
+1
+.Let
+f
+denote the function computed by
+C
+. Then there exists a
+partial assignment
+\013
+that leaves at least
+b
+n=
+4(11
+k
+)\027d\000
+1c
+variables free such that
+f
+(
+\013
+)
+is a constant function.
+As before, this theorem immediately implies a size{depth tradeo\013 for the parity
+function.
+Corollary 4.
+Any threshold circuit of depth
+d
+\025
+2
+that computes parity of
+n
+variables has at least
+(
+n=
+11)1+1\027
+d
+\000
+1edges.
+To motivate the proof of Theorem 3, we \014rst summarize the main inductive
+argument of the previous proof. In each inductive step, the depth of the circuit
+is decreased by 1 by \014xing some variables in order to eliminate the \014rst level. The
+fraction of variables left un\014xed after each step is inversely proportional to the square
+of the parameter
+\016
+, the ratio of the number of edges at the \014rst level to the number
+of un\014xed variables before the step. In analyzing the resulting recurrence, we upper
+bounded the number of edges at the \014rst level by the total number of edges in the
+circuit.
+The idea for improving this analysis is to substantially improve this upper bound
+on the number of edges at the \014rst level, thereby increasing the fraction of variables
+that are known to survive each reduction step. It might seem that since the circuit
+is arbitrary, we cannot do better than to bound the number of edges at the \014rst level
+by the total number of edges in the circuit. This is indeed true the \014rst time the
+reduction is applied. However, it turns out that for all subsequent reduction steps,
+there is a better bound available. This is because the partial assignment produced
+by
+A
+(
+L
+) in the proof of Lemma 3.1 has a very useful side e\013ect: for each \014rst-level
+gate whose output is \014xed to a constant by the partial assignment, the edges leaving
+that gate can be eliminated from the circuit. We will show that with high probability
+the number of edges in the second level of the circuit (which becomes the \014rst level)
+is decreased by a large amount. This allows us to keep a larger fraction of variables
+=====PAGE=====
+704R. IMPAGLIAZZO, R. PATURI, AND M. E. SAKSunassigned when we recursively perform the reduction on the \014rst level of the resulting
+circuit.
+To make this idea precise, we need a modi\014ed version of Lemma 3.1.
+Lemma 6.1.
+Let
+F
+be a collection of generalized monotone functions on
+n
+vari-
+ables, and suppose that each function
+f
+2
+F
+has a nonnegative weight
+w
+(
+f
+)
+.Let
+\016
+=(1
+=n
+)
+Pf
+2
+Fs
+(
+f
+)
+\025
+1
+and
+W
+=
+Pf
+2
+Fw
+(
+f
+)
+. Then assuming that
+n=
+(9
+\016
+)2\025
+4
+,
+there exists a partial assignment
+\013
+that leaves at least
+n=
+(9
+\016
+)2variables free such that
+1.
+for every
+f
+2
+F
+,
+f
+(
+\013
+)
+depends on at most one variable
+;
+2.
+Pf
+:
+f
+(
+\013
+)
+is not constantw
+(
+f
+)
+\024
+W=
+8
+\016
+.
+Note that when we apply this lemma in the inductive argument, the weights of
+the functions will correspond to the out-degree of the corresponding gates. The point
+is that the total number of edges remaining on the new \014rst level can then be bounded
+aboveby1
+=
+8
+\016
+times the number of edges in the circuit.
+ProofofLemma
+6.1. The proof is a modi\014cation of that of Lemma 3.1, and we
+retain the notation of that lemma. We use procedure
+A
+(
+L
+) to generate the random
+restriction ~
+\013
+. We show the following:
+1. With probability at least 1/2, the sum of the weights of the nonconstant
+gates is at most 2
+W=L
+.
+2. Assuming that
+n
+\025
+16(1 +
+L\016
+), then with probability exceeding 1/2, the
+number
+~
+\036
+of free variables is at least
+n
+(1
+\000
+8
+\016=L
+)
+=
+2(
+L\016
++1).
+If we choose
+L
+=16
+\016
+, then it follows immediately that with positive probability
+~
+\013
+satis\014es the conclusion of the lemma, and thus such a partial assignment exists.
+Thus it su\016ces to prove the two claims. For the \014rst claim, using the notation of
+Lemma 5.2, the sum of the weights of the nonconstant gates can be bounded above
+bymXh
+=1~
+\037hw
+(
+fh)
+:
+The expectation of a generic term of the sum can be bounded above by
+w
+(
+fh)
+=L
+using Lemma 5.2 with
+q
+being the constant function
+w
+(
+fh). Thus the expectation of
+the sum is at most
+W=L
+. By Markov's inequality, with probability greater than 1/2,
+the sum does not exceed 2
+W=L
+.
+We now verify the second claim. As in the proof of the main lemma, we write
+~
+\036
+\025
+~
+r
+\000
+~
+s
+, where ~
+s
+denotes
+Pm
+i
+=1max
+f
+0
+;
+j
+~
+Tij\000
+1
+g
+.
+Recall that ~
+r
+is the cardinality of
+~
+R
+. For each
+x
+2
+X
+, let ~
+rxdenote the random
+variable that is 1 if
+x
+2
+~
+R
+and is 0 otherwise; then ~
+r
+=
+Px
+2
+X~
+rx.Thusasobserved
+previously,
+E
+[~
+r
+]=
+Px
+2
+X1
+=
+(1 +
+L\016x), which is at least
+n=
+(1 +
+L\016
+) by the convexity
+of the function
+\025
+(
+y
+)=1
+=
+(1+
+Ly
+) for nonnegative
+y
+. Furthermore, since the variables
+~
+rxare mutually independent, we may use Cherno\013-type bounds (see, e.g., Theorem
+2 of [19]) to bound the probability that ~
+r
+is less than half its mean:
+P
+[~
+r<
+E
+[~
+r
+]
+=
+2]
+<
+e\000
+E
+[~
+r
+]
+=
+8=
+e\000
+n=
+8(1+
+L\016
+). In particular, for
+n
+\025
+16(1 +
+L\016
+), this is less than 1/4.
+On the other hand, by Markov's inequality,
+P
+[~
+s>
+4
+E
+[~
+s
+]]
+\024
+1
+=
+4. Combining this
+with the previous inequality, we get
+P
+[(~
+r
+\025
+E
+[~
+r
+]
+=
+2)
+^
+(~
+s
+\024
+4
+E
+[~
+s
+])]
+>
+1
+=
+2, which implies
+that
+P
+[~
+r
+\000
+~
+s
+\025
+E
+[~
+r
+]
+=
+2
+\000
+4
+E
+[~
+s
+]]
+>
+1
+=
+2. As noted above,
+E
+[~
+r
+]
+\025
+n=
+(1 +
+L\016
+), and from
+Lemma 5.1,
+E
+[~
+s
+]
+\024
+Px
+2
+X(
+\016x=L
+)
+=
+(
+L\016x+ 1) which is at most (
+\016=L
+)
+=
+(
+L\016
++ 1) (by the
+concavity of the function
+\025
+(
+y
+)=(
+y=L
+)
+=
+(
+Ly
++ 1) for positive
+y
+). Substituting these
+bounds, we get
+P
+[
+~
+\036
+\025
+n
+(1
+\000
+8
+\016=L
+)
+=
+2(
+L\016
++1)]
+>
+1
+=
+2.Corollary 5.
+Let
+C
+be a depth-
+d
+layered threshold circuit with
+n
+inputs and
+nk
+edges, where
+k
+\025
+1
+.Let
+f
+denote the function computed by
+C
+.For
+i
+\025
+0
+,let
+=====PAGE=====
+SIZE{DEPTH TRADEOFFS FOR THRESHOLD CIRCUITS705
+\032i=(11
+k
+)\027i
++1\000
+1. Then for each
+i
+2f
+0
+;
+1
+;:::;d
+\000
+1
+g
+such that
+n
+\025
+4
+\032i, there exists
+a partial assignment
+\013ithat leaves at least
+n=\032ivariables free such that
+f
+(
+\013i)
+can be
+computed by a layered circuit
+Ciof depth
+d
+\000
+i
+.
+Proof
+.For
+i
+= 0, we take
+\013ito be the trivial restriction and
+C0=
+C
+.For
+i
+2
+[
+d
+\000
+1], we will use Lemma 6.1 repeatedly to de\014ne partial assignments
+\013iand
+circuits
+Cithat have depth
+d
+\000
+i
+.For
+Ci,welet
+nidenote the number of inputs,
+midenote the number of edges entering the level-1 gates, and
+Fidenote the family of
+functions computed by the level-1 gates.
+For 0
+\024
+i
+\024
+d
+\000
+2, we construct
+Ci
++1from
+Cias follows: Apply Lemma 6.1 to the
+set
+Fiwith
+w
+(
+f
+) equal to the fan-out (in
+Ci) of the gate into level 2. Note that the
+quantity
+\016
+in this application of the lemma is equal to
+mi=ni. Thus the hypothesis of
+the lemma holds as long as
+ni\025
+4(9(
+mi=ni))2. Assuming this holds, then after the
+application of the lemma, we can eliminate the level-1 gates to produce
+Ci
++1.
+It remains to verify that for 0
+\024
+i
+\024
+d
+\000
+2,
+ni\025
+4(9(
+mi=ni))2(so that Lemma
+6.1 can be applied in constructing
+Ci
++1)and
+ni
++1\025
+n=\032i
++1(which is the conclusion
+of the corollary). From the conclusion of Lemma 6.1,
+ni
++1\025
+ni=
+(9(
+mi=ni))2.Thusif
+we de\014ne
+p0=
+n
+and
+pi=
+n3
+i
+\000
+1=
+(9
+mi
+\000
+1)2for
+i
+\025
+1, then the condition for applying
+the lemma to construct
+Ci
++1for 0
+\024
+i
+\024
+d
+\000
+2is
+pi
++1\025
+4 and the conclusion of
+the lemma gives
+ni
++1\025
+pi
++1. Furthermore, Lemma 6.1 implies that the number of
+edges into the level-1 gates of
+Ci
++1is at most 1
+=
+8
+\016
+times the number of edges into the
+level-2 gates of
+Ci, and hence
+mi
++1\024
+nkni=
+8
+mi. Squaring this and multiplying both
+sidesby81
+pi
++2ni, we obtain
+nin3
+i
++1\024
+(81
+nk=
+8)2pi
++2pi
++1. Substituting the bounds
+ni
++1\025
+pi
++1and
+ni\025
+piyields the following recurrence entirely in terms of
+pi:for
+i
+\025
+0,
+pi
++2\025
+\022
+881
+nk
+\0232p2
+i
++1pi\025
+\022
+111
+nk
+\0232p2
+i
++1piwith the initial conditions
+p0=
+n
+and
+p1\025
+n3=
+(9
+nk
+)2\025
+n=
+(11
+k
+)2.
+If we set
+li=log
+pi, we get a linear recurrence which is easily shown to imply
+pi\025
+n=\032i. (Alternatively, this inequality can be veri\014ed directly by induction on
+i
+.)
+Thus for each
+i
+2f
+0
+;
+1
+;:::;d
+\000
+2
+g
+,if
+n
+\025
+4
+\032i
++1, then
+pi
++1\025
+4and
+ni
++1\025
+pi
++1\025
+n=\032i
++1, as required.We can now \014nish the proof of Theorem 3. If
+n<
+4
+\032d
+\000
+1then we can choose any
+total assignment for
+\013
+and the conclusion holds trivially. Otherwise, we may apply
+Corollary 5 with
+i
+=
+d
+\000
+1 to \014nd a partial assignment
+\013d
+\000
+1with at least
+n=\032d
+\000
+1un\014xed variables such that the resulting restricted function can be computed by a
+single threshold gate. Applying Corollary 1, we need to \014x at most half the remaining
+variables to make the function constant.7. Final remarks and open problems.
+This paper gives the \014rst nontrivial
+lower bounds, for threshold circuits with arbitrary weights and any \014xed depth, on the
+number of edges and gates needed to compute an explicit function. The results show
+that there are functions
+\017
+(
+d
+)and
+\015
+(
+d
+) such that any depth-
+d
+threshold circuit that
+computes parity on
+n
+variables must have at least
+n1+
+\017
+(
+d
+)edges and
+n\015
+(
+d
+)gates. In
+our case, the functions
+\017
+(
+d
+)and
+\015
+(
+d
+)tendto0as
+d
+tends to
+1
+. An apparently di\016cult
+challenge would be to prove an
+n\017lower bound, with
+\017>
+1 a constant independent of
+depth, on the number of gates needed to compute some explicit function.
+For each \014xed depth, there is a gap between the bounds provided by our results
+and the best constructions for parity circuits. For instance, for depth-2 circuits, the
+=====PAGE=====
+706R. IMPAGLIAZZO, R. PATURI, AND M. E. SAKSresult in this paper gives an \012(
+n3
+=
+2) bound on the number of edges and an
+n1
+=
+2bound
+on the number of gates, while the best construction requires
+O
+(
+n2) edges and
+O
+(
+n
+)
+gates. One way to reduce this gap is to improve Lemma 3.1 by increasing the number
+of variables left free in the restrictions.
+Problem 1.
+What is the smallest exponent
+r
+such that the conclusions of Lemmas
+3.1
+and
+6.1
+hold with
+n=
+(4
+\0162+2)
+replaced by
+\012(
+n=\016r)?
+The best possible
+r
+is at least 1, as shown by the family
+F
+=
+f
+Ti:0
+\024
+i
+\024
+n
+g
+of
+n
+-variable functions, where
+Tiis the function which is 1 on inputs with at least
+i
+1's.
+If the conclusion holds for
+r
+= 1, then this would lead to an \012(
+n2)-edge lower bound
+for depth-2 circuits that compute parity and, more generally, to an improvement in
+the value of
+\022
+in the main theorem to
+\022
+=(1+
+p5)
+=
+2. This would exactly match
+the value of
+\022
+in the known upper bounds. Note that for purposes of applications
+to circuits, it would su\016ce to consider the above problem for families of threshold
+functions rather than for generalized monotone functions.
+It is interesting also to look for a similar improvement to Lemma 3.2.
+Problem 2.
+What is the smallest exponent
+r
+such that the conclusion of Lemma
+3.2
+holds with
+n=
+(4
+\0162+2)
+replaced by
+\012(
+n=
+j
+F
+jr)?
+Again, the best lower bound on
+r
+we have is 1. Any value of
+r<
+2 would give a
+corresponding improvement in Theorem 2: the number of variables left free would be
+\012(
+n=Nr
+(
+d
+\000
+1)).
+For the special case of monotone functions, it is easy to show that Lemma 3.2 has
+such a strengthening.
+Proposition 1.
+Let
+F
+be a collection of monotone functions on
+n
+variables.
+Then there exists a partial assignment
+\013
+that leaves at least
+b
+n=
+(
+j
+F
+j
++1)
+c
+variables
+free such that for each
+f
+2
+F
+,
+f
+(
+\013
+)
+is a constant function.
+Proof
+. Fix an ordering \000 for the variables
+X
+and for each
+f
+2
+F
+,let
+j
+(
+f
+)be
+the index promised by Lemma 2.1. Order the functions as
+f1;f2;:::;fmso that
+j1\024
+j2\024\001\001\001\024
+jm, where
+ji=
+j
+(
+fi), and let
+j0= 0 and
+jm
++1=
+n
++ 1. Let
+i
+be an
+index such that
+ji
++1\000
+jiis maximum (and hence at least (
+n
++1)
+=
+(
+m
++ 1)) and let
+\013
+be the assignment which sets all variables in \000(
+\024
+ji)to0and\000(
+\025
+ji
++1)to1.Then
+fh(
+\013
+) is identically 0 for all
+h
+\024
+i
+and
+fh(
+\013
+) is identically 1 for all
+h
+\025
+i
++1. The
+number of free variables of
+\013
+is
+ji
++1\000
+ji\000
+1
+\025b
+n=
+(
+m
++1)
+c
+:REFERENCES
+[1]
+M. Ajtai
+,\0061
+1-formulae on \014nite structures
+, Ann. Pure Appl. Logic, 24 (1983), pp. 1{48.
+[2]
+P. Beame, S. A. Cook, and H. J. Hoover
+,
+Log depth circuits for division and related problems
+,
+SIAM J. Comput., 15 (1986), pp. 994{1003.
+[3]
+R. Beigel
+,
+When do extra majority gates help
+?, in Proc. 24th ACM Symposium on Theory of
+Computing, ACM, New York, 1992, pp. 450{454.
+[4]
+N. Blum
+,
+A Boolean function requiring
+3
+n
+network size
+, Theoret. Comput. Sci., 28 (1984), pp.
+337{345.
+[5]
+R. Boppana and M. Sipser
+,
+The complexity of \014nite functions
+, in Handbook of Theoretical
+Computer Science, Vol. A, Elsevier Science Publishers, Amsterdam, New York, 1990, pp.
+757{804.
+[6]
+J. Bruck, and R. Smolensky
+,
+Polynomial threshold functions,
+AC0functions and spectral
+norms
+, in Proc. 31st IEEE Symposium on Foundations of Computer Science, IEEE Com-
+puter Society Press, Los Alamitos, CA, 1990, pp. 632{641.
+[7]
+A. Chandra and L. Stockmeyer
+,
+Constant depth reducibility
+, SIAM J. Comput., 13 (1984),
+pp. 423{439.
+[8]
+P. E. Dunne
+,
+The Complexity of Boolean Functions
+, Academic Press, New York, 1988.
+[9]
+M. Furst, J. B. Saxe, and M. Sipser
+,
+Parity, circuits, and the polynomial time hierarchy
+,
+Math. Systems Theory, 17 (1984), pp. 13{28.
+=====PAGE=====
+SIZE{DEPTH TRADEOFFS FOR THRESHOLD CIRCUITS707[10]
+J. H
+\027
+astad
+,
+Almost optimal lower bounds for small depth circuits
+, in Proc. 18th ACM Sympo-
+sium on Theory of Computing, ACM, New York, 1986, pp. 6{20.
+[11]
+J. E. Hopcroft and J. D. Ullman
+,
+Introduction to Automata Theory, Languages and Com-
+putation
+, Addison{Wesley, Reading, MA, 1979.
+[12]
+G. E. Hinton
+,
+Connectionist learning p
+rocedures
+, Technical Report CMU-CS-87-115, Depart-
+ment of Computer Science, Carnegie Mellon University, Pittsburgh, PA, 1987.
+[13]
+T. Hofmeister, W. Hohberg, and S. K
+\177
+ohling
+,
+Some notes on threshold circuit and multi-
+plication in depth
+4, Inform. Process. Lett., 39 (1991), pp. 219{225.
+[14]
+M. Minsky and S. A. Papert
+,
+Perceptrons
+, expanded ed., MIT Press, Cambridge, MA, 1988.
+[15]
+C. Mead
+,
+Analog VLSI and Neural Systems
+, Addison{Wesley, Reading, MA, 1989.
+[16]
+W. Maass, G. Schnitger, and E. D. Sontag
+,
+On the computational power of sigmoid versus
+Boolean threshold circuits
+, in Proc. 32nd IEEE Symposium on Foundations of Computer
+Science, IEEE Computer Society Press, Los Alamitos, CA, 1991, pp. 767{776.
+[17]
+I. Parberry and G. Schnitger
+,
+Parallel computation with threshold functions
+, J. Comput.
+System Sci., 36 (1988), pp. 278{302.
+[18]
+R. Paturi and M. E. Saks
+,
+Approximating threshold circuits by rational functions
+, Inform.
+and Comput., 112 (1994), pp. 257{272.
+[19]
+P. Raghavan
+,
+Probabilistic construction of deterministic algorithms: Approximating packing
+integer programs
+, in Proc. 27th IEEE Symposium on Foundations of Computer Science,
+IEEE Computer Society Press, Los Alamitos, CA, 1986, pp. 10{18.
+[20]
+N. P. Red'kin
+,
+A roof of minimality of circuits consisting of functional elements
+, Problemy
+Kibernet., 23 (1973), pp. 83{102 (in Russian); Systems Theory Res., 23 (1973), pp. 85{103
+(in English).
+[21]
+A. A. Razborov
+,
+Lower bounds on the size of bounded depth networks over a complete basis
+with logical addition
+, Mat. Zametki, 41 (1986), pp. 598{607 (in Russian); Math. Notes
+Acad. Sci. USSR, 41 (1986), pp. 333{338 (in English).
+[22]
+J. Reif
+,
+On threshold circuits and polynomial computations
+, in Proc. 2nd Structure in Com-
+plexity Theory Conference, IEEE Computer Society Press, Los Alamitos, CA, 1987, pp.
+118{125.
+[23]
+K. Siu, V. Roychowdury, and T. Kailath
+,
+Rational approximation techniques for analysis
+of neural networks
+, IEEE Trans. Inform. Theory, 40 (1994), pp. 455{466.
+[24]
+K.-Y. Siu, J. Bruck, and T. Kailath
+,
+Depth-e\016cient neural networks for division and related
+problems
+, IEEE Trans. Inform. Theory, 39 (1993), pp. 946{956.
+[25]
+R. Smolensky
+,
+Algebraic methods in the theory of lower bounds for Boolean circuit complexity
+,
+in Proc. 19th ACM Symposium on Theory of Computing, ACM, New York, 1987, pp. 77{
+82.
+[26]
+A. C.-C. Yao
+,
+Circuits and local computation
+, in Proc. 21st ACM Symposium on Theory of
+Computing, ACM, New York, 1989, pp. 186{196.
+[27]
+A. C.-C. Yao
+,
+On ACC and threshold circuits
+, in Proc. 31st IEEE Symposium on Foundations
+of Computer Science, IEEE Computer Society Press, Los Alamitos, CA, 1990, pp. 619{627.
+=====PAGE=====
+
+
+
+
+
+
+
+
+=====PAGE=====
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

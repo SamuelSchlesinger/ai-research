@@ -1,0 +1,44 @@
+[
+  {
+    "baseRefOid": "1b4ca5308f66f5bbf1c90fb3d1ceebd864d52b66",
+    "headRefOid": "445df566d2d4220d708a8b99c47f59ff13329699",
+    "mergeCommit": {
+      "oid": "83b757a70ddcb56007d393628cd061ac6d059620"
+    },
+    "number": 2377,
+    "state": "MERGED",
+    "title": "feat(WeightedThreshold): sharpen Andreev lower bounds by one logarithm",
+    "url": "https://github.com/cslib-community/complexitylib/pull/2377"
+  },
+  {
+    "baseRefOid": "242879e6913ca3b29005f7c48536896983d2ad2f",
+    "headRefOid": "b8b0c45ff57de60b956212028a513dce59a08746",
+    "mergeCommit": {
+      "oid": "a62a6921ea942158ec6773071af6c2ccd1544559"
+    },
+    "number": 2813,
+    "state": "MERGED",
+    "title": "feat(WeightedThreshold): 3/4\u00b7n\u00b2 exact depth-two circuit for Andreev's function",
+    "url": "https://github.com/cslib-community/complexitylib/pull/2813"
+  },
+  {
+    "baseRefOid": "c23db7837829027cb3cae49700cc0a144577dd02",
+    "headRefOid": "2feb700002c5c566432789cbbd8cc73cee8c7ccd",
+    "mergeCommit": {
+      "oid": "ab1d5a44aad3ef2e303571afbd92158ede654398"
+    },
+    "number": 2814,
+    "state": "MERGED",
+    "title": "feat(WeightedThreshold): approximate-majority and top fan-in lower bounds for Andreev's function",
+    "url": "https://github.com/cslib-community/complexitylib/pull/2814"
+  },
+  {
+    "baseRefOid": "242879e6913ca3b29005f7c48536896983d2ad2f",
+    "headRefOid": "7b4652bd4d9a76a7e12ea6dbca3eb0738c85009e",
+    "mergeCommit": null,
+    "number": 2816,
+    "state": "OPEN",
+    "title": "feat(WeightedThreshold): Kane\u2013Williams depth-three function with log\u00b2 gate and log^{5/2} wire bounds",
+    "url": "https://github.com/cslib-community/complexitylib/pull/2816"
+  }
+]

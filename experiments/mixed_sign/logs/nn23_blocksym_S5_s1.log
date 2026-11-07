@@ -1,0 +1,5 @@
+  restart 0: err=146 best=146 t=3s
+  restart 10: err=244 best=75 t=29s
+  restart 20: err=252 best=75 t=52s
+  restart 30: err=271 best=75 t=78s
+  restart 40: err=102 best=75 t=103s

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/tmp/andreev_gap/z3_min.py", line 34, in <module>
+    t0=time.time(); r=feasible(k,m,S,mode,tl); res.append(f"{S}:{r}[{time.time()-t0:.0f}s]")
+                      ~~~~~~~~^^^^^^^^^^^^^^^
+  File "/tmp/andreev_gap/z3_min.py", line 27, in feasible
+    r=so.check(); return {z3.sat:'SAT',z3.unsat:'UNSAT'}.get(r,'UNKNOWN')
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unhashable type: 'CheckSatResult'

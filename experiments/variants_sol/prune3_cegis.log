@@ -1,0 +1,45 @@
+POOL 3 initial 11 pool 105
+RESTART 3 0 support 14 best 11
+IMPROVED 3 7 {'status': 'COUNTEREXAMPLE', 'point': (0, 0, 0, 0, 1, 0, 0, 0, 1, 1), 'seconds': 0.01055334135890007}
+RESTART 3 1 support 7 best 11
+IMPROVED 3 7 {'status': 'COUNTEREXAMPLE', 'point': (0, 0, 0, 0, 0, 1, 1, 0, 1, 0), 'seconds': 0.0020518824458122253}
+RESTART 3 2 support 7 best 11
+RESTART 3 3 support 11 best 11
+IMPROVED 3 8 {'status': 'COUNTEREXAMPLE', 'point': (0, 1, 0, 1, 1, 1, 1, 0, 1, 1), 'seconds': 0.0021184999495744705}
+RESTART 3 4 support 8 best 11
+IMPROVED 3 10 {'status': 'COUNTEREXAMPLE', 'point': (0, 0, 1, 1, 1, 0, 1, 0, 0, 1), 'seconds': 0.002148108556866646}
+RESTART 3 5 support 10 best 11
+IMPROVED 3 7 {'status': 'COUNTEREXAMPLE', 'point': (0, 0, 1, 0, 1, 0, 0, 0, 1, 1), 'seconds': 0.0014684386551380157}
+RESTART 3 6 support 7 best 11
+RESTART 3 7 support 14 best 11
+IMPROVED 3 8 {'status': 'COUNTEREXAMPLE', 'point': (0, 0, 0, 0, 1, 0, 1, 0, 1, 1), 'seconds': 0.0013090837746858597}
+RESTART 3 8 support 8 best 11
+IMPROVED 3 9 {'status': 'COUNTEREXAMPLE', 'point': (0, 0, 0, 1, 0, 1, 1, 1, 0, 0), 'seconds': 0.0021247584372758865}
+RESTART 3 9 support 9 best 11
+RESTART 3 10 support 15 best 11
+IMPROVED 3 8 {'status': 'COUNTEREXAMPLE', 'point': (0, 1, 0, 1, 1, 1, 0, 0, 1, 0), 'seconds': 0.0015439391136169434}
+RESTART 3 11 support 8 best 11
+IMPROVED 3 8 {'status': 'COUNTEREXAMPLE', 'point': (1, 0, 0, 0, 0, 0, 0, 0, 1, 1), 'seconds': 0.0015787463635206223}
+RESTART 3 12 support 8 best 11
+RESTART 3 13 support 13 best 11
+IMPROVED 3 10 {'status': 'COUNTEREXAMPLE', 'point': (0, 0, 1, 0, 1, 0, 1, 0, 1, 0), 'seconds': 0.0014957133680582047}
+RESTART 3 14 support 10 best 11
+RESTART 3 15 support 15 best 11
+RESTART 3 16 support 12 best 11
+RESTART 3 17 support 15 best 11
+IMPROVED 3 8 {'status': 'COUNTEREXAMPLE', 'point': (0, 0, 0, 0, 0, 1, 1, 0, 1, 1), 'seconds': 0.00126633420586586}
+RESTART 3 18 support 8 best 11
+RESTART 3 19 support 12 best 11
+RESTART 3 20 support 12 best 11
+RESTART 3 21 support 17 best 11
+IMPROVED 3 10 {'status': 'COUNTEREXAMPLE', 'point': (0, 0, 1, 0, 0, 0, 0, 0, 1, 1), 'seconds': 0.0025093164294958115}
+RESTART 3 22 support 10 best 11
+RESTART 3 23 support 17 best 11
+RESTART 3 24 support 14 best 11
+IMPROVED 3 10 {'status': 'COUNTEREXAMPLE', 'point': (0, 0, 0, 0, 0, 1, 0, 0, 1, 0), 'seconds': 0.0022357814013957977}
+RESTART 3 25 support 10 best 11
+RESTART 3 26 support 12 best 11
+RESTART 3 27 support 12 best 11
+RESTART 3 28 support 11 best 11
+IMPROVED 3 10 {'status': 'COUNTEREXAMPLE', 'point': (1, 0, 0, 0, 0, 1, 1, 0, 0, 0), 'seconds': 0.0026804637163877487}
+RESTART 3 29 support 10 best 11

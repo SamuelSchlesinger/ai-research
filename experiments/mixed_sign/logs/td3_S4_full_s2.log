@@ -1,0 +1,2 @@
+sub-instance tables: ['0011', '0101', '1010', '1100']
+ANDREEV k=2 m=3 S=4 cls=free tables=0101,0011 intaddr=None sym=True: UNKNOWN (3600.6s) {}

@@ -1,0 +1,12 @@
+POOL 3 initial 11 pool 105
+RESTART 3 0 support 14 best 11
+IMPROVED 3 7 {'status': 'COUNTEREXAMPLE', 'point': (0, 0, 0, 0, 1, 0, 0, 0, 1, 1), 'seconds': 0.0029090121388435364}
+REJECTED_EXACT_ERRORS 7 56 of 1024
+RESTART 3 1 support 7 best 11
+IMPROVED 3 7 {'status': 'COUNTEREXAMPLE', 'point': (0, 0, 0, 0, 0, 1, 1, 0, 1, 0), 'seconds': 0.002099720761179924}
+REJECTED_EXACT_ERRORS 7 104 of 1024
+RESTART 3 2 support 7 best 11
+RESTART 3 3 support 11 best 11
+IMPROVED 3 8 {'status': 'COUNTEREXAMPLE', 'point': (0, 1, 0, 1, 1, 1, 1, 0, 1, 1), 'seconds': 0.002342749387025833}
+REJECTED_EXACT_ERRORS 8 168 of 1024
+RESTART 3 4 support 8 best 11

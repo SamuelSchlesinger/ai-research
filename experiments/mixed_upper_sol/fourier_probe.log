@@ -1,0 +1,8 @@
+# Copyright (c) 2026 Christian Reitwiessner
+# Authors: Christian Reitwiessner
+triple threshold 0 status Optimization terminated successfully. (HiGHS Status 7: Optimal)
+[ 1.   1.   1.   1.   1.2  1.2  1.   1.   1.2  1.2  1.2  1.2  1.   0.4
+  0.4  0.4  0.8  0.8  0.4  0.4  0.4 -2. ]
+triple threshold 1 status Optimization terminated successfully. (HiGHS Status 7: Optimal)
+[ 1.   1.   1.2  1.2  1.   1.   1.   1.   1.   1.   1.   1.   1.   0.4
+  0.4  0.6  0.6  0.4  0.4  0.6  0.6 -2. ]

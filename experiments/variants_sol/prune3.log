@@ -1,0 +1,6 @@
+POOL 3 initial 11 pool 105
+RESTART 3 0 support 14 best 11
+IMPROVED 3 7 {'status': 'COUNTEREXAMPLE', 'point': (0, 0, 0, 0, 1, 0, 0, 0, 1, 1), 'seconds': 0.010849697515368462}
+RESTART 3 1 support 7 best 11
+IMPROVED 3 7 {'status': 'COUNTEREXAMPLE', 'point': (0, 0, 0, 0, 0, 1, 1, 0, 0, 1), 'seconds': 0.002609388902783394}
+RESTART 3 2 support 7 best 11

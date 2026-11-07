@@ -1,0 +1,2 @@
+==> blocksym k=2 m=3 (n=10): undecided at s=4   trace 0:UNSAT[0s] 1:UNSAT[1s] 2:UNSAT[3s] 3:UNSAT[141s] 4:UNKNOWN[2402s]   [ours 5/8: 55, 3/4: 56]
+==> blocksym k=2 m=4 (n=12): undecided at s=4   trace 0:UNSAT[0s] 1:UNSAT[1s] 2:UNSAT[2s] 3:UNSAT[166s] 4:UNKNOWN[2402s]   [ours 5/8: 67, 3/4: 64]

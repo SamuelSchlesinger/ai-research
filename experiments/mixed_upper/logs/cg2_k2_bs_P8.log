@@ -1,0 +1,19 @@
+k=2 mode=bs P=8 periods=2,4,8 points=1024 atoms=2079840
+    it 0: active 0 obj 6400000.00000 slack 640 add 1500
+    it 1: active 1500 obj 1.00000 slack 0 add 1500
+    it 2: active 3000 obj 1.00000 slack 0 add 1500
+    it 3: stalled at obj 1.00000
+  rw it 0: support 7 slope 4.500 active 4500 (29s)
+    it 0: active 4500 obj 4.49451 slack 0 add 0
+  rw it 1: support 7 slope 4.500 active 4500 (35s)
+    it 0: active 4500 obj 4.12072 slack 0 add 0
+  rw it 2: support 6 slope 4.000 active 4500 (41s)
+    it 0: active 4500 obj 3.99600 slack 0 add 0
+  rw it 3: support 6 slope 4.000 active 4500 (47s)
+pruned slope 3.0 atoms 5
+   p=8 beta=(4, 4) alpha=(5, 1, 0, 7) r=2 cost=1.000
+   p=8 beta=(0, 4) alpha=(5, 7, 3, 0) r=4 cost=0.500
+   p=8 beta=(4, 0) alpha=(3, 0, 2, 6) r=6 cost=0.500
+   p=8 beta=(4, 0) alpha=(3, 7, 3, 0) r=7 cost=0.500
+   p=8 beta=(0, 4) alpha=(1, 1, 7, 5) r=7 cost=0.500
+time 47s

@@ -1,0 +1,25 @@
+# Copyright (c) 2026 Christian Reitwiessner
+# Authors: Christian Reitwiessner
+Fourier full-domain coefficient certificate: 2048 cases; minimum 15
+{'m': 1, 'k': 3, 'bottoms': 33, 'total': 34, 'margin': 15, 'count_points': 2048}
+{'m': 2, 'k': 3, 'bottoms': 47, 'total': 48, 'margin': 15, 'count_points': 6912}
+{'m': 3, 'k': 3, 'bottoms': 54, 'total': 55, 'margin': 15, 'count_points': 16384}
+{'m': 4, 'k': 3, 'bottoms': 68, 'total': 69, 'margin': 15, 'count_points': 32000}
+{'m': 7, 'k': 3, 'bottoms': 96, 'total': 97, 'margin': 15, 'count_points': 131072}
+{'m': 10, 'k': 3, 'bottoms': 131, 'total': 132, 'margin': 15, 'count_points': 340736}
+diagonal {'m': 1, 'k': 2, 'bottoms': 5, 'total': 6, 'margin': 1, 'count_points': 64}
+diagonal {'m': 2, 'k': 2, 'bottoms': 5, 'total': 6, 'margin': 1, 'count_points': 144}
+diagonal {'m': 3, 'k': 2, 'bottoms': 10, 'total': 11, 'margin': 1, 'count_points': 256}
+diagonal {'m': 4, 'k': 2, 'bottoms': 10, 'total': 11, 'margin': 1, 'count_points': 400}
+diagonal {'m': 5, 'k': 2, 'bottoms': 19, 'total': 20, 'margin': 1, 'count_points': 576}
+diagonal {'m': 6, 'k': 2, 'bottoms': 19, 'total': 20, 'margin': 1, 'count_points': 784}
+diagonal {'m': 7, 'k': 2, 'bottoms': 24, 'total': 25, 'margin': 1, 'count_points': 1024}
+diagonal {'m': 8, 'k': 2, 'bottoms': 24, 'total': 25, 'margin': 1, 'count_points': 1296}
+diagonal {'m': 9, 'k': 2, 'bottoms': 33, 'total': 34, 'margin': 1, 'count_points': 1600}
+diagonal {'m': 10, 'k': 2, 'bottoms': 33, 'total': 34, 'margin': 1, 'count_points': 1936}
+diagonal {'m': 11, 'k': 2, 'bottoms': 38, 'total': 39, 'margin': 1, 'count_points': 2304}
+diagonal {'m': 12, 'k': 2, 'bottoms': 38, 'total': 39, 'margin': 1, 'count_points': 2704}
+diagonal {'m': 13, 'k': 2, 'bottoms': 47, 'total': 48, 'margin': 1, 'count_points': 3136}
+diagonal {'m': 14, 'k': 2, 'bottoms': 47, 'total': 48, 'margin': 1, 'count_points': 3600}
+diagonal {'m': 15, 'k': 2, 'bottoms': 52, 'total': 53, 'margin': 1, 'count_points': 4096}
+diagonal {'m': 16, 'k': 2, 'bottoms': 52, 'total': 53, 'margin': 1, 'count_points': 4624}

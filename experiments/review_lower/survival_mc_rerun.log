@@ -1,0 +1,5 @@
+block-symmetric (all ones)          : p(g) ~ 0.0350   [coherent bound 0.0461; sqrt(k/m)=0.217; k m^(-1/3)=0.750]
+coherent heavy-tailed               : p(g) ~ 0.0254   [coherent bound 0.0461; sqrt(k/m)=0.217; k m^(-1/3)=0.750]
+subset-majority (|T|=8 per block)   : p(g) ~ 0.0332   [coherent bound 0.0461; sqrt(k/m)=0.217; k m^(-1/3)=0.750]
+balanced +-1                        : p(g) ~ 0.1853   [coherent bound 0.0461; sqrt(k/m)=0.217; k m^(-1/3)=0.750]
+gaussian                            : p(g) ~ 0.1270   [coherent bound 0.0461; sqrt(k/m)=0.217; k m^(-1/3)=0.750]

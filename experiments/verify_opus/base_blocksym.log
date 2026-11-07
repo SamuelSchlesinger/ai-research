@@ -1,0 +1,6 @@
+==> blocksym k=1 m=1 (n=3): minimum s=1   trace 0:UNSAT[0s] 1:SAT[0s]   [ours 5/8: 8, 3/4: 10]
+==> blocksym k=1 m=2 (n=4): minimum s=1   trace 0:UNSAT[0s] 1:SAT[0s]   [ours 5/8: 11, 3/4: 12]
+==> blocksym k=1 m=3 (n=5): minimum s=2   trace 0:UNSAT[0s] 1:UNSAT[0s] 2:SAT[0s]   [ours 5/8: 14, 3/4: 14]
+==> blocksym k=1 m=4 (n=6): minimum s=2   trace 0:UNSAT[0s] 1:UNSAT[0s] 2:SAT[0s]   [ours 5/8: 17, 3/4: 16]
+==> blocksym k=2 m=1 (n=6): minimum s=3   trace 0:UNSAT[0s] 1:UNSAT[0s] 2:UNSAT[25s] 3:SAT[1s]   [ours 5/8: 31, 3/4: 40]
+==> blocksym k=2 m=2 (n=8): minimum s=3   trace 0:UNSAT[0s] 1:UNSAT[0s] 2:UNSAT[5s] 3:SAT[4s]   [ours 5/8: 43, 3/4: 48]

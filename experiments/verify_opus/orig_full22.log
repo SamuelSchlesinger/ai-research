@@ -1,0 +1,1 @@
+==> full k=2 m=2 (n=8): minimum s=3   trace 0:UNSAT[0s] 1:UNSAT[1s] 2:UNSAT[145s] 3:SAT[51s]   [ours 5/8: 43, 3/4: 48]

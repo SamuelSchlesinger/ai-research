@@ -1,0 +1,5 @@
+ANDREEV k=2 m=2 S=3 cls=free tables=all intaddr=2 sym=True: SAT (46.9s) {} verified exactly on all 256 points
+    g0: [1*x3 + -1*a11 + -1*a12 + -2*a21 + -2*a22 >= -2]
+    g1: [1*x1 + -1*a11 + -1*a12 + -2*a21 + 2*a22 >= 0]
+    g2: [2*x0 + -1*x2 + 1*a11 + -1*a12 + 2*a21 + -2*a22 >= 1]
+    top: [984*g0 + 984*g1 + 984*g2 + -2*x0 + 491*x2 + 1*x3 + 3*a11 + 494*a12 + 492*a21 + 492*a22 >= 2462]

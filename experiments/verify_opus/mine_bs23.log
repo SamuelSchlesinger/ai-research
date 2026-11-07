@@ -1,0 +1,4 @@
+blocksym k=2 m=3 S=0: UNSAT (proved) [0.2s]
+blocksym k=2 m=3 S=1: UNSAT (proved) [0.4s]
+blocksym k=2 m=3 S=2: UNSAT (proved) [4.7s]
+blocksym k=2 m=3 S=3: UNSAT (proved) [332.4s]

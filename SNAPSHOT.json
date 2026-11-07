@@ -1,0 +1,14 @@
+{
+  "snapshot_utc": "2026-11-07T11:50:42.307143+00:00",
+  "author": "Christian Reitwiessner",
+  "original_workspace": "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6",
+  "original_experiments": "/tmp/andreev_gap",
+  "python_version": "3.13.5 (main, Aug 10 2026, 12:06:59) [GCC 14.2.0]",
+  "packages": {
+    "z3-solver": "5.3.3.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "ortools": "9.15.6755",
+    "python-sat": "1.9.dev21"
+  }
+}

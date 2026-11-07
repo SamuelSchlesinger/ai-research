@@ -1,0 +1,5 @@
+full k=2 m=2 S=0: UNSAT (proved) [0.3s]
+full k=2 m=2 S=1: UNSAT (proved) [1.4s]
+full k=2 m=2 S=2: UNSAT (proved) [210.0s]
+full k=2 m=2 S=3: SAT (verified exactly on all 256 inputs) [38.2s]
+RESULT full k=2 m=2 n=8 points=256: minimum = 3 (proved, all smaller S UNSAT)

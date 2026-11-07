@@ -1,0 +1,62 @@
+  restart 0: err=28 best=28 t=2s
+  restart 10: err=6 best=6 t=18s
+  restart 20: err=17 best=6 t=37s
+  restart 30: err=45 best=6 t=54s
+  restart 40: err=18 best=6 t=69s
+  restart 50: err=32 best=5 t=85s
+  restart 60: err=9 best=5 t=104s
+  restart 70: err=31 best=5 t=120s
+  restart 80: err=49 best=5 t=136s
+  restart 90: err=27 best=5 t=152s
+  restart 100: err=22 best=5 t=167s
+  restart 110: err=57 best=5 t=189s
+  restart 120: err=14 best=5 t=206s
+  restart 130: err=16 best=5 t=236s
+  restart 140: err=13 best=5 t=259s
+  restart 150: err=72 best=5 t=275s
+  restart 160: err=21 best=5 t=288s
+  restart 170: err=14 best=5 t=299s
+  restart 180: err=13 best=5 t=320s
+  restart 190: err=106 best=5 t=331s
+  restart 200: err=122 best=5 t=340s
+  restart 210: err=234 best=5 t=349s
+  restart 220: err=86 best=5 t=359s
+  restart 230: err=9 best=5 t=368s
+  restart 240: err=13 best=5 t=377s
+  restart 250: err=45 best=5 t=387s
+  restart 260: err=10 best=5 t=396s
+  restart 270: err=19 best=5 t=405s
+  restart 280: err=17 best=5 t=415s
+  restart 290: err=106 best=4 t=425s
+  restart 300: err=21 best=4 t=437s
+  restart 310: err=28 best=4 t=452s
+  restart 320: err=9 best=4 t=466s
+  restart 330: err=46 best=3 t=480s
+  restart 340: err=19 best=3 t=495s
+  restart 350: err=18 best=3 t=509s
+  restart 360: err=23 best=3 t=523s
+  restart 370: err=14 best=3 t=538s
+  restart 380: err=19 best=3 t=552s
+  restart 390: err=41 best=3 t=566s
+  restart 400: err=25 best=3 t=580s
+  restart 410: err=35 best=3 t=595s
+  restart 420: err=33 best=3 t=609s
+  restart 430: err=30 best=3 t=624s
+  restart 440: err=39 best=3 t=639s
+  restart 450: err=35 best=3 t=653s
+  restart 460: err=31 best=3 t=668s
+  restart 470: err=157 best=3 t=680s
+  restart 480: err=20 best=3 t=695s
+FOUND andreev:2,3 S=11 cls=blocksym restart=489 t=712.1s VERIFIED exactly on all 1024 points
+    g0: [-8*z0 + 1*z1 + 6*z2 + 8*z3 + 2*z4 + 2*z5 + 2*z6 + 15*z7 + 15*z8 + 15*z9 >= 21]
+    g1: [-2*z1 + 2*z2 + 1*z3 + 1*z4 + 1*z5 + 1*z6 + -5*z7 + -5*z8 + -5*z9 >= -3]
+    g2: [-4*z0 + 7*z1 + -5*z2 + 1*z3 + -13*z4 + -13*z5 + -13*z6 + -2*z7 + -2*z8 + -2*z9 >= -15]
+    g3: [1*z0 + -18*z1 + 12*z2 + 1*z3 + 6*z4 + 6*z5 + 6*z6 + -8*z7 + -8*z8 + -8*z9 >= 3]
+    g4: [-15*z0 + -1*z1 + 1*z2 + -3*z3 + 5*z4 + 5*z5 + 5*z6 + 17*z7 + 17*z8 + 17*z9 >= 31]
+    g5: [28*z0 + 2*z1 + -1*z2 + 6*z3 + -9*z4 + -9*z5 + -9*z6 + -13*z7 + -13*z8 + -13*z9 >= 9]
+    g6: [2*z0 + -2*z1 + 2*z2 + -3*z3 + -7*z4 + -7*z5 + -7*z6 + -1*z7 + -1*z8 + -1*z9 >= -8]
+    g7: [-2*z0 + -3*z1 + 2*z2 + -1*z4 + -1*z5 + -1*z6 + -6*z7 + -6*z8 + -6*z9 >= -15]
+    g8: [1*z0 + -2*z1 + 1*z2 + -15*z3 + 5*z4 + 5*z5 + 5*z6 + 13*z7 + 13*z8 + 13*z9 >= 42]
+    g9: [2*z0 + 14*z1 + -23*z2 + 2*z3 + 8*z4 + 8*z5 + 8*z6 + -9*z7 + -9*z8 + -9*z9 >= -13]
+    g10: [10*z0 + 1*z1 + 4*z2 + -7*z4 + -7*z5 + -7*z6 + -6*z7 + -6*z8 + -6*z9 >= -6]
+    top: [6*g0 + 6*g1 + 7*g2 + -5*g3 + -7*g4 + 7*g5 + -7*g6 + -7*g7 + -7*g8 + -7*g9 + 2*g10 + -1*z0 + 1*z1 + 3*z2 + 3*z4 + 3*z5 + 3*z6 >= 0]

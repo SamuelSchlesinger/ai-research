@@ -1,0 +1,5 @@
+RESULT blocksym k=3 m=1 S=0 UNSAT time=0.8s cpu=0.8s cegar_rounds=1 points_used=2048/2048
+RESULT blocksym k=3 m=1 S=1 UNSAT time=2.9s cpu=2.3s cegar_rounds=1 points_used=2048/2048
+RESULT blocksym k=3 m=1 S=2 UNSAT time=73.1s cpu=54.8s cegar_rounds=1 points_used=2048/2048
+RESULT blocksym k=3 m=1 S=3 UNKNOWN time=3600.2s cpu=2174.8s cegar_rounds=1 points_used=2048/2048
+LOWER BOUND blocksym k=3 m=1: min >= 3 (S=3 undecided)

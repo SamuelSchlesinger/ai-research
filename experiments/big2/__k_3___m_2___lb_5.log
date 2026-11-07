@@ -1,0 +1,2 @@
+RESULT blocksym k=3 m=2 S=4 UNKNOWN time=3601.2s cpu=2159.2s cegar_rounds=1 points_used=6912/6912
+UNDECIDED within time limit

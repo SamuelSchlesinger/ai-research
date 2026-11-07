@@ -1,0 +1,6 @@
+blocksym k=2 m=3 S=0: UNSAT (proved) [0.1s]
+blocksym k=2 m=3 S=1: UNSAT (proved) [0.6s]
+blocksym k=2 m=3 S=2: UNSAT (proved) [1.9s]
+blocksym k=2 m=3 S=3: UNSAT (proved) [82.4s]
+RESULT blocksym k=2 m=3 n=10 points=256: lower bound >= 4 (proved)
+   note: blocksym is a restriction; its lower bounds do not transfer to general circuits

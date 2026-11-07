@@ -1,0 +1,11 @@
+POOL 4 initial 12 pool 123
+RESTART 4 0 support 13 best 12
+RESTART 4 1 support 17 best 12
+RESTART 4 2 support 18 best 12
+RESTART 4 3 support 15 best 12
+RESTART 4 4 support 17 best 12
+RESTART 4 5 support 18 best 12
+RESTART 4 6 support 12 best 12
+RESTART 4 7 support 16 best 12
+RESTART 4 8 support 20 best 12
+RESTART 4 9 support 15 best 12

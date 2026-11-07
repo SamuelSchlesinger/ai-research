@@ -1,0 +1,3 @@
+blocksym k=2 m=4 S=4: UNSAT (proved) [317.3s] {'winning_seed': 2}
+RESULT blocksym k=2 m=4 n=12 points=400: S=4 -> UNSAT  => minimum >= 5 (proved)
+   note: blocksym is a restriction; its lower bounds do not transfer to general circuits

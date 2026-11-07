@@ -1,0 +1,16 @@
+(k,m)=(4,2) n=24 gates=238 formula=238 (d')=269 inputs=13344 correct=True wrong=0 min|P|=16 P==closed=True
+(k,m)=(4,3) n=28 gates=324 formula=324 (d')=333 inputs=13344 correct=True wrong=0 min|P|=16 P==closed=True
+(k,m)=(4,4) n=32 gates=370 formula=370 (d')=389 inputs=13344 correct=True wrong=0 min|P|=16 P==closed=True
+(k,m)=(4,6) n=40 gates=502 formula=502 (d')=509 inputs=13344 correct=True wrong=0 min|P|=16 P==closed=True
+(k,m)=(4,8) n=48 gates=634 formula=634 (d')=629 inputs=13344 correct=True wrong=0 min|P|=16 P==closed=True
+(k,m)=(5,3) n=47 gates=941 formula=941 (d')=971 inputs=14944 correct=True wrong=0 min|P|=32 P==closed=True
+(k,m)=(5,4) n=52 gates=1038 formula=1038 (d')=1098 inputs=14944 correct=True wrong=0 min|P|=32 P==closed=True
+(k,m)=(5,5) n=57 gates=1226 formula=1226 (d')=1241 inputs=14944 correct=True wrong=0 min|P|=32 P==closed=True
+(k,m)=(5,6) n=62 gates=1323 formula=1323 (d')=1368 inputs=14944 correct=True wrong=0 min|P|=32 P==closed=True
+(k,m)=(6,3) n=82 gates=2969 formula=2969 (d')=3076 inputs=18400 correct=True wrong=0 min|P|=64 P==closed=True
+(k,m)=(6,4) n=88 gates=3182 formula=3182 (d')=3366 inputs=18400 correct=True wrong=0 min|P|=64 P==closed=True
+(k,m)=(6,5) n=94 gates=3599 formula=3599 (d')=3688 inputs=18400 correct=True wrong=0 min|P|=64 P==closed=True
+(k,m)=(6,6) n=100 gates=3812 formula=3812 (d')=3978 inputs=18400 correct=True wrong=0 min|P|=64 P==closed=True
+(k,m)=(7,2) n=142 gates=9327 formula=9327 (d')=9768 inputs=19824 correct=True wrong=0 min|P|=128 P==closed=True
+(k,m)=(7,3) n=149 gates=10262 formula=10262 (d')=10493 inputs=19824 correct=True wrong=0 min|P|=128 P==closed=True
+(k,m)=(8,1) n=264 gates=34138 formula=34138 (d')=34774 inputs=15280 correct=True wrong=0 min|P|=256 P==closed=True

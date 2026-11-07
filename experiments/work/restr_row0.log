@@ -1,0 +1,6 @@
+{"mode": "row0", "R": 3, "T": 3, "best": 8, "status": 0, "cands": 43, "target": 8}
+{"mode": "row0", "R": 2, "T": 4, "best": 8, "status": 0, "cands": 30, "target": 7}
+{"mode": "row0", "R": 2, "T": 5, "best": 9, "status": 0, "cands": 40, "target": 8}
+{"mode": "row0", "R": 3, "T": 4, "best": 10, "status": 0, "cands": 61, "target": 9}
+SolverData::transformNewIntegerFeasibleSolution tmpSolver.run();
+easibleSolution tmpSolver.run();

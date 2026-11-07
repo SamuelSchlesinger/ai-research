@@ -1,0 +1,2 @@
+full k=2 m=1 S=2: UNSAT (proved) [30.0s]
+RESULT full k=2 m=1 n=6 points=64: S=2 -> UNSAT  => minimum >= 3 (proved)

@@ -1,0 +1,12 @@
+ANDREEV k=2 m=2 S=1 cls=free tables=0101,0011 intaddr=None sym=True: UNSAT (0.0s) {}
+ANDREEV k=2 m=2 S=2 cls=free tables=0101,0011 intaddr=None sym=True: SAT (0.1s) {} verified exactly on all 64 points
+ANDREEV k=2 m=3 S=1 cls=free tables=0101,0011 intaddr=None sym=True: UNSAT (0.2s) {}
+ANDREEV k=2 m=3 S=2 cls=free tables=0101,0011 intaddr=None sym=True: UNSAT (1.1s) {}
+ANDREEV k=2 m=3 S=3 cls=free tables=0101,0011 intaddr=None sym=True: UNSAT (149.6s) {}
+ANDREEV k=2 m=4 S=2 cls=free tables=0101,0011 intaddr=None sym=True: UNSAT (8.2s) {}
+ANDREEV k=2 m=4 S=3 cls=free tables=0101,0011 intaddr=None sym=True: UNKNOWN (380.8s) {}
+ANDREEV k=2 m=4 S=4 cls=free tables=0101,0011 intaddr=None sym=True: UNKNOWN (382.0s) {}
+ANDREEV k=2 m=5 S=3 cls=free tables=0101,0011 intaddr=None sym=True: UNKNOWN (386.5s) {}
+ANDREEV k=2 m=5 S=4 cls=free tables=0101,0011 intaddr=None sym=True: UNKNOWN (388.1s) {}
+
+[killed]

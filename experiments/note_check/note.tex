@@ -1,0 +1,181 @@
+\sect{Note: a quadratic lower bound for sign-coherent circuits (preliminary)}\label{app:coherent}
+
+\begin{keybox}
+\textbf{Status.} This appendix records a recent result together with
+everything needed to reproduce it. The proofs below are complete and have
+been checked by an independent referee and by computer on small cases. The
+constants are not optimised, and the result is not yet formalized in Lean.
+We plan to tighten and integrate it later.
+\end{keybox}
+
+\smalltitle{The class.}
+A bottom gate is \emph{sign-coherent} if, inside every address block, its
+weights are either all $\ge0$ or all $\le0$. Its table weights and the top
+gate are arbitrary. Every gate that sees a block only through $|a_i|$ is
+sign-coherent, and so is every gate that is monotone in the address bits.
+All gates of the circuit in Theorem~\ref{thm:exact} are of this kind.
+
+\begin{theorem}\label{thm:coherent}
+Let $C$ be a depth-two threshold circuit for $A$ whose $S$ bottom gates are
+all sign-coherent. Put $D_0=\bigl(N-k-1-\log_2(S+1)\bigr)/\bigl(k+\log_2(S+1)\bigr)$. Then
+\[
+S\ \ge\ \frac{m^k}{m^k-(m-1)^k}\,D_0\ \ge\ \frac mk\,D_0 .
+\]
+Consequently $S\ge\min\{N^2,\ m(N-3k-1)/(3k^2)\}$, and in the balanced case
+\[
+S\ \ge\ \frac{N(N-3k-1)}{3k^3}\ =\ \Omega\!\left(\frac{n^2}{\log^3 n}\right).
+\]
+\end{theorem}
+
+So within this class the circuit of Theorem~\ref{thm:exact} is optimal up to a
+polylogarithmic factor. A circuit with substantially fewer gates must contain
+gates whose weights have mixed signs inside a block.
+
+\smalltitle{Plan.}
+We walk through all unit cubes of the grid of block weights. On each cube,
+the circuit reveals the whole table, so many gates must be non-constant there
+(Lemma~\ref{lem:entropy}). A sign-coherent gate is non-constant on only a
+$k/m$ fraction of the cubes (Lemma~\ref{lem:diag}). Comparing the two counts
+gives the theorem.
+
+\smalltitle{The cube restriction.}
+Fix an order of the positions inside every block. For a vector
+$s\in\{0,\dots,m\}^k$ let $a(s)$ be the address part in which block $i$ has
+ones exactly at its first $s_i$ positions. A \emph{cube} is a vector
+$c\in\{0,\dots,m-1\}^k$; there are $m^k$ cubes. For $z\in\bits^k$ the input
+$(x,a(c+z))$ differs from $(x,a(c))$ exactly in the live positions
+$c_i+1$ of the blocks $i$ with $z_i=1$, and its address is
+$(c\bmod2)\oplus z$. Hence
+\[
+z\mapsto A\bigl(x,a(c+z)\bigr)=x_{(c\bmod 2)\oplus z}
+\]
+determines the whole table $x$. A bottom gate \emph{splits} the cube $c$ for
+the table $x$ if it is non-constant in $z$ on the inputs $(x,a(c+z))$. Let
+$d_c(x)$ be the number of bottom gates that split $c$ for $x$.
+
+\begin{lemma}[Many gates split each cube]\label{lem:entropy}
+Let $C$ be any depth-two threshold circuit for $A$ with $S$ bottom gates, and
+let $x$ be uniformly random. Then $\mathbb E_x[d_c(x)]\ge D_0$ for every cube
+$c$.
+\end{lemma}
+\begin{proof}
+Fix $c$. On the inputs $(x,a(c+z))$, bottom gate $j$ computes
+$\ind{\lambda_j\cdot z\ge\tau_j}$, where $\lambda_j\in\mathbb R^k$ lists its
+weights on the live positions and only the number $\tau_j$ depends on $x$.
+Likewise the top gate computes
+$\ind{\sum_jv_jg_j+\mu\cdot z\ge\kappa}$, where $v_j$ are its weights on the
+bottom gates and $\mu$ its weights on the live positions; the gates that
+do not split $c$ are constant and are absorbed, together with the table and
+the fixed address bits, into $\kappa$. So only $\tau_j$ and $\kappa$ depend
+on $x$.
+
+Therefore the function $z\mapsto x_{(c\bmod2)\oplus z}$, and with it $x$, is
+determined by: the set $G$ of splitting gates; for each $j\in G$ the
+non-constant function $\ind{\lambda_j\cdot z\ge\tau_j}$, one of at most $2^k-1$
+(only the position of $\tau_j$ among the $\le2^k$ values $\lambda_j\cdot z$
+matters); and the position of $\kappa$, one of at most $2^k+1$. With
+$D=|G|=d_c(x)$, entropy gives
+\[
+N=H(x)\le H(D)+\mathbb E\log_2\Bigl[\tbinom SD(2^k-1)^D(2^k+1)\Bigr]
+\le\log_2(S+1)+\mathbb E[D]\,(\log_2S+k)+k+1,
+\]
+which rearranges to the claim.
+\end{proof}
+
+\begin{lemma}[A coherent gate splits few cubes]\label{lem:diag}
+For every table $x$, a sign-coherent gate splits at most $m^k-(m-1)^k$ cubes.
+\end{lemma}
+\begin{proof}
+Let $\varepsilon_i=+1$ if the gate's weights in block $i$ are $\ge0$ and
+$\varepsilon_i=-1$ otherwise. Its linear form on $(x,a(s))$ is a constant plus
+$\sum_iP_i(s_i)$, where $P_i(s_i)$ is the sum of its weights on the first
+$s_i$ positions of block $i$. So the form $F(s)$ does not decrease when
+$s_i$ moves by one step in direction $\varepsilon_i$.
+
+On the cube $c$ the form is smallest at $c^-=c+(\mathbf1-\varepsilon)/2$ and
+largest at $c^+=c+(\mathbf1+\varepsilon)/2$. The gate with threshold $\theta$
+splits $c$ exactly when $F(c^-)<\theta\le F(c^+)$.
+
+Group the cubes into \emph{lines} $c,\,c+\varepsilon,\,c+2\varepsilon,\dots$.
+For consecutive cubes on a line, the largest vertex of one is the smallest
+vertex of the next, so the intervals $(F(c^-),F(c^+)]$ along a line are
+disjoint, and $\theta$ lies in at most one of them. Each line starts at a cube
+$c$ for which $c-\varepsilon$ is not a cube, and exactly $(m-1)^k$ cubes $c$
+have $c-\varepsilon$ a cube. So there are $m^k-(m-1)^k$ lines.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:coherent}]
+Sum Lemma~\ref{lem:entropy} over all cubes and compare with
+Lemma~\ref{lem:diag}: $m^kD_0\le\sum_c\mathbb E[d_c]\le S\,(m^k-(m-1)^k)$.
+Then use $1-(1-1/m)^k\le k/m$. If $S<N^2$ then $\log_2(S+1)\le2k$ and
+$D_0\ge(N-3k-1)/(3k)$. In the balanced case $m=N/k$; this requires $k$ to be
+a power of two.
+\end{proof}
+
+\begin{remark}
+(1) For gates that see each block only through $|a_i|$, a slab argument with
+Ball's cube-slicing bound improves the denominator to $6\sqrt2\,k^{5/2}$ for
+$k\ge8$. (2) Lemma~\ref{lem:diag} is tight for all $k,m$. The fact that a
+unate function changes at most once along a chain compatible with its
+orientation is classical (Impagliazzo, Paturi and Saks~\cite{IPS},
+Lemma~2.1); the cube restriction and the quadratic bound appear to be new,
+but our literature search was limited. (3) Theorem~\ref{thm:coherent} is
+asymptotic. It exceeds $n^{3/2}$ only from about $k=37$, and the method
+(Lemma~\ref{lem:entropy} plus a uniform bound as in Lemma~\ref{lem:diag})
+cannot give more than $O(n^2/\log n)$. (4) Lemma~\ref{lem:entropy} holds for
+all circuits. For general gates, the survival-type arguments of
+Section~\ref{sec:lower} cannot exceed $O(n^{3/2})$: under every
+distribution of restrictions that leaves one live bit per block, a gate with
+random $\pm1$ weights is non-constant with probability at least
+$1/(2\sqrt{2km})$. Gates with mixed signs inside a block are exactly where
+the gap between $n^{3/2}$ and $n^2$ lies.
+\end{remark}
+
+\smalltitle{Two address blocks.}
+For $k=2$ the same ideas give matching linear bounds.
+
+\begin{proposition}\label{prop:k2}
+Let $k=2$. (a) Every circuit for $A$ with sign-coherent bottom gates has at
+least $m-1$ bottom gates. (b) There is a circuit with $4\lceil m/2\rceil+m$
+bottom gates, each seeing the blocks only through $s_i=|a_i|$.
+\end{proposition}
+\begin{proof}[Proof sketch of (a)]
+Take the table with $x_c=c_1\oplus c_2$. On every cube (here a unit square)
+the restricted circuit computes XOR or its negation. If every bottom gate were
+constant or a literal there, the top gate would compute XOR as a threshold
+function, which is impossible. So on every square some gate cuts off exactly
+one corner. After reflecting $s_i\mapsto m-s_i$ where needed, the region where
+a coherent gate is $1$ is an up-set of the grid $\{0,\dots,m\}^2$. Its
+boundary is a monotone lattice path, and a corner is cut exactly where the
+path turns. On the $4(m-1)$ squares at the border of the grid such a path
+turns at most four times. So at least $m-1$ gates are needed.
+\end{proof}
+\begin{proof}[Construction for (b)]
+Write $b=b_1+2b_2$ for the table index and $J=\lceil m/2\rceil$. The bottom
+gates are, for $1\le j\le J$,
+\[
+\ind{s_1+x_0\ge2j},\ \ind{s_1+x_2\ge2j},\ \ind{s_2+x_0\ge2j},\ \ind{s_2+x_1\ge2j}
+\]
+with top weights $-4,-2,-4,-2$, and, for $1\le j\le m$, $\ind{s_1+s_2+x_0\ge2j}$
+with top weight $-4$. The top gate outputs $\ind{F\ge0}$ with
+\[
+F=\sum_j v_jg_j+5s_1+5s_2+8x_0+2x_1+\tfrac32x_2+x_3-\tfrac{13}2 .
+\]
+For $0\le t\le T$ we have $t-2\sum_{j\le\lceil T/2\rceil}\ind{t+y\ge2j}=(-1)^y(t\bmod2)$
+for every bit $y$, so $F$ depends on $s$ only through $b$. This leaves a
+finite check, and we verified $\ind{F\ge0}=x_b$ for all inputs with exact
+arithmetic for $m\le40$.
+\end{proof}
+
+The earlier general constructions give about $12m$ gates for $k=2$. Exact
+solver data for gates that see blocks only through $|a_i|$ give minima $3,3$
+for $m=1,2$ and lower bounds $5$ for $m=3,4,5$ and $6$ for $m=6,8,10$.
+
+\smalltitle{Reproducing.}
+Lemma~\ref{lem:diag} can be checked by brute force: enumerate all cubes and
+compute $F(c^\pm)$ for random sign-coherent weight vectors, including zero
+weights and ties, and random orders. Equality is attained by a gate with one
+large weight on the last position of each block. For the bound of (a), the
+Ring Lemma can be checked over all up-sets of $\{0,\dots,m\}^2$ for
+$m\le11$. The construction of (b) is checked as described. All three checks
+were run independently twice.

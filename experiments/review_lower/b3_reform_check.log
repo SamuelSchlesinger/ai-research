@@ -1,0 +1,8 @@
+/tmp/andreev_gap/review_lower/b3_reform_check.py:3: SyntaxWarning: invalid escape sequence '\{'
+  = (1/m) * 1/(m * C(m-1,|A|))   for every l and every A subset of [m]\{l}."""
+m=1: 1 (l,A) pairs, mismatches with the Beta-mixture formula = 0
+m=2: 4 (l,A) pairs, mismatches with the Beta-mixture formula = 0
+m=3: 12 (l,A) pairs, mismatches with the Beta-mixture formula = 0
+m=4: 32 (l,A) pairs, mismatches with the Beta-mixture formula = 0
+m=5: 80 (l,A) pairs, mismatches with the Beta-mixture formula = 0
+m=6: 192 (l,A) pairs, mismatches with the Beta-mixture formula = 0

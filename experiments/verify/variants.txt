@@ -1,0 +1,5 @@
+V0_orig-like --enc twosided --no-sym --no-cegar
+V1_sym --enc twosided --no-cegar
+V2_sym+onesided --enc onesided --no-cegar
+V3_sym+cegar --enc twosided
+V4_all --enc onesided

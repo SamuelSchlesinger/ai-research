@@ -1,0 +1,5 @@
+import sys,time; sys.path.insert(0,'/tmp/pydeps'); sys.path.insert(0,'/tmp/andreev_gap')
+src=open('/tmp/andreev_gap/z3_min.py').read().split("if __name__")[0]; exec(src)
+mode,k,m,S,tl=sys.argv[1],int(sys.argv[2]),int(sys.argv[3]),int(sys.argv[4]),int(sys.argv[5])
+t0=time.time(); r=feasible(k,m,S,mode,tl)
+print(f"{mode} k={k} m={m} S={S}: {r} [{time.time()-t0:.0f}s]",flush=True)

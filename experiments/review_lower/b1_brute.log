@@ -1,0 +1,24 @@
+coherent random  k=1 m=5: max split over 300 gates x all thresholds = 1   bound m^k-(m-1)^k = 1
+coherent random  k=2 m=2: max split over 400 gates x all thresholds = 3   bound m^k-(m-1)^k = 3
+coherent random  k=2 m=3: max split over 400 gates x all thresholds = 5   bound m^k-(m-1)^k = 5
+coherent random  k=2 m=5: max split over 400 gates x all thresholds = 9   bound m^k-(m-1)^k = 9
+coherent random  k=2 m=8: max split over 300 gates x all thresholds = 15   bound m^k-(m-1)^k = 15
+coherent random  k=3 m=2: max split over 400 gates x all thresholds = 7   bound m^k-(m-1)^k = 7
+coherent random  k=3 m=3: max split over 400 gates x all thresholds = 19   bound m^k-(m-1)^k = 19
+coherent random  k=3 m=5: max split over 300 gates x all thresholds = 61   bound m^k-(m-1)^k = 61
+coherent random  k=4 m=2: max split over 300 gates x all thresholds = 15   bound m^k-(m-1)^k = 15
+coherent random  k=4 m=3: max split over 300 gates x all thresholds = 65   bound m^k-(m-1)^k = 65
+coherent random  k=4 m=4: max split over 200 gates x all thresholds = 172   bound m^k-(m-1)^k = 175
+coherent random  k=5 m=2: max split over 200 gates x all thresholds = 31   bound m^k-(m-1)^k = 31
+coherent random  k=5 m=3: max split over 150 gates x all thresholds = 209   bound m^k-(m-1)^k = 211
+coherent random  k=6 m=2: max split over 100 gates x all thresholds = 63   bound m^k-(m-1)^k = 63
+coherent random  k=6 m=3: max split over 40 gates x all thresholds = 665   bound m^k-(m-1)^k = 665
+coherent EXHAUSTIVE k=2 m=2 entries 0..2 x block signs (324 gates): max split = 3  bound = 3
+coherent EXHAUSTIVE k=2 m=3 entries 0..2 x block signs (2916 gates): max split = 5  bound = 5
+coherent EXHAUSTIVE k=3 m=2 entries 0..2 x block signs (5832 gates): max split = 7  bound = 7
+coherent EXHAUSTIVE k=2 m=4 entries 0..1 x block signs (1024 gates): max split = 7  bound = 7
+coherent EXHAUSTIVE k=3 m=3 entries 0..1 x block signs (4096 gates): max split = 19  bound = 19
+NON-coherent +-1 k=2 m=4: max split = 16  (coherent bound 7; exceeding it is expected)
+NON-coherent +-1 k=3 m=4: max split = 64  (coherent bound 37; exceeding it is expected)
+NON-coherent +-1 k=2 m=8: max split = 64  (coherent bound 15; exceeding it is expected)
+total violations of Lemma B1: 0

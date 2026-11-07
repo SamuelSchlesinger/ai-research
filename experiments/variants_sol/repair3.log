@@ -1,0 +1,22 @@
+REPAIR 3 delete 0 free [0]
+CEGIS 2 3 10 learner unsat round 1 points 256
+REPAIR 3 delete 1 free [1]
+CEGIS 2 3 10 learner unknown round 1 points 256
+REPAIR 3 delete 2 free [2]
+CEGIS 2 3 10 learner unsat round 1 points 256
+REPAIR 3 delete 3 free [3]
+CEGIS 2 3 10 learner unsat round 1 points 256
+REPAIR 3 delete 4 free [4]
+CEGIS 2 3 10 learner unsat round 1 points 256
+REPAIR 3 delete 5 free [5]
+CEGIS 2 3 10 learner unsat round 1 points 256
+REPAIR 3 delete 6 free [6]
+CEGIS 2 3 10 learner unsat round 1 points 256
+REPAIR 3 delete 7 free [7]
+CEGIS 2 3 10 learner unsat round 1 points 256
+REPAIR 3 delete 8 free [8]
+CEGIS 2 3 10 learner unsat round 1 points 256
+REPAIR 3 delete 9 free [9]
+CEGIS 2 3 10 learner unsat round 1 points 256
+REPAIR 3 delete 10 free [9]
+CEGIS 2 3 10 learner unsat round 1 points 256

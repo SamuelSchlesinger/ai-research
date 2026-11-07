@@ -1,0 +1,16 @@
+(k,m)=(4,2) n=24 gates=269 formula=270 inputs=13344 correct=True wrong=0 min|P|=16 P==closed_form=True maxcoef=600 t=0s
+(k,m)=(4,3) n=28 gates=333 formula=334 inputs=13344 correct=True wrong=0 min|P|=16 P==closed_form=True maxcoef=664 t=0s
+(k,m)=(4,4) n=32 gates=389 formula=390 inputs=13344 correct=True wrong=0 min|P|=16 P==closed_form=True maxcoef=728 t=0s
+(k,m)=(4,6) n=40 gates=509 formula=510 inputs=13344 correct=True wrong=0 min|P|=16 P==closed_form=True maxcoef=856 t=0s
+(k,m)=(4,8) n=48 gates=629 formula=630 inputs=13344 correct=True wrong=0 min|P|=16 P==closed_form=True maxcoef=984 t=0s
+(k,m)=(5,3) n=47 gates=971 formula=971 inputs=14944 correct=True wrong=0 min|P|=32 P==closed_form=True maxcoef=2448 t=1s
+(k,m)=(5,4) n=52 gates=1098 formula=1098 inputs=14944 correct=True wrong=0 min|P|=32 P==closed_form=True maxcoef=2608 t=1s
+(k,m)=(5,5) n=57 gates=1241 formula=1241 inputs=14944 correct=True wrong=0 min|P|=32 P==closed_form=True maxcoef=2768 t=1s
+(k,m)=(5,6) n=62 gates=1368 formula=1368 inputs=14944 correct=True wrong=0 min|P|=32 P==closed_form=True maxcoef=2928 t=1s
+(k,m)=(6,3) n=82 gates=3076 formula=3076 inputs=18400 correct=True wrong=0 min|P|=64 P==closed_form=True maxcoef=9184 t=4s
+(k,m)=(6,4) n=88 gates=3366 formula=3366 inputs=18400 correct=True wrong=0 min|P|=64 P==closed_form=True maxcoef=9568 t=5s
+(k,m)=(6,5) n=94 gates=3688 formula=3688 inputs=18400 correct=True wrong=0 min|P|=64 P==closed_form=True maxcoef=9952 t=5s
+(k,m)=(6,6) n=100 gates=3978 formula=3978 inputs=18400 correct=True wrong=0 min|P|=64 P==closed_form=True maxcoef=10336 t=6s
+(k,m)=(7,2) n=142 gates=9768 formula=9768 inputs=19824 correct=True wrong=0 min|P|=128 P==closed_form=True maxcoef=34240 t=21s
+(k,m)=(7,3) n=149 gates=10493 formula=10493 inputs=19824 correct=True wrong=0 min|P|=128 P==closed_form=True maxcoef=35136 t=25s
+(k,m)=(8,1) n=264 gates=34774 formula=34774 inputs=15280 correct=True wrong=0 min|P|=256 P==closed_form=True maxcoef=132480 t=147s

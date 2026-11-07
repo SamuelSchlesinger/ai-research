@@ -1,0 +1,7 @@
+EXACT blocksym k=2 m=3 S=0: UNSAT (0.1s)
+EXACT blocksym k=2 m=3 S=1: UNSAT (0.2s)
+EXACT blocksym k=2 m=3 S=2: UNSAT (0.4s)
+EXACT blocksym k=2 m=3 S=3: UNSAT (1.1s)
+EXACT blocksym k=2 m=3 S=4: UNSAT (6.7s)
+EXACT blocksym k=2 m=3 S=5: UNSAT (372.5s)
+EXACT blocksym k=2 m=3 S=6: stopped by me after ~14 min (undecided)

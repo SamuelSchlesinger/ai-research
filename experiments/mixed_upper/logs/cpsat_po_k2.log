@@ -1,0 +1,4 @@
+k=2 tsupp=4 W=6 status=OPTIMAL slope=3.0 bound=3.0 time=1s
+  S= 10 terms [('0100', -2), ('0001', -6)]
+  S= 01 terms [('0010', -6), ('0001', -6)]
+  S= 11 terms [('0001', 6)]

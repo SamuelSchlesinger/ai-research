@@ -1,0 +1,6 @@
+ANDREEV k=2 m=3 S=3 cls=bsreduced tables=0101,0011 intaddr=None sym=True: UNSAT (1.0s) {}
+ANDREEV k=2 m=3 S=4 cls=bsreduced tables=0101,0011 intaddr=None sym=True: UNSAT (108.3s) {}
+ANDREEV k=2 m=3 S=5 cls=bsreduced tables=0101,0011 intaddr=None sym=True: SAT (30.1s) {} verified exactly on all 64 points
+ANDREEV k=2 m=3 S=6 cls=bsreduced tables=0101,0011 intaddr=None sym=True: SAT (11.5s) {} verified exactly on all 64 points
+
+[exited with code 0]

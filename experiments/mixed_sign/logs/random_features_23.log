@@ -1,0 +1,6 @@
+k=2 m=3 points=1024 class=blocksym : ~96 random gates give exact representation (>=50% of 5 draws)
+k=2 m=3 points=1024 class=coherent : ~416 random gates give exact representation (>=50% of 5 draws)
+k=2 m=3 points=1024 class=mixed    : ~416 random gates give exact representation (>=50% of 5 draws)
+k=2 m=3 points=1024 class=pm1      : ~288 random gates give exact representation (>=50% of 5 draws)
+
+[exited with code 0]

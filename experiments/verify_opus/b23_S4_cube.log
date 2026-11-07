@@ -1,0 +1,3 @@
+blocksym k=2 m=3 S=4: UNKNOWN [3602.1s] {'cubes': 32, 'cube_times_max': 3599.1, 'cube_times_sum': 28789.7}
+RESULT blocksym k=2 m=3 n=10 points=256: S=4 -> UNKNOWN
+   note: blocksym is a restriction; its lower bounds do not transfer to general circuits

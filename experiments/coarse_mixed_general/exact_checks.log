@@ -1,0 +1,301 @@
+{
+  "mixed44_cover": {
+    "masks": 64,
+    "addresses": 256,
+    "integer_constant": 1568
+  },
+  "Authors": "Christian Reitwiessner",
+  "integer_gadget_checks": 24576,
+  "central_cover_checks": [
+    {
+      "M": 2,
+      "masks": 2,
+      "coverage": 1
+    },
+    {
+      "M": 4,
+      "masks": 8,
+      "coverage": 3
+    },
+    {
+      "M": 6,
+      "masks": 32,
+      "coverage": 10
+    },
+    {
+      "M": 8,
+      "masks": 128,
+      "coverage": 35
+    },
+    {
+      "M": 10,
+      "masks": 512,
+      "coverage": 126
+    }
+  ],
+  "spectral_scan": [
+    {
+      "M": 4,
+      "radius": 0,
+      "layers": 1,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 8
+    },
+    {
+      "M": 4,
+      "radius": 1,
+      "layers": 3,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 8
+    },
+    {
+      "M": 6,
+      "radius": 0,
+      "layers": 1,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 32
+    },
+    {
+      "M": 6,
+      "radius": 1,
+      "layers": 3,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 32
+    },
+    {
+      "M": 6,
+      "radius": 2,
+      "layers": 5,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 32
+    },
+    {
+      "M": 8,
+      "radius": 0,
+      "layers": 1,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 128
+    },
+    {
+      "M": 8,
+      "radius": 1,
+      "layers": 3,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 128
+    },
+    {
+      "M": 8,
+      "radius": 2,
+      "layers": 5,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 128
+    },
+    {
+      "M": 8,
+      "radius": 3,
+      "layers": 7,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 128
+    },
+    {
+      "M": 10,
+      "radius": 0,
+      "layers": 1,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 512
+    },
+    {
+      "M": 10,
+      "radius": 1,
+      "layers": 3,
+      "zero_even_degrees": [
+        8
+      ],
+      "constant_coverage_support_lower": null
+    },
+    {
+      "M": 10,
+      "radius": 2,
+      "layers": 5,
+      "zero_even_degrees": [
+        4
+      ],
+      "constant_coverage_support_lower": null
+    },
+    {
+      "M": 10,
+      "radius": 3,
+      "layers": 7,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 512
+    },
+    {
+      "M": 12,
+      "radius": 0,
+      "layers": 1,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 2048
+    },
+    {
+      "M": 12,
+      "radius": 1,
+      "layers": 3,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 2048
+    },
+    {
+      "M": 12,
+      "radius": 2,
+      "layers": 5,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 2048
+    },
+    {
+      "M": 12,
+      "radius": 3,
+      "layers": 7,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 2048
+    },
+    {
+      "M": 16,
+      "radius": 0,
+      "layers": 1,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 32768
+    },
+    {
+      "M": 16,
+      "radius": 1,
+      "layers": 3,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 32768
+    },
+    {
+      "M": 16,
+      "radius": 2,
+      "layers": 5,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 32768
+    },
+    {
+      "M": 16,
+      "radius": 3,
+      "layers": 7,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 32768
+    },
+    {
+      "M": 24,
+      "radius": 0,
+      "layers": 1,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 8388608
+    },
+    {
+      "M": 24,
+      "radius": 1,
+      "layers": 3,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 8388608
+    },
+    {
+      "M": 24,
+      "radius": 2,
+      "layers": 5,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 8388608
+    },
+    {
+      "M": 24,
+      "radius": 3,
+      "layers": 7,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 8388608
+    },
+    {
+      "M": 32,
+      "radius": 0,
+      "layers": 1,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 2147483648
+    },
+    {
+      "M": 32,
+      "radius": 1,
+      "layers": 3,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 2147483648
+    },
+    {
+      "M": 32,
+      "radius": 2,
+      "layers": 5,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 2147483648
+    },
+    {
+      "M": 32,
+      "radius": 3,
+      "layers": 7,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 2147483648
+    },
+    {
+      "M": 48,
+      "radius": 0,
+      "layers": 1,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 140737488355328
+    },
+    {
+      "M": 48,
+      "radius": 1,
+      "layers": 3,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 140737488355328
+    },
+    {
+      "M": 48,
+      "radius": 2,
+      "layers": 5,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 140737488355328
+    },
+    {
+      "M": 48,
+      "radius": 3,
+      "layers": 7,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 140737488355328
+    },
+    {
+      "M": 64,
+      "radius": 0,
+      "layers": 1,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 9223372036854775808
+    },
+    {
+      "M": 64,
+      "radius": 1,
+      "layers": 3,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 9223372036854775808
+    },
+    {
+      "M": 64,
+      "radius": 2,
+      "layers": 5,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 9223372036854775808
+    },
+    {
+      "M": 64,
+      "radius": 3,
+      "layers": 7,
+      "zero_even_degrees": [],
+      "constant_coverage_support_lower": 9223372036854775808
+    }
+  ]
+}

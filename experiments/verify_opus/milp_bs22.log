@@ -1,0 +1,1 @@
+milp blocksym k=2 m=2: stopped S=2 Wb=10268 Wt=262145 trace 0:UNSAT[0.0s] 1:UNSAT[0.2s] 2:UNKNOWN[3600.5s]

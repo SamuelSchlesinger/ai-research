@@ -1,0 +1,4 @@
+k=3 extra= counts=3:2,5:2,6:2 W=12 status=INFEASIBLE time=7s
+k=3 extra= counts=3:2,5:2,6:2,7:2 W=12 status=INFEASIBLE time=7s
+k=3 extra= counts=1:2,3:2,5:2,6:2 W=12 status=INFEASIBLE time=12s
+k=3 extra= counts=3:2,5:2 W=12 status=INFEASIBLE time=5s

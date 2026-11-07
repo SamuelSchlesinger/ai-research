@@ -1,0 +1,9 @@
+sym+sym2 | RESULT blocksym k=2 m=4 S=3 UNSAT time=3.9s cpu=1.7s cegar_rounds=1 points_used=400/400
+sym+sym2+onesided | RESULT blocksym k=2 m=3 S=3 UNSAT time=6.8s cpu=3.4s cegar_rounds=1 points_used=256/256
+sym+sym2 | RESULT blocksym k=2 m=3 S=3 UNSAT time=6.9s cpu=2.8s cegar_rounds=1 points_used=256/256
+sym+sym2 | RESULT blocksym k=2 m=5 S=3 UNSAT time=14.5s cpu=5.4s cegar_rounds=1 points_used=576/576
+sym+sym2+onesided | RESULT blocksym k=2 m=4 S=3 UNSAT time=14.9s cpu=6.0s cegar_rounds=1 points_used=400/400
+sym+sym2 | RESULT blocksym k=2 m=6 S=3 UNSAT time=16.4s cpu=6.2s cegar_rounds=1 points_used=784/784
+sym_only | RESULT blocksym k=2 m=5 S=3 UNSAT time=24.7s cpu=9.9s cegar_rounds=1 points_used=576/576
+sym+sym2+onesided | RESULT blocksym k=2 m=5 S=3 UNSAT time=27.0s cpu=10.8s cegar_rounds=1 points_used=576/576
+sym+sym2+onesided | RESULT blocksym k=2 m=6 S=3 UNSAT time=32.9s cpu=15.0s cegar_rounds=1 points_used=784/784

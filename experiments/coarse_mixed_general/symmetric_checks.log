@@ -1,0 +1,1 @@
+{'Authors': 'Christian Reitwiessner', 'terms': [{'type': (1, 1), 'radius': 0, 'masks': 64, 'weight': '3/1568'}, {'type': (1, 1), 'radius': 1, 'masks': 64, 'weight': '1/392'}, {'type': (1, 1), 'radius': 3, 'masks': 64, 'weight': '3/224'}], 'unmerged_bottoms': 544, 'merged_bottoms': 416, 'total_with_top': 417, 'exact_checks': 4096}

@@ -1,0 +1,19 @@
+k=2 mode=half P=4 periods=2,4 points=4096 atoms=261600
+    it 0: active 0 obj 25600000.00000 slack 2.56e+03 add 1500
+    it 1: active 1500 obj 2.00000 slack 0 add 1500
+    it 2: active 3000 obj 2.00000 slack 0 add 1500
+    it 3: stalled at obj 2.00000
+  rw it 0: support 15 slope 10.500 active 4500 (55s)
+    it 0: active 4500 obj 8.85592 slack 0 add 0
+  rw it 1: support 9 slope 5.500 active 4500 (75s)
+    it 0: active 4500 obj 5.22581 slack 0 add 0
+  rw it 2: support 7 slope 4.500 active 4500 (97s)
+    it 0: active 4500 obj 4.49276 slack 0 add 0
+  rw it 3: support 7 slope 4.500 active 4500 (118s)
+pruned slope 3.0 atoms 5
+   p=4 beta=(2, 2, 2, 2) alpha=(0, 1, 2, 0) r=2 cost=1.000
+   p=4 beta=(0, 0, 2, 2) alpha=(3, 0, 1, 1) r=3 cost=0.500
+   p=4 beta=(2, 2, 0, 0) alpha=(3, 1, 0, 1) r=1 cost=0.500
+   p=4 beta=(2, 2, 0, 0) alpha=(0, 1, 2, 0) r=0 cost=0.500
+   p=4 beta=(0, 0, 2, 2) alpha=(3, 1, 0, 3) r=0 cost=0.500
+time 119s

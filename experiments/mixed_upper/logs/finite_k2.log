@@ -1,0 +1,142 @@
+  MILP over 20 gates (8 directions): 3  status ok dual bound 3.0
+RESULT k=2 m=1 pool=axis heuristic=3 milp=3 time=1s
+  MILP over 16 gates (4 directions): 3  status ok dual bound 2.9999999999999996
+RESULT k=2 m=1 pool=bsrich heuristic=3 milp=3 time=0s
+  MILP over 12 gates (4 directions): 3  status ok dual bound 3.0
+RESULT k=2 m=1 pool=half heuristic=3 milp=3 time=0s
+  MILP over 44 gates (12 directions): 5  status ok dual bound 4.999999999999991
+RESULT k=2 m=2 pool=axis heuristic=6 milp=5 time=5s
+  MILP over 56 gates (14 directions): 4  status ok dual bound 3.999999999999965
+RESULT k=2 m=2 pool=bsrich heuristic=4 milp=4 time=3s
+  MILP over 64 gates (16 directions): 6  status ok dual bound 5.999999999999987
+RESULT k=2 m=2 pool=half heuristic=6 milp=6 time=22s
+  MILP over 60 gates (12 directions): 11  status ok dual bound 10.999999999999995
+RESULT k=2 m=3 pool=axis heuristic=17 milp=11 time=239s
+  MILP over 76 gates (14 directions): 11  status ok dual bound 7.0
+RESULT k=2 m=3 pool=bsrich heuristic=17 milp=11 time=302s
+  MILP over 396 gates (76 directions): 14  status ok dual bound 1.0
+RESULT k=2 m=3 pool=half heuristic=37 milp=14 time=316s
+  MILP over 76 gates (12 directions): 12  status ok dual bound 9.0
+RESULT k=2 m=4 pool=axis heuristic=12 milp=12 time=301s
+  MILP over 253 gates (29 directions): 10  status ok dual bound 3.0
+RESULT k=2 m=4 pool=bsrich heuristic=28 milp=10 time=306s
+  MILP over 380 gates (52 directions): 13  status ok dual bound 1.0
+RESULT k=2 m=4 pool=half heuristic=20 milp=13 time=324s
+  MILP over 92 gates (12 directions): 17  status ok dual bound 8.0
+  MILP circuit exact certificate True min slack (scaled) 1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[0, 1] theta=2 topw=4000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[0, 1] theta=4 topw=4000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[0, 1] theta=6 topw=4000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[0, 1] theta=1 topw=-6000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[0, 1] theta=3 topw=-6000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[0, 1] theta=5 topw=-6000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, 0] theta=2 topw=-6000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, 0] theta=4 topw=-6000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, 0] theta=6 topw=-6000000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[1, 0] theta=1 topw=4000000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[1, 0] theta=3 topw=4000000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[1, 0] theta=5 topw=4000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, 1] theta=2 topw=6000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, 1] theta=4 topw=6000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, 1] theta=6 topw=6000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, 1] theta=8 topw=6000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, 1] theta=10 topw=6000000/1000000
+RESULT k=2 m=5 pool=axis heuristic=19 milp=17 time=303s
+  MILP over 365 gates (33 directions): 19  status ok dual bound 3.0
+  MILP circuit exact certificate True min slack (scaled) 1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[0, 1] theta=1 topw=-12000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[0, 1] theta=3 topw=-12000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[0, 1] theta=5 topw=-12000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[0, 1] theta=2 topw=16000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[0, 1] theta=4 topw=16000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[0, 1] theta=6 topw=16000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, -1] theta=0 topw=-6000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, -1] theta=2 topw=-6000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, -1] theta=4 topw=-6000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, -1] theta=0 topw=6000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, -1] theta=1 topw=0/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, -1] theta=2 topw=6000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, -1] theta=4 topw=6000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 0] theta=2 topw=8000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 0] theta=4 topw=8000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 0] theta=6 topw=8000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 1] theta=5 topw=0/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 1] theta=6 topw=-6000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, 1] theta=6 topw=6000000/1000000
+RESULT k=2 m=5 pool=bsrich heuristic=53 milp=19 time=317s
+  MILP over 856 gates (103 directions): 52  status ok dual bound 1.0
+  MILP circuit exact certificate True min slack (scaled) 1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[0, 0, 1, -1] theta=2 topw=1000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[0, 0, 1, -1] theta=1 topw=-1000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[0, 0, 1, -1] theta=1 topw=1000000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[0, 0, 1, -1] theta=2 topw=-1000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[0, 0, 1, 1] theta=2 topw=1000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[0, 0, 1, 1] theta=4 topw=1000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[0, 0, 1, 1] theta=3 topw=-1000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[0, 0, 1, 1] theta=5 topw=-1000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[0, 0, 1, 1] theta=3 topw=1000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[0, 0, 1, 1] theta=5 topw=1000000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[0, 0, 1, 1] theta=2 topw=-1000000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[0, 0, 1, 1] theta=4 topw=-1000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, -1, -1, -1] theta=-2 topw=500000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, -1, -1, -1] theta=0 topw=500000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[1, -1, -1, -1] theta=-2 topw=-500000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[1, -1, -1, -1] theta=0 topw=-500000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, -1, -1, 1] theta=1 topw=500000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, -1, -1, 1] theta=1 topw=-500000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, -1, 0, 0] theta=-1 topw=-1000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, -1, 0, 0] theta=1 topw=-1000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, -1, 0, 0] theta=3 topw=-1000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, -1, 0, 0] theta=0 topw=-3500000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, -1, 0, 0] theta=2 topw=-3500000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, -1, 0, 0] theta=4 topw=-3500000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, -1, 0, 0] theta=-1 topw=-1000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, -1, 0, 0] theta=1 topw=-1000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, -1, 0, 0] theta=3 topw=-1000000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[1, -1, 0, 0] theta=0 topw=-3500000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[1, -1, 0, 0] theta=2 topw=-3500000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[1, -1, 0, 0] theta=4 topw=-3500000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, -1, 1, -1] theta=2 topw=500000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[1, -1, 1, -1] theta=2 topw=-500000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, -1, 1, 1] theta=3 topw=500000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, -1, 1, 1] theta=5 topw=500000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, -1, 1, 1] theta=3 topw=-500000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, -1, 1, 1] theta=5 topw=-500000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 1, -1, -1] theta=1 topw=500000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, 1, -1, -1] theta=1 topw=-500000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 1, -1, 1] theta=3 topw=500000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, 1, -1, 1] theta=3 topw=-500000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, 1, -1, 1] theta=2 topw=500000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, 1, -1, 1] theta=4 topw=500000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[1, 1, -1, 1] theta=2 topw=-500000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[1, 1, -1, 1] theta=4 topw=-500000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 1, 1, -1] theta=3 topw=500000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 1, 1, -1] theta=5 topw=500000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, 1, 1, -1] theta=3 topw=-500000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[1, 1, 1, -1] theta=5 topw=-500000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, 1, 1, -1] theta=4 topw=500000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[1, 1, 1, -1] theta=4 topw=-500000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, 1, 1, 1] theta=6 topw=500000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[1, 1, 1, 1] theta=6 topw=-500000/1000000
+RESULT k=2 m=5 pool=half heuristic=75 milp=52 time=697s
+  MILP over 108 gates (12 directions): 18  status ok dual bound 7.0
+  MILP circuit exact certificate True min slack (scaled) 1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[0, 1] theta=2 topw=6000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[0, 1] theta=4 topw=6000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[0, 1] theta=6 topw=6000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[0, 1] theta=2 topw=4000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[0, 1] theta=4 topw=4000000/1000000
+    MILPgate alpha=[0, 0, 1, 0] beta=[0, 1] theta=6 topw=4000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 0] theta=2 topw=6000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 0] theta=4 topw=6000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 0] theta=6 topw=6000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, 0] theta=2 topw=4000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, 0] theta=4 topw=4000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, 0] theta=6 topw=4000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 1] theta=2 topw=-6000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 1] theta=4 topw=-6000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 1] theta=6 topw=-6000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 1] theta=8 topw=-6000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 1] theta=10 topw=-6000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 1] theta=12 topw=-6000000/1000000
+RESULT k=2 m=6 pool=axis heuristic=27 milp=18 time=302s

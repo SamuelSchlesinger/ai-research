@@ -1,0 +1,1 @@
+V0_nosym | RESULT blocksym k=2 m=5 S=3 UNSAT time=144.3s cpu=63.2s cegar_rounds=1 points_used=576/576

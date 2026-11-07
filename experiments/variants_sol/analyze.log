@@ -1,0 +1,8 @@
+NEIGHBOR 1 errors 0 domain 64
+NEIGHBOR 2 errors 0 domain 256
+NEIGHBOR 3 errors 56 domain 1024
+BAD_BLOCK_PAIRS {('011', '000'): 4, ('011', '100'): 4, ('011', '110'): 4, ('011', '101'): 4, ('100', '011'): 8, ('010', '011'): 8, ('001', '011'): 8, ('011', '011'): 8, ('111', '011'): 8}
+NEIGHBOR 4 errors 608 domain 4096
+KNOWN 3 bottom 11 top 1 {'status': 'VERIFIED', 'seconds': 0.0033596232533454895}
+KNOWN 4 bottom 12 top 1 {'status': 'VERIFIED', 'seconds': 0.012590648606419563}
+KNOWN 6 bottom 18 top 1 {'status': 'VERIFIED', 'seconds': 0.17895599268376827}

@@ -1,0 +1,8 @@
+cpsat blocksym k=1 m=1: minimum S=1  bounds Wb=26 Wt=89  trace 0:UNSAT[0.0s] 1:SAT[0.0s]
+   circuit: {'bottom': [([-1, 1, -1], 1)], 'v': [-2], 'u': [1, 2, -1], 'tau': 1}
+cpsat blocksym k=1 m=2: minimum S=1  bounds Wb=65 Wt=244  trace 0:UNSAT[0.0s] 1:SAT[0.0s]
+   circuit: {'bottom': [([1, -64, 65], 2)], 'v': [-244], 'u': [123, 1, 122], 'tau': 2}
+cpsat blocksym k=1 m=3: minimum S=2  bounds Wb=170 Wt=3376  trace 0:UNSAT[0.0s] 1:UNSAT[0.0s] 2:SAT[0.0s]
+   circuit: {'bottom': [([170, 1, -56], 3), ([86, 170, -84], 3)], 'v': [3376, 3373], 'u': [-1126, 2, 1125], 'tau': 3376}
+cpsat blocksym k=1 m=4: minimum S=2  bounds Wb=401 Wt=10649  trace 0:UNSAT[0.0s] 1:UNSAT[0.0s] 2:SAT[0.1s]
+   circuit: {'bottom': [([268, -401, 267], 401), ([-1, 133, 134], 401)], 'v': [-10649, -10649], 'u': [10649, 2, 5324], 'tau': 5325}

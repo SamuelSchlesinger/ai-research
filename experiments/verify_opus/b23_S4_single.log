@@ -1,0 +1,3 @@
+blocksym k=2 m=3 S=4: UNKNOWN [3600.1s]
+RESULT blocksym k=2 m=3 n=10 points=256: S=4 -> UNKNOWN
+   note: blocksym is a restriction; its lower bounds do not transfer to general circuits

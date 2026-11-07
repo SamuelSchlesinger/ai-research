@@ -1,0 +1,6 @@
+COHERENT (up-sets, both orientations) m=2: maximal cut-sets=4  cover number=2  LP=1.3333  (m-1=1);  dual weight on boundary=1.333
+COHERENT (up-sets, both orientations) m=3: maximal cut-sets=24  cover number=3  LP=2.0000  (m-1=2);  dual weight on boundary=2.000
+COHERENT (up-sets, both orientations) m=4: maximal cut-sets=100  cover number=4  LP=3.0000  (m-1=3);  dual weight on boundary=3.000
+COHERENT (up-sets, both orientations) m=5: maximal cut-sets=388  cover number=4  LP=4.0000  (m-1=4);  dual weight on boundary=4.000
+COHERENT (up-sets, both orientations) m=6: maximal cut-sets=1484  cover number=5  LP=5.0000  (m-1=5);  dual weight on boundary=5.000
+COHERENT (up-sets, both orientations) m=7: maximal cut-sets=5672  cover number=6  LP=6.0000  (m-1=6);  dual weight on boundary=6.000

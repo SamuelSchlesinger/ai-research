@@ -1,0 +1,53 @@
+k=2 m=4 pool=bsrich points=400 gates=1280
+  L1 support 79  pruned best 28  (7s)
+  exact certificate True
+    gate alpha=[0, 1, 0, 0] beta=[1, 0] theta=2
+    gate alpha=[0, 1, 0, 0] beta=[1, 0] theta=4
+    gate alpha=[1, 0, 0, 0] beta=[1, 0] theta=2
+    gate alpha=[1, 0, 0, 0] beta=[1, 0] theta=4
+    gate alpha=[0, 0, 0, 1] beta=[1, 1] theta=3
+    gate alpha=[0, 0, 0, 1] beta=[1, 1] theta=7
+    gate alpha=[0, 0, 1, 0] beta=[1, 1] theta=3
+    gate alpha=[0, 0, 1, 0] beta=[1, 1] theta=7
+    gate alpha=[0, 1, 0, 0] beta=[1, 1] theta=4
+    gate alpha=[0, 1, 0, 0] beta=[1, 1] theta=5
+    gate alpha=[0, 1, 0, 0] beta=[1, 1] theta=6
+    gate alpha=[1, 0, 0, 0] beta=[1, 1] theta=4
+    gate alpha=[1, 0, 0, 0] beta=[1, 1] theta=5
+    gate alpha=[1, 0, 0, 0] beta=[1, 1] theta=6
+    gate alpha=[0, 0, 1, 0] beta=[1, 2] theta=6
+    gate alpha=[0, 0, 1, 0] beta=[1, 2] theta=7
+    gate alpha=[0, 0, 1, 0] beta=[1, 2] theta=8
+    gate alpha=[1, 0, 0, 0] beta=[1, 2] theta=5
+    gate alpha=[1, 0, 0, 0] beta=[1, 2] theta=9
+    gate alpha=[0, 0, 1, 0] beta=[2, -1] theta=1
+    gate alpha=[0, 0, 1, 0] beta=[2, -1] theta=5
+    gate alpha=[0, 1, 0, 0] beta=[2, -1] theta=2
+    gate alpha=[0, 1, 0, 0] beta=[2, -1] theta=4
+    gate alpha=[1, 0, 0, 0] beta=[2, -1] theta=3
+    gate alpha=[0, 1, 0, 0] beta=[2, 1] theta=6
+    gate alpha=[0, 1, 0, 0] beta=[2, 1] theta=7
+    gate alpha=[0, 1, 0, 0] beta=[2, 1] theta=8
+    gate alpha=[1, 0, 0, 0] beta=[2, 1] theta=9
+  MILP over 253 gates (29 directions): 10  status ok dual bound 3.0
+  MILP circuit exact certificate True min slack (scaled) 1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[0, 1] theta=2 topw=-12000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[0, 1] theta=4 topw=-12000000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[0, 1] theta=2 topw=-16000000/1000000
+    MILPgate alpha=[1, 0, 0, 0] beta=[0, 1] theta=4 topw=-16000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, -1] theta=1 topw=6000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, -1] theta=1 topw=-6000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, 0] theta=2 topw=8000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, 0] theta=4 topw=8000000/1000000
+    MILPgate alpha=[0, 0, 0, 1] beta=[1, 1] theta=5 topw=6000000/1000000
+    MILPgate alpha=[0, 1, 0, 0] beta=[1, 1] theta=5 topw=-6000000/1000000
+    top linear: mu=[16000000, 12000000, 2000000, 0] nu=[-4000000, 14000000] t0=15000000 (all /1000000)
+RESULT k=2 m=4 pool=bsrich heuristic=28 milp=10 time=307s
+HighsMipSolverData::transformNewIntegerFeasibleSolution tmpSolver.run();
+HighsMipSolverData::transformNewIntegerFeasibleSolution tmpSolver.run();
+HighsMipSolverData::transformNewIntegerFeasibleSolution tmpSolver.run();
+HighsMipSolverData::transformNewIntegerFeasibleSolution tmpSolver.run();
+HighsMipSolverData::transformNewIntegerFeasibleSolution tmpSolver.run();
+HighsMipSolverData::transformNewIntegerFeasibleSolution tmpSolver.run();
+HighsMipSolverData::transformNewIntegerFeasibleSolution tmpSolver.run();
+HighsMipSolverData::transformNewIntegerFeasibleSolution tmpSolver.run();

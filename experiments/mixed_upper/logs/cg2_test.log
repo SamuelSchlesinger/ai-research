@@ -1,0 +1,4 @@
+k=2 mode=half P=4 periods=2,4 points=4096 atoms=261600
+    it 0: active 0 obj 25600000.00000 slack 2.56e+03 add 1500
+    it 1: active 1500 obj 2.00000 slack 0 add 1500
+    it 2: active 3000 obj 2.00000 slack 0 add 1500

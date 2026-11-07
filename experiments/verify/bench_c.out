@@ -1,0 +1,8 @@
+S4_twosided_full | RESULT full k=2 m=1 S=3 SAT time=1.1s cpu=0.3s cegar_rounds=1 points_used=64/64 verified_exact=True(64 inputs)
+S4 | RESULT blocksym k=2 m=5 S=4 UNSAT time=50.7s cpu=19.5s cegar_rounds=1 points_used=576/576
+S4 | RESULT blocksym k=2 m=6 S=4 UNSAT time=139.6s cpu=51.3s cegar_rounds=1 points_used=784/784
+S4 | RESULT blocksym k=2 m=4 S=4 UNSAT time=537.9s cpu=199.1s cegar_rounds=1 points_used=400/400
+S4 | RESULT blocksym k=2 m=3 S=4 UNSAT time=1045.0s cpu=398.5s cegar_rounds=1 points_used=256/256
+S5 | RESULT blocksym k=2 m=3 S=5 UNKNOWN time=1500.1s cpu=627.4s cegar_rounds=1 points_used=256/256
+S4_nosym2 | RESULT blocksym k=2 m=3 S=4 UNKNOWN time=1500.1s cpu=638.7s cegar_rounds=1 points_used=256/256
+S5 | RESULT blocksym k=2 m=4 S=5 UNKNOWN time=1500.1s cpu=632.1s cegar_rounds=1 points_used=400/400

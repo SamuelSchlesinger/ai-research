@@ -1,0 +1,2 @@
+full k=2 m=3 S=3: UNKNOWN [3606.6s] {'cubes': 16, 'cube_times_max': 3597.3, 'cube_times_sum': 21577.7}
+RESULT full k=2 m=3 n=10 points=1024: S=3 -> UNKNOWN

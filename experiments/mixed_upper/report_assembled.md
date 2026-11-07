@@ -1,0 +1,340 @@
+# Mixed-sign depth-two upper bounds for Andreev's function: pool LPs, periodic constructions, obstructions
+
+Directory: `/tmp/andreev_gap/mixed_upper/`. All scripts run with `python3 -I` and add `/tmp/pydeps` themselves.
+Logs are in `logs/`.
+
+Notation follows the task:
+- $N=2^k$ table bits $x_c$, and $k$ address blocks of $m$ bits, with $s_i=|a_i|$, $b=s\bmod 2$, $A=x_b$, $n=N+km$.
+- The table index is $c=\sum_i b_i2^i$; for $k=2$ a table is written $(x_{00},x_{10},x_{01},x_{11})$.
+- $e_S=t_S\bmod 2$ with $t_S=\sum_{i\in S}s_i$, and $\chi_S=(-1)^{t_S}=1-2e_S$.
+- A *part-symmetric* gate has weights that are constant on each part of a fixed partition of every block; *block-symmetric* is the case of one part per block; *two halves* means two parts of sizes $\lceil m/2\rceil,\lfloor m/2\rfloor$ with counts $(u_i,w_i)$.
+- The *slope* of a family at fixed $k$ is $\lim S(k,m)/m$.
+
+Labels: **[PROVED]** complete proof here; **[VERIFIED]** exact computation (exact integer/rational arithmetic, or a CP-SAT/LP certificate with the stated bounds); **[EVIDENCE]** heuristic search only; **[CONJECTURE]**.
+
+## 0. Summary
+
+**Bottom line.**
+- I found **no mixed-sign family that beats the coherent constructions**, at fixed $k$ or in the balanced case.
+- I found, and proved, a new explicit **block-symmetric** family for every $k$ (Theorem 3.1). It contains Theorem G at $k=2$, and at $k=3$ it needs less than half the gates of the earlier constructions. For $k\ge4$ it is worse than (d'').
+- Most of the work is a reduction that turns the fixed-$k$ slope question into a finite problem, plus a set of proved obstructions explaining why mixed signs did not help in it.
+
+### Positive results
+1. **Periodic reduction** [PROVED] (§1).
+   - Staircases whose coefficients are periodic in the threshold have *no boundary effects*. The top sum of such a circuit is exactly $D(x)+\sum_aw_a((L_a-r_a)\bmod p_a)$ for every $m$.
+   - So the slope at fixed $k$ is the optimum of a finite sparse sign-representation problem on $\{0,1\}^N\times(\mathbb Z/P)^d$. This holds for any partition of the blocks, hence for mixed signs.
+   - Together with a count-vector reduction for part-symmetric gates (Lemma 1.1), it gives exact verification for all $m$ at once.
+2. **Theorem 3.1** [PROVED; VERIFIED].
+   - For all $k,m$ there is a block-symmetric circuit with
+   $$G(k,m)=\sum_{t=1}^k\binom kt2^{k-t}\lceil tm/2\rceil\quad\text{gates},$$
+   bottom weights $0/1$, rational top weights, and top sum exactly $\sum_{c\succeq b}\kappa_{|c|}(x_c-\frac12)$.
+   - $k=2$ gives Theorem G.
+   - $k=3$ gives $12\lceil m/2\rceil+6m+\lceil3m/2\rceil$, slope $13.5$ against $18$ for (d''). For example, 135 against 312 (d') and 339 (d'') at $m=10$.
+   - Verified exactly: bit-exhaustive for $n\le20$, and on all count vectors for $k=2$, $m\le30$; $k=3$, $m\le12$; $k=4$, $m\le2$.
+
+### The key question: no
+3. **At fixed $k$, size cannot grow slower than $m$ in the periodic world, mixed or not** [PROVED, Lemma 2.1].
+   - Every periodic construction has slope $\ge k/2$, the conjectured parity value.
+   - At $k=2$ this is slope $\ge1$, the slope of the coherent lower bound $m-1$. So inside periodic constructions **mixed signs cannot beat the slope of the coherent lower bound**.
+4. **Beating Theorem G's slope 3 at $k=2$ needs fluctuating atoms** [PROVED, Theorem 2.4 + Lemma 2.2].
+   - Pure-parity constructions, of any sign pattern, need slope $\ge3$. Mixed signs make no signal-carrying atom cheaper (Lemma 2.6).
+   - Every unrestricted search over fluctuating and mixed atoms returned slope 3, using pure parity atoms only (§4.1): two halves at period 4 (261 600 atoms) and block-symmetric at periods up to 8 (2.08 million atoms). When the pure atom on $\{1,2\}$ was excluded, the best was $3.5$, with three fluctuating $(1,-1)$ atoms. no solution found (UNKNOWN after 700 s; inconclusive)SUM
+5. **Balanced case** [PROVED bounds, §5].
+   - Pure-parity constructions of any sign pattern cost $\ge n^2/16$. They pay **no $Y$-range cost**, so they beat $\frac5{16}n^2$ iff the $|S|$-weighted number of gadgets per character stays below 5 with cheap $D$.
+   - Data on $\bar n$: 1.5 at $k=2$ (exact); 1.75 at $k=3$ with arbitrary amplitudes, 2.25 realised; 1.875 at $k=4$ with arbitrary amplitudes (PLACEHOLDER-K4S). Whether $\bar n$ stays bounded with *realisable* (threshold) amplitudes is open; it is the most concrete route to a better constant.
+   - $o(n^2)$ needs fluctuating atoms with periods $n^{\Omega(\epsilon)}$ that are heavily mixed ($\gtrsim\epsilon\log n$ patterns per block). Bounded-view designs are capped by the existing lower bounds.
+
+### Other proved obstructions
+- One monomial gadget per character is impossible for every $k\ge2$ (Lemma 2.5).
+- One gadget per character with arbitrary amplitudes is impossible at $k=2$ (proved) and at $k=3$ (CP-SAT).
+- No hyperplane in count space is parity-pure for two characters (Lemma 2.7), which rules out minterm-style designs.
+
+### LP/MILP data
+- §4.1: slopes per atom class.
+- §4.2: finite-$m$ pool minima for $k=2$. The mixed pool never beats the block-symmetric pools.
+
+---
+
+## 1. Reductions used throughout
+
+### Lemma 1.1 (count-vector reduction) [PROVED]
+Fix a partition of every block into parts $P_{i,1},\dots,P_{i,r_i}$ and let every bottom gate be part-symmetric. Then the circuit computes $A_{k,m}$ on all $2^n$ inputs iff it does so on every pair $(x,c)$, where $c_{i,p}\in\{0,\dots,|P_{i,p}|\}$ are the part counts. The top gate may be assumed part-symmetric as well.
+
+*Proof.*
+1. $A$ depends on $a$ only through $s_i=\sum_pc_{i,p}$, and every bottom gate only through $c$.
+2. Let $G$ be the group of bit permutations that map every part to itself. For $g\in G$, the circuit $z\mapsto C(gz)$ has the same bottom gates and computes $A(gz)=A(z)$; only the top gate's raw-input weights are permuted.
+3. Scale so that the top sum $T$ satisfies $(2A-1)T\ge1$. Then $\bar T(z)=\frac1{|G|}\sum_gT(gz)$ also satisfies $(2A(z)-1)\bar T(z)\ge1$. Its raw-input weights are constant on parts, so $\bar T$ depends on $a$ only through $c$.
+4. Every count vector is realised by some input. ∎
+
+The bit-level circuit gives weight $\beta_{i,p}$ to every bit of part $P_{i,p}$. All verification below is done on count vectors, and additionally bit-by-bit for $n\le20$.
+
+### Lemma 1.2 (periodic atoms have no boundary) [PROVED]
+An *atom* is $(\beta,\alpha,p,r,w)$: the gates $[L\ge\theta]$ with $L=\beta\cdot c+\alpha\cdot x$, for all $\theta\in(L_{\min},L_{\max}]$ with $\theta\equiv r\pmod p$, each with top weight $-wp$. Together with the free linear term $wL$ and a constant, they contribute **exactly**
+$$w\,\big((L-r)\bmod p\big)\qquad\text{on the whole box, for every }m .$$
+*Proof.* $(L-r)\bmod p=L-r-p\lfloor (L_{\min}-r)/p\rfloor-p\,\#\{\theta\in(L_{\min},L]:\theta\equiv r\}$. ∎
+
+The atom has $\lfloor (L_{\max}-r)/p\rfloor-\lfloor (L_{\min}-r)/p\rfloor=(\|\beta\|_1h+\operatorname{range}(\alpha\cdot x))/p+O(1)$ gates, where $h$ is the part size.
+
+### Theorem 1.3 (periodic reduction) [PROVED]
+Let $F(x,c)=D(x)+\sum_aw_a((L_a-r_a)\bmod p_a)$ and $P=\operatorname{lcm}(2,p_a)$. If $F$ sign-represents $x_b$ with margin on all $x$ and all residues $c\in(\mathbb Z/P)^{\#\text{coords}}$, then for **every** $m$ the atoms, plus gates computing $D(x)$, form a correct circuit with
+$$S(k,m)=\sum_a\Big\lfloor\frac{L^a_{\max}-r_a}{p_a}\Big\rfloor-\Big\lfloor\frac{L^a_{\min}-r_a}{p_a}\Big\rfloor+\mathrm{cost}(D)$$
+gates. Its slope is $\sum_a\|\beta_a\|_1(h/m)/p_a$.
+
+*Proof.* $F$ is $P$-periodic in every count coordinate, and every point of the box is congruent to a residue. Lemma 1.2 shows that the finite circuit's top sum equals $F$ exactly. ∎
+
+So at fixed $k$ the **asymptotic slope question becomes a finite problem**: a sparse sign-representation problem on $\{0,1\}^N\times(\mathbb Z/P)^{\#\text{coords}}$, with costs $\|\beta\|_1(h/m)/p$ per atom. It holds verbatim for mixed signs (two halves etc.). `periodic_lp.py`, `cg2.py` (column generation) and `cpsat_*.py` solve it, and `build_periodic.py` / `realize.py` turn solutions into explicit circuits and verify them exactly.
+
+*Sanity check.* Theorem G of `push_lower` is exactly a periodic construction: five period-2 atoms with single-bit table forms and linear $D$. Re-deriving it from the LP and rebuilding it gives $5,6,11,12,17,18,23,24$ gates for $m=1..8$, all verified bit by bit (`test_realize_k2.py`).
+
+---
+
+## 2. What periodic constructions can and cannot do
+
+### Lemma 2.1 (crossing density: slope $\ge k/2$ for every periodic construction, mixed or not) [PROVED]
+In any periodic construction, every count coordinate $j$ satisfies $\sum_a|\beta_{a,j}|/p_a\ge\frac12$. Hence the slope is at least $\sum_j(h_j/m)/2=k/2$.
+
+*Proof.*
+- Take the dictator table $x_c=c_i$, where $j$ is a coordinate of block $i$. Along a line in direction $e_j$ the target alternates at every step.
+- On a step that crosses no threshold of any atom, $F$ changes by the constant $\nu_j=\sum_aw_a\beta_{a,j}$. So all steps of one of the two orientations ($1\to0$ if $\nu_j\ge0$), i.e. half of all steps, contain a crossing.
+- Atom $a$ crosses a threshold on at most a $|\beta_{a,j}|/p_a$ fraction of the steps. ∎
+
+So **inside the periodic world, mixed signs cannot make the size grow slower than $m$** at fixed $k$. This matches the parity reduction of `mixed_sign` (size $\ge$ par$(km+1)$), and the $k/2$ is exactly the conjectured par$(km)/m$.
+
+### Lemma 2.2 (averaging) [PROVED]
+Let $\bar F(x,e)$ be the average of $F(x,c)$ over all residues $c$ with block parities $e$. If $F$ is correct with margin 1, so is $\bar F$, and
+$$\bar F=D(x)+\sum_S A_S(x)\,e_S,\qquad A_S=\sum_{a:\,S(a)=S}w_a\tfrac{g_a}2\,\epsilon_a(x),\quad \epsilon_a(x)\in\{\pm1\}.$$
+Here $g_a=\gcd\big(p_a,\,2\beta_{a,j},\,\beta_{a,j}-\beta_{a,j'}\ (j,j'\text{ in the same block})\big)$, and $S(a)$ is the set of blocks whose coefficients are $\equiv g_a/2\pmod{g_a}$. If $g_a=1$, atom $a$ contributes nothing to $\bar F$.
+
+*Proof.* The parity class of $0$ is a subgroup $\Lambda_0$. $\beta\cdot\Lambda_0\bmod p$ is generated by $2\beta_{j}$ and by the within-block differences $\beta_j-\beta_{j'}$, so it equals $g\mathbb Z/p$. The average of $(y+h)\bmod p$ over $h\in g\mathbb Z/p$ is $(y\bmod g)+(p-g)/2$. Finally, $\beta\cdot c\equiv\frac g2e_{S(a)}\pmod g$ on the class $e$. ∎
+
+Atoms with $g_a=p_a$ are **pure parity atoms**: they depend on $c$ only through $e$. The others are **fluctuating atoms**: cheaper, at cost $\|\beta\|_1/p$ with $p>g$, but they vary inside each parity class. Every atom contributes at most **one two-valued "parity gadget"** to $\bar F$.
+
+### Lemma 2.3 (all characters are needed) [PROVED]
+Every character $S\ne\emptyset$ must carry at least one atom with $S(a)=S$. Otherwise, for every $x$, $\bar F(x,\cdot)$ lies in a space of dimension $N-1$, which cannot sign-represent all $2^N$ tables. Consequently **pure-parity** constructions have slope at least $\sum_S|S|/2=kN/4$, i.e. at least $N^2/4=n^2/16$ in the balanced case.
+
+### Theorem 2.4 ($k=2$: pure-parity constructions need slope 3; Theorem G is optimal among them) [PROVED; VERIFIED with CP-SAT]
+Let $\bar F=D(x)+A_1e_1+A_2e_2+A_{12}e_{12}$, where each $A_S$ is a sum of $n_S$ two-valued functions $\pm\Delta$ of $x$, arbitrary otherwise. Then at least two of $n_1,n_2,n_{12}$ are $\ge2$.
+
+*Proof.* Write $a,b,c$ for the values of $A_1,A_2,A_{12}$ at a given table. The scores are $E=(0,a+c,b+c,a+b)$ at addresses $00,10,01,11$. The table is representable iff every 1-address scores strictly above every 0-address.
+- **Table 1100.** We need $0>b+c$, $0>a+b$, $a>b$ and $c>b$. If $b>0$, then $a>b>0$ gives $a+b>0$. So $b<0$, and then $|a|<|b|$ and $|c|<|b|$.
+- **Table 1010** (blocks swapped). This gives $a<0$, $|b|<|a|$ and $|c|<|a|$.
+- **Table 0110.** We need $c>a$, $c>b$, $a+c>0$ and $b+c>0$. If $c\le0$, then $a<c\le0$ gives $a+c<0$. So $c>0$, and then $|b|<c$ and $|a|<c$.
+
+Now suppose two of the amplitudes are two-valued.
+- $n_1=n_2=1$: from 1100, $\Delta_1<\Delta_2$; from 1010, $\Delta_2<\Delta_1$.
+- $n_2=n_{12}=1$: from 1100, $\Delta_{12}<\Delta_2$; from 0110, $\Delta_2<\Delta_{12}$.
+- $n_1=n_{12}=1$: symmetric.
+
+Each case is a contradiction. ∎
+
+A pure-parity atom on $S$ costs at least $|S|/2$. So pure-parity constructions have slope at least $2\cdot\frac12+2\cdot\frac12+1=3$, and Theorem G attains it. CP-SAT agrees (`cpsat_parity_only.py --k 2`: optimum 3.0, proved optimal within $|w|\le6$, all 16 table monomials allowed for every character). By Lemma 2.2, **any** periodic construction at $k=2$ has at least two signal atoms on two of the three characters. Only fluctuating atoms could push the slope below 3.
+
+### Lemma 2.5 (one monomial gadget per character is impossible for every $k\ge2$) [PROVED]
+Suppose $A_S=\Delta_S(-1)^{\ell_S(x)}$ with $\ell_S$ linear over GF(2) (period-2 atoms with arbitrary table forms).
+1. The $N-1$ functionals $\ell_S$ on $N$ bits have a nonzero common kernel vector $v$. The tables $x$ and $x\oplus v$ get the same scores, so their 1-sets are nested level sets of one function. This forces $v=e_{c_0}$, and after a translation $c_0=0$.
+2. Now $y=(\ell_S(x))_S$ is a bijection of $x_{-0}$. Each $x_b$ is GF(2)-linear in $y$ and must equal the threshold function $[\sum_{S\cdot b\text{ odd}}\Delta_S(-1)^{y_S}>0]$. A threshold function is a parity only if it is a dictator. So $x_b=y_{S(b)}$ (up to complement), with $\Delta_{S(b)}>\sum_{S\cdot b\text{ odd},\,S\ne S(b)}\Delta_S$, and $b\mapsto S(b)$ is a bijection.
+3. Summing over $b\ne0$ gives $\sum\Delta>(N/2-1)\sum\Delta$, so $N<4$. ∎
+
+### Lemma 2.6 (mixed signs do not make signal atoms cheaper) [PROVED]
+Take any part-symmetric atom whose average carries a signal on $S$ (Lemma 2.2, $g\ge2$). For $i\in S$ every coefficient satisfies $\beta_{i,p}\equiv g/2\pmod g$, so $|\beta_{i,p}|\ge g/2$. Hence its cost is
+$$\sum_{i\in S}\sum_p|\beta_{i,p}|\frac{|P_{i,p}|}{mp}\ \ge\ |S|\frac{g}{2p},$$
+which is exactly the block-symmetric minimum.
+
+Consequences:
+- A *pure* parity atom ($g=p$) on $S$ costs at least $|S|/2$ for **every** sign pattern and every partition.
+- Lemma 2.3 ($\ge kN/4$) and Theorem 2.4 (slope $\ge3$ at $k=2$) hold verbatim for pure-parity constructions with mixed signs: two halves, $s_i$ plus alternating sums $D_i$, any number of views.
+- In the periodic world, mixing can only change the *fluctuation patterns* of the cheap fluctuating atoms.
+
+### Lemma 2.7 (no hyperplane is parity-pure for two characters) [PROVED]
+Let $\Lambda=\beta^\perp\cap\mathbb Z^{d}$ be the lattice of a hyperplane in count space ($d$ coordinates, any partition, primitive $\beta$). Its points have constant $t_S$-parity exactly for those $S$ whose parity functional is $\equiv\beta\pmod2$; that is at most one $S$.
+
+*Proof.* The image of $\Lambda$ in $\mathbb F_2^d$ is $\beta^\perp\bmod2$. The functionals vanishing on it form $\operatorname{span}(\beta\bmod2)$, a space with one nonzero element. ∎
+
+So a single gate can never "see" an address coset. This is why minterm-style designs (one gate per address detected on many cubes) fail, and it explains why every working design cancels wrong-parity contributions through characters.
+
+---
+
+## 3. An explicit family for all $k$: "subcube dominance" (generalises Theorem G; beats the earlier constructions at $k=3$)
+
+The periodic LP at $k=3$ (pure-parity atoms, period 2, single-bit table forms) returned a structured solution. Character $S$ uses exactly the table bits $x_c$ with $c_i=0$ for all $i\in S$. Theorem G at $k=2$ has the same shape: $A_1=2X_{00}+X_{01}$, $A_2=2X_{00}+X_{10}$, $A_{12}=2X_{00}$. The LP also gives linear $D$, and at $k=2,3,4$ (`subcube_k.py`) the weights depend only on $|c|$. This leads to a proof for all $k$.
+
+### Theorem 3.1 [PROVED; VERIFIED]
+Fix weights $\kappa_k=2$ and $\kappa_j=1+\sum_{t=1}^{k-j}\binom{k-j}{t}\kappa_{j+t}$ for $j<k$. For $|c|=j<k$ put $\lambda_c=\kappa_j/2^{k-j}$. The circuit has:
+- **bottom gates** $[\,t_S+x_c\ge 2l\,]$ for every address $c$, every nonempty $S\subseteq\overline{\operatorname{supp}c}$ and $l=1,\dots,\lceil|S|m/2\rceil$. All bottom weights are $0/1$.
+- **top weights** $-2\lambda_c$ on these gates, plus the linear part
+$$\sum_{c,S}\lambda_c\,(t_S+x_c)+\sum_{|c|<k}\lambda_cx_c+\kappa_kx_{1\cdots1}-\tfrac{\kappa_k}2-\tfrac12\sum_{|c|<k}\kappa_{|c|}.$$
+- **output** $[\,\mathrm{top}>0\,]$.
+
+It computes $A_{k,m}$ for every $k,m$ with margin at least $\frac12$, using
+$$G(k,m)=\sum_{t=1}^{k}\binom kt2^{k-t}\Big\lceil\frac{tm}2\Big\rceil\qquad\text{gates, slope }\frac k2\,3^{k-1}.$$
+
+*Proof.*
+1. By Lemma 1.2 the staircase of the pair $(S,c)$ contributes $\lambda_c\big((e_S+x_c)\bmod2\big)=\lambda_c\big(x_c+e_S(b)(1-2x_c)\big)$.
+2. For fixed $c$ with support $C$, $\sum_{\emptyset\ne S\subseteq\bar C}e_S(b)=2^{k-|c|-1}[\,b\not\preceq c\,]$, where $b\preceq c$ means $\operatorname{supp}b\subseteq C$.
+3. With $d_c=\lambda_c$, the coefficient of $x_c$ in the top sum is $\lambda_c(2^{k-|c|}-1)+\lambda_c-2\lambda_c2^{k-|c|-1}[b\not\preceq c]=\kappa_c[\,b\preceq c\,]$. Collecting the constants gives the closed form
+$$\mathrm{top}(x,b)=\sum_{c\succeq b}\kappa_{|c|}\big(x_c-\tfrac12\big).$$
+4. Since $\kappa_{|b|}>\sum_{c\succ b}\kappa_{|c|}$ (that is the recursion), the sign is that of $x_b-\frac12$, with margin $\ge\frac12$. ∎
+
+Each table bit $c$ is "switched off" exactly at the addresses outside its upper subcube. At address $b$ only the bits $c\succeq b$ survive, and $x_b$ dominates them.
+
+**Explicit instance, $k=3$.**
+- The weights are $\kappa=(\kappa_0,\kappa_1,\kappa_2,\kappa_3)=(39,9,3,2)$, so $\lambda_{|c|=0,1,2}=\frac{39}8,\frac94,\frac32$.
+- The 19 staircases $[t_S+x_c\ge2l]$, $1\le l\le\lceil|S|m/2\rceil$, are:
+  - for $c=000$: every $S\ne\emptyset$ (7 staircases), top weight $-\frac{39}4$;
+  - for the three $c$ of weight 1: the three nonempty $S$ inside the other two blocks (9 staircases), top weight $-\frac92$;
+  - for the three $c$ of weight 2: $S=$ the remaining block (3 staircases), top weight $-3$.
+- The top gate adds $\sum_{(S,c)}\lambda_c(t_S+x_c)+\sum_{|c|<3}\lambda_cx_c+2x_{111}-\frac{77}2$ and outputs $[\mathrm{top}>0]$. Then $\mathrm{top}=\sum_{c\succeq b}\kappa_{|c|}(x_c-\frac12)$.
+- At $k=2$ the same recipe gives $\kappa=(9,3,2)$ and exactly the five staircases of Theorem G.
+
+**Verification** (`subcube_family.py`, exact rationals):
+- $k=1$: $G(1,m)=\lceil m/2\rceil$, which is optimal among coherent circuits for every $m$ (parity restriction plus Prop. 1.2 of `mixed_sign`) and in the full model for $m\le8$ (par$(M)=\lfloor M/2\rfloor$ for $M\le9$). Verified for $m\le12$, bit-exhaustively.
+- $k=2$: $m\le8$ exhaustively over all bit inputs, and $m\le30$ on all count vectors. The family *is* Theorem G: $4\lceil m/2\rceil+m$.
+- $k=3$: $m\le4$ bit-exhaustive, and $m\le12$ on all count vectors.
+- $k=4$: $m=1$ bit-exhaustive, and $m\le2$ on all count vectors.
+- The gate count equals $G(k,m)$ in every case.
+
+| $k=3$, $m$ | 1 | 2 | 3 | 4 | 6 | 8 | 10 | 20 | 40 |
+|---|---|---|---|---|---|---|---|---|---|
+| Theorem 3.1, $12\lceil m/2\rceil+6m+\lceil3m/2\rceil$ | 20 | 27 | 47 | 54 | 81 | 108 | 135 | 270 | 540 |
+| (d') `constr2` | 71 | 96 | 125 | 150 | 204 | 258 | 312 | 582 | 1122 |
+| (d'') `constr3` | 65 | 87 | 128 | 150 | 213 | 276 | 339 | 654 | 1284 |
+
+Slopes:
+
+| $k$ | Theorem 3.1 | (d'') |
+|---|---|---|
+| 2 | 3 | 6 |
+| 3 | 13.5 | 18 |
+| 4 | 54 | 48 |
+| 5 | 202.5 | 120 |
+
+So **Theorem 3.1 is the best known family for $k\le3$**. At $k=3$ it uses less than half of the earlier gate counts for every $m$. It loses for $k\ge4$, because it puts $2^{k-|S|}$ gadgets on character $S$, i.e. $\bar n=(3/2)^{k-1}$ in the notation of §5. **It is block-symmetric (coherent): mixed signs played no role.**
+
+The LP's own $k=3$ circuit has rational weights and some odd-threshold atoms (`realize_k3_mono.py`, `k3_family.json`). It has $\lceil27m/2\rceil+12$ gates, verified bit-exhaustively for $m\le4$ and on all count vectors for $m\le20$. Theorem 3.1 has the same slope and 12 fewer gates.
+
+### 3.2 Can $k=3$ go below slope $27/2$?
+- **One two-valued gadget per character** (slope 6): **infeasible** even with arbitrary amplitude functions of $x$ [VERIFIED by CP-SAT for integer $\Delta_S\in[1,12]$; `onegadget_any.py`]. It stays infeasible when up to three characters (singletons, pairs or the triple) get a second gadget, and with pairs doubled.
+- **Arbitrary two-valued amplitudes** with 2 gadgets on every singleton and pair and 1 on the triple (slope $10.5$): **feasible** [VERIFIED], all $\Delta=2$, so the amplitudes are *ternary* $\{-4,0,4\}$. Also feasible: $(3,3,3,2,2,2,1)$ (slope 12) and $(4,4,4,2,2,2,1)$ (slope 13.5).
+- **Realising slope 10.5 with gates** requires every amplitude to be a sum of two threshold functions of $x$. These cost $|S|m/2+O(1)$ via period-$p$ staircases on $\frac p2t_S+\alpha\cdot x$ with $p>2\operatorname{range}(\alpha\cdot x)$. The CP-SAT model with threshold amplitudes, $|\alpha_c|\le3$ and linear $D$ (`gadget_thr.py`) ended **UNKNOWN** after 1500 s.
+- Searches over realisable atoms found nothing better than $13.5$:
+  - reweighted $L_1$ with 12 random restarts (`k3_restarts.py`): best $15.5$;
+  - column generation with comb amplitudes up to support 3 (`run_cg_parity.py`): best $20$;
+  - CP-SAT with single-bit monomials (`cpsat_parity_only.py`): best $15$ after 1800 s, bound $2.5$.
+- **Open:** whether slope $10.5$ is realisable at $k=3$.
+
+---
+
+## 4. LP / MILP / CP-SAT data
+
+### 4.1 Slope data from the periodic model (fixed $k$, all $m$ at once)
+
+Each atom class below uses the residue domain $\{0,1\}^N\times(\mathbb Z/P)^{\#\text{coords}}$. "Best slope found" comes from reweighted $L_1$ (LP, HiGHS; column generation `cg2.py` when the class is large), followed by greedy pruning. The rows are of three kinds:
+- **heuristic rows** are realised constructions, verified by an LP certificate on all residues mod $P$ (margin 1) and Theorem 1.3;
+- **proof rows** give bounds;
+- **CP-SAT rows about arbitrary amplitudes** are feasibility statements about the averaged pure-parity model, not circuits.
+
+| $k$ | atom class (domain) | #atoms | method | best slope | status |
+|---|---|---|---|---|---|
+| 2 | pure parity, any two-valued amplitudes | – | proof (Thm 2.4) | **3** | **exact (lower bound = Theorem G)** |
+| 2 | block-sym., period 2, all 16 monomial table forms ($P=2$) | 48 | CP-SAT, $\lvert w\rvert\le6$ | 3 | exact within bounds |
+| 2 | block-sym., periods 2,4, $\alpha\in\{0..3\}^4$ ($P=4$) | 15 456 | rw-$L_1$ + prune; CG | 3 | heuristic |
+| 2 | block-sym., periods 2,4, $\alpha\in\{0,1\}^4$, CP-SAT asked for slope $\le2.75$ | 1 056 | CP-SAT | no solution found (UNKNOWN after 700 s; inconclusive) | |
+| 2 | block-sym., only cheap atoms (cost $\le\frac12$, incl. all fluctuating ones), $P=4$ | 10 304 | rw-$L_1$ + prune | 3.5 | heuristic |
+| 2 | block-sym., periods 2,4,8, $\alpha\in\{0..7\}^4$ ($P=8$) | 2 079 840 | CG + prune | 3 | heuristic |
+| 2 | **two halves (mixed)**, periods 2,4, $\beta\in\{-1..2\}^4$, $\alpha\in\{0..3\}^4$ ($P=4$) | 261 600 | CG + prune | 3 | heuristic; optimum used only $\beta=(2,2\,\lvert\,\cdot)$ |
+| 2 | any periodic construction, any signs | – | proof (Lemma 2.1) | lower bound 1 | |
+| 3 | pure parity, single-bit monomials ($P=2$) | 3 584 | rw-$L_1$ + prune | **13.5** (Thm 3.1) | heuristic; = Theorem 3.1 |
+| 3 | pure parity, monomials and comb amplitudes (support $\le3$) | 53 676 | CG + prune | 20 | heuristic |
+| 3 | pure parity, arbitrary two-valued amplitudes, counts $(2,2,2,2,2,2,1)$ | – | CP-SAT | 10.5 feasible | not realised by gates |
+| 3 | same, one gadget per character | – | CP-SAT | infeasible ($\Delta\le12$) | |
+| 3 | any periodic construction | – | Lemma 2.1 | lower bound 1.5 | |
+| 4 | subcube dominance (Thm 3.1) | 65 | proof + LP | 54 (vs (d'') 48) | exact family |
+| 4 | arbitrary two-valued amplitudes, counts $(2,2,2,1)$ by $\lvert S\rvert$ (slope 30) | – | CP-SAT on 222 table orbits | PLACEHOLDER-K4R | |
+
+
+### 4.2 Finite-$m$ pool minima ($k=2$; `exp_finite.py`, `batch_finite.sh`, log `logs/finite_k2.log`)
+
+The pools contain all gates $[\alpha\cdot x+\beta\cdot c\ge\theta]$ with $\alpha\in\{0,1\}^4$, every threshold, and:
+- **axis**: $\beta\in\{0,1\}^2$ (block-symmetric);
+- **bsrich**: primitive $\beta\in\{-2..2\}^2$ (block-symmetric);
+- **half**: two halves, primitive $\beta\in\{-1,0,1\}^4$ (mixed signs allowed).
+
+Method: $L_1$ followed by greedy pruning (3 orders) gives the heuristic value. Then an exact MILP (HiGHS, big-M, with constraint generation over count vectors) is run over all gates whose direction occurs in a pruned support. Verification: heuristic supports carry an exact integer certificate on all count vectors. MILP values are verified by an LP (margin 1) on all count vectors. The 10-gate circuit at $m=4$ is additionally certified in exact integers (`logs/finite_k2_m4_bsrich_detail.log`).
+
+| $m$ | axis | bsrich | half (mixed) | Theorem G $=4\lceil m/2\rceil+m$ | known exact (block-sym. / full) |
+|---|---|---|---|---|---|
+| 1 | 3 (heur. 3) | 3 (heur. 3) | 3 (heur. 3) | 5 | 3 / 3 |
+| 2 | 5 (heur. 6) | 4 (heur. 4) | 6 (heur. 6) | 6 | 3 / 3 |
+| 3 | 11 (heur. 17) | 11 (heur. 17) | 14 (heur. 37) | 11 | $\ge5$ / $\ge4$ |
+| 4 | 12 (heur. 12) | 10 (heur. 28) | 13 (heur. 20) | 12 | $\ge5$ / $\ge4$ |
+
+
+For reference:
+- the block-symmetric optimum is 3 at $m=1,2$ (`mixed_sign`, `verify_opus`);
+- block-symmetric needs $\ge5$ at $m=3,4$;
+- the full model needs $\ge4$ at $m=3$ and $\ge m$ for $m\le4$ (`mixed_sign`, via par$(2m+1)$).
+
+The pool MILPs only give *upper bounds*. They are restricted to $\alpha\in\{0,1\}^4$ and to the directions found by the heuristic, and they miss the small-$m$ optima (3 at $m=2$ needs table weights outside $\{0,1\}$). In no instance did the mixed pool beat the block-symmetric pools.
+
+## 5. The balanced case: what the periodic analysis says
+
+Write the cost of a periodic construction as
+$$S=\sum_a\frac{\|\beta_a\|_1h+\operatorname{range}(\alpha_a\cdot x)}{p_a}+\mathrm{cost}(D)+O(\#\text{atoms}),\qquad m=N/k .$$
+
+1. **Pure-parity constructions cannot go below $n^2/16$, whatever the signs** [PROVED] (Lemmas 2.3 and 2.6). They need at least one atom per character, of cost at least $|S|m/2$, so $S\ge kmN/4=N^2/4=n^2/16$.
+   - Their "$Y$-range" cost is **zero**: threshold or comb amplitudes cost $|S|m/2+O(1)$ by choosing $p>2\operatorname{range}(\alpha\cdot x)$. Compare $N/2$ per character for the ridges of (d).
+   - So whether they beat $\frac5{16}n^2$ depends only on the average number $\bar n$ of gadgets per character, weighted by $|S|$: they cost about $\bar n\,n^2/16$, so they win iff $\bar n<5$ with cheap $D$.
+   - Data: $\bar n=1.5$ at $k=2$ (optimal, Theorem 2.4) and $\bar n=1.75$ at $k=3$ (arbitrary amplitudes; §3.2). The realised monomial family at $k=3$ has $\bar n=2.25$.
+   - Lemma 2.5 and the $k=2,3$ infeasibility results show $\bar n>1$. **Whether $\bar n$ stays bounded as $k\to\infty$ is open** (PLACEHOLDER-K4).
+   - Heuristic reason to doubt it: the amplitude of character $S$ must act like a quantised Fourier coefficient. Sign-quantising $N/2$ coefficients produces a reconstruction error of order $\sqrt N$ per address against a gap of order 1, unless the quantisation is coordinated across characters, as the dominance structure of Theorem G does at $k=2$.
+2. **Sub-quadratic size needs fluctuating atoms, and those are capped by the existing lower bounds.**
+   - A fluctuating atom on $t_S$ with period $p$ costs $|S|m/p$ instead of $|S|m/2$.
+   - With coherent gates (any parts), the count-restriction bound $S\ge N^2/(3k^3)$ of `push_lower` caps the possible saving at a factor $O(k^3)$.
+   - With at most $r$ sign patterns per block, class (c) of `mixed_sign` caps it at $O(k^3 2^{r})$.
+   - So an $n^{2-\epsilon}$ periodic construction needs heavily mixed atoms with $\gtrsim\epsilon\log n$ patterns per block and periods $p=n^{\Omega(\epsilon)}$. Equivalently, the parity information of a block must survive in a sawtooth whose teeth are $n^{\Omega(\epsilon)}$ apart. Nothing found here comes close: at $k=2$, no fluctuating atom ever appeared in an optimal solution (§4).
+3. **Necessary-condition bookkeeping ($S\cdot f\ge N/(2k)$).**
+   - Every gate of a periodic block-symmetric construction splits at most a $\min(k,2\sqrt{2k})/m$ fraction of cubes, so these constructions need $S\ge N^2/(6\sqrt2k^{5/2})$ in the balanced case.
+   - Two-halves or $(s_i,D_i)$ designs, and any bounded number of views, lose only the factor $2^{r-2}+1$ in this bound.
+   - Hence every design family tried here (axis staircases, two halves, $s_i$ plus alternating sums, sub-block counts with boundedly many parts) is **hopeless for $n^{2-\epsilon}$** but not for polylog factors. We found no polylog gain either (§4).
+
+---
+
+## 6. Negative findings (and why)
+
+1. **Mixed signs gave no improvement anywhere** [EVIDENCE + PROVED pieces].
+   - $k=2$, periodic, best slope found in every class: 3 (two halves at period 4, block-symmetric at periods up to 8; §4.1). The optimal two-halves solutions used only block-symmetric directions $\beta=(2,2\,|\,\cdot)$.
+   - $k=2$, finite pools: the mixed pool was never better than the block-symmetric pools (§4.2).
+   - Explanation (Lemma 2.6): in the periodic world, mixing cannot make signal-carrying atoms cheaper. It only reshuffles the fluctuations of fluctuating atoms, and those were never used by any optimum.
+2. **Fluctuating (long-period) atoms never helped** [EVIDENCE]. They are the only periodic mechanism that could beat pure parity. Every unrestricted solution found, at every $P$, used pure parity atoms only. When the pure $\{1,2\}$ atom was priced out, fluctuating $(1,-1)$ atoms were used, but three of them were needed (slope 3.5 instead of 3).
+   - The reason is a mismatch between signal and noise. A fluctuating atom carries a parity signal of amplitude $g/2$ but varies by $p-g$ inside a parity class, and the pure-character tables (dictators, XOR) force strict amplitude dominances (proof of Theorem 2.4). A signal that small cannot tip them without its own fluctuation flipping a sign somewhere.
+   - Exact cancellation of fluctuations across atoms is impossible, because distinct atoms fluctuate along distinct characters of $(\mathbb Z/P)^d$. Cancellation within one $(\beta,\alpha)$ family just rebuilds a pure parity atom at the same cost.
+3. **One gadget per character fails** [PROVED for $k=2$ (any amplitudes) and for monomials at all $k$; VERIFIED for $k=3$, any amplitudes]. The obstruction is the pure-character tables: each forces its own character's amplitude to dominate the others.
+4. **Minterm-style designs** (one gate detects one address on many cubes) are impossible: no hyperplane is parity-pure for two characters (Lemma 2.7).
+5. **Bounded numbers of views** ($s_i$ plus $D_i$, two halves, $r$ parts) cannot reach $n^{2-\epsilon}$. This is class (c) of `mixed_sign` plus Lemma 2.6. In the periodic world they cannot even lower the pure-parity bound $n^2/16$.
+6. **Generic pools are bad features.** $L_1$ over large mixed pools gives much worse supports than over block-symmetric pools ($m=3$: heuristic 37 vs 17), which matches `mixed_sign`'s random-feature finding. The finite-$m$ MILPs mostly recover Theorem G's counts, with one block-symmetric improvement (10 gates at $m=4$ against 12), and they miss the small-$m$ optima.
+
+## 7. Most promising next steps
+
+1. **Realise ternary parity-only patterns with threshold amplitudes.**
+   - At $k=3$ the pattern with 2 gadgets per singleton and pair is feasible with arbitrary amplitudes (slope 10.5 against 13.5). Realisability is open (CP-SAT UNKNOWN).
+   - More importantly: if $\bar n=O(1)$ gadgets per character with threshold amplitudes and linear $D$ works for all $k$, the balanced cost is about $\bar n\,n^2/16$. With $\bar n<5$ this beats $\frac5{16}n^2$ by a constant factor, **with no $Y$-range cost at all**.
+   - Concrete sub-question: is every Boolean function on $k$ variables the sign of $\theta+\sum_{S\ne\emptyset}\tau_S\chi_S$ with $\tau_S\in\{-1,0,1\}$? If so, can the choice $\tau_S(x)$ be made a sum of two threshold functions of the table? True for $k\le3$ without the threshold condition. PLACEHOLDER-K4-NEXT
+2. **Settle the $k=2$ periodic slope.**
+   - Either prove slope $\ge3$ for all periodic constructions, including fluctuating and mixed atoms (a pointwise strengthening of Theorem 2.4), or find a counterexample.
+   - The averaging lemma reduces this to showing that a fluctuating atom cannot supply the "second gadget" that Theorem 2.4 requires.
+3. **For $o(n^2)$**, the analysis says exactly what is missing: heavily mixed atoms with $\gtrsim\epsilon\log n$ sign patterns per block and periods $n^{\Omega(\epsilon)}$, whose fluctuations cancel against partner atoms. Nothing in the bounded-view world can do this. The periodic LP is the right test bed: give each block $r\approx\log N$ parts and allow periods $p\approx\sqrt m$.
+
+## 8. Files
+
+| file | content |
+|---|---|
+| `report.md` | this report |
+| `lpcore.py`, `exp_finite.py`, `batch_finite.sh`, `exp_k2.py` | finite-$m$ count-vector LP/MILP over gate pools (constraint generation, exact integer certificates) |
+| `periodic_lp.py`, `run_periodic.py`, `run_periodic_k2.py`, `run_capped.py` | periodic (bulk) slope LP, dense version |
+| `cg_periodic.py`, `cg2.py`, `run_cg2.py`, `run_cg_parity.py` | column-generation versions (vectorised pricing over all table forms) |
+| `cpsat_periodic.py`, `cpsat_parity_only.py` | exact bounded-weight CP-SAT for the periodic and pure-parity models |
+| `gadget_k2.py`, `parity_only_k2.py`, `lb_onegadget_k2.py`, `onegadget_any.py`, `onegadget_sym.py`, `gadget_thr.py` | gadget-configuration feasibility (monomial, arbitrary two-valued, threshold amplitudes; orbit reduction for $k=4$) |
+| `build_periodic.py`, `realize.py`, `test_realize_k2.py`, `realize_k3_mono.py`, `verify_k3_big.py`, `k3_family.json` | turning atoms into explicit circuits; exact verification (count vectors and bit level) |
+| **`subcube_family.py`**, `subcube_k.py` | **Theorem 3.1**: construction, gate-count formula, exact verification for $k\le4$ |
+| `notes_theory.md` | working notes |
+| `logs/` | all runs quoted above |

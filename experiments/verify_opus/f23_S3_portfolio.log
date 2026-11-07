@@ -1,0 +1,2 @@
+full k=2 m=3 S=3: UNKNOWN [3000.1s] {}
+RESULT full k=2 m=3 n=10 points=1024: S=3 -> UNKNOWN

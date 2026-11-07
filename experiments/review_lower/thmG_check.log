@@ -1,0 +1,8 @@
+bit-level m=1: gates=5 (4*ceil(m/2)+m=5)  inputs=64  errors=0  min integer slack=0
+bit-level m=2: gates=6 (4*ceil(m/2)+m=6)  inputs=256  errors=0  min integer slack=0
+bit-level m=3: gates=11 (4*ceil(m/2)+m=11)  inputs=1024  errors=0  min integer slack=0
+bit-level m=4: gates=12 (4*ceil(m/2)+m=12)  inputs=4096  errors=0  min integer slack=0
+bit-level m=5: gates=17 (4*ceil(m/2)+m=17)  inputs=16384  errors=0  min integer slack=0
+bit-level m=6: gates=18 (4*ceil(m/2)+m=18)  inputs=65536  errors=0  min integer slack=0
+bit-level m=7: gates=23 (4*ceil(m/2)+m=23)  inputs=262144  errors=0  min integer slack=0
+bit-level m=8: gates=24 (4*ceil(m/2)+m=24)  inputs=1048576  errors=0  min integer slack=0

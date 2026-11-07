@@ -1,0 +1,138 @@
+{
+  "costs": [
+    {
+      "k": 2,
+      "m": 2,
+      "N": 4,
+      "gates": 31,
+      "bottom_L1": 268,
+      "bottom_padding": 161,
+      "bottom_gcd_L1": 268,
+      "bottom_gcd_padding": 161,
+      "top_L1": 712,
+      "direct_L1": 88,
+      "bias": 8,
+      "top_padding": 1,
+      "coefficient_total": 1068,
+      "gcd_coefficient_total": 1068,
+      "majority_wires_with_constants": 1230,
+      "clones_bottom_L1": 6960
+    },
+    {
+      "k": 3,
+      "m": 2,
+      "N": 8,
+      "gates": 87,
+      "bottom_L1": 1290,
+      "bottom_padding": 783,
+      "bottom_gcd_L1": 1290,
+      "bottom_gcd_padding": 783,
+      "top_L1": 5240,
+      "direct_L1": 368,
+      "bias": 16,
+      "top_padding": 1,
+      "coefficient_total": 6898,
+      "gcd_coefficient_total": 6898,
+      "majority_wires_with_constants": 7682,
+      "clones_bottom_L1": 90064
+    },
+    {
+      "k": 4,
+      "m": 4,
+      "N": 16,
+      "gates": 370,
+      "bottom_L1": 13100,
+      "bottom_padding": 7638,
+      "bottom_gcd_L1": 13100,
+      "bottom_gcd_padding": 7638,
+      "top_L1": 75312,
+      "direct_L1": 2144,
+      "bias": 32,
+      "top_padding": 1,
+      "coefficient_total": 90556,
+      "gcd_coefficient_total": 90556,
+      "majority_wires_with_constants": 98195,
+      "clones_bottom_L1": 3241280
+    },
+    {
+      "k": 5,
+      "m": 6,
+      "N": 32,
+      "gates": 1323,
+      "bottom_L1": 89386,
+      "bottom_padding": 51563,
+      "bottom_gcd_L1": 89386,
+      "bottom_gcd_padding": 51563,
+      "top_L1": 624416,
+      "direct_L1": 11840,
+      "bias": 64,
+      "top_padding": 1,
+      "coefficient_total": 725642,
+      "gcd_coefficient_total": 725642,
+      "majority_wires_with_constants": 777206,
+      "clones_bottom_L1": 53528512
+    },
+    {
+      "k": 6,
+      "m": 10,
+      "N": 64,
+      "gates": 5072,
+      "bottom_L1": 680516,
+      "bottom_padding": 388540,
+      "bottom_gcd_L1": 680516,
+      "bottom_gcd_padding": 388540,
+      "top_L1": 5363168,
+      "direct_L1": 72064,
+      "bias": 128,
+      "top_padding": 1,
+      "coefficient_total": 6115748,
+      "gcd_coefficient_total": 6115748,
+      "majority_wires_with_constants": 6504289,
+      "clones_bottom_L1": 940966400
+    },
+    {
+      "k": 7,
+      "m": 18,
+      "N": 128,
+      "gates": 20583,
+      "bottom_L1": 5651274,
+      "bottom_padding": 3219639,
+      "bottom_gcd_L1": 5651274,
+      "bottom_gcd_padding": 3219639,
+      "top_L1": 47361024,
+      "direct_L1": 495872,
+      "bias": 256,
+      "top_padding": 1,
+      "coefficient_total": 53508170,
+      "gcd_coefficient_total": 53508170,
+      "majority_wires_with_constants": 56727810,
+      "clones_bottom_L1": 17306858640
+    }
+  ],
+  "fourier_checks": [
+    {
+      "M": 2,
+      "max_parity_coefficient": 0.25
+    },
+    {
+      "M": 3,
+      "max_parity_coefficient": 0.25
+    },
+    {
+      "M": 4,
+      "max_parity_coefficient": 0.1875
+    },
+    {
+      "M": 5,
+      "max_parity_coefficient": 0.1875
+    },
+    {
+      "M": 6,
+      "max_parity_coefficient": 0.15625
+    },
+    {
+      "M": 7,
+      "max_parity_coefficient": 0.15625
+    }
+  ]
+}

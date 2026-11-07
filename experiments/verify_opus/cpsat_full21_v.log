@@ -1,0 +1,1 @@
+cpsat full k=2 m=1: stopped S=2  bounds Wb=33 Wt=196  trace 0:UNSAT[0.0s] 1:UNSAT[3.0s] 2:UNKNOWN[3607.8s]

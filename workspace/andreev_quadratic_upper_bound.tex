@@ -1,0 +1,275 @@
+% Build with: tectonic andreev_quadratic_upper_bound.tex
+\documentclass[11pt,letterpaper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{microtype,booktabs,enumitem,xcolor,fancyhdr,hyperref}
+\usepackage[most]{tcolorbox}
+\definecolor{ink}{HTML}{203B55}
+\definecolor{accent}{HTML}{176C65}
+\definecolor{boxbg}{HTML}{F2F6F8}
+\hypersetup{colorlinks=true,linkcolor=ink,urlcolor=accent,citecolor=ink,
+ pdftitle={A Quadratic Depth-Two Threshold Circuit for Andreev's Function},
+ pdfauthor={Christian Reitwiessner},pdfsubject={Self-contained construction and proof}}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{ink}Andreev's function: a quadratic upper bound}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\setlength{\emergencystretch}{2em}
+\setlist[itemize]{leftmargin=1.5em,itemsep=0.2em,topsep=0.2em}
+\setlist[enumerate]{leftmargin=1.8em,itemsep=0.2em,topsep=0.2em}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\bits}{\{0,1\}}
+\newcommand{\ind}[1]{\bigl[\,#1\,\bigr]}
+\newcommand{\sect}[1]{\section*{\color{ink}#1}}
+\newcommand{\smalltitle}[1]{\textbf{\color{ink}#1}\quad}
+\newtcolorbox{keybox}[1][]{colback=boxbg,colframe=ink!40,boxrule=0.4pt,
+  arc=2pt,left=8pt,right=8pt,top=5pt,bottom=5pt,#1}
+\begin{document}
+\thispagestyle{empty}
+{\color{accent}\small A SELF-CONTAINED CONSTRUCTION AND PROOF\par}
+\vspace{0.4em}
+{\raggedright\color{ink}\LARGE\bfseries A Quadratic Depth-Two Threshold Circuit\\[0.15em]
+for Andreev's Function\par}
+\vspace{0.5em}
+{\large Christian Reitwiessner\par}
+{\small November 6, 2026\par}
+\vspace{0.8em}
+Andreev's function looks up a bit in a table, at an address given by the
+parities of $k$ blocks of input bits. We compute it exactly with a
+two-layer threshold circuit whose number of gates is quadratic in the input
+length. The proof needs three short lemmas and no background beyond
+elementary algebra.
+
+\sect{1. The result}
+\smalltitle{The function.}
+Fix integers $k,m\ge1$ and put $N=2^k$. The input has two parts:
+\begin{itemize}
+\item a \emph{table} of $N$ bits $x_c$, one for each address $c\in\bits^k$;
+\item $k$ \emph{address blocks} of $m$ bits each; block $i$ has bits
+      $a_{i,1},\dots,a_{i,m}$ and \emph{weight} $s_i=a_{i,1}+\dots+a_{i,m}$.
+\end{itemize}
+The address $b\in\bits^k$ has coordinates $b_i=s_i \bmod 2$, and the output is
+\[
+A(x,a)=x_b .
+\]
+The input length is $n=N+km$.
+
+\smalltitle{The model.}
+For a statement $P$, the bracket $\ind{P}$ is $1$ if $P$ holds and $0$
+otherwise. A \emph{threshold gate} with inputs $z_1,\dots,z_r\in\bits$,
+real weights $w_1,\dots,w_r$ and threshold $\tau$ outputs
+\[
+\ind{w_1z_1+\dots+w_rz_r\ge\tau}.
+\]
+In a \emph{depth-two threshold circuit}
+every bottom gate reads input bits, and a single top gate reads the
+bottom gates.
+
+\begin{theorem}\label{thm:main}
+Andreev's function is computed exactly by a depth-two threshold circuit with
+\[
+G=4N^2+kmN
+\]
+bottom gates and one top gate. Bottom weights lie in $\{-2,-1,0,1,2\}$, and
+top weights are odd integers of absolute value at most $2n-1$.
+In the balanced case $km=N$ we have $n=2N$, so $G=\tfrac54n^2$.
+\end{theorem}
+
+For comparison, Kane and Williams~\cite{KW} give an $O(n^3/\log n)$ upper bound.
+
+\smalltitle{Plan of the proof.}
+The circuit evaluates an integer \emph{score} whose sign is the answer:
+\begin{equation}\label{eq:goal}
+\text{score}(x,a)=2N\cdot(-1)^{x_b}.
+\end{equation}
+The score is negative exactly when $x_b=1$, so the top gate only has to test
+whether the score is negative. We get there in three steps, one per lemma.
+\begin{enumerate}
+\item Write $(-1)^{x_b}$ as a sum of $N$ products ``table part $\times$
+      address part'' (Lemma~\ref{lem:lookup}).
+\item Turn each product into a sum of two functions, each of a single
+      integer linear form in the input bits (Lemma~\ref{lem:parity}).
+\item Compute any function of a linear form with one threshold gate per
+      possible value (Lemma~\ref{lem:ladder}).
+\end{enumerate}
+Each lemma has its own local variables; only the following two quantities
+are used throughout.
+
+\begin{keybox}
+For a set $S\subseteq\{1,\dots,k\}$ and an address $c\in\bits^k$, write
+$S\cdot c=\sum_{i\in S}c_i$. Define
+\[
+X_S=\sum_{c\in\bits^k}(-1)^{S\cdot c+x_c}
+\qquad\text{and}\qquad
+t_S=\sum_{i\in S}s_i .
+\]
+$X_S$ depends only on the table, and $-N\le X_S\le N$.
+$t_S$ is the total weight of the blocks in $S$, so $0\le t_S\le |S|m$.
+\end{keybox}
+
+\sect{2. Three lemmas}
+
+\begin{lemma}[Lookup as a sum of products]\label{lem:lookup}
+For every input,
+\[
+\sum_{S\subseteq\{1,\dots,k\}}X_S\,(-1)^{t_S}=N\,(-1)^{x_b}.
+\]
+\end{lemma}
+\begin{proof}
+Since $s_i\equiv b_i\pmod 2$, we have $(-1)^{t_S}=(-1)^{S\cdot b}$.
+Substituting the definition of $X_S$ and exchanging the two sums, the
+left-hand side becomes
+\[
+\sum_{c\in\bits^k}(-1)^{x_c}\sum_{S}(-1)^{S\cdot(c+b)}
+=\sum_{c\in\bits^k}(-1)^{x_c}\prod_{i=1}^{k}\bigl(1+(-1)^{c_i+b_i}\bigr).
+\]
+The product is $2^k=N$ if $c=b$, and $0$ otherwise, because some factor
+is then $1+(-1)=0$.
+\end{proof}
+
+The table part $X_S$ and the address part $(-1)^{t_S}$ are both easy to
+handle on their own; the difficulty is their product. The next lemma
+removes it. Let $\varphi(u)=(-1)^u\,u$ for integers $u$.
+
+\begin{lemma}[Removing the product]\label{lem:parity}
+If $X$ is an even integer and $t$ is any integer, then
+\[
+\varphi(X+t)+\varphi(X-t)=2X\,(-1)^t .
+\]
+\end{lemma}
+\begin{proof}
+As $X$ is even, $X+t$ and $X-t$ both have the parity of $t$. So the
+left-hand side equals $(-1)^t\bigl((X+t)+(X-t)\bigr)$.
+\end{proof}
+
+Every $X_S$ is even, since it is a sum of $N$ terms $\pm1$ and $N$ is even.
+Combining the two lemmas, the score~\eqref{eq:goal} can be written as
+\begin{equation}\label{eq:score}
+\boxed{\;2N(-1)^{x_b}=\sum_{S\subseteq\{1,\dots,k\}}
+ \Bigl(\varphi(X_S+t_S)+\varphi(X_S-t_S)\Bigr).\;}
+\end{equation}
+Each of the $2N$ terms is $\varphi$ applied to a single integer linear form
+in the input bits. Indeed, $(-1)^{x_c}=1-2x_c$, so
+\begin{equation}\label{eq:form}
+X_S\pm t_S=\sum_{c}(-1)^{S\cdot c}
+ \;-\;2\sum_{c}(-1)^{S\cdot c}\,x_c
+ \;\pm\sum_{i\in S}\sum_{j=1}^{m}a_{i,j}.
+\end{equation}
+Its coefficients are $\pm2$ on table bits, $\pm1$ on the bits of the blocks
+in $S$, and $0$ on the other bits.
+
+\begin{lemma}[Threshold staircase]\label{lem:ladder}
+Let $L$ be an integer-valued function of the input that always lies in
+$\{\ell,\ell+1,\dots,h\}$, and let $g$ be any function on the integers. Then
+\[
+g(L)=g(\ell)+\sum_{\theta=\ell+1}^{h}\bigl(g(\theta)-g(\theta-1)\bigr)\,
+\ind{L\ge\theta}.
+\]
+\end{lemma}
+\begin{proof}
+The bracket equals $1$ exactly for $\theta=\ell+1,\dots,L$, and these terms
+telescope to $g(L)-g(\ell)$.
+\end{proof}
+
+If $L$ is a linear form in the input bits, as in~\eqref{eq:form}, each
+bracket $\ind{L\ge\theta}$ is a single threshold gate reading the input.
+So $g(L)$ is a constant plus a weighted sum of $h-\ell$ threshold gates.
+
+\sect{3. The circuit}
+
+\smalltitle{Bottom layer.}
+For each set $S$ and each sign $\pm$, apply Lemma~\ref{lem:ladder} with
+$L=X_S\pm t_S$ and $g=\varphi$. By the ranges in the box, $L$ lies in an
+interval of length $2N+|S|m$:
+\[
+X_S+t_S\in[-N,\;N+|S|m],\qquad X_S-t_S\in[-N-|S|m,\;N].
+\]
+For every integer $\theta$ above the lower end and up to the upper end of this
+interval, the bottom layer contains the gate $\ind{X_S\pm t_S\ge\theta}$,
+written out with the coefficients of~\eqref{eq:form}.
+
+\smalltitle{Top gate.}
+By~\eqref{eq:score} and Lemma~\ref{lem:ladder}, the score is
+\[
+2N(-1)^{x_b}=K+\sum_{\text{bottom gates}}\bigl(\varphi(\theta)-\varphi(\theta-1)\bigr)\cdot
+\ind{X_S\pm t_S\ge\theta},
+\]
+where the constant $K$ collects the terms $g(\ell)$ of all $2N$ staircases.
+The top gate outputs $1$ exactly when this score is negative, that is, when
+$x_b=1$. As a threshold gate, it takes the weight
+$\varphi(\theta-1)-\varphi(\theta)$ on the bottom gate with threshold $\theta$,
+and has threshold $K$. This computes $A$ exactly.
+
+\smalltitle{Counting gates.}
+The pair of staircases for $S$ uses $2(2N+|S|m)$ gates. Each index $i$ lies in
+exactly half of the $N$ sets $S$, so $\sum_S|S|=kN/2$ and
+\[
+G=\sum_{S}2\,(2N+|S|m)=4N^2+2m\cdot\frac{kN}{2}=4N^2+kmN .
+\]
+
+\smalltitle{Weights.}
+Bottom weights are the coefficients in~\eqref{eq:form}, so they lie in
+$\{-2,-1,0,1,2\}$. Top weights are
+$\varphi(\theta-1)-\varphi(\theta)=(-1)^{\theta+1}(2\theta-1)$, odd integers.
+Every staircase step satisfies $-n<\theta\le n$, because $N+|S|m\le n$; hence
+$|2\theta-1|\le 2n-1$. Each bottom gate reads at most $n$ wires, so the
+circuit has at most $G(n+1)$ wires. This proves Theorem~\ref{thm:main}. \qed
+
+\sect{4. Two checks}
+
+\smalltitle{The smallest case.}
+Take $k=m=1$, so the input is $x_0,x_1$ and one address bit $a_{1,1}=t$, and
+let $x_0=0$, $x_1=1$. Then $X_\varnothing=(-1)^0+(-1)^1=0$ and
+$X_{\{1\}}=(-1)^{0+0}+(-1)^{1+1}=2$. The score~\eqref{eq:score} is
+\[
+\varphi(0)+\varphi(0)+\varphi(2+t)+\varphi(2-t)=4(-1)^t ,
+\]
+which is negative exactly when $t=1$, that is, when the address is $1$ and
+the bit read is $x_1=1$. For $k=m=1$ the circuit has $4\cdot4+2=18$ bottom
+gates.
+
+\smalltitle{A full gate count.}
+For $k=m=2$ (four table bits, four address bits, $n=8$):
+\begin{center}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+$|S|$ & sets $S$ & gates per set, $2(2N+|S|m)$ & total\\
+\midrule
+$0$ & $1$ & $16$ & $16$\\
+$1$ & $2$ & $20$ & $40$\\
+$2$ & $1$ & $24$ & $24$\\
+\midrule
+ & & & $80=4\cdot16+2\cdot2\cdot4$\\
+\bottomrule
+\end{tabular}
+\end{center}
+With the top gate the circuit has $81$ gates. We checked it gate by gate
+on all $256$ inputs.
+
+\vspace{0.6em}
+{\small
+\textbf{Remarks.} All weights are integers of absolute value below $2n$, so
+the bound also holds for threshold circuits with polynomially bounded
+integer weights. It applies to
+all $k,m\ge1$; the balanced case $km=N$ needs $m=2^k/k$ to be an integer, for
+example when $k$ is a power of two. The argument and this note were developed
+with AI assistance.
+
+\renewcommand{\refname}{\normalsize\color{ink}References}
+\begin{thebibliography}{9}\setlength{\itemsep}{0.1em}
+\bibitem{KW} D.~M. Kane and R.~Williams.
+\emph{Super-Linear Gate and Super-Quadratic Wire Lower Bounds for Depth-Two
+and Depth-Three Threshold Circuits}. STOC 2016.
+\href{https://arxiv.org/abs/1511.07860}{arXiv:1511.07860v1}, Theorem~1.2.
+\end{thebibliography}
+
+\textbf{Formal proof.} A Lean formalization is available in
+\href{https://github.com/cslib-community/complexitylib/blob/1b4ca5308f66f5bbf1c90fb3d1ceebd864d52b66/Complexity/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean}{\mbox{Complexitylib}}.
+}
+\end{document}

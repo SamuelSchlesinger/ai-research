@@ -1,0 +1,4 @@
+bash: line 1: MIN: command not found
+bash: line 1: MIN: command not found
+blocksym 1 6 [(0, 'UNSAT', 0.1, None), (1, 'UNSAT', 0.1, None), (2, 'UNSAT', 0.1, None), (3, 'SAT', 0.2, (True, 28))]
+blocksym 1 8 [(0, 'UNSAT', 0.1, None), (1, 'UNSAT', 0.1, None), (2, 'UNSAT', 0.2, None), (3, 'UNSAT', 0.8, None), (4, 'SAT', 0.4, (True, 36))]

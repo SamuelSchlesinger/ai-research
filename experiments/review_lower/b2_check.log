@@ -1,0 +1,17 @@
+k=2 m=6: worst actual/bound = 1.000 (dir (1, 1): 11 vs 11.0);  worst actual/(m^k-(m-1)^k) = 1.000
+k=2 m=9: worst actual/bound = 1.000 (dir (1, 1): 17 vs 17.0);  worst actual/(m^k-(m-1)^k) = 1.000
+k=3 m=4: worst actual/bound = 0.946 (dir (np.int64(-2), np.int64(3), np.int64(3)): 35 vs 37.0);  worst actual/(m^k-(m-1)^k) = 0.946
+k=3 m=7: worst actual/bound = 0.890 (dir (np.int64(-33), np.int64(28), np.int64(-28)): 113 vs 127.0);  worst actual/(m^k-(m-1)^k) = 0.890
+k=4 m=4: worst actual/bound = 0.903 (dir (np.int64(3), np.int64(2), np.int64(3), np.int64(3)): 158 vs 175.0);  worst actual/(m^k-(m-1)^k) = 0.903
+k=4 m=6: worst actual/bound = 0.836 (dir (np.int64(42), np.int64(-43), np.int64(32), np.int64(-42)): 561 vs 671.0);  worst actual/(m^k-(m-1)^k) = 0.836
+k=5 m=3: worst actual/bound = 0.962 (dir (np.int64(-2), np.int64(-3), np.int64(2), np.int64(2), np.int64(2)): 203 vs 211.0);  worst actual/(m^k-(m-1)^k) = 0.962
+k=5 m=5: worst actual/bound = 0.833 (dir (1, 1, 1, 1, 1): 1751 vs 2101.0);  worst actual/(m^k-(m-1)^k) = 0.833
+k=6 m=3: worst actual/bound = 0.952 (dir (np.int64(2), np.int64(-2), np.int64(2), np.int64(-1), np.int64(-2), np.int64(-2)): 633 vs 665.0);  worst actual/(m^k-(m-1)^k) = 0.952
+k=6 m=4: worst actual/bound = 0.878 (dir (np.int64(-3), np.int64(3), np.int64(3), np.int64(2), np.int64(3), np.int64(3)): 2955 vs 3367.0);  worst actual/(m^k-(m-1)^k) = 0.878
+k=7 m=3: worst actual/bound = 0.952 (dir (1, 1, 1, 1, 1, 1, 1): 1961 vs 2059.0);  worst actual/(m^k-(m-1)^k) = 0.952
+k=8 m=2: worst actual/bound = 1.000 (dir (1, 1, 1, 1, 1, 1, 1, 1): 255 vs 255.0);  worst actual/(m^k-(m-1)^k) = 1.000
+k=8 m=3: worst actual/bound = 0.949 (dir (1, 1, 1, 1, 1, 1, 1, 1): 5981 vs 6305.0);  worst actual/(m^k-(m-1)^k) = 0.949
+max ratio over all cases: 1.0
+all-ones k=8 m=20: max split fraction = 0.1901;  Ball 2sqrt(2k)/m = 0.4000;  CLT sqrt(6k/pi)/m = 0.1954;  coherent 1-(1-1/m)^k = 0.3366
+all-ones k=12 m=12: max split fraction = 0.3798;  Ball 2sqrt(2k)/m = 0.8165;  CLT sqrt(6k/pi)/m = 0.3989;  coherent 1-(1-1/m)^k = 0.6480
+all-ones k=16 m=8: max split fraction = 0.6133;  Ball 2sqrt(2k)/m = 1.4142;  CLT sqrt(6k/pi)/m = 0.6910;  coherent 1-(1-1/m)^k = 0.8819
