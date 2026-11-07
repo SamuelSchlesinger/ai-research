@@ -1,0 +1,36 @@
+# Copyright (c) 2026 Christian Reitwiessner.
+# Authors: Christian Reitwiessner
+k4 exact certificate margin 43 tables at translated address zero 65536
+sign-only collision [5, 5, 5, -3, 5, -3, -3, -3, 5, -3, -3, -3, -3, -3, -3, 5]
+{
+  "2": {
+    "errors": 54913,
+    "central_inputs": 680,
+    "central_errors": 0
+  },
+  "4": {
+    "errors": 47327,
+    "central_inputs": 8214,
+    "central_errors": 0
+  },
+  "6": {
+    "errors": 4000,
+    "central_inputs": 72144,
+    "central_errors": 0
+  },
+  "8": {
+    "errors": 6286,
+    "central_inputs": 122388,
+    "central_errors": 0
+  },
+  "10": {
+    "errors": 394,
+    "central_inputs": 130608,
+    "central_errors": 0
+  },
+  "13": {
+    "errors": 0,
+    "central_inputs": 131072,
+    "central_errors": 0
+  }
+}

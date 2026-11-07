@@ -1,0 +1,32 @@
+{
+  "authors": "Christian Reitwiessner",
+  "N": 16,
+  "constraints": 42,
+  "first_feasible_number_of_odd_channels": 2,
+  "certificates": [
+    {
+      "thresholds": [
+        2,
+        4
+      ],
+      "coefficients": [
+        "4/43",
+        "11/43",
+        "32/43"
+      ],
+      "margin": "1"
+    },
+    {
+      "thresholds": [
+        2,
+        6
+      ],
+      "coefficients": [
+        "5/52",
+        "4/13",
+        "9/13"
+      ],
+      "margin": "1"
+    }
+  ]
+}

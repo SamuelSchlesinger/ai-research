@@ -1,0 +1,5 @@
+# Copyright (c) 2026 Christian Reitwiessner.
+# Authors: Christian Reitwiessner
+distinct constraints 42
+{"thresholds": [2, 4], "coefficients": ["4/43", "11/43", "32/43"], "margin": "1"}
+{"thresholds": [2, 6], "coefficients": ["5/52", "4/13", "9/13"], "margin": "1"}

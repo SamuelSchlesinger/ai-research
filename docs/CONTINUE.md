@@ -68,3 +68,7 @@ After a new completed experiment, copy its whole directory into `experiments/`, 
 ## Latest continuation update: Astra investigations
 
 The lower-bound Astra task completed; its three hand-proof proposals are archived in `experiments/lower_astra/report.md` and summarized, explicitly pending independent review, in RESEARCH_STATE.md section 7. Prioritize reviewing the VC class/adaptive-survivor argument before upgrading the small-advantage gate range to established status. The upper-bound Astra task is still running at this update. An older `mixed_upper/batch_finite.sh` solver batch was found still running after the generator campaign; do not infer that all historical processes stopped from an individual task's completion. No new jobs were left by the lower-bound Astra task.
+
+## Both Astra tasks completed
+
+The upper report is now archived as `experiments/upper_astra/report.md`. Read RESEARCH_STATE.md section 8 for its distributional $n^{3/2}$-up-to-logs construction, exact k4 certificate, and two explicit missing lemmas for exact subquadratic constructions. The highest-value upper follow-ups are economical shared tail repair and a sparse table-bit-gated selector dictionary. Both requested Astra tasks have finished and left no task-owned jobs. Lower proposals in section 7 still await independent review; upper analytical results also await independent review, while the k4 integer certificate received a separate parent recheck. Historical background processes should be checked separately if their status matters.

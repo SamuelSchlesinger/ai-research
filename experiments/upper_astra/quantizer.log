@@ -1,0 +1,67 @@
+# Authors: Christian Reitwiessner
+[
+  {
+    "N": 2,
+    "positive_steps": 1
+  },
+  {
+    "N": 4,
+    "positive_steps": 2
+  },
+  {
+    "N": 8,
+    "positive_steps": 4
+  },
+  {
+    "N": 16,
+    "positive_steps": 8
+  },
+  {
+    "N": 32,
+    "positive_steps": 13
+  },
+  {
+    "N": 64,
+    "positive_steps": 21
+  },
+  {
+    "N": 128,
+    "positive_steps": 31
+  },
+  {
+    "N": 256,
+    "positive_steps": 46
+  },
+  {
+    "N": 512,
+    "positive_steps": 67
+  },
+  {
+    "N": 1024,
+    "positive_steps": 96
+  },
+  {
+    "N": 2048,
+    "positive_steps": 137
+  },
+  {
+    "N": 4096,
+    "positive_steps": 196
+  },
+  {
+    "N": 8192,
+    "positive_steps": 278
+  },
+  {
+    "N": 16384,
+    "positive_steps": 394
+  },
+  {
+    "N": 32768,
+    "positive_steps": 559
+  },
+  {
+    "N": 65536,
+    "positive_steps": 790
+  }
+]
