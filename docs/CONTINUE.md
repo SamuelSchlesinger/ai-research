@@ -76,3 +76,7 @@ The upper report is now archived as `experiments/upper_astra/report.md`. Read RE
 ## Important correction: existing average-case bounds
 
 Before treating any truncated-ridge approximation result as new, read `workspace/threshold_paper/paper.tex` theorem `thm:avgupper` and `workspace/andreev_depth_two_bounds.md` Theorem 2. They already give the same near-perfect-agreement bound and the epsilon-squared tradeoff. Astra's mixed-sign variant improves no asymptotic average-case upper bound. The earlier handoff omitted this fact and caused an overstated announcement; RESEARCH_STATE.md now explicitly corrects it.
+
+## Latest upper-bound round completed: actual logarithmic saving
+
+Astra round 2 is archived as `experiments/upper_astra_round2`. Unlike round 1's rediscovery, it replaces the approximation union bound by independent mixed-mask cancellation of cross-character error moments and an L2 estimate. Read RESEARCH_STATE.md section 9 and the report before quoting formulas: constant error now needs $O(n^{3/2})$ gates, and advantage epsilon has $O(epsilon^2 n^{3/2} sqrt(log(1/epsilon)))$ gates over the stated small-advantage regime. These are hand proofs, not Lean formalized or separately referee-reviewed. Exact bounds are unchanged. Next mathematical verification should focus on mask-selection quantifiers, mean-square cancellation, tail second moments, and threshold tie handling. Further exact progress still needs shared worst-case tail repair.

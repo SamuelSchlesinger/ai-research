@@ -1,0 +1,10 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "serialized_raw_input_audit": "PASS",
+  "inputs": 131072,
+  "bottoms": 140,
+  "errors": 8823,
+  "agreement_numerator": 122249,
+  "agreement_denominator": 131072,
+  "generic_builder_matches": true
+}

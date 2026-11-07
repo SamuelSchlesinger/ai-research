@@ -166,3 +166,25 @@ Both requested Astra tasks have completed. Their reports leave the exact balance
 ### Correction to the Astra upper-result announcement
 
 The parent initially presented Astra's truncated mixed-ridge bound as a new matching-exponent average-case advance. That was incorrect: the pre-existing paper and overview already state the same bound and the stronger epsilon-squared tradeoff. The curated summary had omitted that prior upper result from the Astra handoff. Preserve the agent report as provenance, but do not claim an improved average-case upper bound from it. Its additional contributions are an explicit mixed-sign variant, the exact finite k4 certificate, the specified sign-only obstruction and proposed exact-construction targets. None improves the known asymptotic upper bounds. The lower Astra advantage-range extension remains a separate provisional improvement pending review.
+
+## 9. Astra upper round 2: genuine average-case logarithmic improvement
+
+`experiments/upper_astra_round2/report.md` gives a new hand-proof improvement over the pre-existing average-case theorem. It has explicit raw-input LTF formulas and deterministic nonuniform existence via fixed-mask averaging. It is not Lean formalized and has not received a separate full independent referee review. The parent inspected the central cancellation/conditioning argument and separately verified vanishing cross-character moments on every k=m=2 table/address and mask marginal at radius 2.
+
+For uniform independent table/address bits and balanced $km\asymp N$, agreement $1-\delta$ now has an upper bound
+
+$$S=O(n^{3/2}\sqrt{\log(1/\delta)}),\qquad 0<\delta\le1/2,$$
+
+plus one top gate. This replaces the OLD $\log(n/\delta)$ inside the square root. Constant error consequently uses $O(n^{3/2})$ bottoms, a genuine $\sqrt{\log n}$ saving. Polynomially small error retains the old asymptotic order. The earlier Astra round's approximation was a rediscovery; this second round has a different, stronger proof.
+
+For $N^{-1/2}\le\varepsilon\le1/8$, selecting a subset of characters and subcube majority gives
+
+$$S=O(\varepsilon^2n^{3/2}\sqrt{\log(1/\varepsilon)}),\qquad W=O(\varepsilon^2n^{5/2}\sqrt{\log(1/\varepsilon)}).$$
+
+For $1/8<\varepsilon<1/2$, use the error bound with $\delta=1/2-\varepsilon$. This improves the old square-root logarithm for constant or subpolynomially small advantage; polynomially small advantage retains the same asymptotic order. No advantage-dependent logarithm saving is claimed uniformly as epsilon approaches one half.
+
+The change is ZERO-truncation of Walsh-product staircases and independently chosen address masks per character. Conditional on a table and address, masks make distinct character errors independent; their conditional means have the form $\chi_S(b)g_S(X_S)$. Averaging the uniform raw address kills cross terms by character orthogonality, without assuming Walsh coefficients are independent. The total mean-square error is therefore the sum of diagonal errors. Subgaussian tail second moments and Markov yield a radius $O(\sqrt{N\log(1/\delta)})$ instead of $O(\sqrt{N\log(N/\delta)})$. Averaging selects one fixed circuit; no run-time random inputs or mask-dependent circuit per input are allowed. Genuinely mixed/diverse masks can be imposed in the balanced growing-k regime by conditioning mask selection, at constant-factor cost.
+
+The finite theorem uses $t=2^r$, $V=N+rm/4$, radius $R=\lceil4\sqrt{V\log(16V/(t\delta))}\rceil$, at most $4(t-1)(R+1)$ bottoms, and agreement $1/2+p(N/t)/2-\delta$. For truncated subcube-majority output, the top threshold is shifted to avoid zero-margin ties. See the report for exact p, all gate coefficients, and mixed-mask conditioning.
+
+No exact upper bound improves: general leading $5n^2/16$, fixed-k3 +20 formula and small k2 witnesses remain current. Sparse selector LP witnesses were valid but noncompetitive. The report states the remaining exact shared-tail repair lemma. Every task-owned process finished, and code, witnesses, audits and logs are archived.
