@@ -188,3 +188,30 @@ The change is ZERO-truncation of Walsh-product staircases and independently chos
 The finite theorem uses $t=2^r$, $V=N+rm/4$, radius $R=\lceil4\sqrt{V\log(16V/(t\delta))}\rceil$, at most $4(t-1)(R+1)$ bottoms, and agreement $1/2+p(N/t)/2-\delta$. For truncated subcube-majority output, the top threshold is shifted to avoid zero-margin ties. See the report for exact p, all gate coefficients, and mixed-mask conditioning.
 
 No exact upper bound improves: general leading $5n^2/16$, fixed-k3 +20 formula and small k2 witnesses remain current. Sparse selector LP witnesses were valid but noncompetitive. The report states the remaining exact shared-tail repair lemma. Every task-owned process finished, and code, witnesses, audits and logs are archived.
+
+
+## 10. Logged comparison: new average-case bounds versus the paper
+
+**Status:** new Astra upper/lower analytical results are hand proofs pending full independent review and Lean formalization. This entry records the comparison requested by the user. All bounds concern balanced ordinary Andreev under uniform independent raw table and address bits, with arbitrary real depth-two threshold circuits and direct raw-input wires at the top. Gate upper counts are bottoms plus one top. Let $N=2^k$ and $n=N+km$ with $km\asymp N$.
+
+| Requirement | Earlier paper / archived theorem | New upper bound |
+|---|---|---|
+| Agreement $1-\delta$: gates | $O(n^{3/2}\sqrt{\log(n/\delta)})$ | $O(n^{3/2}\sqrt{\log(1/\delta)})$ |
+| Agreement $1/2+\varepsilon$: gates | $O(\varepsilon^2n^{3/2}\sqrt{\log n})$ | $O(\varepsilon^2n^{3/2}\sqrt{\log(1/\varepsilon)})$ |
+| Agreement $1/2+\varepsilon$: support wires | $O(\varepsilon^2n^{5/2}\sqrt{\log n})$ | $O(\varepsilon^2n^{5/2}\sqrt{\log(1/\varepsilon)})$ |
+
+The error comparison uses $0<\delta\le1/2$. The displayed advantage comparisons use $N^{-1/2}\le\varepsilon\le1/8$. For $1/8<\varepsilon<1/2$, use the error bound with $\delta=1/2-\varepsilon$; do not extrapolate the small-advantage formula to near-perfect agreement.
+
+For constant error or constant advantage, the upper bounds save $\sqrt{\log n}$. For polynomially small error or advantage, the asymptotic order stays the same. Neither result improves the exact-computation upper bound. The improvement comes from independent fixed-mask cancellation of cross-character truncation-error moments and an L2 estimate, replacing the old union bound. Masks are chosen once per circuit, not per input.
+
+The existing gate lower-bound expression is unchanged:
+
+$$S=\Omega(\varepsilon^2n^{3/2}/\log^2n).$$
+
+At constant advantage, the gate upper/lower logarithmic gap shrinks from $\log^{5/2}n$ to $\log^2n$. The support-wire lower-bound expression remains $\Omega(\varepsilon^2n^{5/2}/\log^{5/2}n)$, so its constant-advantage logarithmic gap shrinks from $\log^3n$ to $\log^{5/2}n$. These compare asymptotic expressions, not numerical sizes or hidden constants.
+
+Separately, the new lower hand argument extends the gate advantage range to $\varepsilon\ge C/\sqrt n$, compared with the paper's conservative formalized range $\varepsilon\ge C\log n/\sqrt n$ and the intervening hand-derived $C\sqrt{\log n/n}$ range. No corresponding wire-range extension is claimed. A zero-bottom table-majority circuit already achieves advantage $\Theta(n^{-1/2})$, so the sufficiently-large-constant qualifier is essential.
+
+For the original Kane–Williams paper, the stated lower bounds are $\Omega(\varepsilon^3n^{3/2}/\log^3n)$ gates and $\Omega(\varepsilon^3n^{5/2}/\log^{7/2}n)$ wires. Its stated range is $\varepsilon\gg\sqrt{\log n/n}$; the archived erratum discusses proof-range caveats. Our earlier lower-bound work had already improved the epsilon dependence and logarithmic denominators. The present upper round supplies an additional upper-bound improvement, not a new change to those lower-bound expressions. Source: [Kane–Williams, arXiv:1511.07860](https://arxiv.org/abs/1511.07860).
+
+Local sources: `workspace/threshold_paper/paper.tex`, theorem `thm:avgupper`; `workspace/andreev_depth_two_bounds.md`, Theorem 2; `experiments/upper_astra_round2/report.md`; `experiments/lower_astra/report.md`. Sections 7 and 9 above retain proof status, the finite theorem, and restrictions. Section 8 and its correction retain the fact that the FIRST Astra approximation report merely rediscovered the prior upper bound.

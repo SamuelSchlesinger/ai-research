@@ -80,3 +80,5 @@ Before treating any truncated-ridge approximation result as new, read `workspace
 ## Latest upper-bound round completed: actual logarithmic saving
 
 Astra round 2 is archived as `experiments/upper_astra_round2`. Unlike round 1's rediscovery, it replaces the approximation union bound by independent mixed-mask cancellation of cross-character error moments and an L2 estimate. Read RESEARCH_STATE.md section 9 and the report before quoting formulas: constant error now needs $O(n^{3/2})$ gates, and advantage epsilon has $O(epsilon^2 n^{3/2} sqrt(log(1/epsilon)))$ gates over the stated small-advantage regime. These are hand proofs, not Lean formalized or separately referee-reviewed. Exact bounds are unchanged. Next mathematical verification should focus on mask-selection quantifiers, mean-square cancellation, tail second moments, and threshold tie handling. Further exact progress still needs shared worst-case tail repair.
+
+The explicit paper-versus-new comparison, parameter ranges, constant-advantage gaps, and Kane–Williams distinction are logged in RESEARCH_STATE.md section 10.
