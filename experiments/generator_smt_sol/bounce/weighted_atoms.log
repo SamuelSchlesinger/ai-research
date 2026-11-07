@@ -1,0 +1,114 @@
+# Authors: Christian Reitwiessner
+# Copyright (c) 2026 Christian Reitwiessner
+# Authors: Christian Reitwiessner
+Running HiGHS 1.12.0 (git hash: 4f96ee8): Copyright (c) 2025 HiGHS under MIT licence terms
+MIP has 2160 rows; 121 cols; 125152 nonzeros; 56 integer variables (56 binary)
+Coefficient ranges:
+  Matrix  [1e+00, 1e+02]
+  Cost    [1e+00, 3e+00]
+  Bound   [1e+00, 1e+02]
+  RHS     [1e+00, 1e+00]
+Presolving model
+2160 rows, 121 cols, 125152 nonzeros  0s
+2160 rows, 121 cols, 125152 nonzeros  0s
+Presolve reductions: rows 2160(-0); columns 121(-0); nonzeros 125152(-0) - Not reduced
+Objective function is integral with scale 1
+
+Solving MIP model with:
+   2160 rows
+   121 cols (56 binary, 0 integer, 0 implied int., 65 continuous, 0 domain fixed)
+   125152 nonzeros
+
+Src: B => Branching; C => Central rounding; F => Feasibility pump; H => Heuristic;
+     I => Shifting; J => Feasibility jump; L => Sub-MIP; P => Empty MIP; R => Randomized rounding;
+     S => Solve LP; T => Evaluate node; U => Unbounded; X => User solution; Y => HiGHS solution;
+     Z => ZI Round; l => Trivial lower; p => Trivial point; u => Trivial upper; z => Trivial zero
+
+        Nodes      |    B&B Tree     |            Objective Bounds              |  Dynamic Constraints |       Work      
+Src  Proc. InQueue |  Leaves   Expl. | BestBound       BestSol              Gap |   Cuts   InLp Confl. | LpIters     Time
+
+         0       0         0   0.00%   0               inf                  inf        0      0      0         0     0.3s
+ S       0       0         0   0.00%   0               88               100.00%        0      0      0         0     0.4s
+ R       0       0         0   0.00%   0.12            87                99.86%        0      0      0       265     0.4s
+ S       0       0         0   0.00%   0.12            28                99.57%      240      3      0       265     0.6s
+ L       0       0         0   0.00%   0.2578523406    21                98.77%      456     40      0      1894     3.6s
+
+Symmetry detection completed in 0.0s
+Found 5 generator(s)
+
+HighsMipSolverData::transformNewIntegerFeasibleSolution tmpSolver.run();
+HighsMipSolverData::transformNewIntegerFeasibleSolution tmpSolver.run();
+         6       0         1   3.12%   0.2578523406    21                98.77%      459     25      3     27576     9.5s
+        88      12        32   4.87%   0.2578523406    21                98.77%      529     25    209     41851    14.6s
+       218      38        76   6.55%   2               21                90.48%      583     23    438     59044    20.0s
+       533      90       210   9.87%   4               21                80.95%      457     17    824     72972    25.0s
+       903     121       366  11.04%   5.058081808     21                75.91%      505     18   1208     88450    30.0s
+      1231     165       498  11.11%   5.058081808     21                75.91%      577     20   1593    105429    35.1s
+      1570     220       628  11.17%   6.054023228     21                71.17%      610     22   1977    121095    40.1s
+HighsMipSolverData::transformNewIntegerFeasibleSolution tmpSolver.run();
+      1720     244       690  11.19%   6.054023228     21                71.17%      538     24   2155    138928    48.0s
+      2037     283       824  11.77%   6.054023228     21                71.17%      514     18   2612    155865    53.0s
+      2324     314       948  13.10%   6.054023228     21                71.17%      488     24   2978    172676    58.0s
+      2663     358      1091  13.29%   7.810827858     21                62.81%      469     17   3425    189450    63.1s
+      2999     400      1233  13.45%   7.810827858     21                62.81%      515     20   3857    206575    68.1s
+      3341     451      1374  13.55%   7.810827858     21                62.81%      552     24   4338    223627    73.1s
+      3362     455      1382  13.56%   8.068132425     21                61.58%      553     28   4373    243024    80.2s
+
+Restarting search from the root node
+Model after restart has 2160 rows, 121 cols (56 bin., 0 int., 0 impl., 65 cont., 0 dom.fix.), and 125152 nonzeros
+
+      3456       0         0   0.00%   8.068132425     21                61.58%       28      0      0    246957    81.7s
+
+        Nodes      |    B&B Tree     |            Objective Bounds              |  Dynamic Constraints |       Work      
+Src  Proc. InQueue |  Leaves   Expl. | BestBound       BestSol              Gap |   Cuts   InLp Confl. | LpIters     Time
+
+      3456       0         0   0.00%   8.068132425     21                61.58%       28     13      0    247208    81.8s
+
+Symmetry detection completed in 0.1s
+Found 5 generator(s)
+
+      3785      31       139  25.07%   8.068132425     21                61.58%      242      8    483    261562    86.8s
+      4148      72       295  28.40%   8.068132425     21                61.58%      319     16    884    278736    91.9s
+      4481     103       439  34.89%   8.068132425     21                61.58%      342     21   1325    294442    96.9s
+      4782     138       570  35.50%   8.16384         21                61.12%      491     17   1686    310323   101.9s
+      5108     181       707  35.95%   10.02           21                52.29%      514     18   2032    325420   106.9s
+      5417     222       833  36.86%   10.02           21                52.29%      517     17   2484    341720   111.9s
+      5761     253       979  37.14%   10.02           21                52.29%      464     19   2913    357455   117.4s
+      6084     275      1129  37.62%   10.34666667     21                50.73%      521     13   3357    373149   122.4s
+      6387     310      1261  38.03%   10.34666667     21                50.73%      543     19   3923    390125   127.4s
+      6716     368      1388  38.40%   10.34666667     21                50.73%      567     21   4393    406514   132.4s
+      7018     422      1506  38.78%   11.5065         21                45.21%      601     30   4822    421822   137.5s
+      7274     465      1608  40.35%   11.5065         21                45.21%      656     18   5146    437069   142.5s
+      7529     498      1715  40.78%   11.5065         21                45.21%      641     32   5544    450807   147.5s
+      7784     523      1827  44.55%   12.06129032     21                42.57%      703     18   5908    465891   152.5s
+      8061     570      1939  45.58%   12.06129032     21                42.57%      651     13   6314    480559   157.7s
+      8365     608      2066  46.18%   12.77220814     21                39.18%      584     16   6734    495534   162.8s
+      8680     653      2196  46.63%   12.77220814     21                39.18%      490     20   7112    510704   167.8s
+      9020     703      2334  47.02%   12.77220814     21                39.18%      466     23   7582    526843   172.8s
+      9321     736      2463  47.98%   12.77220814     21                39.18%      537     33   7961    543060   177.8s
+
+        Nodes      |    B&B Tree     |            Objective Bounds              |  Dynamic Constraints |       Work      
+Src  Proc. InQueue |  Leaves   Expl. | BestBound       BestSol              Gap |   Cuts   InLp Confl. | LpIters     Time
+
+      9461     778      2510  48.14%   13              21                38.10%      586     37   8165    551013   180.0s
+
+Solving report
+  Status            Time limit reached
+  Primal bound      20.9999999999
+  Dual bound        13
+  Gap               38.1% (tolerance: 0.01%)
+  P-D integral      110.701083696
+  Solution status   feasible
+                    20.9999999999 (objective)
+                    0 (bound viol.)
+                    2.50547283585e-11 (int. viol.)
+                    0 (row viol.)
+  Timing            180.00
+  Max sub-MIP depth 4
+  Nodes             9461
+  Repair LPs        3 (2 feasible; 51 iterations)
+  LP iterations     551013
+                    35807 (strong br.)
+                    22482 (separation)
+                    41105 (heuristics)
+{'Authors': 'Christian Reitwiessner', 'status': 1, 'message': 'Time limit reached. (HiGHS Status 13: Time limit reached)', 'objective': 20.99999999993392, 'dual_bound': 13.0, 'seconds': 180.01915475726128, 'atoms': [{'s': 1, 'r': 0, 'weight': '3/2'}, {'s': 1, 'r': 1, 'weight': '3/2'}, {'s': 2, 'r': 0, 'weight': '3/2'}, {'s': 2, 'r': 1, 'weight': '3/2'}, {'s': 3, 'r': 0, 'weight': '3/2'}, {'s': 3, 'r': 4, 'weight': '1'}, {'s': 4, 'r': 0, 'weight': '3/2'}, {'s': 4, 'r': 1, 'weight': '3/2'}, {'s': 5, 'r': 0, 'weight': '3/2'}, {'s': 5, 'r': 1, 'weight': '3/2'}, {'s': 6, 'r': 0, 'weight': '3/2'}, {'s': 6, 'r': 1, 'weight': '3/2'}, {'s': 7, 'r': 0, 'weight': '3/2'}], 'table_weights': ['2', '2', '2', '2', '2', '2', '2', '2'], 'threshold': '8', 'scale': 2, 'exact_minimum': '2'}

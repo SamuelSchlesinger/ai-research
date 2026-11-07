@@ -9,7 +9,15 @@ Read RESEARCH_STATE.md first. The primary objective is a smaller exact THR∘THR
 
 The earlier majority, small-instance SMT, mixed-sign upper-bound, and coarse-Fourier tasks have finished. Their reports are in `experiments/maj_sol`, `variants_sol`, `mixed_upper_sol`, and `coarse_mixed_general`. No old solver process needs resuming. The last report gives an exact localized mixed-sign product gadget, a varying-width cancellation identity, and a restricted obstruction for one middle-layer architecture. It obtains no subquadratic family. Pooling across growing-k characters is open.
 
-The user now requests a fresh SMT search for larger k and m, with the generator encoding specified below. A background GPT Sol task is being started after this initial archive is pushed. Its future output is not part of this snapshot. Preserve new code, witnesses, results, and logs in a new experiment directory, then update this archive.
+The generator-SMT Sol campaign is completed and archived in `experiments/generator_smt_sol/`. Read its `report.md`, `campaign_matrix.md`, and independent `bounce/review.md`. It implements generic bounded binary-LUT descriptions and a symmetry-reduced AND/XOR alternative; the threshold circuit always receives only evaluated table bits and raw addresses. Small generator families are useful as a curriculum, not a compression of all table inputs. Full coverage at k=3,r=5 is checked; r=1 and r=2 are incomplete (38 and 152 of 256 tables).
+
+The main new **ordinary-Andreev** result, independently reviewed and exactly certified, is
+
+$$S_3(m)=6\lfloor m/2\rfloor+6m+\lfloor3m/2\rfloor+20$$
+
+bottom gates plus one top, for every $m\ge1$. This removes six table-only gates from the inherited formula and keeps slope $21/2$. The fixed rational coefficient certificate covers all 2048 table/parity pairs; an exact ladder identity proves all m. Explicit m=3,4,6 witnesses have 48,62,83 bottoms and exact full-domain integer audits. The arbitrary-table symbolic checker verifies m=3; longer m=4 and m=6 checks remain UNKNOWN/timeouts, separately recorded. The uniform proof is independent of those timeouts. This does not improve the growing-k balanced leading constant.
+
+Other exact family-only witnesses include k3m3 r1:S32, r2:S47; k3m4 r1:S43; k3m6 r1:S59; k4m2 r1:S49; k4m3 r1:S60. Each fails on arbitrary tables. Unrestricted-real CEGIS trials reached UNKNOWN. Canonical XAG descriptions preserve coverage but did not show a speedup in bounded comparisons. The independent agent's critique explains why dropping a few separable Walsh channels cannot beat the general full-ladder quadratic cost. Prioritize sharing bottom gates across characters or localized windows, using controlled-score identities rather than composing sign-only restricted-family witnesses. All experiment-owned jobs finished; do not resume old solvers blindly.
 
 ## The generator-SMT encoding: the essential quantifiers
 

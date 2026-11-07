@@ -1,0 +1,7 @@
+# Authors: Christian Reitwiessner
+{'regression': 'canonical_coverage', 'k': 2, 'r': 1, 'tables': 16}
+{'regression': 'canonical_coverage', 'k': 3, 'r': 1, 'tables': 38}
+{'regression': 'canonical_coverage', 'k': 3, 'r': 2, 'tables': 152}
+{'regression': 'canonical_coverage', 'k': 4, 'r': 1, 'tables': 70}
+{'basis': 'XAG', 'k': 3, 'm': 3, 'r': 5, 'bottoms': 49, 'result': {'status': 'UNSAT', 'reason': '', 'examples': [], 'seconds': 9.708540864288807}, 'wall_seconds': 9.7597288005054}
+{'basis': 'canonical_XAG', 'k': 3, 'm': 3, 'r': 5, 'bottoms': 49, 'result': {'status': 'UNSAT', 'reason': '', 'examples': [], 'seconds': 10.870620364323258}, 'wall_seconds': 10.925203882157803}

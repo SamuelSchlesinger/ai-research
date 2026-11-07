@@ -1,0 +1,572 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "rows": [
+    {
+      "run": "free_k2m6r0s6",
+      "k": 2,
+      "m": 6,
+      "r": 0,
+      "method": "free",
+      "attempted_S_or_library": 6,
+      "status": "learner UNKNOWN; checker UNKNOWN",
+      "witness": null,
+      "best_S": null,
+      "family_symbolic": null,
+      "ordinary_symbolic": null,
+      "exact_matrix": null
+    },
+    {
+      "run": "free_k2m6r1s18",
+      "k": 2,
+      "m": 6,
+      "r": 1,
+      "method": "free",
+      "attempted_S_or_library": 18,
+      "status": "learner UNKNOWN; checker UNKNOWN",
+      "witness": null,
+      "best_S": null,
+      "family_symbolic": null,
+      "ordinary_symbolic": null,
+      "exact_matrix": null
+    },
+    {
+      "run": "free_k2m8r0s8",
+      "k": 2,
+      "m": 8,
+      "r": 0,
+      "method": "free",
+      "attempted_S_or_library": 8,
+      "status": "learner UNKNOWN; checker UNKNOWN",
+      "witness": null,
+      "best_S": null,
+      "family_symbolic": null,
+      "ordinary_symbolic": null,
+      "exact_matrix": null
+    },
+    {
+      "run": "free_k2m8r1s23",
+      "k": 2,
+      "m": 8,
+      "r": 1,
+      "method": "free",
+      "attempted_S_or_library": 23,
+      "status": "learner UNKNOWN; checker UNKNOWN",
+      "witness": null,
+      "best_S": null,
+      "family_symbolic": null,
+      "ordinary_symbolic": null,
+      "exact_matrix": null
+    },
+    {
+      "run": "free_k3m3r1s8",
+      "k": 3,
+      "m": 3,
+      "r": 1,
+      "method": "free",
+      "attempted_S_or_library": 8,
+      "status": "learner UNKNOWN; checker UNKNOWN",
+      "witness": null,
+      "best_S": null,
+      "family_symbolic": null,
+      "ordinary_symbolic": null,
+      "exact_matrix": null
+    },
+    {
+      "run": "free_k3m3r1s8_long",
+      "k": 3,
+      "m": 3,
+      "r": 1,
+      "method": "free",
+      "attempted_S_or_library": 8,
+      "status": "learner UNKNOWN; checker UNKNOWN",
+      "witness": null,
+      "best_S": null,
+      "family_symbolic": null,
+      "ordinary_symbolic": null,
+      "exact_matrix": null
+    },
+    {
+      "run": "free_k3m4r0s8",
+      "k": 3,
+      "m": 4,
+      "r": 0,
+      "method": "free",
+      "attempted_S_or_library": 8,
+      "status": "learner UNKNOWN; checker UNKNOWN",
+      "witness": null,
+      "best_S": null,
+      "family_symbolic": null,
+      "ordinary_symbolic": null,
+      "exact_matrix": null
+    },
+    {
+      "run": "free_k3m6r1s18",
+      "k": 3,
+      "m": 6,
+      "r": 1,
+      "method": "free",
+      "attempted_S_or_library": 18,
+      "status": "learner UNKNOWN; checker UNKNOWN",
+      "witness": null,
+      "best_S": null,
+      "family_symbolic": null,
+      "ordinary_symbolic": null,
+      "exact_matrix": null
+    },
+    {
+      "run": "free_k4m2r1s12",
+      "k": 4,
+      "m": 2,
+      "r": 1,
+      "method": "free",
+      "attempted_S_or_library": 12,
+      "status": "learner UNKNOWN; checker UNKNOWN",
+      "witness": null,
+      "best_S": null,
+      "family_symbolic": null,
+      "ordinary_symbolic": null,
+      "exact_matrix": null
+    },
+    {
+      "run": "free_k4m3r1s16",
+      "k": 4,
+      "m": 3,
+      "r": 1,
+      "method": "free",
+      "attempted_S_or_library": 16,
+      "status": "learner UNKNOWN; checker UNKNOWN",
+      "witness": null,
+      "best_S": null,
+      "family_symbolic": null,
+      "ordinary_symbolic": null,
+      "exact_matrix": null
+    },
+    {
+      "run": "free_xag_k3m3r1s8",
+      "k": 3,
+      "m": 3,
+      "r": 1,
+      "method": "free",
+      "attempted_S_or_library": 8,
+      "status": "learner UNKNOWN; checker UNKNOWN",
+      "witness": null,
+      "best_S": null,
+      "family_symbolic": null,
+      "ordinary_symbolic": null,
+      "exact_matrix": null
+    },
+    {
+      "run": "lp_k3m3full",
+      "k": 3,
+      "m": 3,
+      "r": -1,
+      "method": "LP",
+      "attempted_S_or_library": 54,
+      "status": "LP feasible",
+      "witness": "lp_k3m3full/verified_54.json",
+      "best_S": 54,
+      "family_symbolic": "UNSAT",
+      "ordinary_symbolic": "UNKNOWN",
+      "exact_matrix": {
+        "minimum": "7",
+        "scale": "7",
+        "rows": 16384
+      }
+    },
+    {
+      "run": "lp_k3m3r1",
+      "k": 3,
+      "m": 3,
+      "r": 1,
+      "method": "LP",
+      "attempted_S_or_library": 54,
+      "status": "LP feasible",
+      "witness": "lp_k3m3r1/verified_36.json",
+      "best_S": 36,
+      "family_symbolic": "UNSAT",
+      "ordinary_symbolic": "COUNTEREXAMPLE",
+      "exact_matrix": {
+        "minimum": "1",
+        "scale": "1",
+        "rows": 2432
+      }
+    },
+    {
+      "run": "lp_k3m3r2",
+      "k": 3,
+      "m": 3,
+      "r": 2,
+      "method": "LP",
+      "attempted_S_or_library": 54,
+      "status": "LP feasible",
+      "witness": "lp_k3m3r2/verified_54.json",
+      "best_S": 54,
+      "family_symbolic": "UNSAT",
+      "ordinary_symbolic": "COUNTEREXAMPLE",
+      "exact_matrix": {
+        "minimum": "3",
+        "scale": "3",
+        "rows": 9728
+      }
+    },
+    {
+      "run": "lp_k3m4full",
+      "k": 3,
+      "m": 4,
+      "r": -1,
+      "method": "LP",
+      "attempted_S_or_library": 68,
+      "status": "LP feasible",
+      "witness": "lp_k3m4full/verified_68.json",
+      "best_S": 68,
+      "family_symbolic": "UNKNOWN",
+      "ordinary_symbolic": "UNKNOWN",
+      "exact_matrix": {
+        "minimum": "7",
+        "scale": "7",
+        "rows": 32000
+      }
+    },
+    {
+      "run": "lp_k3m4r1",
+      "k": 3,
+      "m": 4,
+      "r": 1,
+      "method": "LP",
+      "attempted_S_or_library": 68,
+      "status": "LP feasible",
+      "witness": "lp_k3m4r1/verified_48.json",
+      "best_S": 48,
+      "family_symbolic": "UNKNOWN",
+      "ordinary_symbolic": "COUNTEREXAMPLE",
+      "exact_matrix": {
+        "minimum": "1",
+        "scale": "1",
+        "rows": 4750
+      }
+    },
+    {
+      "run": "lp_k3m6full",
+      "k": 3,
+      "m": 6,
+      "r": -1,
+      "method": "LP",
+      "attempted_S_or_library": 89,
+      "status": "LP feasible",
+      "witness": "lp_k3m6full/verified_89.json",
+      "best_S": 89,
+      "family_symbolic": "UNKNOWN",
+      "ordinary_symbolic": "UNKNOWN",
+      "exact_matrix": {
+        "minimum": "7",
+        "scale": "7",
+        "rows": 87808
+      }
+    },
+    {
+      "run": "lp_k3m6r1",
+      "k": 3,
+      "m": 6,
+      "r": 1,
+      "method": "LP",
+      "attempted_S_or_library": 89,
+      "status": "LP feasible",
+      "witness": "lp_k3m6r1/verified_66.json",
+      "best_S": 66,
+      "family_symbolic": "UNKNOWN",
+      "ordinary_symbolic": "COUNTEREXAMPLE",
+      "exact_matrix": {
+        "minimum": "1",
+        "scale": "1",
+        "rows": 13034
+      }
+    },
+    {
+      "run": "lp_k4m3r1",
+      "k": 4,
+      "m": 3,
+      "r": 1,
+      "method": "LP",
+      "attempted_S_or_library": 168,
+      "status": "LP feasible",
+      "witness": "lp_k4m3r1/verified_64.json",
+      "best_S": 64,
+      "family_symbolic": "UNKNOWN",
+      "ordinary_symbolic": "COUNTEREXAMPLE",
+      "exact_matrix": {
+        "minimum": "1",
+        "scale": "1",
+        "rows": 17920
+      }
+    },
+    {
+      "run": "milp_k3m3full",
+      "k": 3,
+      "m": 3,
+      "r": -1,
+      "method": "MILP",
+      "attempted_S_or_library": 54,
+      "status": "Time limit reached. (HiGHS Status 13: Time limit reached)",
+      "witness": "milp_k3m3full/verified_49.json",
+      "best_S": 49,
+      "family_symbolic": "UNSAT",
+      "ordinary_symbolic": "VERIFIED",
+      "exact_matrix": {
+        "minimum": "9",
+        "rows": 16384
+      }
+    },
+    {
+      "run": "milp_k3m3r1",
+      "k": 3,
+      "m": 3,
+      "r": 1,
+      "method": "MILP",
+      "attempted_S_or_library": 54,
+      "status": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+      "witness": "milp_k3m3r1/verified_32.json",
+      "best_S": 32,
+      "family_symbolic": "UNSAT",
+      "ordinary_symbolic": "COUNTEREXAMPLE",
+      "exact_matrix": {
+        "minimum": "3",
+        "rows": 2432
+      }
+    },
+    {
+      "run": "milp_k3m3r2",
+      "k": 3,
+      "m": 3,
+      "r": 2,
+      "method": "MILP",
+      "attempted_S_or_library": 54,
+      "status": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+      "witness": "milp_k3m3r2/verified_47.json",
+      "best_S": 47,
+      "family_symbolic": "UNSAT",
+      "ordinary_symbolic": "COUNTEREXAMPLE",
+      "exact_matrix": {
+        "minimum": "5",
+        "rows": 9728
+      }
+    },
+    {
+      "run": "milp_k3m4full",
+      "k": 3,
+      "m": 4,
+      "r": -1,
+      "method": "MILP",
+      "attempted_S_or_library": 68,
+      "status": "Time limit reached. (HiGHS Status 13: Time limit reached)",
+      "witness": "milp_k3m4full/verified_63.json",
+      "best_S": 63,
+      "family_symbolic": "UNKNOWN",
+      "ordinary_symbolic": "UNKNOWN",
+      "exact_matrix": {
+        "minimum": "1",
+        "rows": 32000
+      }
+    },
+    {
+      "run": "milp_k3m4r1",
+      "k": 3,
+      "m": 4,
+      "r": 1,
+      "method": "MILP",
+      "attempted_S_or_library": 68,
+      "status": "Time limit reached. (HiGHS Status 13: Time limit reached)",
+      "witness": "milp_k3m4r1/verified_43.json",
+      "best_S": 43,
+      "family_symbolic": "UNSAT",
+      "ordinary_symbolic": "COUNTEREXAMPLE",
+      "exact_matrix": {
+        "minimum": "1",
+        "rows": 4750
+      }
+    },
+    {
+      "run": "milp_k3m6full",
+      "k": 3,
+      "m": 6,
+      "r": -1,
+      "method": "MILP",
+      "attempted_S_or_library": 89,
+      "status": "Time limit reached. (HiGHS Status 13: Time limit reached)",
+      "witness": "milp_k3m6full/verified_86.json",
+      "best_S": 86,
+      "family_symbolic": "UNKNOWN",
+      "ordinary_symbolic": "UNKNOWN",
+      "exact_matrix": {
+        "minimum": "10",
+        "rows": 87808
+      }
+    },
+    {
+      "run": "milp_k3m6r1",
+      "k": 3,
+      "m": 6,
+      "r": 1,
+      "method": "MILP",
+      "attempted_S_or_library": 89,
+      "status": "Time limit reached. (HiGHS Status 13: Time limit reached)",
+      "witness": "milp_k3m6r1/verified_59.json",
+      "best_S": 59,
+      "family_symbolic": "UNKNOWN",
+      "ordinary_symbolic": "COUNTEREXAMPLE",
+      "exact_matrix": {
+        "minimum": "3",
+        "rows": 13034
+      }
+    },
+    {
+      "run": "milp_k4m2r1",
+      "k": 4,
+      "m": 2,
+      "r": 1,
+      "method": "MILP",
+      "attempted_S_or_library": 144,
+      "status": "Time limit reached. (HiGHS Status 13: Time limit reached)",
+      "witness": "milp_k4m2r1/verified_49.json",
+      "best_S": 49,
+      "family_symbolic": "UNSAT",
+      "ordinary_symbolic": "COUNTEREXAMPLE",
+      "exact_matrix": {
+        "minimum": "2",
+        "rows": 5670
+      }
+    },
+    {
+      "run": "milp_k4m3r1",
+      "k": 4,
+      "m": 3,
+      "r": 1,
+      "method": "MILP",
+      "attempted_S_or_library": 168,
+      "status": "Time limit reached. (HiGHS Status 13: Time limit reached)",
+      "witness": "milp_k4m3r1/verified_60.json",
+      "best_S": 60,
+      "family_symbolic": "UNKNOWN",
+      "ordinary_symbolic": "COUNTEREXAMPLE",
+      "exact_matrix": {
+        "minimum": "3",
+        "rows": 17920
+      }
+    },
+    {
+      "run": "mixedlp_k2m6full",
+      "k": 2,
+      "m": 6,
+      "r": -1,
+      "method": "LP",
+      "attempted_S_or_library": 57,
+      "status": "LP feasible",
+      "witness": "mixedlp_k2m6full/verified_19.json",
+      "best_S": 19,
+      "family_symbolic": "UNSAT",
+      "ordinary_symbolic": "VERIFIED",
+      "exact_matrix": {
+        "minimum": "1",
+        "scale": "1",
+        "rows": 65536
+      }
+    },
+    {
+      "run": "pool_k2m6r1",
+      "k": 2,
+      "m": 6,
+      "r": 1,
+      "method": "pool",
+      "attempted_S_or_library": 19,
+      "status": "learner UNSAT",
+      "witness": "pool_k2m6r1/verified_19.json",
+      "best_S": 19,
+      "family_symbolic": "UNSAT",
+      "ordinary_symbolic": "VERIFIED",
+      "exact_matrix": null
+    },
+    {
+      "run": "pool_k2m8r1",
+      "k": 2,
+      "m": 8,
+      "r": 1,
+      "method": "pool",
+      "attempted_S_or_library": 24,
+      "status": "learner SAT; checker UNKNOWN",
+      "witness": null,
+      "best_S": null,
+      "family_symbolic": null,
+      "ordinary_symbolic": null,
+      "exact_matrix": null
+    },
+    {
+      "run": "pool_k2m8r1_long",
+      "k": 2,
+      "m": 8,
+      "r": 1,
+      "method": "pool",
+      "attempted_S_or_library": 24,
+      "status": "learner SAT; checker UNKNOWN",
+      "witness": null,
+      "best_S": null,
+      "family_symbolic": null,
+      "ordinary_symbolic": null,
+      "exact_matrix": null
+    },
+    {
+      "run": "pool_k3m3full",
+      "k": 3,
+      "m": 3,
+      "r": -1,
+      "method": "pool",
+      "attempted_S_or_library": 54,
+      "status": "learner UNKNOWN; checker UNKNOWN",
+      "witness": null,
+      "best_S": null,
+      "family_symbolic": null,
+      "ordinary_symbolic": null,
+      "exact_matrix": null
+    },
+    {
+      "run": "pool_k3m3r1",
+      "k": 3,
+      "m": 3,
+      "r": 1,
+      "method": "pool",
+      "attempted_S_or_library": 54,
+      "status": "learner UNKNOWN; checker UNKNOWN",
+      "witness": "pool_k3m3r1/verified_39.json",
+      "best_S": 39,
+      "family_symbolic": "UNSAT",
+      "ordinary_symbolic": "COUNTEREXAMPLE",
+      "exact_matrix": null
+    },
+    {
+      "run": "pool_k3m3r2",
+      "k": 3,
+      "m": 3,
+      "r": 2,
+      "method": "pool",
+      "attempted_S_or_library": 54,
+      "status": "learner UNKNOWN; checker UNKNOWN",
+      "witness": null,
+      "best_S": null,
+      "family_symbolic": null,
+      "ordinary_symbolic": null,
+      "exact_matrix": null
+    },
+    {
+      "run": "pool_k4m2r1",
+      "k": 4,
+      "m": 2,
+      "r": 1,
+      "method": "pool",
+      "attempted_S_or_library": 144,
+      "status": "learner SAT",
+      "witness": "pool_k4m2r1/verified_112.json",
+      "best_S": 112,
+      "family_symbolic": "UNSAT",
+      "ordinary_symbolic": "COUNTEREXAMPLE",
+      "exact_matrix": null
+    }
+  ]
+}

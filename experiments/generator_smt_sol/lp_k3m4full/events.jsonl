@@ -1,0 +1,15 @@
+{"Authors": "Christian Reitwiessner", "phase": "file_credit"}
+{"phase": "matrix", "k": 3, "m": 4, "r": -1, "tables": 256, "rows": 32000, "library": 68, "columns": 80, "elapsed": 0.016573656350374222}
+{"phase": "lp", "iteration": 0, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 2.297971246764064, "elapsed": 2.3148311730474234}
+{"phase": "exact_matrix", "support": 68, "minimum": "7", "scale": "7", "elapsed": 2.3678605277091265}
+{"phase": "certification", "bottoms": 68, "family": {"status": "UNKNOWN", "reason": "timeout", "examples": [], "seconds": 15.011741932481527}, "ordinary": {"status": "UNKNOWN", "reason": "timeout", "seconds": 10.005602242425084}, "elapsed": 27.410289051011205}
+{"phase": "lp", "iteration": 1, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 1.8332916609942913, "elapsed": 29.24404646269977}
+{"phase": "exact_matrix", "support": 68, "minimum": "7", "scale": "7", "elapsed": 29.294690940529108}
+{"phase": "certification", "bottoms": 68, "family": {"status": "UNKNOWN", "reason": "timeout", "examples": [], "seconds": 15.006631191819906}, "ordinary": {"status": "UNKNOWN", "reason": "timeout", "seconds": 10.004371156916022}, "elapsed": 54.32796508073807}
+{"phase": "lp", "iteration": 2, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 2.114925689995289, "elapsed": 56.463003946468234}
+{"phase": "exact_matrix", "support": 68, "minimum": "7", "scale": "7", "elapsed": 56.51706508733332}
+{"phase": "certification", "bottoms": 68, "family": {"status": "UNKNOWN", "reason": "timeout", "examples": [], "seconds": 15.010096661746502}, "ordinary": {"status": "UNKNOWN", "reason": "timeout", "seconds": 10.004102816805243}, "elapsed": 81.55671275034547}
+{"phase": "lp", "iteration": 3, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 1.7562007177621126, "elapsed": 83.33302222751081}
+{"phase": "exact_matrix", "support": 68, "minimum": "7", "scale": "7", "elapsed": 83.38268157094717}
+{"phase": "certification", "bottoms": 68, "family": {"status": "UNKNOWN", "reason": "timeout", "examples": [], "seconds": 15.009149158373475}, "ordinary": {"status": "UNKNOWN", "reason": "timeout", "seconds": 10.007199130952358}, "elapsed": 108.42150993831456}
+{"phase": "finished", "best": 68, "elapsed": 108.44719702005386}

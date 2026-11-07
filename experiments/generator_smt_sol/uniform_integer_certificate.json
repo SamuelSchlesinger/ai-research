@@ -1,0 +1,130 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "atoms": [
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      0
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      5,
+      0
+    ],
+    [
+      5,
+      1
+    ],
+    [
+      6,
+      0
+    ],
+    [
+      6,
+      1
+    ],
+    [
+      7,
+      0
+    ]
+  ],
+  "A": [
+    190,
+    187,
+    188,
+    190,
+    190,
+    185,
+    188,
+    189,
+    190,
+    188,
+    188,
+    191,
+    110
+  ],
+  "C": [
+    -440,
+    0,
+    -220,
+    -324,
+    -344,
+    0,
+    -440,
+    0,
+    0,
+    -444,
+    0,
+    -508,
+    0
+  ],
+  "table": [
+    -68,
+    304,
+    240,
+    244,
+    244,
+    288,
+    296,
+    196
+  ],
+  "tau": 1886,
+  "integer_scale": 16,
+  "exact_minimum": 16,
+  "cases": 2048,
+  "formula": "6 floor(m/2)+6m+floor(3m/2)+20 bottoms, for every m>=1",
+  "checks": [
+    {
+      "m": 3,
+      "bottoms": 48,
+      "independent_symbolic": {
+        "status": "VERIFIED",
+        "seconds": 7.421378882601857
+      }
+    },
+    {
+      "m": 4,
+      "bottoms": 62,
+      "independent_symbolic": {
+        "status": "UNKNOWN",
+        "reason": "timeout",
+        "seconds": 30.00563670322299
+      }
+    },
+    {
+      "m": 6,
+      "bottoms": 83,
+      "independent_symbolic": {
+        "status": "UNKNOWN",
+        "reason": "timeout",
+        "seconds": 10.008377213031054
+      }
+    }
+  ]
+}

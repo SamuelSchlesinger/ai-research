@@ -1,0 +1,99 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": 0,
+  "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "objective": 2107.0,
+  "dual_bound": 2107.0,
+  "A": [
+    "95/8",
+    "187/16",
+    "47/4",
+    "95/8",
+    "95/8",
+    "185/16",
+    "47/4",
+    "189/16",
+    "95/8",
+    "47/4",
+    "47/4",
+    "191/16",
+    "55/8"
+  ],
+  "C": [
+    "-55/2",
+    "0",
+    "-55/4",
+    "-81/4",
+    "-43/2",
+    "0",
+    "-55/2",
+    "0",
+    "0",
+    "-111/4",
+    "0",
+    "-127/4",
+    "0"
+  ],
+  "raw_table": [
+    "-17/4",
+    "19",
+    "15",
+    "61/4",
+    "61/4",
+    "18",
+    "37/2",
+    "49/4"
+  ],
+  "tau": "943/8",
+  "exact_minimum": "16",
+  "exact_cases": 2048,
+  "weighted_channel_cost": 21,
+  "standalone_gates": 7,
+  "instances": [
+    {
+      "m": 3,
+      "bottoms": 48,
+      "exact": {
+        "status": "VERIFIED",
+        "count_cases": 16384,
+        "raw_cases": 131072,
+        "integer_scale": 4
+      },
+      "symbolic": {
+        "status": "UNKNOWN",
+        "reason": "timeout",
+        "seconds": 5.002416389063001
+      }
+    },
+    {
+      "m": 4,
+      "bottoms": 62,
+      "exact": {
+        "status": "VERIFIED",
+        "count_cases": 32000,
+        "raw_cases": 1048576,
+        "integer_scale": 4
+      },
+      "symbolic": {
+        "status": "UNKNOWN",
+        "reason": "timeout",
+        "seconds": 5.0039169285446405
+      }
+    },
+    {
+      "m": 6,
+      "bottoms": 83,
+      "exact": {
+        "status": "VERIFIED",
+        "count_cases": 87808,
+        "raw_cases": 67108864,
+        "integer_scale": 4
+      },
+      "symbolic": {
+        "status": "UNKNOWN",
+        "reason": "timeout",
+        "seconds": 5.006843706592917
+      }
+    }
+  ]
+}

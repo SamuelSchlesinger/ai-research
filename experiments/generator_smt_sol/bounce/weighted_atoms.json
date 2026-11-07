@@ -1,0 +1,88 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": 1,
+  "message": "Time limit reached. (HiGHS Status 13: Time limit reached)",
+  "objective": 20.99999999993392,
+  "dual_bound": 13.0,
+  "seconds": 180.01915475726128,
+  "atoms": [
+    {
+      "s": 1,
+      "r": 0,
+      "weight": "3/2"
+    },
+    {
+      "s": 1,
+      "r": 1,
+      "weight": "3/2"
+    },
+    {
+      "s": 2,
+      "r": 0,
+      "weight": "3/2"
+    },
+    {
+      "s": 2,
+      "r": 1,
+      "weight": "3/2"
+    },
+    {
+      "s": 3,
+      "r": 0,
+      "weight": "3/2"
+    },
+    {
+      "s": 3,
+      "r": 4,
+      "weight": "1"
+    },
+    {
+      "s": 4,
+      "r": 0,
+      "weight": "3/2"
+    },
+    {
+      "s": 4,
+      "r": 1,
+      "weight": "3/2"
+    },
+    {
+      "s": 5,
+      "r": 0,
+      "weight": "3/2"
+    },
+    {
+      "s": 5,
+      "r": 1,
+      "weight": "3/2"
+    },
+    {
+      "s": 6,
+      "r": 0,
+      "weight": "3/2"
+    },
+    {
+      "s": 6,
+      "r": 1,
+      "weight": "3/2"
+    },
+    {
+      "s": 7,
+      "r": 0,
+      "weight": "3/2"
+    }
+  ],
+  "table_weights": [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+  ],
+  "threshold": "8",
+  "scale": 2,
+  "exact_minimum": "2"
+}

@@ -1,0 +1,286 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "results": [
+    {
+      "k": 2,
+      "m": 6,
+      "r": 1,
+      "bottoms": 36,
+      "family_exact": {
+        "status": "VERIFIED",
+        "count_cases": 784,
+        "raw_cases": 65536,
+        "integer_scale": 1
+      },
+      "family_symbolic": {
+        "status": "UNSAT",
+        "reason": "",
+        "examples": [],
+        "seconds": 4.282172318547964
+      },
+      "ordinary": {
+        "status": "UNKNOWN",
+        "reason": "timeout",
+        "seconds": 3.0023361444473267
+      }
+    },
+    {
+      "k": 3,
+      "m": 3,
+      "r": 1,
+      "bottoms": 48,
+      "family_exact": {
+        "status": "VERIFIED",
+        "count_cases": 2432,
+        "raw_cases": 19456,
+        "integer_scale": 1
+      },
+      "family_symbolic": {
+        "status": "UNSAT",
+        "reason": "",
+        "examples": [],
+        "seconds": 2.0046309661120176
+      },
+      "ordinary": {
+        "status": "COUNTEREXAMPLE",
+        "point": [
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "seconds": 0.06011164002120495
+      }
+    },
+    {
+      "k": 3,
+      "m": 6,
+      "r": 1,
+      "bottoms": 78,
+      "family_exact": {
+        "status": "VERIFIED",
+        "count_cases": 13034,
+        "raw_cases": 9961472,
+        "integer_scale": 1
+      },
+      "family_symbolic": {
+        "status": "UNKNOWN",
+        "reason": "timeout",
+        "examples": [],
+        "seconds": 10.006419638171792
+      },
+      "ordinary": {
+        "status": "COUNTEREXAMPLE",
+        "point": [
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "seconds": 1.822200894355774
+      }
+    },
+    {
+      "k": 4,
+      "m": 2,
+      "r": 1,
+      "bottoms": 72,
+      "family_exact": {
+        "status": "VERIFIED",
+        "count_cases": 5670,
+        "raw_cases": 17920,
+        "integer_scale": 1
+      },
+      "family_symbolic": {
+        "status": "UNSAT",
+        "reason": "",
+        "examples": [],
+        "seconds": 6.2349639441818
+      },
+      "ordinary": {
+        "status": "COUNTEREXAMPLE",
+        "point": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        "seconds": 0.004479959607124329
+      }
+    },
+    {
+      "k": 4,
+      "m": 3,
+      "r": 1,
+      "bottoms": 84,
+      "family_exact": {
+        "status": "VERIFIED",
+        "count_cases": 17920,
+        "raw_cases": 286720,
+        "integer_scale": 1
+      },
+      "family_symbolic": {
+        "status": "UNKNOWN",
+        "reason": "timeout",
+        "examples": [],
+        "seconds": 10.001656932756305
+      },
+      "ordinary": {
+        "status": "COUNTEREXAMPLE",
+        "point": [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "seconds": 0.008492892608046532
+      }
+    },
+    {
+      "k": 5,
+      "m": 2,
+      "r": 1,
+      "bottoms": 110,
+      "family_exact": {
+        "status": "VERIFIED",
+        "count_cases": 27216,
+        "raw_cases": 114688,
+        "integer_scale": 1
+      },
+      "family_symbolic": {
+        "status": "UNKNOWN",
+        "reason": "timeout",
+        "examples": [],
+        "seconds": 10.004112027585506
+      },
+      "ordinary": {
+        "status": "COUNTEREXAMPLE",
+        "point": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1
+        ],
+        "seconds": 0.009628498926758766
+      }
+    }
+  ],
+  "core_cases": 64
+}

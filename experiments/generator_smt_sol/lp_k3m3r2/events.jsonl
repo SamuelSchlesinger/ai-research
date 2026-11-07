@@ -1,0 +1,27 @@
+{"Authors": "Christian Reitwiessner", "phase": "file_credit"}
+{"phase": "matrix", "k": 3, "m": 3, "r": 2, "tables": 152, "rows": 9728, "library": 54, "columns": 66, "elapsed": 0.013622557744383812}
+{"phase": "lp", "iteration": 0, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.4529664535075426, "elapsed": 0.46679296530783176}
+{"phase": "exact_matrix", "support": 54, "minimum": "3", "scale": "3", "elapsed": 0.47889380902051926}
+{"phase": "certification", "bottoms": 54, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 12.840983709320426}, "ordinary": {"status": "UNKNOWN", "reason": "timeout", "seconds": 10.006232043728232}, "elapsed": 23.35854092054069}
+{"phase": "lp", "iteration": 1, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.46313306502997875, "elapsed": 23.822315404191613}
+{"phase": "exact_matrix", "support": 54, "minimum": "3", "scale": "3", "elapsed": 23.834867106750607}
+{"phase": "certification", "bottoms": 54, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 13.190386364236474}, "ordinary": {"status": "COUNTEREXAMPLE", "point": [1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0], "seconds": 0.040270956233143806}, "elapsed": 37.096010299399495}
+{"phase": "lp", "iteration": 2, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.39312254451215267, "elapsed": 37.514620173722506}
+{"phase": "exact_matrix", "support": 54, "minimum": "3", "scale": "3", "elapsed": 37.525144504383206}
+{"phase": "certification", "bottoms": 54, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 12.113057626411319}, "ordinary": {"status": "COUNTEREXAMPLE", "point": [0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0], "seconds": 0.03186938911676407}, "elapsed": 49.69849618151784}
+{"phase": "lp", "iteration": 3, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.4061633534729481, "elapsed": 50.13020101375878}
+{"phase": "exact_matrix", "support": 54, "minimum": "3", "scale": "3", "elapsed": 50.14146436564624}
+{"phase": "certification", "bottoms": 54, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 14.136577112600207}, "ordinary": {"status": "COUNTEREXAMPLE", "point": [0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0], "seconds": 0.03424399718642235}, "elapsed": 64.34251931495965}
+{"phase": "lp", "iteration": 4, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.44119352474808693, "elapsed": 64.8036661092192}
+{"phase": "exact_matrix", "support": 54, "minimum": "3", "scale": "3", "elapsed": 64.81615529768169}
+{"phase": "certification", "bottoms": 54, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 13.398988915607333}, "ordinary": {"status": "COUNTEREXAMPLE", "point": [0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], "seconds": 0.024937158450484276}, "elapsed": 78.2711401488632}
+{"phase": "lp", "iteration": 5, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.3966262433677912, "elapsed": 78.69350352697074}
+{"phase": "exact_matrix", "support": 54, "minimum": "3", "scale": "3", "elapsed": 78.70549767650664}
+{"phase": "certification", "bottoms": 54, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 13.288184069097042}, "ordinary": {"status": "COUNTEREXAMPLE", "point": [0, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], "seconds": 0.009495312348008156}, "elapsed": 92.03432317636907}
+{"phase": "lp", "iteration": 6, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.38602576591074467, "elapsed": 92.44598506763577}
+{"phase": "exact_matrix", "support": 54, "minimum": "3", "scale": "3", "elapsed": 92.45740668103099}
+{"phase": "certification", "bottoms": 54, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 12.602342633530498}, "ordinary": {"status": "COUNTEREXAMPLE", "point": [1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1], "seconds": 0.06025330908596516}, "elapsed": 105.1493752617389}
+{"phase": "lp", "iteration": 7, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.4019209612160921, "elapsed": 105.57137838564813}
+{"phase": "exact_matrix", "support": 54, "minimum": "3", "scale": "3", "elapsed": 105.5828077364713}
+{"phase": "certification", "bottoms": 54, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 11.783278722316027}, "ordinary": {"status": "COUNTEREXAMPLE", "point": [0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], "seconds": 0.029662057757377625}, "elapsed": 117.42613483220339}
+{"phase": "finished", "best": 54, "elapsed": 117.44613809324801}

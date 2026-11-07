@@ -1,0 +1,18 @@
+{"Authors": "Christian Reitwiessner", "phase": "file_credit"}
+{"phase": "matrix", "k": 3, "m": 4, "r": 1, "tables": 38, "rows": 4750, "library": 68, "columns": 80, "elapsed": 0.0037083402276039124}
+{"phase": "lp", "iteration": 0, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.25621748343110085, "elapsed": 0.2602142784744501}
+{"phase": "exact_matrix", "support": 48, "minimum": "1", "scale": "1", "elapsed": 0.26683614030480385}
+{"phase": "certification", "bottoms": 48, "family": {"status": "UNKNOWN", "reason": "timeout", "examples": [], "seconds": 15.003675732761621}, "ordinary": {"status": "COUNTEREXAMPLE", "point": [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], "seconds": 0.0059896111488342285}, "elapsed": 15.30474621616304}
+{"phase": "lp", "iteration": 1, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.20544829964637756, "elapsed": 15.510614607483149}
+{"phase": "exact_matrix", "support": 48, "minimum": "1", "scale": "1", "elapsed": 15.51650470122695}
+{"phase": "certification", "bottoms": 48, "family": {"status": "UNKNOWN", "reason": "timeout", "examples": [], "seconds": 15.002907492220402}, "ordinary": {"status": "COUNTEREXAMPLE", "point": [1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0], "seconds": 0.003624372184276581}, "elapsed": 30.547228947281837}
+{"phase": "lp", "iteration": 2, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.20610462315380573, "elapsed": 30.77910466864705}
+{"phase": "exact_matrix", "support": 48, "minimum": "1", "scale": "1", "elapsed": 30.78496596030891}
+{"phase": "certification", "bottoms": 48, "family": {"status": "UNKNOWN", "reason": "timeout", "examples": [], "seconds": 15.003208193928003}, "ordinary": {"status": "COUNTEREXAMPLE", "point": [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0], "seconds": 0.0034775882959365845}, "elapsed": 45.815646931529045}
+{"phase": "lp", "iteration": 3, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.19920571893453598, "elapsed": 46.03495845012367}
+{"phase": "exact_matrix", "support": 48, "minimum": "1", "scale": "1", "elapsed": 46.0407703910023}
+{"phase": "certification", "bottoms": 48, "family": {"status": "UNKNOWN", "reason": "timeout", "examples": [], "seconds": 15.001791441813111}, "ordinary": {"status": "COUNTEREXAMPLE", "point": [1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1], "seconds": 0.0034788642078638077}, "elapsed": 61.07066475600004}
+{"phase": "lp", "iteration": 4, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.21742773242294788, "elapsed": 61.313977133482695}
+{"phase": "exact_matrix", "support": 48, "minimum": "1", "scale": "1", "elapsed": 61.32063623145223}
+{"phase": "certification", "bottoms": 48, "family": {"status": "UNKNOWN", "reason": "timeout", "examples": [], "seconds": 15.002528205513954}, "ordinary": {"status": "COUNTEREXAMPLE", "point": [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], "seconds": 0.006883982568979263}, "elapsed": 76.35518098808825}
+{"phase": "finished", "best": 48, "elapsed": 76.35560158826411}

@@ -1,0 +1,4 @@
+# Authors: Christian Reitwiessner
+{'m': 3, 'bottoms': 48, 'independent_symbolic': {'status': 'VERIFIED', 'seconds': 7.421378882601857}}
+{'m': 4, 'bottoms': 62, 'independent_symbolic': {'status': 'UNKNOWN', 'reason': 'timeout', 'seconds': 30.00563670322299}}
+{'m': 6, 'bottoms': 83, 'independent_symbolic': {'status': 'UNKNOWN', 'reason': 'timeout', 'seconds': 10.008377213031054}}

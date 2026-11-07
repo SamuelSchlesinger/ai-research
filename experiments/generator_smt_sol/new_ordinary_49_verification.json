@@ -1,0 +1,20 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "witness": "milp_k3m3full/verified_49.json",
+  "ordinary_exact": {
+    "status": "VERIFIED",
+    "count_cases": 16384,
+    "raw_cases": 131072,
+    "integer_scale": 9
+  },
+  "ordinary_symbolic": {
+    "status": "VERIFIED",
+    "seconds": 8.259039089083672
+  },
+  "generic_r5": {
+    "status": "UNSAT",
+    "reason": "",
+    "examples": [],
+    "seconds": 10.78475933894515
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "k": 3,
+  "m": 4,
+  "r": -1,
+  "bottom_library": 68,
+  "top_and_bottom_output_coefficient_bound": 100.0,
+  "status": 1,
+  "message": "Time limit reached. (HiGHS Status 13: Time limit reached)",
+  "seconds": 300.15046864561737,
+  "objective": 62.99999999999999,
+  "dual_bound": 57.0,
+  "exact_minimum": "1",
+  "support": 63,
+  "family": {
+    "status": "UNKNOWN",
+    "reason": "timeout",
+    "examples": [],
+    "seconds": 30.006513880565763
+  },
+  "ordinary": {
+    "status": "UNKNOWN",
+    "reason": "timeout",
+    "seconds": 10.003442337736487
+  }
+}

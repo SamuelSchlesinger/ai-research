@@ -1,0 +1,63 @@
+# Authors: Christian Reitwiessner
+Running HiGHS 1.12.0 (git hash: 4f96ee8): Copyright (c) 2025 HiGHS under MIT licence terms
+MIP has 2540 rows; 120 cols; 89592 nonzeros; 54 integer variables (54 binary)
+Coefficient ranges:
+  Matrix  [1e+00, 1e+02]
+  Cost    [1e+00, 1e+00]
+  Bound   [1e+00, 1e+02]
+  RHS     [1e+00, 1e+00]
+Presolving model
+2540 rows, 120 cols, 89592 nonzeros  0s
+2540 rows, 120 cols, 89592 nonzeros  0s
+Presolve reductions: rows 2540(-0); columns 120(-0); nonzeros 89592(-0) - Not reduced
+Objective function is integral with scale 1
+
+Solving MIP model with:
+   2540 rows
+   120 cols (54 binary, 0 integer, 0 implied int., 66 continuous, 0 domain fixed)
+   89592 nonzeros
+
+Src: B => Branching; C => Central rounding; F => Feasibility pump; H => Heuristic;
+     I => Shifting; J => Feasibility jump; L => Sub-MIP; P => Empty MIP; R => Randomized rounding;
+     S => Solve LP; T => Evaluate node; U => Unbounded; X => User solution; Y => HiGHS solution;
+     Z => ZI Round; l => Trivial lower; p => Trivial point; u => Trivial upper; z => Trivial zero
+
+        Nodes      |    B&B Tree     |            Objective Bounds              |  Dynamic Constraints |       Work      
+Src  Proc. InQueue |  Leaves   Expl. | BestBound       BestSol              Gap |   Cuts   InLp Confl. | LpIters     Time
+
+         0       0         0   0.00%   0               inf                  inf        0      0      0         0     0.2s
+ S       0       0         0   0.00%   0               36               100.00%        0      0      0         0     0.2s
+ R       0       0         0   0.00%   0.72            35                97.94%        0      0      0       203     0.3s
+ L       0       0         0   0.00%   1.166662108     32                96.35%      491     36      0      1294     5.8s
+         0       0         0   0.00%   1.166662108     32                96.35%      491     18      0     30787    21.9s
+
+Symmetry detection completed in 0.0s
+Found 3 generator(s)
+
+        19       0         9  75.00%   1.166662108     32                96.35%      572     18    127     52721    27.0s
+        47       1        21  78.81%   1.166662108     32                96.35%      633     18    221     72990    32.0s
+       122      12        53  91.72%   11.20486037     32                64.98%      788     20    371     90625    37.2s
+       445      19       209  93.21%   17.78633462     32                44.42%      941     26    722    104599    42.2s
+       746      25       353  96.87%   23.44023483     32                26.75%      769     12   1150    119310    47.3s
+       838       0       414 100.00%   32              32                 0.00%      650     18   1339    125297    49.4s
+
+Solving report
+  Status            Optimal
+  Primal bound      32
+  Dual bound        32
+  Gap               0%
+  P-D integral      40.613079605
+  Solution status   feasible
+                    32 (objective)
+                    0 (bound viol.)
+                    6.85957957103e-13 (int. viol.)
+                    0 (row viol.)
+  Timing            49.39
+  Max sub-MIP depth 6
+  Nodes             838
+  Repair LPs        0
+  LP iterations     125297
+                    51668 (strong br.)
+                    4257 (separation)
+                    29493 (heuristics)
+{'k': 3, 'm': 3, 'r': 1, 'bottom_library': 54, 'top_and_bottom_output_coefficient_bound': 100.0, 'status': 0, 'message': 'Optimization terminated successfully. (HiGHS Status 7: Optimal)', 'seconds': 49.39975294098258, 'objective': 31.999999999998302, 'dual_bound': 31.999999999998302, 'exact_minimum': '3', 'support': 32, 'family': {'status': 'UNSAT', 'reason': '', 'examples': [], 'seconds': 1.4127962868660688}, 'ordinary': {'status': 'COUNTEREXAMPLE', 'point': (1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1), 'seconds': 0.002594372257590294}}

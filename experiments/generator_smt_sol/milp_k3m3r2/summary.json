@@ -1,0 +1,44 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "k": 3,
+  "m": 3,
+  "r": 2,
+  "bottom_library": 54,
+  "top_and_bottom_output_coefficient_bound": 100.0,
+  "status": 0,
+  "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "seconds": 91.07268431596458,
+  "objective": 46.99999999999996,
+  "dual_bound": 46.99999999999996,
+  "exact_minimum": "5",
+  "support": 47,
+  "family": {
+    "status": "UNSAT",
+    "reason": "",
+    "examples": [],
+    "seconds": 11.141857363283634
+  },
+  "ordinary": {
+    "status": "COUNTEREXAMPLE",
+    "point": [
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "seconds": 0.004071112722158432
+  }
+}

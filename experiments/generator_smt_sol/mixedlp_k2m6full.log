@@ -1,0 +1,27 @@
+# Authors: Christian Reitwiessner
+{"phase": "matrix", "k": 2, "m": 6, "r": -1, "tables": 16, "rows": 65536, "library": 57, "columns": 74, "elapsed": 0.03139251470565796}
+{"phase": "lp", "iteration": 0, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 2.7566226981580257, "elapsed": 2.788236578926444}
+{"phase": "exact_matrix", "support": 19, "minimum": "1", "scale": "1", "elapsed": 2.8736148457974195}
+{"phase": "certification", "bottoms": 19, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 0.34842499531805515}, "ordinary": {"status": "VERIFIED", "seconds": 0.336547764018178}, "elapsed": 3.5685873832553625}
+{"phase": "lp", "iteration": 1, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 2.5463684014976025, "elapsed": 6.115343639627099}
+{"phase": "exact_matrix", "support": 19, "minimum": "1", "scale": "1", "elapsed": 6.199401866644621}
+{"phase": "certification", "bottoms": 19, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 0.3130224496126175}, "ordinary": {"status": "VERIFIED", "seconds": 0.34617359191179276}, "elapsed": 6.865961419418454}
+{"phase": "lp", "iteration": 2, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 2.6433856915682554, "elapsed": 9.529267780482769}
+{"phase": "exact_matrix", "support": 19, "minimum": "1", "scale": "1", "elapsed": 9.618538254871964}
+{"phase": "certification", "bottoms": 19, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 0.3461824767291546}, "ordinary": {"status": "VERIFIED", "seconds": 0.31541006453335285}, "elapsed": 10.287587495520711}
+{"phase": "lp", "iteration": 3, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 2.6972049828618765, "elapsed": 13.004766624420881}
+{"phase": "exact_matrix", "support": 19, "minimum": "1", "scale": "1", "elapsed": 13.090693375095725}
+{"phase": "certification", "bottoms": 19, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 0.350755600258708}, "ordinary": {"status": "VERIFIED", "seconds": 0.35939629934728146}, "elapsed": 13.808266883715987}
+{"phase": "lp", "iteration": 4, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 2.743949491530657, "elapsed": 16.572261601686478}
+{"phase": "exact_matrix", "support": 19, "minimum": "1", "scale": "1", "elapsed": 16.658594137057662}
+{"phase": "certification", "bottoms": 19, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 0.34400144778192043}, "ordinary": {"status": "VERIFIED", "seconds": 0.34128536842763424}, "elapsed": 17.35147081874311}
+{"phase": "lp", "iteration": 5, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 2.7753553446382284, "elapsed": 20.14670819044113}
+{"phase": "exact_matrix", "support": 19, "minimum": "1", "scale": "1", "elapsed": 20.22909282334149}
+{"phase": "certification", "bottoms": 19, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 0.36511222273111343}, "ordinary": {"status": "VERIFIED", "seconds": 0.2884163800626993}, "elapsed": 20.890122642740607}
+{"phase": "lp", "iteration": 6, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 2.7893445268273354, "elapsed": 23.699586756527424}
+{"phase": "exact_matrix", "support": 19, "minimum": "1", "scale": "1", "elapsed": 23.782945971935987}
+{"phase": "certification", "bottoms": 19, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 0.35179213620722294}, "ordinary": {"status": "VERIFIED", "seconds": 0.3381020277738571}, "elapsed": 24.480484895408154}
+{"phase": "lp", "iteration": 7, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 2.7197050284594297, "elapsed": 27.220126006752253}
+{"phase": "exact_matrix", "support": 19, "minimum": "1", "scale": "1", "elapsed": 27.308965982869267}
+{"phase": "certification", "bottoms": 19, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 0.3366546928882599}, "ordinary": {"status": "VERIFIED", "seconds": 0.3626678064465523}, "elapsed": 28.01566468179226}
+{"phase": "finished", "best": 19, "elapsed": 28.03582770563662}

@@ -1,0 +1,61 @@
+# Authors: Christian Reitwiessner
+Running HiGHS 1.12.0 (git hash: 4f96ee8): Copyright (c) 2025 HiGHS under MIT licence terms
+MIP has 87986 rows; 190 cols; 4590669 nonzeros; 89 integer variables (89 binary)
+Coefficient ranges:
+  Matrix  [1e+00, 1e+02]
+  Cost    [1e+00, 1e+00]
+  Bound   [1e+00, 1e+02]
+  RHS     [1e+00, 1e+00]
+Presolving model
+87986 rows, 190 cols, 4590669 nonzeros  0s
+87986 rows, 190 cols, 4590669 nonzeros  1s
+Presolve reductions: rows 87986(-0); columns 190(-0); nonzeros 4590669(-0) - Not reduced
+Objective function is integral with scale 1
+
+Solving MIP model with:
+   87986 rows
+   190 cols (89 binary, 0 integer, 0 implied int., 101 continuous, 0 domain fixed)
+   4590669 nonzeros
+
+Src: B => Branching; C => Central rounding; F => Feasibility pump; H => Heuristic;
+     I => Shifting; J => Feasibility jump; L => Sub-MIP; P => Empty MIP; R => Randomized rounding;
+     S => Solve LP; T => Evaluate node; U => Unbounded; X => User solution; Y => HiGHS solution;
+     Z => ZI Round; l => Trivial lower; p => Trivial point; u => Trivial upper; z => Trivial zero
+
+        Nodes      |    B&B Tree     |            Objective Bounds              |  Dynamic Constraints |       Work      
+Src  Proc. InQueue |  Leaves   Expl. | BestBound       BestSol              Gap |   Cuts   InLp Confl. | LpIters     Time
+
+         0       0         0   0.00%   0               inf                  inf        0      0      0         0     7.8s
+ S       0       0         0   0.00%   0               89               100.00%        0      0      0         0    17.0s
+         0       0         0   0.00%   3.231428571     89                96.37%        0      0      0       767    21.6s
+         0       0         0   0.00%   5.151374243     89                94.21%      161      3      0      1291    29.4s
+         0       0         0   0.00%   5.543777072     89                93.77%      230      8      0      1789    36.1s
+         0       0         0   0.00%   5.650160508     89                93.65%      295      9      0      1966    44.0s
+         0       0         0   0.00%   5.70313916      89                93.59%      344     24      0      2234    49.7s
+         0       0         0   0.00%   5.720571435     89                93.57%      347     31      0      2450    54.8s
+         0       0         0   0.00%   5.743533039     89                93.55%      413     35      0      2839    60.3s
+         0       0         0   0.00%   5.798402602     89                93.48%      481     34      0      3458    69.2s
+         0       0         0   0.00%   5.827845112     89                93.45%      559     37      0      3873    75.5s
+ L       0       0         0   0.00%   5.835687042     86                93.21%      575     39      0      4030   300.0s
+         0       0         0   0.00%   5.835687042     86                93.21%      575     39      0     15555   300.0s
+
+Solving report
+  Status            Time limit reached
+  Primal bound      86
+  Dual bound        6
+  Gap               93.02%
+  P-D integral      264.827795592
+  Solution status   feasible
+                    86 (objective)
+                    0 (bound viol.)
+                    0 (int. viol.)
+                    0 (row viol.)
+  Timing            300.04
+  Max sub-MIP depth 1
+  Nodes             0
+  Repair LPs        0
+  LP iterations     15555
+                    0 (strong br.)
+                    3263 (separation)
+                    11525 (heuristics)
+{'k': 3, 'm': 6, 'r': -1, 'bottom_library': 89, 'top_and_bottom_output_coefficient_bound': 100.0, 'status': 1, 'message': 'Time limit reached. (HiGHS Status 13: Time limit reached)', 'seconds': 300.4762175641954, 'objective': 86.0, 'dual_bound': 6.0, 'exact_minimum': '10', 'support': 86, 'family': {'status': 'UNKNOWN', 'reason': 'timeout', 'examples': [], 'seconds': 30.011310698464513}, 'ordinary': {'status': 'UNKNOWN', 'reason': 'timeout', 'seconds': 10.007849680259824}}

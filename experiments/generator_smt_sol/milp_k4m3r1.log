@@ -1,0 +1,66 @@
+# Authors: Christian Reitwiessner
+Running HiGHS 1.12.0 (git hash: 4f96ee8): Copyright (c) 2025 HiGHS under MIT licence terms
+MIP has 18256 rows; 357 cols; 1792672 nonzeros; 168 integer variables (168 binary)
+Coefficient ranges:
+  Matrix  [1e+00, 1e+02]
+  Cost    [1e+00, 1e+00]
+  Bound   [1e+00, 1e+02]
+  RHS     [1e+00, 1e+00]
+Presolving model
+18256 rows, 357 cols, 1792672 nonzeros  0s
+18244 rows, 351 cols, 1792648 nonzeros  0s
+Presolve reductions: rows 18244(-12); columns 351(-6); nonzeros 1792648(-24) 
+Objective function is integral with scale 1
+
+Solving MIP model with:
+   18244 rows
+   351 cols (168 binary, 0 integer, 0 implied int., 183 continuous, 0 domain fixed)
+   1792648 nonzeros
+
+Src: B => Branching; C => Central rounding; F => Feasibility pump; H => Heuristic;
+     I => Shifting; J => Feasibility jump; L => Sub-MIP; P => Empty MIP; R => Randomized rounding;
+     S => Solve LP; T => Evaluate node; U => Unbounded; X => User solution; Y => HiGHS solution;
+     Z => ZI Round; l => Trivial lower; p => Trivial point; u => Trivial upper; z => Trivial zero
+
+        Nodes      |    B&B Tree     |            Objective Bounds              |  Dynamic Constraints |       Work      
+Src  Proc. InQueue |  Leaves   Expl. | BestBound       BestSol              Gap |   Cuts   InLp Confl. | LpIters     Time
+
+         0       0         0   0.00%   0               inf                  inf        0      0      0         0     3.6s
+ S       0       0         0   0.00%   0               128              100.00%        0      0      0         0     7.7s
+ R       0       0         0   0.00%   1.28            127               98.99%        0      0      0      1014     9.6s
+ S       0       0         0   0.00%   1.28            65                98.03%      174      9      0      1014    13.4s
+         0       0         0   0.00%   1.303464896     65                97.99%      262     18      0      1333    20.4s
+         0       0         0   0.00%   1.311495539     65                97.98%      279     26      0      1443    26.9s
+         0       0         0   0.00%   1.322150763     65                97.97%      319     35      0      1670    32.3s
+         0       0         0   0.00%   1.325945475     65                97.96%      336     44      0      1741    38.3s
+         0       0         0   0.00%   1.354625289     65                97.92%      358     48      0      2145    44.2s
+         0       0         0   0.00%   1.356505216     65                97.91%      362     52      0      2237    50.2s
+         0       0         0   0.00%   1.357161134     65                97.91%      368     55      0      2270    56.0s
+ L       0       0         0   0.00%   1.357161134     60                97.74%      368     55      0      2270   110.0s
+
+Symmetry detection completed in 0.6s
+Found 3 generator(s)
+
+         1       1         1   0.00%   1.357161134     60                97.74%      368     44      0     33438   300.1s
+         1       1         1   0.00%   1.357161134     60                97.74%      368     44      0     33438   300.1s
+
+Solving report
+  Status            Time limit reached
+  Primal bound      60
+  Dual bound        2
+  Gap               96.67%
+  P-D integral      285.995401233
+  Solution status   feasible
+                    60 (objective)
+                    0 (bound viol.)
+                    5.92670801325e-12 (int. viol.)
+                    0 (row viol.)
+  Timing            300.06
+  Max sub-MIP depth 5
+  Nodes             1
+  Repair LPs        0
+  LP iterations     33438
+                    0 (strong br.)
+                    1256 (separation)
+                    31168 (heuristics)
+{'k': 4, 'm': 3, 'r': 1, 'bottom_library': 168, 'top_and_bottom_output_coefficient_bound': 100.0, 'status': 1, 'message': 'Time limit reached. (HiGHS Status 13: Time limit reached)', 'seconds': 300.23615621961653, 'objective': 59.999999999994074, 'dual_bound': 2.0, 'exact_minimum': '3', 'support': 60, 'family': {'status': 'UNKNOWN', 'reason': 'timeout', 'examples': [], 'seconds': 30.003217969089746}, 'ordinary': {'status': 'COUNTEREXAMPLE', 'point': (0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0), 'seconds': 0.005886826664209366}}

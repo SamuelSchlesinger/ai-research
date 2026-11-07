@@ -1,0 +1,21 @@
+{"Authors": "Christian Reitwiessner", "phase": "file_credit"}
+{"phase": "matrix", "k": 3, "m": 3, "r": -1, "tables": 256, "rows": 16384, "library": 54, "columns": 66, "elapsed": 0.008032575249671936}
+{"phase": "lp", "iteration": 0, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.665296507999301, "elapsed": 0.67351552285254}
+{"phase": "exact_matrix", "support": 54, "minimum": "7", "scale": "7", "elapsed": 0.6943890266120434}
+{"phase": "certification", "bottoms": 54, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 9.213552923873067}, "ordinary": {"status": "VERIFIED", "seconds": 7.08267368003726}, "elapsed": 17.00787467882037}
+{"phase": "lp", "iteration": 1, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.5946272537112236, "elapsed": 17.60286163724959}
+{"phase": "exact_matrix", "support": 54, "minimum": "7", "scale": "7", "elapsed": 17.622865825891495}
+{"phase": "certification", "bottoms": 54, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 9.26774094812572}, "ordinary": {"status": "VERIFIED", "seconds": 7.4059530179947615}, "elapsed": 34.31187937036157}
+{"phase": "lp", "iteration": 2, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.6190700922161341, "elapsed": 34.96022141724825}
+{"phase": "exact_matrix", "support": 54, "minimum": "7", "scale": "7", "elapsed": 34.978437040001154}
+{"phase": "certification", "bottoms": 54, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 8.139926010742784}, "ordinary": {"status": "VERIFIED", "seconds": 9.09905911423266}, "elapsed": 52.232811288908124}
+{"phase": "lp", "iteration": 3, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.639013510197401, "elapsed": 52.872175654396415}
+{"phase": "exact_matrix", "support": 54, "minimum": "7", "scale": "7", "elapsed": 52.891569435596466}
+{"phase": "certification", "bottoms": 54, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 11.303267354145646}, "ordinary": {"status": "UNKNOWN", "reason": "timeout", "seconds": 10.007723961025476}, "elapsed": 74.220190519467}
+{"phase": "lp", "iteration": 4, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.8109926804900169, "elapsed": 75.03171955049038}
+{"phase": "exact_matrix", "support": 54, "minimum": "7", "scale": "7", "elapsed": 75.05592464283109}
+{"phase": "certification", "bottoms": 54, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 11.262955581769347}, "ordinary": {"status": "UNKNOWN", "reason": "timeout", "seconds": 10.0044329687953}, "elapsed": 96.341168127954}
+{"phase": "lp", "iteration": 5, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 0.7300333436578512, "elapsed": 97.08696976304054}
+{"phase": "exact_matrix", "support": 54, "minimum": "7", "scale": "7", "elapsed": 97.10643416084349}
+{"phase": "certification", "bottoms": 54, "family": {"status": "UNSAT", "reason": "", "examples": [], "seconds": 9.562492053955793}, "ordinary": {"status": "UNKNOWN", "reason": "timeout", "seconds": 10.005101094022393}, "elapsed": 116.69211950339377}
+{"phase": "finished", "best": 54, "elapsed": 116.71203117445111}

@@ -1,0 +1,12 @@
+# Authors: Christian Reitwiessner
+{"phase": "matrix", "k": 3, "m": 6, "r": -1, "tables": 256, "rows": 87808, "library": 89, "columns": 101, "elapsed": 0.049147192388772964}
+{"phase": "lp", "iteration": 0, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 8.14177000708878, "elapsed": 8.19119149632752}
+{"phase": "exact_matrix", "support": 89, "minimum": "7", "scale": "7", "elapsed": 8.369315959513187}
+{"phase": "certification", "bottoms": 89, "family": {"status": "UNKNOWN", "reason": "timeout", "examples": [], "seconds": 15.010650545358658}, "ordinary": {"status": "UNKNOWN", "reason": "timeout", "seconds": 10.007599422708154}, "elapsed": 33.42563296854496}
+{"phase": "lp", "iteration": 1, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 8.993457533419132, "elapsed": 42.4197386354208}
+{"phase": "exact_matrix", "support": 89, "minimum": "7", "scale": "7", "elapsed": 42.598451564088464}
+{"phase": "certification", "bottoms": 89, "family": {"status": "UNKNOWN", "reason": "timeout", "examples": [], "seconds": 15.006458131596446}, "ordinary": {"status": "UNKNOWN", "reason": "timeout", "seconds": 10.0043251439929}, "elapsed": 67.6430119201541}
+{"phase": "lp", "iteration": 2, "status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 7.961873171851039, "elapsed": 75.63084468059242}
+{"phase": "exact_matrix", "support": 89, "minimum": "7", "scale": "7", "elapsed": 75.79763637669384}
+{"phase": "certification", "bottoms": 89, "family": {"status": "UNKNOWN", "reason": "timeout", "examples": [], "seconds": 15.008223513141274}, "ordinary": {"status": "UNKNOWN", "reason": "timeout", "seconds": 10.014732651412487}, "elapsed": 100.85538592934608}
+{"phase": "finished", "best": 89, "elapsed": 100.88154208660126}

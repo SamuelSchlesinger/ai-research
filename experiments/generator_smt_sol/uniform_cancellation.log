@@ -1,0 +1,61 @@
+# Authors: Christian Reitwiessner
+Running HiGHS 1.12.0 (git hash: 4f96ee8): Copyright (c) 2025 HiGHS under MIT licence terms
+MIP has 2100 rows; 61 cols; 50560 nonzeros; 26 integer variables (26 binary)
+Coefficient ranges:
+  Matrix  [1e+00, 1e+02]
+  Cost    [1e+00, 3e+02]
+  Bound   [1e+00, 1e+02]
+  RHS     [1e+00, 1e+00]
+Presolving model
+2100 rows, 61 cols, 50560 nonzeros  0s
+2100 rows, 61 cols, 50560 nonzeros  0s
+Presolve reductions: rows 2100(-0); columns 61(-0); nonzeros 50560(-0) - Not reduced
+Objective function is integral with scale 1
+
+Solving MIP model with:
+   2100 rows
+   61 cols (26 binary, 0 integer, 0 implied int., 35 continuous, 0 domain fixed)
+   50560 nonzeros
+
+Src: B => Branching; C => Central rounding; F => Feasibility pump; H => Heuristic;
+     I => Shifting; J => Feasibility jump; L => Sub-MIP; P => Empty MIP; R => Randomized rounding;
+     S => Solve LP; T => Evaluate node; U => Unbounded; X => User solution; Y => HiGHS solution;
+     Z => ZI Round; l => Trivial lower; p => Trivial point; u => Trivial upper; z => Trivial zero
+
+        Nodes      |    B&B Tree     |            Objective Bounds              |  Dynamic Constraints |       Work      
+Src  Proc. InQueue |  Leaves   Expl. | BestBound       BestSol              Gap |   Cuts   InLp Confl. | LpIters     Time
+
+         0       0         0   0.00%   0               inf                  inf        0      0      0         0     0.2s
+ S       0       0         0   0.00%   0               2113             100.00%        0      0      0         0     0.2s
+ R       0       0         0   0.00%   21.19142857     2112              99.00%        0      0      0       199     0.2s
+
+15.4% inactive integer columns, restarting
+Model after restart has 2092 rows, 57 cols (22 bin., 0 int., 0 impl., 35 cont., 0 dom.fix.), and 50544 nonzeros
+
+         0       0         0   0.00%   820.1807843     2112              61.17%        1      0      0      1618     1.2s
+         0       0         0   0.00%   820.1807843     2112              61.17%        1      1      0      1673     1.2s
+ L       0       0         0   0.00%   838.8202001     2108              60.21%      149      9      0      3977     3.0s
+ S       8       0         2   7.81%   838.8202001     2107              60.19%      155      9     15      7389     3.4s
+       835      67       382  85.42%   2104.294474     2107               0.13%      535      8    723     26490     8.4s
+      1024       0       510 100.00%   2107            2107               0.00%      287      7    912     35177    10.3s
+
+Solving report
+  Status            Optimal
+  Primal bound      2107
+  Dual bound        2107
+  Gap               0% (tolerance: 0.01%)
+  P-D integral      2.49362835583
+  Solution status   feasible
+                    2107 (objective)
+                    0 (bound viol.)
+                    2.831512802e-14 (int. viol.)
+                    0 (row viol.)
+  Timing            10.28
+  Max sub-MIP depth 2
+  Nodes             1024
+  Repair LPs        0
+  LP iterations     35177
+                    2805 (strong br.)
+                    1904 (separation)
+                    5053 (heuristics)
+{'status': 0, 'message': 'Optimization terminated successfully. (HiGHS Status 7: Optimal)', 'objective': 2107.0, 'dual_bound': 2107.0, 'A': ['95/8', '187/16', '47/4', '95/8', '95/8', '185/16', '47/4', '189/16', '95/8', '47/4', '47/4', '191/16', '55/8'], 'C': ['-55/2', '0', '-55/4', '-81/4', '-43/2', '0', '-55/2', '0', '0', '-111/4', '0', '-127/4', '0'], 'raw_table': ['-17/4', '19', '15', '61/4', '61/4', '18', '37/2', '49/4'], 'tau': '943/8', 'exact_minimum': '16', 'exact_cases': 2048, 'weighted_channel_cost': 21, 'standalone_gates': 7, 'instances': [{'m': 3, 'bottoms': 48, 'exact': {'status': 'VERIFIED', 'count_cases': 16384, 'raw_cases': 131072, 'integer_scale': 4}, 'symbolic': {'status': 'UNKNOWN', 'reason': 'timeout', 'seconds': 5.002416389063001}}, {'m': 4, 'bottoms': 62, 'exact': {'status': 'VERIFIED', 'count_cases': 32000, 'raw_cases': 1048576, 'integer_scale': 4}, 'symbolic': {'status': 'UNKNOWN', 'reason': 'timeout', 'seconds': 5.0039169285446405}}, {'m': 6, 'bottoms': 83, 'exact': {'status': 'VERIFIED', 'count_cases': 87808, 'raw_cases': 67108864, 'integer_scale': 4}, 'symbolic': {'status': 'UNKNOWN', 'reason': 'timeout', 'seconds': 5.006843706592917}}]}
