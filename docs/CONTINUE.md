@@ -72,3 +72,7 @@ The lower-bound Astra task completed; its three hand-proof proposals are archive
 ## Both Astra tasks completed
 
 The upper report is now archived as `experiments/upper_astra/report.md`. Read RESEARCH_STATE.md section 8 for its distributional $n^{3/2}$-up-to-logs construction, exact k4 certificate, and two explicit missing lemmas for exact subquadratic constructions. The highest-value upper follow-ups are economical shared tail repair and a sparse table-bit-gated selector dictionary. Both requested Astra tasks have finished and left no task-owned jobs. Lower proposals in section 7 still await independent review; upper analytical results also await independent review, while the k4 integer certificate received a separate parent recheck. Historical background processes should be checked separately if their status matters.
+
+## Important correction: existing average-case bounds
+
+Before treating any truncated-ridge approximation result as new, read `workspace/threshold_paper/paper.tex` theorem `thm:avgupper` and `workspace/andreev_depth_two_bounds.md` Theorem 2. They already give the same near-perfect-agreement bound and the epsilon-squared tradeoff. Astra's mixed-sign variant improves no asymptotic average-case upper bound. The earlier handoff omitted this fact and caused an overstated announcement; RESEARCH_STATE.md now explicitly corrects it.
