@@ -13,7 +13,7 @@ The main open objective is an exact **subquadratic** depth-two threshold circuit
 
 - [`docs/RESEARCH_STATE.md`](docs/RESEARCH_STATE.md): definitions, strongest results, proof status, corrections, and open directions.
 - [`docs/CONTINUE.md`](docs/CONTINUE.md): current work, precise generator-SMT specification, reproducibility, and user preferences.
-- [`workspace/threshold_paper/paper.pdf`](workspace/threshold_paper/paper.pdf) and [`paper.tex`](workspace/threshold_paper/paper.tex): latest locally saved research paper. It is not fully synchronized with later reports or merged PR statuses; consult the curated summary.
+- [`workspace/threshold_paper/paper.pdf`](workspace/threshold_paper/paper.pdf) and [`paper.tex`](workspace/threshold_paper/paper.tex): updated research paper, including the strongest general exact upper bound and improved average-case upper bounds, with corrected Lean coverage. Exploratory and finite-instance results remain in the research reports.
 - [`workspace/`](workspace/): original explanatory notes, earlier PDFs, errata, and checking scripts.
 - [`experiments/`](experiments/): preserved research directories, including construction code, exact witnesses, reports, reviews, and solver logs. Python caches and installed dependencies are excluded.
 - [`formalization/`](formalization/): public Lean PR references, pinned commits, and a snapshot patch of the remaining open PR.

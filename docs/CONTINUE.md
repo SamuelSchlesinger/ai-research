@@ -112,3 +112,8 @@ The previously missing affine-hole learner has now been implemented and run at t
 ## Latest requested experiment: n64 UNSAT targets completed
 
 The user requested lower-bound feasibility at n64 with small bottom budgets. `experiments/n64_unsat` and RESEARCH_STATE.md section16 preserve both model conventions, exact timing/results and exported UNSAT instances. Strongest proved conclusion: at least4 bottoms/5 total via an exact parity8 restriction valid in both64-input targets. Four-bottom600s direct runs, five-bottom300s balanced run and parity10/S4 edge probe all remained UNKNOWN. This is unrestricted real-gate feasibility, not a coefficient-language lower bound, and no n64 optimum or new asymptotic lower bound was established. All experiment-owned jobs ended. Read exact definitions before reusing “balanced n64”: it uses unequal block lengths, while equal-block A4,12 is64 inputs but has a16/48 split.
+
+
+## Current manuscript now updated
+
+The user requested a selective paper update. The source/PDF in workspace/threshold_paper now include the refined5/16 exact bound and improved mean-square average-case upper bounds, with complete proofs, updated summaries and accurate merged/open Lean statuses. Read RESEARCH_STATE.md section17 and the paper's REVISION.md. The PDF is19 pages and built/checked cleanly. Finite solver records, language experiments and failed approaches stay in this archive rather than the paper. No experiments or reviews are running from this paper-editing task; no new research pass is implicitly requested by completion.

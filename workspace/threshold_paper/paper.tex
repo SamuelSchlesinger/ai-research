@@ -57,12 +57,13 @@ Andreev's Function: Sharper Bounds\par}
 table at an address given by the parities of blocks of input bits. For
 depth-two threshold circuits we show:
 \begin{itemize}
-\item an exact circuit with $\tfrac34 n^2+1$ gates (previously $O(n^3/\log n)$
-      by Kane and Williams~\cite{KW});
+\item an exact circuit with $(5/16+o(1))n^2$ gates and polynomial integer
+      weights (previously $O(n^3/\log n)$ by Kane and Williams~\cite{KW});
 \item for agreement on a $\tfrac12+\varepsilon$ fraction of inputs, matching
       bounds of $\varepsilon^2n^{3/2}$ gates up to polylogarithmic factors,
-      for $\varepsilon$ between about $\log n/\sqrt n$ and $\tfrac18$
-      (previously only the lower bound $\varepsilon^3n^{3/2}/\log^3n$);
+      for $\varepsilon$ between about $\log n/\sqrt n$ and $\tfrac18$;
+      the upper bound is $O(\varepsilon^2n^{3/2}\sqrt{\log(1/\varepsilon)})$,
+      and constant error needs only $O(n^{3/2})$ gates;
 \item worst-case lower bounds of $\Omega(n^{3/2}/\log^2 n)$ gates and
       $\Omega(n^{5/2}/\log^{5/2}n)$ wires (previously $\log^3 n$ and
       $\log^{7/2}n$ in the denominators).
@@ -71,11 +72,10 @@ In depth three we improve the top fan-in bound for Andreev's function. For
 the depth-three function $B_n$ of Kane and Williams we outline improved
 lower bounds, saving one logarithm, together with an average-case bound that
 was implicit in their work, for $B_n$ with explicit parameters. The lower
-bounds for Andreev's function and the average-case circuits are formalized in
-merged Lean code; the $\tfrac34n^2$ circuit, the depth-three results and the
-results on $B_n$ are formalized in open, not yet reviewed pull requests; one
-proposition has only a proof sketch checked numerically on small cases (see
-Section~\ref{sec:lean}). A preliminary note (Appendix~\ref{app:coherent})
+bounds for Andreev's function, an earlier quadratic circuit, and earlier
+average-case upper bounds have merged Lean formalizations. The two sharper
+upper bounds proved here are not yet formalized; precise coverage and the
+status of the depth-three results are listed in Section~\ref{sec:lean}. A preliminary note (Appendix~\ref{app:coherent})
 shows that circuits whose gates have a single sign inside every address block
 need $\Omega(n^2/\log^3n)$ gates.
 \end{keybox}
@@ -97,7 +97,9 @@ The \emph{address} $b\in\bits^k$ has coordinates $b_i=|a_i|\bmod2$, and
 A(x,a)=x_b .
 \]
 The input length is $n=N+km$. In the \emph{balanced case} $km=N$, so $n=2N$
-and $k=\log_2(n/2)$. All asymptotic statements refer to the balanced case.
+and $k=\log_2(n/2)$. Exact balance requires $k\mid2^k$; for a family at
+every $k$ one may instead take $m=\lfloor N/k\rfloor$, giving $n=2N-O(k)$.
+Unless stated otherwise, asymptotic statements refer to these balanced regimes.
 
 \smalltitle{Threshold circuits.}
 For a statement $P$, the bracket $\ind{P}$ is $1$ if $P$ holds and $0$
@@ -127,10 +129,10 @@ the dependence on $\varepsilon$.
 Function & Bound & Best previously known & This paper & \\
 \midrule
 \multicolumn{5}{@{}l}{\emph{Functions in $\mathsf P$}}\\
-Andreev, exact & gates, upper & $O(n^3/\log n)$ \cite{KW} & $\tfrac34n^2+1$ & Thm.~\ref{thm:exact}\\
+Andreev, exact & gates, upper & $O(n^3/\log n)$ \cite{KW} & $(5/16+o(1))n^2$ & Thm.~\ref{thm:exact}\\
 Andreev, exact & gates, lower & \begin{tabular}[t]{@{}l@{}}$\Omega(n^{3/2}/\log^3n)$ \cite{KW}\\ $n^{3/2}/(\log n)^{O(1)}$ \cite{KKL}$^\dagger$\end{tabular} & $\Omega(n^{3/2}/\log^2n)$ & Thm.~\ref{thm:lower}\\
 Andreev, exact & wires, lower & $n^{5/2}/(\log n)^{O(1)}$ \cite{KKL}$^\dagger$ & $\Omega(n^{5/2}/\log^{5/2}n)$ & Thm.~\ref{thm:lower}\\
-Andreev, $\varepsilon$-agree & gates, upper & none stated & $O(\varepsilon^2n^{3/2}\sqrt{\log n})$ & Thm.~\ref{thm:avgupper}\\
+Andreev, $\varepsilon$-agree & gates, upper & none stated & $O(\varepsilon^2n^{3/2}\sqrt{\log(1/\varepsilon)})$ & Thm.~\ref{thm:avgupper}\\
 Andreev, $\varepsilon$-agree & gates, lower & $\Omega(\varepsilon^3n^{3/2}/\log^3n)$ \cite{KW} & $\Omega(\varepsilon^2n^{3/2}/\log^2n)$ & Thm.~\ref{thm:lower}\\
 Andreev, $\varepsilon$-agree & wires, lower & $\Omega(\varepsilon^3n^{5/2}/\log^{7/2}n)$ \cite{KW} & $\Omega(\varepsilon^2n^{5/2}/\log^{5/2}n)$ & Thm.~\ref{thm:lower}\\
 Andreev, depth 3 & top fan-in & $\tilde\Omega(n^{1/2}/s^{1/3})$, implicit in~\cite{KW} & $\min\{\tilde\Omega(n^{1/2}),\tilde\Omega(n^{3/4}/s^{1/2})\}$ & Cor.~\ref{cor:fanin}\\
@@ -147,8 +149,8 @@ some $F$, $\varepsilon$-agree & wires, lower & $n^3/\log^{12}n$ \cite{Nag} (unre
 Notes on the table:
 \begin{itemize}
 \item All rows concern $\THR\circ\THR$ circuits unless they say depth~3.
-      The first row is exact; the other rows are asymptotic in the
-      balanced case.
+      The Andreev rows are asymptotic in the balanced case; its exact upper
+      bound has the explicit finite version \eqref{eq:bestcount}.
 \item The $\varepsilon$-agreement rows for Andreev's function hold for
       $3\sqrt2(\log_2n+1)/\sqrt n\le\varepsilon$, and the upper bound for
       $\varepsilon\le\tfrac18$. For smaller $\varepsilon$, a single
@@ -165,12 +167,12 @@ Notes on the table:
       Srinivasan~\cite[Thm.~9.3]{CSS} re-prove the Kane--Williams bound for
       $B_n$ with $n^{o(1)}$ losses; Kabanets, Kane and Lu~\cite[Thm.~1.2]{KKL}
       prove a related wire bound for a variant of $B_n$.
-\item Because of the $\tfrac34n^2$ upper bound, no gate lower bound above
+\item Because of the quadratic upper bound, no gate lower bound above
       $n^2$ holds for Andreev's function, so the $n^{5/2-\delta}$ bound
       of~\cite{CTW} cannot hold for it.
 \end{itemize}
 The remaining gap for Andreev's function is the worst case: between
-$n^{3/2}/\log^2n$ and $\tfrac34 n^2$ gates.
+$n^{3/2}/\log^2n$ and $(5/16+o(1))n^2$ gates.
 
 \smalltitle{How to read this paper.}
 Section~\ref{sec:tech} explains which techniques are new.
@@ -202,7 +204,9 @@ Technique & Status & Used for\\
 Fourier expansion of the table lookup & standard & Thms.~\ref{thm:exact},~\ref{thm:avgupper}\\
 Telescoping a function of a linear form into threshold gates (``staircase'') & standard~\cite[Prop.~1]{HMPST}, \cite{HP} & Thms.~\ref{thm:exact},~\ref{thm:avgupper}\\
 Cutting staircases to a window via concentration & \cite[Thm.~1.4]{KW}, for parity & Thm.~\ref{thm:avgupper}\\
-\textbf{Grouping by character and removing the parity factor} (Lemmas~\ref{lem:lookup},~\ref{lem:parity}) & \textbf{new, to our knowledge}; similar in spirit to polarization identities & Thm.~\ref{thm:exact}\\
+Grouping by character and removing the parity factor (Lemmas~\ref{lem:lookup},~\ref{lem:parity}) & starting quadratic construction & Prop.~\ref{prop:basic}\\
+Shared quadratic corrections and sign margins at exceptional addresses & refinement proved here & Thm.~\ref{thm:exact}\\
+Independent address masks cancel cross-character error moments & mean-square refinement proved here & Thm.~\ref{thm:avgupper}\\
 \textbf{Majority vote over a subcube} (sum over $S\subseteq\{1,\dots,k_0\}$) & \textbf{new in this context} & Thm.~\ref{thm:avgupper}\\
 Random restrictions with Littlewood--Offord & \cite[Lemmas~1.1, 3.1]{KW} & Thm.~\ref{thm:lower}\\
 Counting threshold functions over fixed features & \cite{RSO}, \cite[Thm.~2.3]{KW} & Thm.~\ref{thm:lower}\\
@@ -224,9 +228,12 @@ remove the parity with an elementary identity (``removing the parity
 factor'', Lemma~\ref{lem:parity}). This saves the factor $n/\log n$: a
 generic simulation of a threshold of parities builds every parity separately,
 whereas Lemma~\ref{lem:parity} lets all parities with the same address
-character share one staircase. The average-case circuit keeps only the
-characters of the first $k_0$ address bits, which turns the lookup into a
-majority vote over a subcube.
+character share one staircase. The sharper exact score collapses quadratic
+corrections across characters and absorbs errors at a few special addresses
+using sign margins. The average-case circuit keeps only the characters of
+the first $r$ address bits, producing a majority vote over a subcube.
+Independent fixed masks make the characters' truncation errors orthogonal
+in expectation, avoiding a union bound over all characters.
 
 \smalltitle{Lower bounds.}
 We keep the restriction argument of Kane and Williams and change two counting
@@ -253,7 +260,7 @@ For $B_n$, fixed-weight counting needs the circuit to be fixed before the
 seed is chosen; Kane and Williams fix the seed first.
 
 %===================================================================
-\sect{An exact circuit with \texorpdfstring{$\tfrac34 n^2$}{3/4 n\^{}2} gates}\label{sec:upper}
+\sect{Exact quadratic circuits}\label{sec:upper}
 
 \begin{keybox}
 \textbf{Notation for Sections~\ref{sec:upper} and~\ref{sec:avgupper}.}
@@ -267,11 +274,11 @@ $t_S$ is the number of ones in the blocks in $S$, and lies in $[0,|S|m]$.
 \end{keybox}
 
 \smalltitle{Plan.}
-The circuit computes the integer score $N\cdot(-1)^{x_b}$. Its top gate
-tests whether the score is negative, which happens exactly when $x_b=1$.
-Lemma~\ref{lem:lookup} writes the score as a sum of products,
+We first compute the integer score $N\cdot(-1)^{x_b}$ and test its sign.
+Lemma~\ref{lem:lookup} writes it as a sum of products,
 Lemma~\ref{lem:parity} removes the products, and Lemma~\ref{lem:ladder}
-turns the result into threshold gates.
+turns the result into threshold gates. We then refine this to a smaller score
+with the same sign, proving the $5/16$ bound.
 
 \begin{lemma}[Lookup as a sum of products]\label{lem:lookup}
 $\displaystyle\sum_{S\subseteq\{1,\dots,k\}}X_S\,(-1)^{t_S}=N\,(-1)^{x_b}.$
@@ -313,13 +320,13 @@ $(-1)^{x_c}=1-2x_c$:
 X_S+t_S=\sum_c(-1)^{S\cdot c}-2\sum_c(-1)^{S\cdot c}x_c+\sum_{i\in S}\sum_{j=1}^m a_{i,j}.
 \end{equation}
 
-\begin{theorem}\label{thm:exact}
+\begin{proposition}[A first quadratic construction]\label{prop:basic}
 For all $k,m\ge1$, Andreev's function has an exact depth-two threshold
 circuit with $2N^2+kmN$ bottom gates and one top gate. In the balanced case
 this is $\tfrac34n^2+1$ gates. Bottom weights lie in $\{0,\pm2\}$ on table
 bits and in $\{0,1\}$ on address bits, and
 top weights are odd integers of absolute value at most $2n-1$.
-\end{theorem}
+\end{proposition}
 \begin{proof}
 By Lemmas~\ref{lem:lookup} and~\ref{lem:parity},
 \[
@@ -342,121 +349,275 @@ of majority gates ($\THR\circ\mathsf{MAJ}$, by repeating inputs). For
 comparison, Kane and Williams also give a $\mathsf{MOD}_3\circ\mathsf{MOD}_2$
 circuit of size $O(n^2)$~\cite[Thm.~1.2]{KW}, in a different basis.
 
-\begin{keybox}[unbreakable,title={Generalization to other moduli (proof sketch, checked numerically on small cases, not formalized)},
-  fonttitle=\bfseries\small,coltitle=ink,colbacktitle=boxbg]
-\begin{proposition}\label{prop:modp}
-Let $P$ be a prime, and change the address to $b_i=|a_i|\bmod P$, with a
-table indexed by $c\in\{0,\dots,P-1\}^k$ (so $N=P^k$). Then the function has
-an exact depth-two threshold circuit with at most $PN^2+(P-1)^2kmN$
-bottom gates and real weights.
-\end{proposition}
-\emph{Proof sketch.} For $S,c\in\{0,\dots,P-1\}^k$ let $S\cdot c=\sum_iS_ic_i$,
-$t_S=\sum_iS_i|a_i|$, and $Z_{S,\nu}=\#\{c: S\cdot c\equiv \nu \pmod P,\ x_c=1\}$.
-Summing the characters of $\mathbb Z_P^k$ and taking real parts gives
-\[
-N x_b=\sum_{S}\sum_{\nu=0}^{P-1}Z_{S,\nu}\cos\bigl(2\pi(t_S-\nu)/P\bigr).
-\]
-The term $S=0$ is $\sum_cx_c$, which the top gate reads directly. For
-$S\ne0$, the function $g_\nu(\theta)=\cos(2\pi(\theta-\nu)/P)$ has period $P$,
-so $g_\nu(PZ+t)=g_\nu(t)$ for every integer $Z$. Hence, with
-$\psi_\nu(\theta)=\theta\,g_\nu(\theta)$,
-\[
-Z_{S,\nu}\,g_\nu(t_S)=\tfrac1P\bigl(\psi_\nu(PZ_{S,\nu}+t_S)-\psi_\nu(t_S)\bigr),
-\]
-and $\sum_\nu\psi_\nu(t_S)=0$. For prime $P$ and $S\ne0$, exactly $N/P$
-addresses $c$ have $S\cdot c\equiv\nu$, so $Z_{S,\nu}\le N/P$, and
-$PZ_{S,\nu}+t_S$ ranges over an interval of length at most
-$N+(P-1)m\cdot\#\{i:S_i\ne0\}$; its staircase needs that many gates. Summing
-over $S\ne0$ and $\nu$, and using $\sum_S\#\{i:S_i\ne0\}=k(P-1)N/P$, gives the
-bound. The top gate tests $Nx_b\ge N/2$. We checked the circuit gate by gate
-for $P=3$ with $k\le3$ and $P=5$ with $k=1$ (and, outside the proposition,
-for $P=4$ with the bound $Z_{S,\nu}\le N$); these are small cases only.
-\end{keybox}
+% Copyright (c) 2026 Christian Reitwiessner.
+% Authors: Christian Reitwiessner
+\subsect{A sharper score: the \texorpdfstring{$5/16$}{5/16} bound}
 
-%===================================================================
-\sect{Agreeing on most inputs with fewer gates}\label{sec:avgupper}
+We can save more gates by asking only for the correct sign. The score below
+recovers the selected bit with a fixed margin, while allowing a controlled
+error at the zero address and at the $k$ addresses of Hamming weight one.
+A shared correction handles the zero address; amplifying the corresponding
+table entries absorbs the other errors.
 
-\begin{theorem}\label{thm:avgupper}
-\leavevmode
-\begin{enumerate}
-\item For every $\delta\in(0,1)$, there is a depth-two threshold circuit with
-      $O\bigl(N\sqrt{n\log(N/\delta)}\bigr)$ gates that agrees with Andreev's
-      function on a $1-\delta$ fraction of inputs.
-\item For every $\varepsilon$ with $1/\sqrt N\le\varepsilon\le\tfrac18$,
-      there is one with $O\bigl(\varepsilon^2N\sqrt{n\log n}\bigr)$ gates that
-      $\varepsilon$-agrees with Andreev's function.
-\end{enumerate}
-In the balanced case these are $O(n^{3/2}\sqrt{\log(n/\delta)})$ and
-$O(\varepsilon^2n^{3/2}\sqrt{\log n})$ gates. Part~1 with
-$\delta=\tfrac12-\varepsilon$ covers $\tfrac18<\varepsilon\le\tfrac12-n^{-O(1)}$.
+\begin{theorem}\label{thm:exact}
+Put $\alpha=\lfloor(m-1)/2\rfloor$. There is an exact depth-two threshold
+circuit for $A$ with at most
+\begin{equation}\label{eq:bestcount}
+\frac{N(N-1)}2+\frac{kN(m+\alpha)}2
+ +2(N-1)+2\alpha k+3km+\left\lceil\frac{km}{2}\right\rceil
+\end{equation}
+bottom gates and one top gate. Its weights are integers of magnitude
+polynomial in $n$. At exact balance its total size is
+\[
+\frac5{16}n^2-\frac n4\log_2(n/2)+O(n).
+\]
+For $m=\lfloor N/k\rfloor$, its size is $(5/16+o(1))n^2$.
 \end{theorem}
 
-\smalltitle{The circuit.}
-Choose $k_0\in\{0,\dots,k\}$. The circuit is the one from
-Theorem~\ref{thm:exact}, with two changes: it uses only the sets
-$S\subseteq\{1,\dots,k_0\}$, and each staircase covers only a window of
-values. The top gate still tests whether the score is negative. We need one
-consequence of Lemma~\ref{lem:ladder}: if the sum in that lemma is taken only
-over a window $\{\ell,\dots,h\}$, it still equals $g(L)$ whenever $L$ lies in
-the window.
-
 \begin{proof}
-\emph{Fewer terms.} The computation in Lemma~\ref{lem:lookup}, restricted to
-$S\subseteq\{1,\dots,k_0\}$, gives
+\emph{Forms used only in this proof.}
+Write $s_i=|a_i|$, $\sigma=\sum_i s_i$, and let $e_i$ be the address with
+only coordinate $i$ equal to one. Put
 \[
-\sum_{S\subseteq\{1,\dots,k_0\}}X_S(-1)^{t_S}=2^{k_0}\sum_{c\in\mathcal Q}(-1)^{x_c},
+z=\sum_{c\ne0}x_c,\quad E=\sum_i x_{e_i},\quad
+w=2z+2\alpha E+\sigma,\quad R=2(N-1)+2\alpha k+km,\quad C=N(R+4).
 \]
-where $\mathcal Q$ is the set of the $V=2^{k-k_0}$ addresses that agree with
-$b$ in the first $k_0$ coordinates. So without windows the circuit outputs a
-majority vote of the $V$ table entries in $\mathcal Q$, one of which is
-$x_b$.
-
-\emph{The vote on a random table.} Let $V\ge2$, so $V$ is even, and let $Y$
-be the sum of the signs $(-1)^{x_c}$ of the other $V-1$ entries; $Y$ is odd.
-The circuit outputs $1$ exactly when $(-1)^{x_b}+Y<0$. If $x_b=1$ this is
-correct exactly when $Y\le-1$; if $x_b=0$, exactly when $Y\ge-1$. Hence
+Thus $0\le w\le R$. For each nonempty $S\subseteq[k]$, define
 \[
-\Pr[\text{correct}]=\tfrac12\bigl(1+\Pr[Y=-1]\bigr)
-=\tfrac12+\tfrac12\tbinom{V}{V/2}2^{-V}\ \ge\ \tfrac12+\frac1{2\sqrt{2V}},
+Y_S=\sum_{c:S\cdot c\text{ odd}}x_c,\quad
+W_S=Y_S+\alpha\sum_{i\in S}x_{e_i},\quad
+\kappa_S=-4(2\alpha+1)(k-2|S|),
 \]
-using $\binom{V-1}{V/2}=\tfrac12\binom{V}{V/2}$ and the standard bound
-$\binom{V}{V/2}\ge2^V/\sqrt{2V}$. For $V=1$ the vote is exactly $x_b$.
+and let $r_S(u)=-8\lceil u/2\rceil^2+\kappa_S\lceil u/2\rceil$.
+All of $W_S,t_S,w,s_i$ are affine forms in the original inputs.
 
-\emph{Windows.} On a random input, $X_S$ is a sum of $N$ independent uniform
-signs, and $t_S$ is a sum of $|S|m\le n$ independent uniform bits. Hoeffding's
-inequality gives, for every $\lambda>0$,
+\emph{The score.} Consider
+\begin{align}\label{eq:bestscore}
+P={}&2N+\sum_{S\ne\varnothing}r_S(2W_S+t_S)
+ +\frac N2\left(w^2+\sum_i s_i^2\right)\notag\\
+ &+4Nz-2N(\alpha^2+1)E-2\alpha N\sigma
+ +2N(1+\alpha)\sum_i x_{e_i}s_i-Cx_0\ind{b=0}.
+\end{align}
+We first verify its sign, then realize its non-affine terms with bottom gates.
+The following identities follow by expanding the squares and summing
+characters; all sums over $S$ are over nonempty sets:
+\begin{align*}
+\sum_S4W_S(-1)^{t_S}
+ &=2N\ind{b=0}z-2N\ind{b\ne0}x_b
+   +2\alpha N\sum_i x_{e_i}\bigl(\ind{b=0}-\ind{b=e_i}\bigr),\\
+8\sum_S(W_S^2+W_St_S)
+ &=\frac N2(w^2-\sigma^2)+2Nz+(4\alpha+2\alpha^2)NE
+   +2N(1+\alpha)\sum_i x_{e_i}s_i,\\
+8\sum_S\lceil t_S/2\rceil^2
+ &=\frac N2\left(\sigma^2+\sum_i s_i^2\right)
+   +N(\sigma+1)\ind{b\ne0}+N\sum_i s_i\ind{b=e_i}.
+\end{align*}
+For example, the first is character orthogonality applied to $Y_S$ and to
+$\ind{i\in S}$; the other two use the same identity and
+$\lceil t/2\rceil=(t+\ind{t\text{ odd}})/2$.
+Also
 \[
-\Pr\bigl[|X_S|>\lambda\bigr]\le2e^{-\lambda^2/(2N)}\le2e^{-\lambda^2/(2n)},\qquad
-\Pr\bigl[|t_S-|S|m/2|>\lambda\bigr]\le2e^{-2\lambda^2/n}\le2e^{-\lambda^2/(2n)}.
+4W(-1)^t=4W-8\lceil(2W+t)/2\rceil^2+8W^2+8Wt+8\lceil t/2\rceil^2.
 \]
-Take $\lambda=\sqrt{2n\ln(4\cdot2^{k_0}/\delta)}$. A union bound over the two
-events and the $2^{k_0}$ sets shows that, except with probability
-$2^{k_0}\cdot2\cdot2e^{-\lambda^2/(2n)}=\delta$, every $t_S$ lies within
-$\lambda$ of $|S|m/2$ and every $X_S+t_S$ within $2\lambda$ of $|S|m/2$. On
-these windows, rounded outwards to integers, the staircases give exactly the
-score of the unwindowed circuit. For each $S$ the two windows need at most
-$4\lambda+2$ and $2\lambda+2$ gates, so the circuit has at most
-$2^{k_0}(6\lambda+4)+1$ gates.
+The coefficient shifts $\kappa_S$ supply the address correction because
+\[
+\sum_S\kappa_S\bigl(\lceil t_S/2\rceil-t_S/2\bigr)
+ =N(2\alpha+1)\sum_i\ind{b=e_i}.
+\]
+Substitution in \eqref{eq:bestscore} now gives the simple closed form
+\begin{equation}\label{eq:bestclosed}
+P=\begin{cases}
+N(w+2)-Cx_0,&b=0,\\
+2N(1+\alpha)(1-x_{e_i})-Ns_i,&b=e_i,\\
+N(1-2x_b),&\text{otherwise}.
+\end{cases}
+\end{equation}
+At $b=0$, use $0\le w\le R$ and $C=N(R+4)$. At $b=e_i$, the odd
+integer $s_i$ lies between $1$ and $2\alpha+1$. In every case $P\ge N$
+when $x_b=0$, and $P\le-N$ when $x_b=1$. The top gate outputs $\ind{-P\ge0}$.
 
-\emph{Part 1.} Take $k_0=k$, so $V=1$; the output is wrong only outside the
-windows, which has probability at most $\delta$.
+\emph{Raw gates and their count.}
+The staircase for $r_S(2W_S+t_S)$ uses only odd thresholds
+\[
+\ind{2W_S+t_S\ge\theta},\qquad
+1\le\theta\le N+2\alpha|S|+|S|m,
+\]
+with coefficient $-8\theta+\kappa_S$. The two square terms use $R+km$
+gates by Lemma~\ref{lem:ladder}. For $B=n+2$, each product $x_{e_i}s_i$
+uses $m$ gates $\ind{s_i+Bx_{e_i}\ge B+\ell}$, $1\le\ell\le m$.
+Finally, the identity
+\[
+x_0\ind{b=0}=x_0-x_0\sigma+
+ \frac4N\sum_{S\ne\varnothing}x_0\lfloor t_S/2\rfloor
+\]
+implements the last correction with $km$ gates
+$\ind{\sigma+Bx_0\ge B+\ell}$ and
+$\sum_S\lfloor |S|m/2\rfloor$ gates
+$\ind{t_S+Bx_0\ge B+2j}$. Its identity follows from
+$\sum_S\ind{t_S\text{ odd}}=(N/2)\ind{b\ne0}$.
+The even-level $\sigma$ gates coincide with the $S=[k]$ gates, saving
+$\lfloor km/2\rfloor$ gates. Everything else in $P$ is an affine top term.
 
-\emph{Part 2.} Let $V$ be the largest power of two with
-$V\le1/(32\varepsilon^2)$. Since $\varepsilon\le\frac18$ we have $V\ge2$, and
-since $\varepsilon\ge1/\sqrt N$ we have $V\le N$, so $k_0=k-\log_2V$ is
-allowed. Because $V\le1/(32\varepsilon^2)$, the vote has advantage
-$1/(2\sqrt{2V})\ge2\varepsilon$. Take $\delta=\varepsilon$. Then the agreement
-is at least $\tfrac12+2\varepsilon-\varepsilon$. Because
-$V>1/(64\varepsilon^2)$, the number of gates is
-$O(2^{k_0}\lambda)=O\bigl((N/V)\sqrt{n\log(N/\varepsilon)}\bigr)
-=O(\varepsilon^2N\sqrt{n\log n})$.
+Since $\sum_{S\ne\varnothing}|S|=kN/2$, the main-ridge and last-correction
+counts together are
+\[
+\sum_{S\ne\varnothing}\left(
+ \left\lceil\frac{N+2\alpha|S|+|S|m}{2}\right\rceil
+ +\left\lfloor\frac{|S|m}{2}\right\rfloor\right)
+ =\frac{N(N-1)}2+\frac{\alpha kN}2+\frac{kmN}2.
+\]
+Adding the remaining gates gives \eqref{eq:bestcount}. Vanishing coefficients
+or further coincidences can only improve it. At exact balance $m$ is even,
+so $\alpha=m/2-1$; substitution gives the stated asymptotic bound.
+For floor balance, the rounding changes the leading expression by
+$O(Nk)=o(n^2)$. Bottom coefficients and thresholds are $O(n)$; the displayed
+expansion has top coefficients bounded by $O(n^3)$.
 \end{proof}
 
-The lower bounds of Section~\ref{sec:lower} show that Part~2, and Part~1 for
-$\delta\ge n^{-O(1)}$, are tight up to polylogarithmic factors. The Lean
-formalization of this theorem uses the older identity
-$\varphi(X+t)+\varphi(X-t)=2X(-1)^t$, which only changes constant factors, and
-carries the redundant hypothesis $km\le n$.
+The sharper construction remains sign-coherent: every bottom sees a block
+through its sum with a nonnegative coefficient. Large or mixed-sign weights
+are therefore not needed for this bound. Section~\ref{app:coherent} shows
+that improving the quadratic exponent requires leaving that class.
+
+
+%===================================================================
+% Copyright (c) 2026 Christian Reitwiessner.
+% Authors: Christian Reitwiessner
+\sect{Agreeing on most inputs with fewer gates}\label{sec:avgupper}
+
+The earlier windowed construction pays for keeping every character inside
+its window at once. Here we bound the sum of the errors in mean square.
+Independent address masks make cross-character error terms cancel, removing
+the factor $\sqrt{\log n}$ for constant error.
+
+\Needspace{12\baselineskip}
+\begin{theorem}\label{thm:avgupper}
+In the balanced case, the following depth-two threshold circuits exist:
+\begin{enumerate}
+\item For $0<\delta\le1/2$, agreement at least $1-\delta$ with
+      $O\bigl(n^{3/2}\sqrt{\log(1/\delta)}\bigr)$ gates.
+\item For $N^{-1/2}\le\varepsilon\le1/8$, agreement at least
+      $1/2+\varepsilon$ with
+      $O\bigl(\varepsilon^2n^{3/2}\sqrt{\log(1/\varepsilon)}\bigr)$ gates
+      and $O\bigl(\varepsilon^2n^{5/2}\sqrt{\log(1/\varepsilon)}\bigr)$ wires.
+\end{enumerate}
+For $1/8<\varepsilon<1/2$, Part~1 applies with $\delta=1/2-\varepsilon$.
+The proof chooses one fixed circuit for each size; it does not assert an
+efficient uniform algorithm for choosing its masks.
+\end{theorem}
+
+\begin{proof}
+\emph{A majority vote with fewer characters.}
+Fix $0\le r\le k$ and put $q=2^r$. Character orthogonality gives
+\[
+P_*=2\sum_{S\subseteq[r]}X_S(-1)^{t_S}
+ =2q\sum_{c:\,c_{[r]}=b_{[r]}}(-1)^{x_c}.
+\]
+Its sign is a majority vote of $L=N/q$ independent table bits, one of them
+$x_b$. With ties outputting zero, its agreement is
+$1/2+p(L)/2$, where $p(1)=1$ and
+\[
+p(L)=2^{-L}\binom{L}{L/2}\ge(2L)^{-1/2}\qquad(L\ge2).
+\]
+Indeed, conditioning on the selected bit leaves a sum of $L-1$ independent
+signs; the excess agreement is half the probability that this sum equals
+$-1$. This is the subcube-majority calculation used by the earlier circuit.
+
+\emph{Masked, truncated staircases.}
+Independently for each nonempty $S\subseteq[r]$, choose a uniform mask $z_S$
+on its $M_S=|S|m$ active raw address coordinates. Let
+\[
+D_S=|a_S\oplus z_S|-\lfloor M_S/2\rfloor,\qquad
+\eta_S=(-1)^{|z_S|+\lfloor M_S/2\rfloor}.
+\]
+With $\varphi(u)=(-1)^u u$, evenness of $X_S$ gives
+\[
+\eta_S\bigl(\varphi(X_S+D_S)+\varphi(X_S-D_S)\bigr)
+ =2X_S(-1)^{t_S}.
+\]
+For an integer radius $R\ge1$, set
+$f_R(u)=\varphi(u)\ind{|u|\le R}$, and replace the left side by its
+$f_R$ version. Together with the free affine term $2X_\varnothing$, these
+terms give a score $P_z$. The finite-difference expansion
+\[
+f_R(U)=\sum_{\ell=-R}^{R+1}
+ \bigl(f_R(\ell)-f_R(\ell-1)\bigr)\ind{U\ge\ell}
+\]
+uses at most $2R+2$ gates. Each $X_S\pm D_S$ is an affine form in the raw
+inputs, with table weights $\pm2$ and address weights $\pm1$.
+Thus $P_z$ uses at most $4(q-1)(R+1)$ bottoms and one top gate.
+
+\emph{Cancellation of cross terms.}
+Let $e_S$ be the truncated contribution minus its exact contribution.
+Conditional on $x,a$, the masks are independent, and
+$D_S$ has a shifted binomial law independent of $a$. Moreover
+$\eta_S=(-1)^{t_S}(-1)^{D_S}$. Therefore
+\[
+\mathbb E_{z_S}[e_S\mid x,a]=(-1)^{t_S}g_S(X_S)
+\]
+for a function $g_S$ of the table alone. For $S\ne T$, averaging the product
+over masks and then uniform raw addresses gives
+\[
+\mathbb E_{z,x,a}[e_Se_T]
+ =\mathbb E_x[g_S(X_S)g_T(X_T)]\,
+   \mathbb E_a[(-1)^{t_S+t_T}]=0.
+\]
+No independence of Walsh coefficients is assumed. Consequently
+\begin{equation}\label{eq:maskl2}
+\mathbb E_{z,x,a}(P_z-P_*)^2=\sum_{S\ne\varnothing}\mathbb E e_S^2.
+\end{equation}
+
+\emph{Diagonal terms and one fixed circuit.}
+For $U=X_S\pm D_S$, the mean has magnitude at most $1/2$ and the centered
+variable is subgaussian with variance proxy $v_S=N+M_S/4$. Integrating its
+Hoeffding tail yields
+\[
+\mathbb E\bigl[U^2\ind{|U|>R}\bigr]
+ \le16v_S\exp\bigl(-R^2/(16v_S)\bigr).
+\]
+For example, integrate
+$\Pr(|U-\mathbb EU|>t)\le2e^{-t^2/(2v_S)}$ from $t=R/2$;
+the polynomial factor is absorbed by doubling the denominator in the
+exponent. Put $v=N+rm/4$. Since zero truncation removes only tail values,
+\eqref{eq:maskl2} implies
+\[
+\mathbb E_{z,x,a}(P_z-P_*)^2
+ \le64(q-1)v\exp\bigl(-R^2/(16v)\bigr).
+\]
+If $q=N$, the untruncated score is $\pm2N$, so test $-P_z\ge0$.
+If $q<N$, its attainable values are multiples of $4q$; testing
+$-P_z\ge2q$ reproduces its negative-sign vote, with a gap of $2q$ on
+either side. In both cases disagreement with the vote requires
+$|P_z-P_*|\ge2q$. Markov's inequality gives expected disagreement at most
+\[
+\frac{16v}{q}\exp\bigl(-R^2/(16v)\bigr).
+\]
+Taking
+\[
+R=\left\lceil4\sqrt{v\log\frac{16v}{q\delta}}\right\rceil
+\]
+makes this at most $\delta$. Averaging fixes one mask collection with that
+uniform-input error. The resulting circuit is deterministic; masks are
+neither supplied inputs nor chosen separately for different inputs.
+
+\emph{The two parameter choices.}
+For Part~1 take $q=N$. At balance $v=O(N)$, so
+$R=O(\sqrt{N\log(1/\delta)})$. For Part~2 take the least power of two
+$q\ge32\varepsilon^2N$ and set $\delta=\varepsilon$.
+Then $q<64\varepsilon^2N$, $q\le N$, and the vote's advantage is at least
+$\sqrt{q/(8N)}\ge2\varepsilon$. Its truncated circuit has the required
+advantage, with $\log(16v/(q\delta))=O(\log(1/\varepsilon))$.
+Every bottom has at most $n$ input wires, proving the stated wire bound.
+\end{proof}
+
+For each fixed error $0<\delta<1/2$, the upper bound is $O(n^{3/2})$ gates;
+the lower bound
+of Section~\ref{sec:lower} leaves a factor $\log^2n$. For polynomially small
+error or advantage, the new upper bounds have the same asymptotic order as
+the earlier union-bound construction. Requiring error below $2^{-n}$ makes
+the radius linear in $n$ at balance, so this argument gives no exact
+subquadratic circuit.
+
 
 %===================================================================
 \sect{Lower bounds}\label{sec:lower}
@@ -824,48 +985,43 @@ by fixing the circuit first.
 %===================================================================
 \sect{Formalization status}\label{sec:lean}
 
-The Lean~4 proofs are in the Complexitylib library,
-\url{https://github.com/cslib-community/complexitylib}. Merged results are at
-commit \texttt{242879e}; the others are in open pull requests that have not
-yet been independently reviewed. The formal proofs contain no
-\texttt{sorry}, and the library's continuous integration checks that they use
-only the standard axioms.
+The Lean~4 proofs are in Complexitylib,
+\url{https://github.com/cslib-community/complexitylib}. Pull requests
+\#2377, \#2813 and \#2814 are merged; \#2816 remains open as of
+7 November 2026. The refined exact and mean-square upper bounds proved in
+this note are not yet formalized. The Lean statements are explicit finite
+inequalities; their asymptotic corollaries are derived in the text.
+
 \begin{center}
 \small
 \renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}P{0.29\textwidth}P{0.25\textwidth}P{0.39\textwidth}@{}}
+\begin{tabular}{@{}P{0.30\textwidth}P{0.23\textwidth}P{0.40\textwidth}@{}}
 \toprule
 Result & Status & Where\\
 \midrule
-Theorem~\ref{thm:exact} & formalized (open PR) & PR \#2813, \texttt{Andreev.lean}\\
-Proposition~\ref{prop:modp} & proof sketch; numerical check on small cases & --\\
-Theorem~\ref{thm:avgupper} & formalized (merged) & \texttt{AndreevWindowed.lean}, \texttt{AndreevAverage.lean}\\
-Lemma~\ref{lem:surv} & formalized (merged) & \texttt{RandomRestriction.lean}, \texttt{ThresholdCounting.lean}\\
-Lemmas~\ref{lem:count},~\ref{lem:avg}, Thm.~\ref{thm:lower} & formalized (merged) & \texttt{ThresholdCounting.lean}, \texttt{AndreevLowerBound.lean}\\
-Corollary~\ref{cor:fanin} & formalized (open PR) & PR \#2814, \texttt{AndreevApproxMajority.lean}\\
-Lemma~\ref{lem:gram}, Theorem~\ref{thm:B} & formalized (open PR) & PR \#2816, \texttt{KaneWilliamsB.lean}, \texttt{NearlyOrthogonal.lean}\\
+Proposition~\ref{prop:basic} & formalized, merged & PR \#2813; \texttt{Andreev.lean}\\
+Theorem~\ref{thm:exact} & proof here; not formalized & refined exact score\\
+Theorem~\ref{thm:avgupper} & proof here; not formalized & mean-square mask argument\\
+Earlier windowed upper bounds & formalized, merged & \texttt{AndreevWindowed.lean}, \texttt{AndreevAverage.lean}\\
+Lemma~\ref{lem:surv} & formalized, merged & \texttt{RandomRestriction.lean}, \texttt{ThresholdCounting.lean}\\
+Lemmas~\ref{lem:count},~\ref{lem:avg}, Theorem~\ref{thm:lower} & formalized, merged & PR \#2377; \texttt{AndreevLowerBound.lean}\\
+Corollary~\ref{cor:fanin} & formalized, merged & PR \#2814; \texttt{AndreevApproxMajority.lean}\\
+Lemma~\ref{lem:gram}, Theorem~\ref{thm:B} & formalized, open PR & PR \#2816; \texttt{KaneWilliamsB.lean}, \texttt{NearlyOrthogonal.lean}\\
 \bottomrule
 \end{tabular}
 \end{center}
-The formal statements are explicit finite inequalities; the asymptotic
-corollaries are derived in the text. Where constants are given, the formal
-versions have the same or slightly better constants. Some details:
-\begin{itemize}
-\item Theorem~\ref{thm:exact}: the formal statement bounds the bottom
-      weights by $2$ in absolute value; the finer description of the weights
-      is not formalized.
-\item Theorem~\ref{thm:avgupper}: the formal version is the windowed circuit
-      with free window parameters, built with the older identity
-      $\varphi(X+t)+\varphi(X-t)=2X(-1)^t$; the choices made in the proof of
-      Part~2 are on paper.
-\item Corollary~\ref{cor:fanin}: the top majority is modelled as a hypothesis
-      on the number of correct subcircuits.
-\item Theorem~\ref{thm:B}: in the Lean code the seed length $d$ is called $n$
-      and the block length $m$ is called $\ell$. The circuit is a depth-two
-      circuit with $M$ outputs (whose size and wire count are $s$ and $w$),
-      followed by the gate ``at least $\kappa$ of the $M$ outputs''. The formal
-      Part~2 uses $K_2$ and Part~1 uses $K_1$, as stated.
-\end{itemize}
+
+The merged average-case code proves the earlier union-bound window
+construction, using $\varphi(X+t)+\varphi(X-t)=2X(-1)^t$. It does not prove
+the sharper logarithmic factors in Theorem~\ref{thm:avgupper}. Likewise the
+merged exact upper bound is Proposition~\ref{prop:basic}, not
+Theorem~\ref{thm:exact}. The sign-coherent appendix is not formalized.
+
+For Corollary~\ref{cor:fanin}, the top majority is modelled as a hypothesis
+on the number of correct subcircuits. For Theorem~\ref{thm:B}, the seed
+length $d$ is called $n$ and the block length $m$ is called $\ell$ in Lean;
+the circuit has $M$ outputs, followed by the gate ``at least $\kappa$ of the
+$M$ outputs''. Part~2 uses $K_2$ and Part~1 uses $K_1$ as in the text.
 
 \smalltitle{Acknowledgements.}
 The results, the formalization and this note were developed with AI
@@ -947,7 +1103,7 @@ with all non-live positions random),
 \texttt{sum\_circuitUnforcedConstCount\_blockLiveSet\_le} and
 \texttt{sum\_circuitUnforcedAtMostOneCount\_blockLiveSet\_le}.
 
-\sect{Note: a quadratic lower bound for sign-coherent circuits (preliminary)}\label{app:coherent}
+\sect{Note: near-quadratic lower bounds for sign-coherent circuits}\label{app:coherent}
 
 \begin{keybox}
 \textbf{Status.} This appendix records a recent result together with
@@ -966,7 +1122,7 @@ All gates of the circuit in Theorem~\ref{thm:exact} are of this kind.
 
 \begin{theorem}\label{thm:coherent}
 Let $C$ be a depth-two threshold circuit for $A$ whose $S$ bottom gates are
-all sign-coherent. Put $D_0=\bigl(N-k-1-\log_2(S+1)\bigr)/\bigl(k+\log_2(S+1)\bigr)$. Then
+all sign-coherent. Put $D_0=\max\{0,N-k-1-\log_2(S+1)\}/\bigl(k+\log_2(S+1)\bigr)$. Then
 \[
 S\ \ge\ \frac{m^k}{m^k-(m-1)^k}\,D_0\ \ge\ \frac mk\,D_0 .
 \]
@@ -977,7 +1133,7 @@ S\ \ge\ \frac{N(N-3k-1)}{3k^3}\ =\ \Omega\!\left(\frac{n^2}{\log^3 n}\right).
 \end{theorem}
 
 So within this class the circuit of Theorem~\ref{thm:exact} is optimal up to a
-polylogarithmic factor. A circuit with substantially fewer gates must contain
+polylogarithmic factor. A polynomial-exponent improvement below quadratic therefore requires
 gates whose weights have mixed signs inside a block.
 
 \smalltitle{Plan.}
@@ -1026,9 +1182,10 @@ matters); and the position of $\kappa$, one of at most $2^k+1$. With
 $D=|G|=d_c(x)$, entropy gives
 \[
 N=H(x)\le H(D)+\mathbb E\log_2\Bigl[\tbinom SD(2^k-1)^D(2^k+1)\Bigr]
-\le\log_2(S+1)+\mathbb E[D]\,(\log_2S+k)+k+1,
+\le\log_2(S+1)+\mathbb E[D]\,(\log_2(S+1)+k)+k+1,
 \]
-which rearranges to the claim.
+which rearranges to the claim; a negative numerator is replaced by the
+trivial lower bound zero.
 \end{proof}
 
 \begin{lemma}[A coherent gate splits few cubes]\label{lem:diag}

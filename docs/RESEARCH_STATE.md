@@ -129,7 +129,7 @@ Authoritative exact public snapshots: `formalization/pull_requests.json`.
 - https://github.com/cslib-community/complexitylib/pull/2814 — merged; approximate-majority/top-fan-in applications.
 - https://github.com/cslib-community/complexitylib/pull/2816 — open at snapshot; $B_n$ depth-three/log-saving work. Patch saved as `formalization/pr-2816.patch` with base/head OIDs in metadata.
 
-The local paper PDF's formalization-status section predates some merges. Consult the above states and pinned code, rather than treating its old 'open PR' labels as current. The $5n^2/16$ research construction, coherent lower bounds, latest fixed-$k=3$ coarse Fourier family, and majority refinements are separate research artifacts; check their own evidence before claiming Lean coverage.
+The revised paper now records the merged PRs and clearly separates Lean coverage of earlier upper bounds from the two new upper-bound proofs. The $5n^2/16$ construction and improved mean-square approximation proof are included in the paper but not formalized in Lean. Other research refinements remain in their reports; do not infer Lean coverage from their appearance in this archive.
 
 ## 6. Completed mixed-sign coarse-Fourier search
 
@@ -326,3 +326,22 @@ Direct balanced64 sample checks exclude S0, S1, S2 in2.667s,29.963s,59.641s resp
 Direct S4/S5 formulas use1152 actual inputs, unrestricted gate coefficients and real top/direct coefficients, and329/395 real parameters respectively. SAT would be exactly reevaluated and checked by an arbitrary-table/raw-address miter; none of the hard learner calls produced a SAT candidate. Only gate-output complement/permutation normalization is used by default. Optional nonnegative/block-sorted direct-address coefficients are WLOG for the full target through single-address flips with induced table-label permutation and within-block permutations. This does not assume common signs in bottom blocks. The report distinguishes full-target normal-form logic from symmetries of an arbitrary sample-only classification problem. Unit negative margins are valid for this unrestricted finite domain, not for arbitrary shared-rule grammars.
 
 Four tests passed: target/restriction embeddings, exact checker on a valid and false fixture, sample/serialization validation, and input-symmetry normalization of a known full-domain circuit. No formally checked UNSAT proof trace or Lean theorem is claimed; replayable exact SMT instances and full normalizations are saved. A startup logging-helper bug was fixed and affected runs rerun before using results. All task-owned jobs finished and unrelated processes were preserved.
+
+
+## 17. Focused paper revision completed
+
+At the user's request, `workspace/threshold_paper/paper.tex` and `paper.pdf` now contain the strongest general exact upper bound and the useful improved average-case upper bounds with self-contained proofs and raw gate counts. The manuscript is19 pages, up from18. It deliberately excludes finite SMT records, exploratory coefficient languages, failed routes and the pending-review average-case lower-range extension. The unrelated modular-address proof sketch was removed to keep the revision focused; its earlier source remains in repository history.
+
+The exact theorem states the finite bottom upper bound
+
+$$\frac{N(N-1)}2+\frac{kN(m+\alpha)}2+2(N-1)+2\alpha k+3km+\left\lceil\frac{km}{2}\right\rceil,\qquad \alpha=\lfloor(m-1)/2\rfloor,$$
+
+plus one top gate. Its proof gives an explicit score, the exceptional-address sign margins, affine raw-input expansion of every bottom gate, merged override gates and polynomial integer weights. At exact balance total size is $5n^2/16-(n/4)\log_2(n/2)+O(n)$; at floor balance it is $(5/16+o(1))n^2$. The earlier3n^2/4 construction is retained as a shorter introductory proposition and correctly identified as the merged Lean result.
+
+The approximation theorem now gives $O(n^{3/2}\sqrt{\log(1/\delta)})$ gates for error delta and $O(\varepsilon^2n^{3/2}\sqrt{\log(1/\varepsilon)})$ gates (one extra n factor for support wires) over the stated small-advantage regime. Its full independent-mask, cross-moment, tail-second-moment and tie-handling proof is included. Fixed masks are chosen by a nonuniform averaging argument; efficient uniform mask selection is not claimed.
+
+The abstract, result table, technique overview, remaining-gap statement and formalization section are synchronized. PRs2377,2813,2814 were rechecked as MERGED and2816 as OPEN. The new exact and approximation refinements are clearly NOT Lean formalized. A positive-part correction handles the sign-coherent entropy bound's trivial negative-numerator regime.
+
+`verify_upper_updates.py` independently expands the new exact raw-gate score and checks58264 exhaustive table/block-count cases for k1..3,m1..4, plus larger spot checks up to k8,m32. Because the exact construction is block-uniform, these count checks cover every raw arrangement in those small instances. The same script exactly checks truncated staircase expansions and vanishing mixed-mask cross moments. Results are in `upper_update_checks.json`. `layout_checks.json` records19 pages, no missing/duplicate labels, no overfull boxes, no missing glyphs or undefined references, and visual inspection of the revised result pages. Universal proofs remain mathematical proofs rather than finite-test inference.
+
+See `workspace/threshold_paper/REVISION.md` for the concise revision scope and build/check commands. All new authorship headers credit Christian Reitwiessner.
