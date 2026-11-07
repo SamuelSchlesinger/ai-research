@@ -1,0 +1,564 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "copyright": "Copyright (c) 2026 Christian Reitwiessner",
+  "k": 3,
+  "m": 3,
+  "gates": [
+    {
+      "c": 0,
+      "address_weights": [
+        1,
+        1,
+        1,
+        3,
+        3,
+        3,
+        9,
+        9,
+        9
+      ],
+      "threshold": 27,
+      "table_weight": 1,
+      "top_weight": 95558442
+    },
+    {
+      "c": 0,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        3,
+        -3,
+        3,
+        9,
+        -9,
+        9
+      ],
+      "threshold": 1,
+      "table_weight": 1,
+      "top_weight": 73792208
+    },
+    {
+      "c": 0,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        -3,
+        3,
+        3,
+        -9,
+        9,
+        9
+      ],
+      "threshold": 1,
+      "table_weight": 1,
+      "top_weight": 91740260
+    },
+    {
+      "c": 0,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        -3,
+        -3,
+        3,
+        -9,
+        -9,
+        9
+      ],
+      "threshold": 1,
+      "table_weight": 1,
+      "top_weight": 128000000
+    },
+    {
+      "c": 1,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        -3,
+        -3,
+        -3,
+        -9,
+        -9,
+        -9
+      ],
+      "threshold": -24,
+      "table_weight": 1,
+      "top_weight": 93740260
+    },
+    {
+      "c": 1,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        -3,
+        3,
+        -3,
+        -9,
+        9,
+        -9
+      ],
+      "threshold": 2,
+      "table_weight": 1,
+      "top_weight": 127818182
+    },
+    {
+      "c": 1,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        3,
+        -3,
+        -3,
+        9,
+        -9,
+        -9
+      ],
+      "threshold": 2,
+      "table_weight": 1,
+      "top_weight": 79064935
+    },
+    {
+      "c": 1,
+      "address_weights": [
+        1,
+        1,
+        1,
+        3,
+        3,
+        -3,
+        9,
+        9,
+        -9
+      ],
+      "threshold": 2,
+      "table_weight": 1,
+      "top_weight": 126545455
+    },
+    {
+      "c": 2,
+      "address_weights": [
+        1,
+        1,
+        1,
+        3,
+        3,
+        -3,
+        9,
+        9,
+        9
+      ],
+      "threshold": 24,
+      "table_weight": 1,
+      "top_weight": 126909091
+    },
+    {
+      "c": 2,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        3,
+        -3,
+        -3,
+        9,
+        -9,
+        9
+      ],
+      "threshold": -2,
+      "table_weight": 1,
+      "top_weight": 114415584
+    },
+    {
+      "c": 2,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        -3,
+        3,
+        -3,
+        -9,
+        9,
+        9
+      ],
+      "threshold": -2,
+      "table_weight": 1,
+      "top_weight": 126909091
+    },
+    {
+      "c": 2,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        -3,
+        -3,
+        -3,
+        -9,
+        -9,
+        9
+      ],
+      "threshold": -2,
+      "table_weight": 1,
+      "top_weight": 94467532
+    },
+    {
+      "c": 3,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        -3,
+        -3,
+        3,
+        -9,
+        -9,
+        -9
+      ],
+      "threshold": -21,
+      "table_weight": 1,
+      "top_weight": 128000000
+    },
+    {
+      "c": 3,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        -3,
+        3,
+        3,
+        -9,
+        9,
+        -9
+      ],
+      "threshold": 5,
+      "table_weight": 1,
+      "top_weight": 128000000
+    },
+    {
+      "c": 3,
+      "address_weights": [
+        -1,
+        1,
+        -1,
+        -3,
+        3,
+        -3,
+        -9,
+        9,
+        9
+      ],
+      "threshold": -3,
+      "table_weight": 1,
+      "top_weight": 2909091
+    },
+    {
+      "c": 3,
+      "address_weights": [
+        1,
+        1,
+        1,
+        3,
+        3,
+        3,
+        9,
+        9,
+        -9
+      ],
+      "threshold": 5,
+      "table_weight": 1,
+      "top_weight": 95922078
+    },
+    {
+      "c": 4,
+      "address_weights": [
+        1,
+        1,
+        1,
+        3,
+        3,
+        3,
+        9,
+        9,
+        -9
+      ],
+      "threshold": 18,
+      "table_weight": 1,
+      "top_weight": 96285714
+    },
+    {
+      "c": 4,
+      "address_weights": [
+        -1,
+        1,
+        -1,
+        -3,
+        3,
+        -3,
+        -9,
+        9,
+        9
+      ],
+      "threshold": 10,
+      "table_weight": 1,
+      "top_weight": 2363636
+    },
+    {
+      "c": 4,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        -3,
+        3,
+        3,
+        -9,
+        9,
+        -9
+      ],
+      "threshold": -8,
+      "table_weight": 1,
+      "top_weight": 128000000
+    },
+    {
+      "c": 4,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        -3,
+        -3,
+        3,
+        -9,
+        -9,
+        -9
+      ],
+      "threshold": -8,
+      "table_weight": 1,
+      "top_weight": 128000000
+    },
+    {
+      "c": 5,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        -3,
+        -3,
+        -3,
+        -9,
+        -9,
+        9
+      ],
+      "threshold": -15,
+      "table_weight": 1,
+      "top_weight": 94285714
+    },
+    {
+      "c": 5,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        -3,
+        3,
+        -3,
+        -9,
+        9,
+        9
+      ],
+      "threshold": 11,
+      "table_weight": 1,
+      "top_weight": 128000000
+    },
+    {
+      "c": 5,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        3,
+        -3,
+        -3,
+        9,
+        -9,
+        9
+      ],
+      "threshold": 11,
+      "table_weight": 1,
+      "top_weight": 113870130
+    },
+    {
+      "c": 5,
+      "address_weights": [
+        1,
+        1,
+        1,
+        3,
+        3,
+        -3,
+        9,
+        9,
+        9
+      ],
+      "threshold": 11,
+      "table_weight": 1,
+      "top_weight": 127090909
+    },
+    {
+      "c": 6,
+      "address_weights": [
+        1,
+        1,
+        1,
+        3,
+        3,
+        -3,
+        9,
+        9,
+        -9
+      ],
+      "threshold": 15,
+      "table_weight": 1,
+      "top_weight": 127636364
+    },
+    {
+      "c": 6,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        3,
+        -3,
+        -3,
+        9,
+        -9,
+        -9
+      ],
+      "threshold": -11,
+      "table_weight": 1,
+      "top_weight": 78701299
+    },
+    {
+      "c": 6,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        -3,
+        3,
+        -3,
+        -9,
+        9,
+        -9
+      ],
+      "threshold": -11,
+      "table_weight": 1,
+      "top_weight": 128000000
+    },
+    {
+      "c": 6,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        -3,
+        -3,
+        -3,
+        -9,
+        -9,
+        -9
+      ],
+      "threshold": -11,
+      "table_weight": 1,
+      "top_weight": 94831169
+    },
+    {
+      "c": 7,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        -3,
+        -3,
+        3,
+        -9,
+        -9,
+        9
+      ],
+      "threshold": -12,
+      "table_weight": 1,
+      "top_weight": 128000000
+    },
+    {
+      "c": 7,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        -3,
+        3,
+        3,
+        -9,
+        9,
+        9
+      ],
+      "threshold": 14,
+      "table_weight": 1,
+      "top_weight": 92285714
+    },
+    {
+      "c": 7,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        3,
+        -3,
+        3,
+        9,
+        -9,
+        9
+      ],
+      "threshold": 14,
+      "table_weight": 1,
+      "top_weight": 75610390
+    },
+    {
+      "c": 7,
+      "address_weights": [
+        1,
+        1,
+        1,
+        3,
+        3,
+        3,
+        9,
+        9,
+        9
+      ],
+      "threshold": 14,
+      "table_weight": 1,
+      "top_weight": 95194805
+    }
+  ],
+  "top_raw_address": [
+    17402597,
+    -16493506,
+    -111324675,
+    52207792,
+    -51662338,
+    38077922,
+    140311688,
+    -140493506,
+    -73246753
+  ],
+  "top_constant": -1561909091
+}

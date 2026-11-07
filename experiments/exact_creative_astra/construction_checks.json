@@ -1,0 +1,77 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "copyright": "Copyright (c) 2026 Christian Reitwiessner",
+  "results": [
+    {
+      "k": 1,
+      "m": 2,
+      "bottoms": 2,
+      "total_gates": 3,
+      "raw_addresses": 4,
+      "independent_tables_per_address": 4,
+      "all_tables_verified": true,
+      "integer_classification_gap": 1
+    },
+    {
+      "k": 2,
+      "m": 2,
+      "bottoms": 4,
+      "total_gates": 5,
+      "raw_addresses": 16,
+      "independent_tables_per_address": 16,
+      "all_tables_verified": true,
+      "integer_classification_gap": 1
+    },
+    {
+      "k": 3,
+      "m": 2,
+      "bottoms": 8,
+      "total_gates": 9,
+      "raw_addresses": 64,
+      "independent_tables_per_address": 256,
+      "all_tables_verified": true,
+      "integer_classification_gap": 1
+    },
+    {
+      "k": 4,
+      "m": 2,
+      "bottoms": 16,
+      "total_gates": 17,
+      "raw_addresses": 256,
+      "independent_tables_per_address": 65536,
+      "all_tables_verified": true,
+      "integer_classification_gap": 1
+    },
+    {
+      "k": 2,
+      "m": 3,
+      "bottoms": 16,
+      "total_gates": 17,
+      "raw_addresses": 64,
+      "independent_tables_per_address": 16,
+      "all_tables_verified": true,
+      "integer_classification_gap": 1
+    },
+    {
+      "k": 2,
+      "m": 4,
+      "bottoms": 16,
+      "total_gates": 17,
+      "raw_addresses": 256,
+      "independent_tables_per_address": 16,
+      "all_tables_verified": true,
+      "integer_classification_gap": 1
+    },
+    {
+      "k": 4,
+      "m": 4,
+      "bottoms": 256,
+      "total_gates": 257,
+      "raw_addresses": 65536,
+      "independent_tables_per_address": 65536,
+      "all_tables_verified": true,
+      "minimum_signed_margin": 1,
+      "supplied_general_count": 370
+    }
+  ]
+}

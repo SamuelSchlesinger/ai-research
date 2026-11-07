@@ -215,3 +215,29 @@ Separately, the new lower hand argument extends the gate advantage range to $\va
 For the original Kane–Williams paper, the stated lower bounds are $\Omega(\varepsilon^3n^{3/2}/\log^3n)$ gates and $\Omega(\varepsilon^3n^{5/2}/\log^{7/2}n)$ wires. Its stated range is $\varepsilon\gg\sqrt{\log n/n}$; the archived erratum discusses proof-range caveats. Our earlier lower-bound work had already improved the epsilon dependence and logarithmic denominators. The present upper round supplies an additional upper-bound improvement, not a new change to those lower-bound expressions. Source: [Kane–Williams, arXiv:1511.07860](https://arxiv.org/abs/1511.07860).
 
 Local sources: `workspace/threshold_paper/paper.tex`, theorem `thm:avgupper`; `workspace/andreev_depth_two_bounds.md`, Theorem 2; `experiments/upper_astra_round2/report.md`; `experiments/lower_astra/report.md`. Sections 7 and 9 above retain proof status, the finite theorem, and restrictions. Section 8 and its correction retain the fact that the FIRST Astra approximation report merely rediscovered the prior upper bound.
+
+
+## 11. Creative exact Astra round: verified finite improvements
+
+The user requested only exact worst-case upper bounds, encouraging entirely new architectures, large weights and varied mixed signs. The completed report and raw-coordinate witnesses are in `experiments/exact_creative_astra`. The parent reran `verify_final.py` on all four saved witnesses, without solver calls; every check passed. These are exact upper bounds, not optimum claims or Lean-formalized results. No literature-novelty claim is made.
+
+| Instance | Previously supplied construction | New bottoms | Total including top |
+|---|---:|---:|---:|
+| $A_{3,2}$ | 41 | 8 | 9 |
+| $A_{3,3}$ | 48 | 32 | 33 |
+| $A_{3,4}$ | 62 | 36 | 37 |
+| $A_{4,4}$, exactly balanced | 370 from `count_dpp(4,4)` | 256 | 257 |
+
+The first three checks directly evaluated every table/address input: 16384, 131072, and 1048576 inputs respectively. The last checks every one of 65536 raw addresses and computes exact score extrema over all independent table bits, certifying all $2^{32}$ inputs. All arithmetic is integer; thresholds use >=. The reported integer classification gap handles zero positive-class scores correctly and is not always a strict signed margin for the unshifted top score.
+
+**Permutation-rank cancellation:** when $m=2$, encode the two address columns as integers $U,V$. For each label $c$, one gate compares $U$ against $V\mathbin{\mathrm{xor}}c$, using table bit $x_c$ to decide equality. These comparison targets permute $0,\ldots,N-1$, so their strict comparison count is exactly U. Hence $\sum_cg_c=U+x_b$, and a raw affine top correction extracts the selected bit. This proves $S\le N$ for every k at m2. The general paired-column extension gives $N^{\lceil m/2\rceil}$ bottoms; it is not competitive at balance. Address weights for m2 are at most $2^{k-1}=N/2$: exponential in k, but polynomial in total input length. The construction uses genuinely different within-block sign patterns.
+
+**Monochromatic hyperplanes:** positional weights flatten simultaneous Hamming-distance equalities, yielding raw-address hyperplanes containing addresses of just one parity label c. Paired gates can contribute $(2x_c-1)[L(a)=0]$ exactly. More efficiently, one-sided gates with positive top weights plus a raw affine correction need only satisfy two worst-case sign inequalities, rather than exact tail cancellation. A bounded support search yields the 32- and 36-bottom certificates above. The A4,4 certificate uses an explicit eight-word mask cover and two gates per plane, giving 256 bottoms. Its weights are small, with address magnitudes at most 27. Both one-sided certificates also have small integer weights.
+
+The report proves an exact nonuniform general cover bound. For $r=\lfloor m/2\rfloor$ and $p_m=\binom mr/2^{m-1}$,
+
+$$S\le2N\left\lceil\frac{k(m-1)\log2+1}{p_m^k}\right\rceil.$$
+
+For fixed small m this gives subquadratic unbalanced families (m2 has the stronger rank construction). At balanced growing m the cover estimate is superpolynomial in N, so it does not improve the general exact bound. Do not extrapolate the finite balanced A4,4 saving into a balanced subquadratic family. The general leading $5n^2/16$ benchmark, fixed-k3 all-m slope21/2, A3,6=83 and known k2 witnesses remain unchanged unless separately improved.
+
+The next proposed finite experiment is one-sided positive-margin selection on the 128-plane A4,4 dictionary, starting with its guaranteed 256-bottom paired cover. The asymptotic missing piece remains sharing comparisons across labels, potentially with gates depending on several independent table bits, while proving a simultaneous worst-case sign margin. No task-owned solver remains running. All artifacts are preserved.

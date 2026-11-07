@@ -1,0 +1,46 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "copyright": "Copyright (c) 2026 Christian Reitwiessner",
+  "results": [
+    {
+      "file": "exact_k3_m2.json",
+      "bottoms": 8,
+      "total_gates": 9,
+      "method": "direct exhaustive integer evaluation",
+      "raw_addresses": 64,
+      "tables": 256,
+      "certified_inputs": 16384,
+      "integer_classification_gap": 1
+    },
+    {
+      "file": "exact_k3_m3.json",
+      "bottoms": 32,
+      "total_gates": 33,
+      "method": "direct exhaustive integer evaluation",
+      "raw_addresses": 512,
+      "tables": 256,
+      "certified_inputs": 131072,
+      "integer_classification_gap": 1
+    },
+    {
+      "file": "exact_k3_m4.json",
+      "bottoms": 36,
+      "total_gates": 37,
+      "method": "direct exhaustive integer evaluation",
+      "raw_addresses": 4096,
+      "tables": 256,
+      "certified_inputs": 1048576,
+      "integer_classification_gap": 1
+    },
+    {
+      "file": "exact_k4_m4.json",
+      "bottoms": 256,
+      "total_gates": 257,
+      "method": "all raw addresses, exact extrema over every independent table bit",
+      "raw_addresses": 65536,
+      "tables": 65536,
+      "certified_inputs": 4294967296,
+      "integer_classification_gap": 1
+    }
+  ]
+}

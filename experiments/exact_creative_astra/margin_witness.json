@@ -1,0 +1,1605 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "copyright": "Copyright (c) 2026 Christian Reitwiessner",
+  "k": 3,
+  "m": 3,
+  "gates": [
+    {
+      "c": 0,
+      "t": 0,
+      "address_weights": [
+        1,
+        1,
+        1,
+        3,
+        3,
+        3,
+        9,
+        9,
+        9
+      ],
+      "threshold": 27,
+      "table_weight": 1,
+      "top_weight": "655259/338408"
+    },
+    {
+      "c": 0,
+      "t": 0,
+      "address_weights": [
+        9,
+        9,
+        9,
+        -1,
+        -1,
+        -1,
+        3,
+        3,
+        3
+      ],
+      "threshold": 23,
+      "table_weight": 1,
+      "top_weight": "478144/775817"
+    },
+    {
+      "c": 0,
+      "t": 0,
+      "address_weights": [
+        9,
+        9,
+        9,
+        3,
+        3,
+        3,
+        -1,
+        -1,
+        -1
+      ],
+      "threshold": 23,
+      "table_weight": 1,
+      "top_weight": "324341/490528"
+    },
+    {
+      "c": 0,
+      "t": 1,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        -9,
+        9,
+        -9,
+        -3,
+        3,
+        -3
+      ],
+      "threshold": 1,
+      "table_weight": 1,
+      "top_weight": "578837/454736"
+    },
+    {
+      "c": 0,
+      "t": 1,
+      "address_weights": [
+        -1,
+        1,
+        -1,
+        9,
+        -9,
+        9,
+        3,
+        -3,
+        3
+      ],
+      "threshold": 1,
+      "table_weight": 1,
+      "top_weight": "765953/419708"
+    },
+    {
+      "c": 0,
+      "t": 2,
+      "address_weights": [
+        -9,
+        9,
+        9,
+        -3,
+        3,
+        3,
+        1,
+        -1,
+        -1
+      ],
+      "threshold": 1,
+      "table_weight": 1,
+      "top_weight": "1318177/967852"
+    },
+    {
+      "c": 0,
+      "t": 2,
+      "address_weights": [
+        9,
+        -9,
+        -9,
+        3,
+        -3,
+        -3,
+        -1,
+        1,
+        1
+      ],
+      "threshold": 1,
+      "table_weight": 1,
+      "top_weight": "1024796/772401"
+    },
+    {
+      "c": 0,
+      "t": 3,
+      "address_weights": [
+        3,
+        3,
+        -3,
+        1,
+        1,
+        -1,
+        -9,
+        -9,
+        9
+      ],
+      "threshold": 1,
+      "table_weight": 1,
+      "top_weight": "1144256/853291"
+    },
+    {
+      "c": 0,
+      "t": 3,
+      "address_weights": [
+        9,
+        9,
+        -9,
+        3,
+        3,
+        -3,
+        1,
+        1,
+        -1
+      ],
+      "threshold": 1,
+      "table_weight": 1,
+      "top_weight": "200723/483719"
+    },
+    {
+      "c": 0,
+      "t": 3,
+      "address_weights": [
+        9,
+        9,
+        -9,
+        -3,
+        -3,
+        3,
+        1,
+        1,
+        -1
+      ],
+      "threshold": 1,
+      "table_weight": 1,
+      "top_weight": "533207/828696"
+    },
+    {
+      "c": 1,
+      "t": 0,
+      "address_weights": [
+        1,
+        1,
+        -1,
+        -3,
+        -3,
+        -3,
+        9,
+        9,
+        9
+      ],
+      "threshold": 14,
+      "table_weight": 1,
+      "top_weight": "571483/399094"
+    },
+    {
+      "c": 1,
+      "t": 0,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        -9,
+        -9,
+        -9,
+        3,
+        3,
+        3
+      ],
+      "threshold": -12,
+      "table_weight": 1,
+      "top_weight": "328037/478335"
+    },
+    {
+      "c": 1,
+      "t": 0,
+      "address_weights": [
+        9,
+        9,
+        -9,
+        3,
+        3,
+        3,
+        -1,
+        -1,
+        -1
+      ],
+      "threshold": 14,
+      "table_weight": 1,
+      "top_weight": "320822/783287"
+    },
+    {
+      "c": 1,
+      "t": 1,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        3,
+        -3,
+        3,
+        -9,
+        9,
+        -9
+      ],
+      "threshold": 2,
+      "table_weight": 1,
+      "top_weight": "49195/56014"
+    },
+    {
+      "c": 1,
+      "t": 1,
+      "address_weights": [
+        1,
+        -1,
+        -1,
+        9,
+        -9,
+        9,
+        3,
+        -3,
+        3
+      ],
+      "threshold": 0,
+      "table_weight": 1,
+      "top_weight": "149415/327646"
+    },
+    {
+      "c": 1,
+      "t": 1,
+      "address_weights": [
+        3,
+        -3,
+        -3,
+        -1,
+        1,
+        -1,
+        9,
+        -9,
+        9
+      ],
+      "threshold": -2,
+      "table_weight": 1,
+      "top_weight": "302701/903948"
+    },
+    {
+      "c": 1,
+      "t": 1,
+      "address_weights": [
+        -3,
+        3,
+        3,
+        -9,
+        9,
+        -9,
+        1,
+        -1,
+        1
+      ],
+      "threshold": 4,
+      "table_weight": 1,
+      "top_weight": "187203/293987"
+    },
+    {
+      "c": 1,
+      "t": 2,
+      "address_weights": [
+        -1,
+        1,
+        -1,
+        3,
+        -3,
+        -3,
+        9,
+        -9,
+        -9
+      ],
+      "threshold": 0,
+      "table_weight": 1,
+      "top_weight": "246439/334248"
+    },
+    {
+      "c": 1,
+      "t": 2,
+      "address_weights": [
+        -1,
+        1,
+        -1,
+        9,
+        -9,
+        -9,
+        3,
+        -3,
+        -3
+      ],
+      "threshold": 0,
+      "table_weight": 1,
+      "top_weight": "290854/507599"
+    },
+    {
+      "c": 1,
+      "t": 2,
+      "address_weights": [
+        3,
+        -3,
+        3,
+        1,
+        -1,
+        -1,
+        9,
+        -9,
+        -9
+      ],
+      "threshold": 4,
+      "table_weight": 1,
+      "top_weight": "29447/34057"
+    },
+    {
+      "c": 1,
+      "t": 3,
+      "address_weights": [
+        -3,
+        -3,
+        -3,
+        1,
+        1,
+        -1,
+        9,
+        9,
+        -9
+      ],
+      "threshold": -2,
+      "table_weight": 1,
+      "top_weight": "585892/533833"
+    },
+    {
+      "c": 1,
+      "t": 3,
+      "address_weights": [
+        -3,
+        -3,
+        -3,
+        -1,
+        -1,
+        1,
+        -9,
+        -9,
+        9
+      ],
+      "threshold": -2,
+      "table_weight": 1,
+      "top_weight": "140110/280601"
+    },
+    {
+      "c": 1,
+      "t": 3,
+      "address_weights": [
+        3,
+        3,
+        3,
+        9,
+        9,
+        -9,
+        1,
+        1,
+        -1
+      ],
+      "threshold": 4,
+      "table_weight": 1,
+      "top_weight": "148741/278655"
+    },
+    {
+      "c": 2,
+      "t": 0,
+      "address_weights": [
+        1,
+        1,
+        1,
+        -9,
+        -9,
+        9,
+        3,
+        3,
+        3
+      ],
+      "threshold": 0,
+      "table_weight": 1,
+      "top_weight": "625018/263371"
+    },
+    {
+      "c": 2,
+      "t": 0,
+      "address_weights": [
+        9,
+        9,
+        9,
+        1,
+        1,
+        -1,
+        -3,
+        -3,
+        -3
+      ],
+      "threshold": 14,
+      "table_weight": 1,
+      "top_weight": "57238/728957"
+    },
+    {
+      "c": 2,
+      "t": 1,
+      "address_weights": [
+        3,
+        -3,
+        3,
+        1,
+        -1,
+        -1,
+        -9,
+        9,
+        -9
+      ],
+      "threshold": 0,
+      "table_weight": 1,
+      "top_weight": "733195/523047"
+    },
+    {
+      "c": 2,
+      "t": 1,
+      "address_weights": [
+        -3,
+        3,
+        -3,
+        -1,
+        1,
+        1,
+        -9,
+        9,
+        -9
+      ],
+      "threshold": 2,
+      "table_weight": 1,
+      "top_weight": "742243/748426"
+    },
+    {
+      "c": 2,
+      "t": 2,
+      "address_weights": [
+        -3,
+        3,
+        3,
+        9,
+        -9,
+        9,
+        -1,
+        1,
+        1
+      ],
+      "threshold": 10,
+      "table_weight": 1,
+      "top_weight": "763930/763331"
+    },
+    {
+      "c": 2,
+      "t": 2,
+      "address_weights": [
+        -9,
+        9,
+        9,
+        -3,
+        3,
+        -3,
+        1,
+        -1,
+        -1
+      ],
+      "threshold": -2,
+      "table_weight": 1,
+      "top_weight": "1291485/840017"
+    },
+    {
+      "c": 2,
+      "t": 3,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        -3,
+        -3,
+        -3,
+        -9,
+        -9,
+        9
+      ],
+      "threshold": -2,
+      "table_weight": 1,
+      "top_weight": "245789/475792"
+    },
+    {
+      "c": 2,
+      "t": 3,
+      "address_weights": [
+        -3,
+        -3,
+        3,
+        1,
+        1,
+        1,
+        9,
+        9,
+        -9
+      ],
+      "threshold": 2,
+      "table_weight": 1,
+      "top_weight": "134567/71803"
+    },
+    {
+      "c": 3,
+      "t": 0,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        3,
+        3,
+        -3,
+        -9,
+        -9,
+        -9
+      ],
+      "threshold": -15,
+      "table_weight": 1,
+      "top_weight": "772759/737274"
+    },
+    {
+      "c": 3,
+      "t": 0,
+      "address_weights": [
+        1,
+        1,
+        -1,
+        9,
+        9,
+        -9,
+        -3,
+        -3,
+        -3
+      ],
+      "threshold": 5,
+      "table_weight": 1,
+      "top_weight": "473305/386371"
+    },
+    {
+      "c": 3,
+      "t": 0,
+      "address_weights": [
+        9,
+        9,
+        -9,
+        1,
+        1,
+        -1,
+        3,
+        3,
+        3
+      ],
+      "threshold": 17,
+      "table_weight": 1,
+      "top_weight": "129665/598524"
+    },
+    {
+      "c": 3,
+      "t": 1,
+      "address_weights": [
+        -3,
+        3,
+        3,
+        9,
+        -9,
+        -9,
+        1,
+        -1,
+        1
+      ],
+      "threshold": -5,
+      "table_weight": 1,
+      "top_weight": "429223/901310"
+    },
+    {
+      "c": 3,
+      "t": 1,
+      "address_weights": [
+        -9,
+        9,
+        9,
+        3,
+        -3,
+        -3,
+        -1,
+        1,
+        -1
+      ],
+      "threshold": 7,
+      "table_weight": 1,
+      "top_weight": "839161/975132"
+    },
+    {
+      "c": 3,
+      "t": 1,
+      "address_weights": [
+        -9,
+        9,
+        9,
+        -3,
+        3,
+        3,
+        1,
+        -1,
+        1
+      ],
+      "threshold": 13,
+      "table_weight": 1,
+      "top_weight": "95875/97867"
+    },
+    {
+      "c": 3,
+      "t": 2,
+      "address_weights": [
+        -3,
+        3,
+        -3,
+        1,
+        -1,
+        1,
+        -9,
+        9,
+        9
+      ],
+      "threshold": -1,
+      "table_weight": 1,
+      "top_weight": "347887/835895"
+    },
+    {
+      "c": 3,
+      "t": 2,
+      "address_weights": [
+        -9,
+        9,
+        -9,
+        -3,
+        3,
+        -3,
+        -1,
+        1,
+        1
+      ],
+      "threshold": -11,
+      "table_weight": 1,
+      "top_weight": "313323/410801"
+    },
+    {
+      "c": 3,
+      "t": 2,
+      "address_weights": [
+        9,
+        -9,
+        9,
+        3,
+        -3,
+        3,
+        1,
+        -1,
+        -1
+      ],
+      "threshold": 13,
+      "table_weight": 1,
+      "top_weight": "754251/671456"
+    },
+    {
+      "c": 3,
+      "t": 3,
+      "address_weights": [
+        1,
+        1,
+        1,
+        -3,
+        -3,
+        -3,
+        9,
+        9,
+        -9
+      ],
+      "threshold": -1,
+      "table_weight": 1,
+      "top_weight": "880522/979833"
+    },
+    {
+      "c": 3,
+      "t": 3,
+      "address_weights": [
+        3,
+        3,
+        3,
+        1,
+        1,
+        1,
+        9,
+        9,
+        -9
+      ],
+      "threshold": 5,
+      "table_weight": 1,
+      "top_weight": "1228698/907417"
+    },
+    {
+      "c": 4,
+      "t": 0,
+      "address_weights": [
+        -1,
+        -1,
+        -1,
+        -3,
+        -3,
+        -3,
+        9,
+        9,
+        -9
+      ],
+      "threshold": 2,
+      "table_weight": 1,
+      "top_weight": "782943/739996"
+    },
+    {
+      "c": 4,
+      "t": 0,
+      "address_weights": [
+        1,
+        1,
+        1,
+        9,
+        9,
+        9,
+        -3,
+        -3,
+        3
+      ],
+      "threshold": 18,
+      "table_weight": 1,
+      "top_weight": "788907/469474"
+    },
+    {
+      "c": 4,
+      "t": 0,
+      "address_weights": [
+        3,
+        3,
+        3,
+        -1,
+        -1,
+        -1,
+        -9,
+        -9,
+        9
+      ],
+      "threshold": -4,
+      "table_weight": 1,
+      "top_weight": "319251/991847"
+    },
+    {
+      "c": 4,
+      "t": 1,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        -3,
+        3,
+        -3,
+        -9,
+        9,
+        9
+      ],
+      "threshold": 10,
+      "table_weight": 1,
+      "top_weight": "111312/367133"
+    },
+    {
+      "c": 4,
+      "t": 1,
+      "address_weights": [
+        -1,
+        1,
+        -1,
+        -9,
+        9,
+        -9,
+        -3,
+        3,
+        3
+      ],
+      "threshold": 4,
+      "table_weight": 1,
+      "top_weight": "635183/724327"
+    },
+    {
+      "c": 4,
+      "t": 1,
+      "address_weights": [
+        3,
+        -3,
+        3,
+        9,
+        -9,
+        9,
+        1,
+        -1,
+        -1
+      ],
+      "threshold": 0,
+      "table_weight": 1,
+      "top_weight": "244/373"
+    },
+    {
+      "c": 4,
+      "t": 1,
+      "address_weights": [
+        3,
+        -3,
+        3,
+        -9,
+        9,
+        -9,
+        -1,
+        1,
+        1
+      ],
+      "threshold": 2,
+      "table_weight": 1,
+      "top_weight": "292991/826295"
+    },
+    {
+      "c": 4,
+      "t": 2,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        -3,
+        3,
+        3,
+        -9,
+        9,
+        -9
+      ],
+      "threshold": -8,
+      "table_weight": 1,
+      "top_weight": "984235/977348"
+    },
+    {
+      "c": 4,
+      "t": 2,
+      "address_weights": [
+        -3,
+        3,
+        3,
+        9,
+        -9,
+        -9,
+        -1,
+        1,
+        -1
+      ],
+      "threshold": 0,
+      "table_weight": 1,
+      "top_weight": "420890/567393"
+    },
+    {
+      "c": 4,
+      "t": 2,
+      "address_weights": [
+        9,
+        -9,
+        -9,
+        -3,
+        3,
+        3,
+        1,
+        -1,
+        1
+      ],
+      "threshold": 2,
+      "table_weight": 1,
+      "top_weight": "72145/243551"
+    },
+    {
+      "c": 4,
+      "t": 3,
+      "address_weights": [
+        1,
+        1,
+        -1,
+        3,
+        3,
+        -3,
+        -9,
+        -9,
+        -9
+      ],
+      "threshold": -8,
+      "table_weight": 1,
+      "top_weight": "187814/178735"
+    },
+    {
+      "c": 4,
+      "t": 3,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        9,
+        9,
+        -9,
+        3,
+        3,
+        3
+      ],
+      "threshold": 4,
+      "table_weight": 1,
+      "top_weight": "1250376/884569"
+    },
+    {
+      "c": 5,
+      "t": 0,
+      "address_weights": [
+        1,
+        1,
+        -1,
+        3,
+        3,
+        3,
+        9,
+        9,
+        -9
+      ],
+      "threshold": 17,
+      "table_weight": 1,
+      "top_weight": "865981/586207"
+    },
+    {
+      "c": 5,
+      "t": 0,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        -9,
+        -9,
+        -9,
+        3,
+        3,
+        -3
+      ],
+      "threshold": -15,
+      "table_weight": 1,
+      "top_weight": "210785/146342"
+    },
+    {
+      "c": 5,
+      "t": 1,
+      "address_weights": [
+        1,
+        -1,
+        -1,
+        3,
+        -3,
+        3,
+        9,
+        -9,
+        -9
+      ],
+      "threshold": -9,
+      "table_weight": 1,
+      "top_weight": "429766/426399"
+    },
+    {
+      "c": 5,
+      "t": 1,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        9,
+        -9,
+        9,
+        3,
+        -3,
+        -3
+      ],
+      "threshold": -1,
+      "table_weight": 1,
+      "top_weight": "966210/831421"
+    },
+    {
+      "c": 5,
+      "t": 1,
+      "address_weights": [
+        9,
+        -9,
+        -9,
+        -1,
+        1,
+        -1,
+        3,
+        -3,
+        -3
+      ],
+      "threshold": -11,
+      "table_weight": 1,
+      "top_weight": "284198/893197"
+    },
+    {
+      "c": 5,
+      "t": 2,
+      "address_weights": [
+        -1,
+        1,
+        -1,
+        3,
+        -3,
+        -3,
+        -9,
+        9,
+        -9
+      ],
+      "threshold": -9,
+      "table_weight": 1,
+      "top_weight": "522272/933239"
+    },
+    {
+      "c": 5,
+      "t": 2,
+      "address_weights": [
+        -9,
+        9,
+        -9,
+        1,
+        -1,
+        -1,
+        -3,
+        3,
+        -3
+      ],
+      "threshold": -11,
+      "table_weight": 1,
+      "top_weight": "322499/386485"
+    },
+    {
+      "c": 5,
+      "t": 2,
+      "address_weights": [
+        3,
+        -3,
+        3,
+        -9,
+        9,
+        9,
+        -1,
+        1,
+        -1
+      ],
+      "threshold": 3,
+      "table_weight": 1,
+      "top_weight": "4847/5849"
+    },
+    {
+      "c": 5,
+      "t": 2,
+      "address_weights": [
+        -9,
+        9,
+        -9,
+        -3,
+        3,
+        3,
+        1,
+        -1,
+        1
+      ],
+      "threshold": -7,
+      "table_weight": 1,
+      "top_weight": "480787/516304"
+    },
+    {
+      "c": 5,
+      "t": 3,
+      "address_weights": [
+        3,
+        3,
+        3,
+        1,
+        1,
+        -1,
+        -9,
+        -9,
+        -9
+      ],
+      "threshold": -5,
+      "table_weight": 1,
+      "top_weight": "223748/551035"
+    },
+    {
+      "c": 5,
+      "t": 3,
+      "address_weights": [
+        3,
+        3,
+        3,
+        -1,
+        -1,
+        1,
+        9,
+        9,
+        9
+      ],
+      "threshold": 13,
+      "table_weight": 1,
+      "top_weight": "1076923/955827"
+    },
+    {
+      "c": 5,
+      "t": 3,
+      "address_weights": [
+        -9,
+        -9,
+        -9,
+        3,
+        3,
+        -3,
+        1,
+        1,
+        1
+      ],
+      "threshold": -7,
+      "table_weight": 1,
+      "top_weight": "452868/969205"
+    },
+    {
+      "c": 6,
+      "t": 0,
+      "address_weights": [
+        1,
+        1,
+        1,
+        9,
+        9,
+        -9,
+        -3,
+        -3,
+        3
+      ],
+      "threshold": 9,
+      "table_weight": 1,
+      "top_weight": "337463/237550"
+    },
+    {
+      "c": 6,
+      "t": 0,
+      "address_weights": [
+        -3,
+        -3,
+        -3,
+        -1,
+        -1,
+        1,
+        9,
+        9,
+        -9
+      ],
+      "threshold": 3,
+      "table_weight": 1,
+      "top_weight": "377110/533741"
+    },
+    {
+      "c": 6,
+      "t": 1,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        3,
+        -3,
+        -3,
+        -9,
+        9,
+        9
+      ],
+      "threshold": 7,
+      "table_weight": 1,
+      "top_weight": "1143755/915118"
+    },
+    {
+      "c": 6,
+      "t": 1,
+      "address_weights": [
+        -1,
+        1,
+        -1,
+        -9,
+        9,
+        9,
+        3,
+        -3,
+        -3
+      ],
+      "threshold": 7,
+      "table_weight": 1,
+      "top_weight": "663122/827151"
+    },
+    {
+      "c": 6,
+      "t": 2,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        9,
+        -9,
+        9,
+        3,
+        -3,
+        3
+      ],
+      "threshold": 13,
+      "table_weight": 1,
+      "top_weight": "483109/807758"
+    },
+    {
+      "c": 6,
+      "t": 2,
+      "address_weights": [
+        3,
+        -3,
+        -3,
+        1,
+        -1,
+        1,
+        9,
+        -9,
+        9
+      ],
+      "threshold": 11,
+      "table_weight": 1,
+      "top_weight": "767339/859335"
+    },
+    {
+      "c": 6,
+      "t": 2,
+      "address_weights": [
+        -3,
+        3,
+        3,
+        9,
+        -9,
+        9,
+        -1,
+        1,
+        -1
+      ],
+      "threshold": 9,
+      "table_weight": 1,
+      "top_weight": "68881/372310"
+    },
+    {
+      "c": 6,
+      "t": 2,
+      "address_weights": [
+        3,
+        -3,
+        -3,
+        9,
+        -9,
+        9,
+        1,
+        -1,
+        1
+      ],
+      "threshold": 11,
+      "table_weight": 1,
+      "top_weight": "410984/707393"
+    },
+    {
+      "c": 6,
+      "t": 3,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        -3,
+        -3,
+        -3,
+        9,
+        9,
+        9
+      ],
+      "threshold": 7,
+      "table_weight": 1,
+      "top_weight": "648935/672898"
+    },
+    {
+      "c": 6,
+      "t": 3,
+      "address_weights": [
+        3,
+        3,
+        -3,
+        1,
+        1,
+        1,
+        -9,
+        -9,
+        -9
+      ],
+      "threshold": -7,
+      "table_weight": 1,
+      "top_weight": "32025/691072"
+    },
+    {
+      "c": 6,
+      "t": 3,
+      "address_weights": [
+        -9,
+        -9,
+        9,
+        1,
+        1,
+        1,
+        3,
+        3,
+        3
+      ],
+      "threshold": 5,
+      "table_weight": 1,
+      "top_weight": "151029/135281"
+    },
+    {
+      "c": 7,
+      "t": 0,
+      "address_weights": [
+        1,
+        1,
+        -1,
+        3,
+        3,
+        -3,
+        9,
+        9,
+        -9
+      ],
+      "threshold": 14,
+      "table_weight": 1,
+      "top_weight": "1008705/954244"
+    },
+    {
+      "c": 7,
+      "t": 0,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        9,
+        9,
+        -9,
+        3,
+        3,
+        -3
+      ],
+      "threshold": 12,
+      "table_weight": 1,
+      "top_weight": "1311469/782136"
+    },
+    {
+      "c": 7,
+      "t": 1,
+      "address_weights": [
+        1,
+        -1,
+        -1,
+        -9,
+        9,
+        9,
+        -3,
+        3,
+        3
+      ],
+      "threshold": 12,
+      "table_weight": 1,
+      "top_weight": "673879/497709"
+    },
+    {
+      "c": 7,
+      "t": 1,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        9,
+        -9,
+        -9,
+        3,
+        -3,
+        -3
+      ],
+      "threshold": -10,
+      "table_weight": 1,
+      "top_weight": "199667/161129"
+    },
+    {
+      "c": 7,
+      "t": 2,
+      "address_weights": [
+        -3,
+        3,
+        -3,
+        1,
+        -1,
+        1,
+        9,
+        -9,
+        9
+      ],
+      "threshold": 8,
+      "table_weight": 1,
+      "top_weight": "3391/931090"
+    },
+    {
+      "c": 7,
+      "t": 2,
+      "address_weights": [
+        3,
+        -3,
+        3,
+        1,
+        -1,
+        1,
+        -9,
+        9,
+        -9
+      ],
+      "threshold": -4,
+      "table_weight": 1,
+      "top_weight": "408556/676195"
+    },
+    {
+      "c": 7,
+      "t": 2,
+      "address_weights": [
+        3,
+        -3,
+        3,
+        -9,
+        9,
+        -9,
+        -1,
+        1,
+        -1
+      ],
+      "threshold": -6,
+      "table_weight": 1,
+      "top_weight": "172212/890407"
+    },
+    {
+      "c": 7,
+      "t": 2,
+      "address_weights": [
+        9,
+        -9,
+        9,
+        -3,
+        3,
+        -3,
+        1,
+        -1,
+        1
+      ],
+      "threshold": 8,
+      "table_weight": 1,
+      "top_weight": "768034/640695"
+    },
+    {
+      "c": 7,
+      "t": 3,
+      "address_weights": [
+        1,
+        1,
+        1,
+        9,
+        9,
+        9,
+        3,
+        3,
+        3
+      ],
+      "threshold": 14,
+      "table_weight": 1,
+      "top_weight": "594664/813975"
+    },
+    {
+      "c": 7,
+      "t": 3,
+      "address_weights": [
+        -3,
+        -3,
+        -3,
+        1,
+        1,
+        1,
+        9,
+        9,
+        9
+      ],
+      "threshold": 8,
+      "table_weight": 1,
+      "top_weight": "308710/292817"
+    },
+    {
+      "c": 7,
+      "t": 3,
+      "address_weights": [
+        9,
+        9,
+        9,
+        -1,
+        -1,
+        -1,
+        3,
+        3,
+        3
+      ],
+      "threshold": 12,
+      "table_weight": 1,
+      "top_weight": "787987/776562"
+    }
+  ],
+  "top_raw_address": [
+    "-3189/257047",
+    "-1671343/783114",
+    "-2053033/851602",
+    "-2958698/914759",
+    "-569003/683154",
+    "645200/881331",
+    "-2608887/652781",
+    "-4094862/697667",
+    "2199217/991382"
+  ],
+  "top_constant": "-20781233/681375",
+  "verified_margin": "2791556656125831006815262749577557455308817881792406045159925816733630631972738420245058071275085974515447184553483381947347221388742702627718497181588864584157351695501086633197966005052233602327575041828606159490307/2791556659167411598664913627572323725735440433520719622106799787031464296033382966890864081575988289841203759736325135119981225082004904748191338762822376359865315528622586605427200796491966365021916740109202668468000"
+}

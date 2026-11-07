@@ -1,0 +1,30 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "copyright": "Copyright (c) 2026 Christian Reitwiessner",
+  "results": [
+    {
+      "m": 3,
+      "simplification_status": 0,
+      "simplification_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+      "method": "all raw table/address assignments, integer arithmetic",
+      "inputs": 131072,
+      "minimum_signed_margin": 1,
+      "bottoms": 32,
+      "total_gates": 33,
+      "maximum_absolute_integer": 251,
+      "maximum_magnitude_bits": 8
+    },
+    {
+      "m": 4,
+      "simplification_status": 0,
+      "simplification_message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+      "method": "all raw table/address assignments, integer arithmetic",
+      "inputs": 1048576,
+      "minimum_signed_margin": 1,
+      "bottoms": 36,
+      "total_gates": 37,
+      "maximum_absolute_integer": 333,
+      "maximum_magnitude_bits": 9
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": 0,
+  "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "success": true,
+  "top_gate_weight_cap": 128,
+  "target_bottoms": 47,
+  "bottoms": 44,
+  "exact_integer_margin": 999998,
+  "verified": true
+}

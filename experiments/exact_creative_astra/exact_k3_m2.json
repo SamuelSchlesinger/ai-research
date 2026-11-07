@@ -1,0 +1,129 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "copyright": "Copyright (c) 2026 Christian Reitwiessner",
+  "k": 3,
+  "m": 2,
+  "gates": [
+    {
+      "c": 0,
+      "table_weight": 1,
+      "address_weights": [
+        1,
+        -1,
+        2,
+        -2,
+        4,
+        -4
+      ],
+      "threshold": 1,
+      "top_weight": 1
+    },
+    {
+      "c": 1,
+      "table_weight": 1,
+      "address_weights": [
+        1,
+        1,
+        2,
+        -2,
+        4,
+        -4
+      ],
+      "threshold": 2,
+      "top_weight": 1
+    },
+    {
+      "c": 2,
+      "table_weight": 1,
+      "address_weights": [
+        1,
+        -1,
+        2,
+        2,
+        4,
+        -4
+      ],
+      "threshold": 3,
+      "top_weight": 1
+    },
+    {
+      "c": 3,
+      "table_weight": 1,
+      "address_weights": [
+        1,
+        1,
+        2,
+        2,
+        4,
+        -4
+      ],
+      "threshold": 4,
+      "top_weight": 1
+    },
+    {
+      "c": 4,
+      "table_weight": 1,
+      "address_weights": [
+        1,
+        -1,
+        2,
+        -2,
+        4,
+        4
+      ],
+      "threshold": 5,
+      "top_weight": 1
+    },
+    {
+      "c": 5,
+      "table_weight": 1,
+      "address_weights": [
+        1,
+        1,
+        2,
+        -2,
+        4,
+        4
+      ],
+      "threshold": 6,
+      "top_weight": 1
+    },
+    {
+      "c": 6,
+      "table_weight": 1,
+      "address_weights": [
+        1,
+        -1,
+        2,
+        2,
+        4,
+        4
+      ],
+      "threshold": 7,
+      "top_weight": 1
+    },
+    {
+      "c": 7,
+      "table_weight": 1,
+      "address_weights": [
+        1,
+        1,
+        2,
+        2,
+        4,
+        4
+      ],
+      "threshold": 8,
+      "top_weight": 1
+    }
+  ],
+  "top_raw_address": [
+    -1,
+    0,
+    -2,
+    0,
+    -4,
+    0
+  ],
+  "top_constant": -1
+}

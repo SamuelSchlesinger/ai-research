@@ -1,0 +1,750 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "copyright": "Copyright (c) 2026 Christian Reitwiessner",
+  "k": 3,
+  "m": 4,
+  "gates": [
+    {
+      "c": 0,
+      "address_weights": [
+        1,
+        1,
+        1,
+        1,
+        3,
+        3,
+        3,
+        3,
+        9,
+        9,
+        9,
+        9
+      ],
+      "threshold": 27,
+      "table_weight": 1,
+      "top_weight": 24
+    },
+    {
+      "c": 0,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        -1,
+        3,
+        -3,
+        3,
+        -3,
+        9,
+        -9,
+        9,
+        -9
+      ],
+      "threshold": 1,
+      "table_weight": 1,
+      "top_weight": 26
+    },
+    {
+      "c": 0,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        -1,
+        -3,
+        3,
+        3,
+        -3,
+        -9,
+        9,
+        9,
+        -9
+      ],
+      "threshold": 1,
+      "table_weight": 1,
+      "top_weight": 22
+    },
+    {
+      "c": 0,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        1,
+        -3,
+        -3,
+        3,
+        3,
+        -9,
+        -9,
+        9,
+        9
+      ],
+      "threshold": 1,
+      "table_weight": 1,
+      "top_weight": 24
+    },
+    {
+      "c": 1,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        -1,
+        -3,
+        -3,
+        -3,
+        -3,
+        -9,
+        -9,
+        -9,
+        -9
+      ],
+      "threshold": -24,
+      "table_weight": 1,
+      "top_weight": 24
+    },
+    {
+      "c": 1,
+      "address_weights": [
+        1,
+        -1,
+        -1,
+        -1,
+        3,
+        -3,
+        3,
+        -3,
+        9,
+        -9,
+        9,
+        -9
+      ],
+      "threshold": 0,
+      "table_weight": 1,
+      "top_weight": 2
+    },
+    {
+      "c": 1,
+      "address_weights": [
+        -1,
+        1,
+        -1,
+        -1,
+        -3,
+        3,
+        3,
+        -3,
+        -9,
+        9,
+        9,
+        -9
+      ],
+      "threshold": 0,
+      "table_weight": 1,
+      "top_weight": 2
+    },
+    {
+      "c": 1,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        1,
+        3,
+        -3,
+        -3,
+        3,
+        9,
+        -9,
+        -9,
+        9
+      ],
+      "threshold": 2,
+      "table_weight": 1,
+      "top_weight": 24
+    },
+    {
+      "c": 1,
+      "address_weights": [
+        1,
+        1,
+        1,
+        -1,
+        3,
+        3,
+        -3,
+        -3,
+        9,
+        9,
+        -9,
+        -9
+      ],
+      "threshold": 2,
+      "table_weight": 1,
+      "top_weight": 24
+    },
+    {
+      "c": 2,
+      "address_weights": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -3,
+        -3,
+        3,
+        -3,
+        -9,
+        -9,
+        -9,
+        -9
+      ],
+      "threshold": -22,
+      "table_weight": 1,
+      "top_weight": 2
+    },
+    {
+      "c": 2,
+      "address_weights": [
+        1,
+        1,
+        1,
+        1,
+        3,
+        3,
+        -3,
+        3,
+        9,
+        9,
+        9,
+        9
+      ],
+      "threshold": 24,
+      "table_weight": 1,
+      "top_weight": 24
+    },
+    {
+      "c": 2,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        -1,
+        3,
+        -3,
+        -3,
+        -3,
+        9,
+        -9,
+        9,
+        -9
+      ],
+      "threshold": -2,
+      "table_weight": 1,
+      "top_weight": 26
+    },
+    {
+      "c": 2,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        -1,
+        -3,
+        3,
+        -3,
+        -3,
+        -9,
+        9,
+        9,
+        -9
+      ],
+      "threshold": -2,
+      "table_weight": 1,
+      "top_weight": 24
+    },
+    {
+      "c": 2,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        1,
+        -3,
+        -3,
+        -3,
+        3,
+        -9,
+        -9,
+        9,
+        9
+      ],
+      "threshold": -2,
+      "table_weight": 1,
+      "top_weight": 24
+    },
+    {
+      "c": 3,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        -1,
+        -3,
+        -3,
+        3,
+        -3,
+        -9,
+        -9,
+        -9,
+        -9
+      ],
+      "threshold": -21,
+      "table_weight": 1,
+      "top_weight": 22
+    },
+    {
+      "c": 3,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        1,
+        -3,
+        3,
+        3,
+        3,
+        -9,
+        9,
+        -9,
+        9
+      ],
+      "threshold": 5,
+      "table_weight": 1,
+      "top_weight": 22
+    },
+    {
+      "c": 3,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        1,
+        3,
+        -3,
+        3,
+        3,
+        9,
+        -9,
+        -9,
+        9
+      ],
+      "threshold": 5,
+      "table_weight": 1,
+      "top_weight": 24
+    },
+    {
+      "c": 3,
+      "address_weights": [
+        1,
+        1,
+        1,
+        -1,
+        3,
+        3,
+        3,
+        -3,
+        9,
+        9,
+        -9,
+        -9
+      ],
+      "threshold": 5,
+      "table_weight": 1,
+      "top_weight": 24
+    },
+    {
+      "c": 4,
+      "address_weights": [
+        1,
+        1,
+        1,
+        1,
+        3,
+        3,
+        3,
+        3,
+        9,
+        9,
+        -9,
+        9
+      ],
+      "threshold": 18,
+      "table_weight": 1,
+      "top_weight": 18
+    },
+    {
+      "c": 4,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        -1,
+        3,
+        -3,
+        3,
+        -3,
+        9,
+        -9,
+        -9,
+        -9
+      ],
+      "threshold": -8,
+      "table_weight": 1,
+      "top_weight": 22
+    },
+    {
+      "c": 4,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        -1,
+        -3,
+        3,
+        3,
+        -3,
+        -9,
+        9,
+        -9,
+        -9
+      ],
+      "threshold": -8,
+      "table_weight": 1,
+      "top_weight": 18
+    },
+    {
+      "c": 4,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        1,
+        -3,
+        -3,
+        3,
+        3,
+        -9,
+        -9,
+        -9,
+        9
+      ],
+      "threshold": -8,
+      "table_weight": 1,
+      "top_weight": 18
+    },
+    {
+      "c": 5,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        -1,
+        -3,
+        -3,
+        -3,
+        -3,
+        -9,
+        -9,
+        9,
+        -9
+      ],
+      "threshold": -15,
+      "table_weight": 1,
+      "top_weight": 20
+    },
+    {
+      "c": 5,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        1,
+        -3,
+        3,
+        -3,
+        3,
+        -9,
+        9,
+        9,
+        9
+      ],
+      "threshold": 11,
+      "table_weight": 1,
+      "top_weight": 16
+    },
+    {
+      "c": 5,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        1,
+        3,
+        -3,
+        -3,
+        3,
+        9,
+        -9,
+        9,
+        9
+      ],
+      "threshold": 11,
+      "table_weight": 1,
+      "top_weight": 20
+    },
+    {
+      "c": 5,
+      "address_weights": [
+        1,
+        1,
+        1,
+        -1,
+        3,
+        3,
+        -3,
+        -3,
+        9,
+        9,
+        9,
+        -9
+      ],
+      "threshold": 11,
+      "table_weight": 1,
+      "top_weight": 21
+    },
+    {
+      "c": 5,
+      "address_weights": [
+        -1,
+        -1,
+        -1,
+        1,
+        -3,
+        -3,
+        3,
+        3,
+        -9,
+        -9,
+        -9,
+        9
+      ],
+      "threshold": -9,
+      "table_weight": 1,
+      "top_weight": 1
+    },
+    {
+      "c": 6,
+      "address_weights": [
+        1,
+        1,
+        1,
+        1,
+        3,
+        3,
+        -3,
+        3,
+        9,
+        9,
+        -9,
+        9
+      ],
+      "threshold": 15,
+      "table_weight": 1,
+      "top_weight": 18
+    },
+    {
+      "c": 6,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        -1,
+        3,
+        -3,
+        -3,
+        -3,
+        9,
+        -9,
+        -9,
+        -9
+      ],
+      "threshold": -11,
+      "table_weight": 1,
+      "top_weight": 22
+    },
+    {
+      "c": 6,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        -1,
+        -3,
+        3,
+        -3,
+        -3,
+        -9,
+        9,
+        -9,
+        -9
+      ],
+      "threshold": -11,
+      "table_weight": 1,
+      "top_weight": 18
+    },
+    {
+      "c": 6,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        1,
+        -3,
+        -3,
+        -3,
+        3,
+        -9,
+        -9,
+        -9,
+        9
+      ],
+      "threshold": -11,
+      "table_weight": 1,
+      "top_weight": 18
+    },
+    {
+      "c": 7,
+      "address_weights": [
+        -1,
+        -1,
+        1,
+        -1,
+        -3,
+        -3,
+        3,
+        -3,
+        -9,
+        -9,
+        9,
+        -9
+      ],
+      "threshold": -12,
+      "table_weight": 1,
+      "top_weight": 22
+    },
+    {
+      "c": 7,
+      "address_weights": [
+        -1,
+        1,
+        1,
+        1,
+        -3,
+        3,
+        3,
+        3,
+        -9,
+        9,
+        9,
+        9
+      ],
+      "threshold": 14,
+      "table_weight": 1,
+      "top_weight": 18
+    },
+    {
+      "c": 7,
+      "address_weights": [
+        -1,
+        1,
+        -1,
+        -1,
+        -3,
+        3,
+        -3,
+        -3,
+        -9,
+        9,
+        -9,
+        -9
+      ],
+      "threshold": -12,
+      "table_weight": 1,
+      "top_weight": 1
+    },
+    {
+      "c": 7,
+      "address_weights": [
+        1,
+        -1,
+        1,
+        1,
+        3,
+        -3,
+        3,
+        3,
+        9,
+        -9,
+        9,
+        9
+      ],
+      "threshold": 14,
+      "table_weight": 1,
+      "top_weight": 23
+    },
+    {
+      "c": 7,
+      "address_weights": [
+        1,
+        1,
+        1,
+        -1,
+        3,
+        3,
+        3,
+        -3,
+        9,
+        9,
+        9,
+        -9
+      ],
+      "threshold": 14,
+      "table_weight": 1,
+      "top_weight": 22
+    }
+  ],
+  "top_raw_address": [
+    -2,
+    2,
+    -24,
+    2,
+    -6,
+    6,
+    -2,
+    6,
+    -16,
+    16,
+    -12,
+    16
+  ],
+  "top_constant": -333,
+  "verification": {
+    "method": "all raw table/address assignments, integer arithmetic",
+    "inputs": 1048576,
+    "minimum_signed_margin": 1,
+    "bottoms": 36,
+    "total_gates": 37
+  }
+}

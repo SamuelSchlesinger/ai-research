@@ -1,0 +1,22 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "copyright": "Copyright (c) 2026 Christian Reitwiessner",
+  "coverage_min": 1,
+  "coverage_max": 3,
+  "runs": [
+    {
+      "variant": "fixed",
+      "variables": 64,
+      "status": 2,
+      "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+      "success": false
+    },
+    {
+      "variant": "all_lex",
+      "variables": 1536,
+      "status": 2,
+      "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is None)",
+      "success": false
+    }
+  ]
+}

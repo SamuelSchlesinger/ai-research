@@ -1,0 +1,11 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": 1,
+  "message": "Time limit reached. (HiGHS Status 13: Time limit reached)",
+  "success": false,
+  "top_gate_weight_cap": 128,
+  "target_bottoms": 61,
+  "bottoms": 36,
+  "exact_integer_margin": 1000000,
+  "verified": true
+}

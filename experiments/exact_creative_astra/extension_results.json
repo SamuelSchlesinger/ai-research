@@ -1,0 +1,6 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": 2,
+  "message": "The problem is infeasible. (HiGHS Status 8: model_status is Infeasible; primal_status is Infeasible)",
+  "hypothesis": "extend the final m=3 orientations to m=4"
+}
