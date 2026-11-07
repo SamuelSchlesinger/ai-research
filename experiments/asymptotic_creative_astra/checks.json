@@ -1,0 +1,159 @@
+{
+  "authors": "Christian Reitwiessner",
+  "rank_identity": {
+    "Q": 8,
+    "D": 21,
+    "M": 42,
+    "exhaustive_cases": 5632
+  },
+  "gated_code_identity": {
+    "exhaustive_slice_cases": 608,
+    "exact_three_bit_code_cases": 8
+  },
+  "balanced_rank_counterexamples": [
+    {
+      "k": 6,
+      "N": 64,
+      "m": 10,
+      "L": 3,
+      "pairs": [
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "histogram_tests": 12,
+      "four_corner_score_sums": [
+        64,
+        0,
+        64,
+        0
+      ],
+      "affine_four_corner_identity": true
+    },
+    {
+      "k": 8,
+      "N": 256,
+      "m": 32,
+      "L": 4,
+      "pairs": [
+        [
+          2,
+          3
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          2,
+          6
+        ]
+      ],
+      "histogram_tests": 16,
+      "four_corner_score_sums": [
+        256,
+        256,
+        256,
+        256
+      ],
+      "affine_four_corner_identity": true
+    },
+    {
+      "k": 10,
+      "N": 1024,
+      "m": 102,
+      "L": 6,
+      "pairs": [
+        [
+          4,
+          7
+        ],
+        [
+          11,
+          13
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          6,
+          14
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          13,
+          18
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          8,
+          10
+        ]
+      ],
+      "histogram_tests": 24,
+      "four_corner_score_sums": [
+        9216,
+        9216,
+        9216,
+        9216
+      ],
+      "affine_four_corner_identity": true
+    }
+  ]
+}

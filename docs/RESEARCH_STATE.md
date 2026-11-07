@@ -241,3 +241,20 @@ $$S\le2N\left\lceil\frac{k(m-1)\log2+1}{p_m^k}\right\rceil.$$
 For fixed small m this gives subquadratic unbalanced families (m2 has the stronger rank construction). At balanced growing m the cover estimate is superpolynomial in N, so it does not improve the general exact bound. Do not extrapolate the finite balanced A4,4 saving into a balanced subquadratic family. The general leading $5n^2/16$ benchmark, fixed-k3 all-m slope21/2, A3,6=83 and known k2 witnesses remain unchanged unless separately improved.
 
 The next proposed finite experiment is one-sided positive-margin selection on the 128-plane A4,4 dictionary, starting with its guaranteed 256-bottom paired cover. The asymptotic missing piece remains sharing comparisons across labels, potentially with gates depending on several independent table bits, while proving a simultaneous worst-case sign margin. No task-owned solver remains running. All artifacts are preserved.
+
+
+## 12. Asymptotics-only creative restart: no improvement
+
+The completed report `experiments/asymptotic_creative_astra/report.md` explicitly obtains **no balanced asymptotic exact upper-bound improvement**. The current general exact leading bound remains $5n^2/16$. No new finite-size or approximate result was used to claim progress on this request. The parent reran the saved standard-library exact checks successfully; analytical statements remain hand proofs, without independent referee review or Lean formalization.
+
+An exact rank-retrieval identity can query a threshold-encoded table row $h_{T(a)\bmod N}(x)$ with $D+1$ bottoms when an integer affine raw-address form satisfies $0\le T\le D$. Taking $T=\sum_i2^is_i$ has range $O(mN)$, which would be attractive at balance, but its binary residue is not the block parity vector because of carries. The proposed repair used a few signed/permuted positional views and arbitrary nonlinear table codes.
+
+The report supplies a scalable counterexample defeating that specific repair whenever $k\ge2$ and $m-1>2^L$, where L is the number of views. Two coordinates per block share their L-view sign signature. Pair activation preserves block parity while making each query residue uniform on a parity coset. Averaging any proposed score over those activations leaves only an affine function of the block parities; it cannot represent a legitimate XOR table. Thus $L=o(k)$ cannot give the intended logarithmic saving in that architecture, even with arbitrary table encodings and large weights. This is an obstruction to one proposed upper-bound mechanism, not a lower bound for general circuits.
+
+The remaining proposed architecture uses separate raw-address hyperplanes $Z_r(a)=0$ to activate threshold code rows $\operatorname{sgn}(\ell_r(x))$, with different address weights for each row. An exact two-bottom identity implements each product. Its unproved requirement is
+
+$$ (2x_b-1)\sum_{r:Z_r(a)=0}v_r\operatorname{sgn}(\ell_r(x))>0 $$
+
+for every independent table and address, using $R=O(mN)$ rows. If such a family existed, its $2R+1$ gates would give $O(n^2/\log n)$ at balance. No such family was constructed, and no evidence that the requisite incidence/decoding lemma holds is claimed. The compiler alone is not an asymptotic construction. The missing ingredient is an exact all-table decoding identity for the row sets activated at every address, with a provably economical shared row family.
+
+Artifacts preserve the rank compiler, exact two-gate identity, illustrative three-bit threshold code and scalable counterexample checks. No solver or background job was launched by this task. User scope remains exact balanced asymptotics; further finite-record or approximation searches are outside that scope unless newly requested.

@@ -87,3 +87,8 @@ The explicit paper-versus-new comparison, parameter ranges, constant-advantage g
 ## Latest exact-construction update
 
 The creative worst-case-only Astra task completed and is archived as `experiments/exact_creative_astra`. RESEARCH_STATE.md section 11 records newly verified 8/32/36/256-bottom upper bounds at (k,m)=(3,2),(3,3),(3,4),(4,4). These supersede older finite counts for those instances; the older +20 all-m k3 formula remains useful for its uniform statement/slope. Read the rank-permutation identity and monochromatic-plane sign-margin mechanisms before starting more Fourier searches. The m2 rank bound N is a genuine all-k family but highly unbalanced. No balanced subquadratic family, all-m slope improvement or necessity of superpolynomial-in-n weights was established. The parent reran the saved exact all-input verifiers successfully. The strongest immediate proposed experiment is one-sided gate selection on the A4,4 cover; the deeper target is comparison sharing across table labels.
+
+
+## Latest user scope and asymptotic restart outcome
+
+The user is interested ONLY in asymptotic exact worst-case upper bounds for balanced growing-k Andreev, and asked for a highly creative restart. `experiments/asymptotic_creative_astra/report.md` records no improved asymptotic bound. It falsifies the small-channel periodic positional rank-repair idea and proposes, without proving, a separately gated threshold-code lemma that would yield $O(n^2/log n)$. Read RESEARCH_STATE.md section 12 for the precise limitations. Do not present its compiler or unproved target as an upper bound. No new jobs remain from this task, and no new task is implicitly authorized merely by its completion.
