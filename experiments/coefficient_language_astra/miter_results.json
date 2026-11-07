@@ -1,0 +1,22 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "copyright": "Copyright (c) 2026 Christian Reitwiessner",
+  "solver_version": "5.3.3",
+  "checks": [
+    {
+      "k": 2,
+      "m": 2,
+      "miter": "unsat"
+    },
+    {
+      "k": 3,
+      "m": 2,
+      "miter": "unsat"
+    },
+    {
+      "k": 2,
+      "m": 3,
+      "miter": "sat"
+    }
+  ]
+}

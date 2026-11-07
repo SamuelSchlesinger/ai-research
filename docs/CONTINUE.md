@@ -97,3 +97,8 @@ The user is interested ONLY in asymptotic exact worst-case upper bounds for bala
 ## Coefficient-language design and latest blocker context
 
 The user now asks for an Astra design of multiple or parameterized coefficient-rule languages that control SMT difficulty while generating uniform exact circuit families. This is the active design task. Its brief includes all upper/lower blockers, direct independent raw-table inputs, shared rules across sizes, solver-fragment/normalization issues, and accurate prior runtimes. The separate completed asymptotic pass2 is archived as `experiments/asymptotic_creative_astra_pass2`; it yields no upper improvement but rules out specific scalar Walsh shrinkers, including raw-affine repair. This new context has also been sent to the language agent. Treat these as scoped architecture obstructions, not general no-go statements for a DSL.
+
+
+## Coefficient-language task completed
+
+Read `experiments/coefficient_language_astra/report.md` and RESEARCH_STATE.md section 14. Astra recommends an affine-hole public-index language plus a complementary additive atom language, with vector-valued nested resource bounds and alternative finite-state/decision/tensor generators. `rules.py` is a tested compiler/evaluator/miter-export prototype, NOT a completed synthesizer. Parent reran eight tests and three expected SMT outcomes successfully. The natural next engineering task, only when requested, is an exact shared-rule multi-size CEGIS learner using raw table bits, strict tie semantics and scoped grammar claims. No new upper-bound family was proved. All requested Astra tasks have now completed; historical detached processes require separate status checks.

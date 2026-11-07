@@ -1,0 +1,14 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "copyright": "Copyright (c) 2026 Christian Reitwiessner",
+  "tests": 8,
+  "success": true,
+  "rank_finite_domains": [
+    16,
+    256,
+    16384
+  ],
+  "slice_cases": 144,
+  "window_cases": 1920,
+  "solver_campaign_run": false
+}
