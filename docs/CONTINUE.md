@@ -64,3 +64,7 @@ Use increasing bounded budgets and persist progress promptly. Start with modest 
 `tools/verify_archive.py` checks preserved file hashes. `tools/run_experiment.py` makes a writable staged copy and translates old absolute paths there; inspect scripts before running expensive searches. Dependencies are recorded, not vendored. Original logs and witnesses are retained verbatim, including obsolete claims; consult the curated summary for corrections.
 
 After a new completed experiment, copy its whole directory into `experiments/`, update the curated notes, regenerate MANIFEST.json, run the integrity checker, and commit/push. Do not include installed dependencies, credentials, caches, or transient work copies. The original chat is not required to interpret the mathematical state in this archive.
+
+## Latest continuation update: Astra investigations
+
+The lower-bound Astra task completed; its three hand-proof proposals are archived in `experiments/lower_astra/report.md` and summarized, explicitly pending independent review, in RESEARCH_STATE.md section 7. Prioritize reviewing the VC class/adaptive-survivor argument before upgrading the small-advantage gate range to established status. The upper-bound Astra task is still running at this update. An older `mixed_upper/batch_finite.sh` solver batch was found still running after the generator campaign; do not infer that all historical processes stopped from an individual task's completion. No new jobs were left by the lower-bound Astra task.
