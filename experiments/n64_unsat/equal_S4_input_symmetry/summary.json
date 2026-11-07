@@ -1,0 +1,17 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "n": 64,
+  "table_bits": 16,
+  "block_lengths": [
+    12,
+    12,
+    12,
+    12
+  ],
+  "bottoms": 4,
+  "result": "UNKNOWN",
+  "rounds": 1,
+  "examples": 1152,
+  "solver_seconds": 300.03572692349553,
+  "wall_seconds": 301.1745986714959
+}

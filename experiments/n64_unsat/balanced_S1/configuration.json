@@ -1,0 +1,22 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "n": 64,
+  "table_bits": 32,
+  "block_lengths": [
+    7,
+    7,
+    6,
+    6,
+    6
+  ],
+  "bottoms": 1,
+  "parameters": 131,
+  "initial_examples": 144,
+  "seed": 7,
+  "call_timeout": 60,
+  "outer_budget": 90,
+  "logic": "QF_LRA",
+  "weights": "unrestricted reals",
+  "valid_symmetries": "Only gate complement/permutation, no symmetry restrictions on raw weights",
+  "domain": "Every independent raw table/address bit; learner starts on a valid subset"
+}

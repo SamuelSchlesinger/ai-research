@@ -1,0 +1,19 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "n": 64,
+  "table_bits": 32,
+  "block_lengths": [
+    7,
+    7,
+    6,
+    6,
+    6
+  ],
+  "bottoms": 0,
+  "result": "UNSAT_UNRESTRICTED_N64",
+  "rounds": 1,
+  "examples": 132,
+  "solver_seconds": 2.6672617942094803,
+  "wall_seconds": 2.6994665022939444,
+  "consequence": "At least 1 bottoms and 2 total gates."
+}

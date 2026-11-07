@@ -1,0 +1,11 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "python": "3.13.5 (main, Aug 10 2026, 12:06:59) [GCC 14.2.0]",
+  "platform": "Linux-6.1.0-51-amd64-x86_64-with-glibc2.41",
+  "cpu_count": 20,
+  "source_provenance": {
+    "mscore.py": "../mixed_sign/mscore.py",
+    "smt_symbolic_check.py": "../generator_smt_sol/smt_symbolic_check.py",
+    "rules.py": "../coefficient_language_astra/rules.py"
+  }
+}

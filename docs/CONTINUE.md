@@ -107,3 +107,8 @@ Read `experiments/coefficient_language_astra/report.md` and RESEARCH_STATE.md se
 ## Shared-rule experiment now completed
 
 The previously missing affine-hole learner has now been implemented and run at the user's request: `experiments/uniform_rule_smt`. Read its report and RESEARCH_STATE.md section15. Two shared multi-size skeletons plus curricula, a300s balanced n32-only run and frozen-bottom diagnostics found no new verified circuit. Calibration and four exact infrastructure tests passed. All actual constraints, counterexamples, parameters, initialization policies and runtimes are saved. No experiment-owned solver remains. Do not describe this as a full structural grammar search or unrestricted n32 circuit optimization; the unknowns are shared coefficients of fixed public feature menus.
+
+
+## Latest requested experiment: n64 UNSAT targets completed
+
+The user requested lower-bound feasibility at n64 with small bottom budgets. `experiments/n64_unsat` and RESEARCH_STATE.md section16 preserve both model conventions, exact timing/results and exported UNSAT instances. Strongest proved conclusion: at least4 bottoms/5 total via an exact parity8 restriction valid in both64-input targets. Four-bottom600s direct runs, five-bottom300s balanced run and parity10/S4 edge probe all remained UNKNOWN. This is unrestricted real-gate feasibility, not a coefficient-language lower bound, and no n64 optimum or new asymptotic lower bound was established. All experiment-owned jobs ended. Read exact definitions before reusing “balanced n64”: it uses unequal block lengths, while equal-block A4,12 is64 inputs but has a16/48 split.

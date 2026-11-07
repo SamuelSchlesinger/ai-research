@@ -1,0 +1,14 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "kind": "parity8_affine_restriction",
+  "bottoms": 3,
+  "status": "UNSAT",
+  "solver_seconds": 5.282987501472235,
+  "wall_seconds": 5.409030640497804,
+  "points": 256,
+  "logic": "QF_LRA",
+  "weights": "unrestricted reals",
+  "solver": "5.3.3",
+  "normalization": "Valid unrestricted finite-domain unit margins; gate complement/permutation; parity-only direct-weight symmetries",
+  "consequence": "Both n64 instances need at least 4 bottom gates, hence 5 total gates, via the explicit restriction."
+}

@@ -1,0 +1,4 @@
+{"phase": "initialized", "bottoms": 4, "table_bits": 16, "block_lengths": [12, 12, 12, 12], "examples_count": 1152, "elapsed": 1.122398566454649}
+{"phase": "learner", "round": 1, "status": "UNKNOWN", "seconds": 600.0545920245349, "examples_count": 1152, "elapsed": 601.1772027816623}
+{"phase": "reason", "reason": "timeout", "elapsed": 601.177359778434}
+{"phase": "finished", "n": 64, "table_bits": 16, "block_lengths": [12, 12, 12, 12], "bottoms": 4, "result": "UNKNOWN", "rounds": 1, "examples": 1152, "solver_seconds": 600.0545920245349, "wall_seconds": 601.1801915783435, "elapsed": 601.1802697703242}

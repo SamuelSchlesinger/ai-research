@@ -1,0 +1,13 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "UNKNOWN",
+  "bottoms": 4,
+  "dimension": 10,
+  "points": 1024,
+  "edge_clauses": 2560,
+  "solver_seconds": 180.02514370158315,
+  "wall_seconds": 181.15945668518543,
+  "scope": "Unrestricted parity10; fixed-parity-table/address restriction embeds into both n64 targets",
+  "solver": "5.3.3",
+  "reason": "timeout"
+}

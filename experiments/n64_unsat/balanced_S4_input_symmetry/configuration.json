@@ -1,0 +1,22 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "n": 64,
+  "table_bits": 32,
+  "block_lengths": [
+    7,
+    7,
+    6,
+    6,
+    6
+  ],
+  "bottoms": 4,
+  "parameters": 329,
+  "initial_examples": 1152,
+  "seed": 7,
+  "call_timeout": 300,
+  "outer_budget": 360,
+  "logic": "QF_LRA",
+  "weights": "unrestricted reals",
+  "valid_symmetries": "Gate complement/permutation; raw-address flip with induced table permutation; within-block permutation",
+  "domain": "Every independent raw table/address bit; learner starts on a valid subset"
+}

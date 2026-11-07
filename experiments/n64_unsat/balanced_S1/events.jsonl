@@ -1,0 +1,3 @@
+{"phase": "initialized", "bottoms": 1, "table_bits": 32, "block_lengths": [7, 7, 6, 6, 6], "examples_count": 144, "elapsed": 0.09516248852014542}
+{"phase": "learner", "round": 1, "status": "UNSAT", "seconds": 29.9633098077029, "examples_count": 144, "elapsed": 30.05879487283528}
+{"phase": "finished", "n": 64, "table_bits": 32, "block_lengths": [7, 7, 6, 6, 6], "bottoms": 1, "result": "UNSAT_UNRESTRICTED_N64", "rounds": 1, "examples": 144, "solver_seconds": 29.9633098077029, "wall_seconds": 30.063682729378343, "consequence": "At least 2 bottoms and 3 total gates.", "elapsed": 30.06373660452664}

@@ -1,0 +1,360 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "runs": [
+    {
+      "Authors": "Christian Reitwiessner",
+      "n": 64,
+      "table_bits": 32,
+      "block_lengths": [
+        7,
+        7,
+        6,
+        6,
+        6
+      ],
+      "bottoms": 0,
+      "result": "UNSAT_UNRESTRICTED_N64",
+      "rounds": 1,
+      "examples": 132,
+      "solver_seconds": 2.6672617942094803,
+      "wall_seconds": 2.6994665022939444,
+      "consequence": "At least 1 bottoms and 2 total gates.",
+      "run": "balanced_S0",
+      "configuration": {
+        "Authors": "Christian Reitwiessner",
+        "n": 64,
+        "table_bits": 32,
+        "block_lengths": [
+          7,
+          7,
+          6,
+          6,
+          6
+        ],
+        "bottoms": 0,
+        "parameters": 65,
+        "initial_examples": 132,
+        "seed": 7,
+        "call_timeout": 30,
+        "outer_budget": 40,
+        "logic": "QF_LRA",
+        "weights": "unrestricted reals",
+        "valid_symmetries": "Only gate complement/permutation, no symmetry restrictions on raw weights",
+        "domain": "Every independent raw table/address bit; learner starts on a valid subset"
+      }
+    },
+    {
+      "Authors": "Christian Reitwiessner",
+      "n": 64,
+      "table_bits": 32,
+      "block_lengths": [
+        7,
+        7,
+        6,
+        6,
+        6
+      ],
+      "bottoms": 1,
+      "result": "UNSAT_UNRESTRICTED_N64",
+      "rounds": 1,
+      "examples": 144,
+      "solver_seconds": 29.9633098077029,
+      "wall_seconds": 30.063682729378343,
+      "consequence": "At least 2 bottoms and 3 total gates.",
+      "run": "balanced_S1",
+      "configuration": {
+        "Authors": "Christian Reitwiessner",
+        "n": 64,
+        "table_bits": 32,
+        "block_lengths": [
+          7,
+          7,
+          6,
+          6,
+          6
+        ],
+        "bottoms": 1,
+        "parameters": 131,
+        "initial_examples": 144,
+        "seed": 7,
+        "call_timeout": 60,
+        "outer_budget": 90,
+        "logic": "QF_LRA",
+        "weights": "unrestricted reals",
+        "valid_symmetries": "Only gate complement/permutation, no symmetry restrictions on raw weights",
+        "domain": "Every independent raw table/address bit; learner starts on a valid subset"
+      }
+    },
+    {
+      "Authors": "Christian Reitwiessner",
+      "n": 64,
+      "table_bits": 32,
+      "block_lengths": [
+        7,
+        7,
+        6,
+        6,
+        6
+      ],
+      "bottoms": 2,
+      "result": "UNSAT_UNRESTRICTED_N64",
+      "rounds": 1,
+      "examples": 192,
+      "solver_seconds": 59.641445107758045,
+      "wall_seconds": 59.78860280662775,
+      "consequence": "At least 3 bottoms and 4 total gates.",
+      "run": "balanced_S2",
+      "configuration": {
+        "Authors": "Christian Reitwiessner",
+        "n": 64,
+        "table_bits": 32,
+        "block_lengths": [
+          7,
+          7,
+          6,
+          6,
+          6
+        ],
+        "bottoms": 2,
+        "parameters": 197,
+        "initial_examples": 192,
+        "seed": 7,
+        "call_timeout": 90,
+        "outer_budget": 120,
+        "logic": "QF_LRA",
+        "weights": "unrestricted reals",
+        "valid_symmetries": "Only gate complement/permutation, no symmetry restrictions on raw weights",
+        "domain": "Every independent raw table/address bit; learner starts on a valid subset"
+      }
+    },
+    {
+      "Authors": "Christian Reitwiessner",
+      "n": 64,
+      "table_bits": 32,
+      "block_lengths": [
+        7,
+        7,
+        6,
+        6,
+        6
+      ],
+      "bottoms": 4,
+      "result": "UNKNOWN",
+      "rounds": 1,
+      "examples": 1152,
+      "solver_seconds": 600.0576914735138,
+      "wall_seconds": 601.4096460882574,
+      "run": "balanced_S4",
+      "configuration": {
+        "Authors": "Christian Reitwiessner",
+        "n": 64,
+        "table_bits": 32,
+        "block_lengths": [
+          7,
+          7,
+          6,
+          6,
+          6
+        ],
+        "bottoms": 4,
+        "parameters": 329,
+        "initial_examples": 1152,
+        "seed": 7,
+        "call_timeout": 600,
+        "outer_budget": 660,
+        "logic": "QF_LRA",
+        "weights": "unrestricted reals",
+        "valid_symmetries": "Only gate complement/permutation, no symmetry restrictions on raw weights",
+        "domain": "Every independent raw table/address bit; learner starts on a valid subset"
+      }
+    },
+    {
+      "Authors": "Christian Reitwiessner",
+      "n": 64,
+      "table_bits": 32,
+      "block_lengths": [
+        7,
+        7,
+        6,
+        6,
+        6
+      ],
+      "bottoms": 4,
+      "result": "UNKNOWN",
+      "rounds": 1,
+      "examples": 1152,
+      "solver_seconds": 300.0330866780132,
+      "wall_seconds": 301.3876922763884,
+      "run": "balanced_S4_input_symmetry",
+      "configuration": {
+        "Authors": "Christian Reitwiessner",
+        "n": 64,
+        "table_bits": 32,
+        "block_lengths": [
+          7,
+          7,
+          6,
+          6,
+          6
+        ],
+        "bottoms": 4,
+        "parameters": 329,
+        "initial_examples": 1152,
+        "seed": 7,
+        "call_timeout": 300,
+        "outer_budget": 360,
+        "logic": "QF_LRA",
+        "weights": "unrestricted reals",
+        "valid_symmetries": "Gate complement/permutation; raw-address flip with induced table permutation; within-block permutation",
+        "domain": "Every independent raw table/address bit; learner starts on a valid subset"
+      }
+    },
+    {
+      "Authors": "Christian Reitwiessner",
+      "n": 64,
+      "table_bits": 32,
+      "block_lengths": [
+        7,
+        7,
+        6,
+        6,
+        6
+      ],
+      "bottoms": 5,
+      "result": "UNKNOWN",
+      "rounds": 1,
+      "examples": 1152,
+      "solver_seconds": 300.0850335713476,
+      "wall_seconds": 301.712641781196,
+      "run": "balanced_S5",
+      "configuration": {
+        "Authors": "Christian Reitwiessner",
+        "n": 64,
+        "table_bits": 32,
+        "block_lengths": [
+          7,
+          7,
+          6,
+          6,
+          6
+        ],
+        "bottoms": 5,
+        "parameters": 395,
+        "initial_examples": 1152,
+        "seed": 7,
+        "call_timeout": 300,
+        "outer_budget": 360,
+        "logic": "QF_LRA",
+        "weights": "unrestricted reals",
+        "valid_symmetries": "Only gate complement/permutation, no symmetry restrictions on raw weights",
+        "domain": "Every independent raw table/address bit; learner starts on a valid subset"
+      }
+    },
+    {
+      "Authors": "Christian Reitwiessner",
+      "n": 64,
+      "table_bits": 16,
+      "block_lengths": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "bottoms": 4,
+      "result": "UNKNOWN",
+      "rounds": 1,
+      "examples": 1152,
+      "solver_seconds": 600.0545920245349,
+      "wall_seconds": 601.1801915783435,
+      "run": "equal_S4",
+      "configuration": {
+        "Authors": "Christian Reitwiessner",
+        "n": 64,
+        "table_bits": 16,
+        "block_lengths": [
+          12,
+          12,
+          12,
+          12
+        ],
+        "bottoms": 4,
+        "parameters": 329,
+        "initial_examples": 1152,
+        "seed": 7,
+        "call_timeout": 600,
+        "outer_budget": 660,
+        "logic": "QF_LRA",
+        "weights": "unrestricted reals",
+        "valid_symmetries": "Only gate complement/permutation, no symmetry restrictions on raw weights",
+        "domain": "Every independent raw table/address bit; learner starts on a valid subset"
+      }
+    },
+    {
+      "Authors": "Christian Reitwiessner",
+      "n": 64,
+      "table_bits": 16,
+      "block_lengths": [
+        12,
+        12,
+        12,
+        12
+      ],
+      "bottoms": 4,
+      "result": "UNKNOWN",
+      "rounds": 1,
+      "examples": 1152,
+      "solver_seconds": 300.03572692349553,
+      "wall_seconds": 301.1745986714959,
+      "run": "equal_S4_input_symmetry",
+      "configuration": {
+        "Authors": "Christian Reitwiessner",
+        "n": 64,
+        "table_bits": 16,
+        "block_lengths": [
+          12,
+          12,
+          12,
+          12
+        ],
+        "bottoms": 4,
+        "parameters": 329,
+        "initial_examples": 1152,
+        "seed": 7,
+        "call_timeout": 300,
+        "outer_budget": 360,
+        "logic": "QF_LRA",
+        "weights": "unrestricted reals",
+        "valid_symmetries": "Gate complement/permutation; raw-address flip with induced table permutation; within-block permutation",
+        "domain": "Every independent raw table/address bit; learner starts on a valid subset"
+      }
+    },
+    {
+      "Authors": "Christian Reitwiessner",
+      "status": "UNKNOWN",
+      "bottoms": 4,
+      "dimension": 10,
+      "points": 1024,
+      "edge_clauses": 2560,
+      "solver_seconds": 180.02514370158315,
+      "wall_seconds": 181.15945668518543,
+      "scope": "Unrestricted parity10; fixed-parity-table/address restriction embeds into both n64 targets",
+      "solver": "5.3.3",
+      "reason": "timeout",
+      "run": "parity10_S4_edges"
+    }
+  ],
+  "parity8_certificate": {
+    "Authors": "Christian Reitwiessner",
+    "kind": "parity8_affine_restriction",
+    "bottoms": 3,
+    "status": "UNSAT",
+    "solver_seconds": 5.282987501472235,
+    "wall_seconds": 5.409030640497804,
+    "points": 256,
+    "logic": "QF_LRA",
+    "weights": "unrestricted reals",
+    "solver": "5.3.3",
+    "normalization": "Valid unrestricted finite-domain unit margins; gate complement/permutation; parity-only direct-weight symmetries",
+    "consequence": "Both n64 instances need at least 4 bottom gates, hence 5 total gates, via the explicit restriction."
+  }
+}
