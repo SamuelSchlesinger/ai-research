@@ -365,3 +365,18 @@ at balance. Here `slice(m)` is the minimum number of hyperplanes slicing every e
 Proof idea: compare the actual top scores on two single-one tables whose indices differ in one address bit, and fix the other blocks. Their difference sign-represents m-bit parity. Gates reading neither table bit and all raw address terms cancel. Each surviving gate gives two halfspaces, which must collectively slice every edge. Sum over disjoint pairs of table labels. The final report supplies tie handling, hypotheses, counterexamples, and references.
 
 The final referee report and both independent checking scripts are archived in `experiments/review_coherence/`. The parent reran `transfer_checks.py`: all exact checks passed (1,252 reflection-edge cases, 8,184 raw A1 inputs, 2,046 difference-parity inputs, 1,600 random cancellation cases). These checks support the algebra; the asymptotic theorem rests on the written reduction and cited slicing theorem. No shared manuscript was changed.
+
+
+## Completed one-table-bit investigation
+
+The one-table-bit investigation is now complete; its additional proofs remain **pending independent review**. The final report and exact-check artifacts replace the earlier partial snapshot in `experiments/one_table_bit/`. The extractor report remains a historical in-progress snapshot.
+
+For arbitrary real address and top weights, the report establishes the range
+
+$$\Omega(n^{32/19}/\log^{45/19}n)\le S\le O(n^{1+\log_2 3}).$$
+
+The upper construction has at most $km(3^{k-1}+2^{k-1})$ bottom gates. It uses dominating nonnegative kernels $K_c=(2k)^{|c|}[c\subseteq b]$, expands them in block-parity characters, and implements each term with a raw-input threshold reading only its own table bit. This is an upper bound for the restricted class; it does not improve the unrestricted quadratic construction. No optimality or novelty priority is claimed.
+
+If each address normal can individually be rescaled to integer entries in $[-C,C]$, the table-pair argument and Sauermann–Xu's bounded-normal slicing corollary give $S\ge Nm/(16C)$. For fixed $C$, this is $\Omega(n^2/\log n)$ at balance, including mixed zero/plus/minus-one address weights and unrestricted real top weights. The coefficient restriction is essential. Primary source: [Nondegenerate hyperplane covers of the hypercube, Corollary 1.2](https://arxiv.org/html/2507.00773v2). The report also derives a tradeoff in the sum of per-gate integer coefficient bounds.
+
+The standard-library checker records 24 raw-gate construction cases and 4,875 dominance/intercept checks, plus pair-restriction, parity-dual, and small-block construction checks. The floating-point LP support search found no better construction; this is not an impossibility certificate. Further claims about Fourier support, localization and tensor products are stated with their hypotheses in the report. The main unrestricted-real exponent gap for this subclass remains open.

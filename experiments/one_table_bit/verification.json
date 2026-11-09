@@ -1,0 +1,291 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "copyright": "Copyright (c) 2026 Christian Reitwiessner. All rights reserved.",
+  "status": "Exact integer finite checks; not proofs of imported asymptotic theorems.",
+  "dominance_cases": 4875,
+  "construction": [
+    {
+      "k": 1,
+      "m": 1,
+      "bottoms": 2,
+      "table_bottoms": 1,
+      "addresses_or_orbits": 2,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 1,
+      "m": 2,
+      "bottoms": 4,
+      "table_bottoms": 2,
+      "addresses_or_orbits": 4,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 1,
+      "m": 3,
+      "bottoms": 6,
+      "table_bottoms": 3,
+      "addresses_or_orbits": 8,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 1,
+      "m": 4,
+      "bottoms": 8,
+      "table_bottoms": 4,
+      "addresses_or_orbits": 16,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 1,
+      "m": 5,
+      "bottoms": 10,
+      "table_bottoms": 5,
+      "addresses_or_orbits": 32,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 1,
+      "m": 6,
+      "bottoms": 12,
+      "table_bottoms": 6,
+      "addresses_or_orbits": 64,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 1,
+      "m": 7,
+      "bottoms": 14,
+      "table_bottoms": 7,
+      "addresses_or_orbits": 128,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 1,
+      "m": 8,
+      "bottoms": 16,
+      "table_bottoms": 8,
+      "addresses_or_orbits": 256,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 2,
+      "m": 1,
+      "bottoms": 10,
+      "table_bottoms": 6,
+      "addresses_or_orbits": 4,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 2,
+      "m": 2,
+      "bottoms": 20,
+      "table_bottoms": 12,
+      "addresses_or_orbits": 16,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 2,
+      "m": 3,
+      "bottoms": 30,
+      "table_bottoms": 18,
+      "addresses_or_orbits": 64,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 2,
+      "m": 4,
+      "bottoms": 40,
+      "table_bottoms": 24,
+      "addresses_or_orbits": 256,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 2,
+      "m": 5,
+      "bottoms": 50,
+      "table_bottoms": 30,
+      "addresses_or_orbits": 1024,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 3,
+      "m": 1,
+      "bottoms": 39,
+      "table_bottoms": 27,
+      "addresses_or_orbits": 8,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 3,
+      "m": 2,
+      "bottoms": 78,
+      "table_bottoms": 54,
+      "addresses_or_orbits": 64,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 3,
+      "m": 3,
+      "bottoms": 117,
+      "table_bottoms": 81,
+      "addresses_or_orbits": 512,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 3,
+      "m": 4,
+      "bottoms": 156,
+      "table_bottoms": 108,
+      "addresses_or_orbits": 4096,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 4,
+      "m": 1,
+      "bottoms": 140,
+      "table_bottoms": 108,
+      "addresses_or_orbits": 16,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 4,
+      "m": 2,
+      "bottoms": 280,
+      "table_bottoms": 216,
+      "addresses_or_orbits": 256,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 4,
+      "m": 3,
+      "bottoms": 420,
+      "table_bottoms": 324,
+      "addresses_or_orbits": 4096,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 4,
+      "m": 4,
+      "bottoms": 560,
+      "table_bottoms": 432,
+      "addresses_or_orbits": 625,
+      "raw": false,
+      "minimum_margin": 1
+    },
+    {
+      "k": 5,
+      "m": 1,
+      "bottoms": 485,
+      "table_bottoms": 405,
+      "addresses_or_orbits": 32,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 5,
+      "m": 2,
+      "bottoms": 970,
+      "table_bottoms": 810,
+      "addresses_or_orbits": 1024,
+      "raw": true,
+      "minimum_margin": 1
+    },
+    {
+      "k": 5,
+      "m": 3,
+      "bottoms": 1455,
+      "table_bottoms": 1215,
+      "addresses_or_orbits": 1024,
+      "raw": false,
+      "minimum_margin": 1
+    }
+  ],
+  "pair_extraction": [
+    {
+      "k": 2,
+      "m": 3,
+      "all_label_pairs": 6,
+      "sliced_edges_checked": 72
+    },
+    {
+      "k": 3,
+      "m": 3,
+      "all_label_pairs": 28,
+      "sliced_edges_checked": 336
+    },
+    {
+      "k": 4,
+      "m": 2,
+      "all_label_pairs": 120,
+      "sliced_edges_checked": 480
+    }
+  ],
+  "inherited_two_column": [
+    {
+      "k": 1,
+      "m": 2,
+      "addresses": 4,
+      "bottoms": 2
+    },
+    {
+      "k": 2,
+      "m": 2,
+      "addresses": 16,
+      "bottoms": 4
+    },
+    {
+      "k": 3,
+      "m": 2,
+      "addresses": 64,
+      "bottoms": 8
+    },
+    {
+      "k": 4,
+      "m": 2,
+      "addresses": 256,
+      "bottoms": 16
+    },
+    {
+      "k": 5,
+      "m": 2,
+      "addresses": 1024,
+      "bottoms": 32
+    },
+    {
+      "k": 6,
+      "m": 2,
+      "addresses": 4096,
+      "bottoms": 64
+    }
+  ],
+  "coordinate_dictionary_dual_dimensions": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ]
+}
