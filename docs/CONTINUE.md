@@ -3,7 +3,7 @@ Authors: Christian Reitwiessner
 
 # Continuing the research
 
-Latest research snapshot: [9 November 2026 update](UPDATE_2026-11-09.md) — explainer, coherence results, and explicitly incomplete Astra investigations.
+Latest research snapshot: [9 November 2026 update](UPDATE_2026-11-09.md) — completed coherence, one-table-bit, and extractor investigations; proof and review status retained.
 
 
 Read RESEARCH_STATE.md first. The primary objective is a smaller exact THR∘THR construction for ordinary Andreev, ultimately below quadratic size. Prioritize construction discovery over formalization; Lean verification can follow later.
@@ -120,3 +120,9 @@ The user requested lower-bound feasibility at n64 with small bottom budgets. `ex
 ## Current manuscript now updated
 
 The user requested a selective paper update. The source/PDF in workspace/threshold_paper now include the refined5/16 exact bound and improved mean-square average-case upper bounds, with complete proofs, updated summaries and accurate merged/open Lean statuses. Read RESEARCH_STATE.md section17 and the paper's REVISION.md. The PDF is19 pages and built/checked cleanly. Finite solver records, language experiments and failed approaches stay in this archive rather than the paper. No experiments or reviews are running from this paper-editing task; no new research pass is implicitly requested by completion.
+
+## Completed modern-extractor investigation
+
+Read `experiments/extractors_astra/report.md` and RESEARCH_STATE.md section 19 before proposing an extractor transfer. Both upper and lower routes were investigated for unrestricted ordinary Andreev, exact and uniform average case; no new unrestricted exponent was obtained. The report gives explicit source, entropy, seed, error, independence, depth, and table-lookup obstacles, and separates generalized functions from this target. Its elementary one-table-bit bound is superseded by the completed slicing result, and is labeled accordingly. The stronger restricted results remain intact.
+
+The final report, evidence record, standard-library checker, check results, and exponent chart are archived together. Run `python3 experiments/extractors_astra/verify_claims.py` to reproduce the finite checks, then `python3 tools/verify_archive.py` to check archive integrity. The former deterministically rewrites its own `verification.json`. Hand derivations are not independent referee certifications or Lean formalizations. No further research or review assignment follows merely from this archive update.

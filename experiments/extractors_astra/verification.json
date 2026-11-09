@@ -1,0 +1,16 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "copyright": "Copyright (c) 2026 Christian Reitwiessner. All rights reserved.",
+  "status": "finite computations; universal proofs are in report.md",
+  "coordinate_source_rank_cases": 136,
+  "flat_source_index_bound": [
+    255,
+    0.0
+  ],
+  "binary_address_feature_patterns_and_max_advantage": [
+    625,
+    "5/16"
+  ],
+  "binary_table_transcripts": 256,
+  "one_coordinate_staircase_cases": 1184
+}

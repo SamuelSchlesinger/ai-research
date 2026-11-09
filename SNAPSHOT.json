@@ -11,8 +11,8 @@
     "ortools": "9.15.6755",
     "python-sat": "1.9.dev21"
   },
-  "research_update_utc": "2026-11-09T16:10:48.490005+00:00",
-  "research_update_status": "Coherence review and one-table-bit investigation complete; latter additions await independent review; extractor snapshot remains incomplete",
+  "research_update_utc": "2026-11-09T17:29:13.183811+00:00",
+  "research_update_status": "Coherence review, one-table-bit investigation, and extractor investigation complete; supplementary one-table-bit results and extractor hand derivations retain their independent-review limitations",
   "research_update_sources": [
     "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/threshold_paper",
     "/tmp/andreev_gap/coherence_fable",
@@ -22,5 +22,7 @@
     "/home/user/.t3/scratch/2026-11-09-research-modern-state-of-the-a62e4a60"
   ],
   "coherence_referee_completed_utc": "2026-11-09T16:26:28.091793+00:00",
-  "one_table_bit_completed_utc": "2026-11-09T16:41:41.056006+00:00"
+  "one_table_bit_completed_utc": "2026-11-09T16:41:41.056006+00:00",
+  "extractors_archived_utc": "2026-11-09T17:29:13.183811+00:00",
+  "extractors_archive_base_commit": "c2944fbde43e89607bb101a6459607d07f3232aa"
 }

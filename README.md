@@ -3,7 +3,7 @@ Authors: Christian Reitwiessner
 
 # Andreev threshold-circuit research — continuation archive
 
-Latest research snapshot: [9 November 2026 update](docs/UPDATE_2026-11-09.md) — explainer, coherence results, and explicitly incomplete Astra investigations.
+Latest research snapshot: [9 November 2026 update](docs/UPDATE_2026-11-09.md) — completed coherence, one-table-bit, and extractor investigations; proof and review status retained.
 
 
 This private repository preserves the research state, proofs, constructions, experiments, and paper sources needed to continue the Andreev research without the original chat or `/tmp` workspace. It is organized by mathematical content, not by timeline.

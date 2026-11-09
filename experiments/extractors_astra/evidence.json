@@ -1,0 +1,180 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "copyright": "Copyright (c) 2026 Christian Reitwiessner. All rights reserved.",
+  "cutoff": "2026-11-09",
+  "note": "Bibliographic authors below credit the source papers. Hashes identify downloaded source PDFs, not independent proof certifications. Original PDFs are temporary research downloads; report links are persistent source references.",
+  "sources": [
+    {
+      "key": "kw15",
+      "source_authors": "Kane–Williams",
+      "url": "https://arxiv.org/pdf/1511.07860v1",
+      "verified_dates": "2015-11-24",
+      "inspection_scope": "Theorems 1.1–1.4; Lemmas 1.1, 3.1; Sections 5–6",
+      "pdf_sha256": "b43ca1cd02d9799664e75fdaf6380e04d7ff063d5660aa92b8835ee64bf5beda"
+    },
+    {
+      "key": "li23",
+      "source_authors": "Xin Li",
+      "url": "https://arxiv.org/pdf/2303.06802v2",
+      "verified_dates": "2023-05-30 (v2); 2023-03-13 (v1)",
+      "inspection_scope": "Theorems 1.6–1.7; first ten PDF pages inspected locally",
+      "pdf_sha256": "6e58da49590d12a08808249ad0b07889091be6affacd588da8be83ae97bbf8cf"
+    },
+    {
+      "key": "lz24",
+      "source_authors": "Xin Li; Yan Zhong",
+      "url": "https://arxiv.org/pdf/2404.17013v1",
+      "verified_dates": "2024-04-25 (submission); 2024-04-29 (cover)",
+      "inspection_scope": "Theorems 1.1–1.4",
+      "pdf_sha256": "032bb2ab303020b803d30b4566c1db0ea4d36409a2b3da5182534bc49a793bee"
+    },
+    {
+      "key": "lz26",
+      "source_authors": "Xin Li; Yan Zhong",
+      "url": "https://arxiv.org/pdf/2610.02407",
+      "verified_dates": "2026-10-01 (submission); 2026-09-21 (cover)",
+      "inspection_scope": "Theorems 1.2–1.3; 3.15; source definition and application scopes",
+      "pdf_sha256": "2cf2390dc1ff8eb4a872a06618aabdbab5602ef4f81351b8dcd83f859efc221c"
+    },
+    {
+      "key": "df25",
+      "source_authors": "Dean Doron; Ori Fridman",
+      "url": "https://drops.dagstuhl.de/storage/00lipics/lipics-vol353-approx-random2025/LIPIcs.APPROX-RANDOM.2025.33/LIPIcs.APPROX-RANDOM.2025.33.pdf",
+      "verified_dates": "2025-09-15 (conference); 2025-02-17 (ECCC)",
+      "inspection_scope": "Conference Theorem 3 / ECCC Theorem 1.3",
+      "pdf_sha256": "e350b72d25d79a8a3df1aca37dcf53aaee78aefdd4d82097f9ec883e55f0b835"
+    },
+    {
+      "key": "fast26",
+      "source_authors": "Dean Doron; João Ribeiro",
+      "url": "https://arxiv.org/pdf/2411.07473v2",
+      "verified_dates": "2026-02-09 (v2); 2024-11-12 (v1)",
+      "inspection_scope": "Theorem 1 including preprocessing conditions",
+      "pdf_sha256": "49ead8d73968613dc361fe01b383fea45024f29abcde123bef66d2eb032ba677"
+    },
+    {
+      "key": "matrix26",
+      "source_authors": "Kuan Cheng; Ruiyang Wu",
+      "url": "https://arxiv.org/pdf/2610.37122v2",
+      "verified_dates": "2026-11-06 (v2); 2026-10-27 (v1)",
+      "inspection_scope": "Theorems 1.7–1.8",
+      "pdf_sha256": "6cc4eb330f58152e2cf4a10eaff34bb21f5812ffb5f6e4a6b85fe019a014df84"
+    },
+    {
+      "key": "erasure25",
+      "source_authors": "Yeyuan Chen; Mahdi Cheraghchi; Nikhil Shagrithaya",
+      "url": "https://arxiv.org/pdf/2504.03090v1",
+      "verified_dates": "2025-04-03",
+      "inspection_scope": "Corollary 2; constant-rate and slack qualifications",
+      "pdf_sha256": "08ba95d5bdcfb9d574fabf915c6b49ece3577ecae8d72b8d01aaf41f15cf9fbd"
+    },
+    {
+      "key": "quad26",
+      "source_authors": "Gautam Chandrasekaran; Jesse Goodman; David Zuckerman",
+      "url": "https://arxiv.org/pdf/2611.07266v1",
+      "verified_dates": "2026-11-05",
+      "inspection_scope": "Theorem 1.3; Corollaries 1.4–1.5; quadratic image versus variety definition",
+      "pdf_sha256": "712967d7e2e2e83957d5016d069e639287fe35905d052cd63c8bd34d6aae0b2e"
+    },
+    {
+      "key": "recognizable19",
+      "source_authors": "Fu Li; David Zuckerman",
+      "url": "https://drops.dagstuhl.de/storage/00lipics/lipics-vol145-approx-random2019/LIPIcs.APPROX-RANDOM.2019.72/LIPIcs.APPROX-RANDOM.2019.72.pdf",
+      "verified_dates": "2019-09-17",
+      "inspection_scope": "Theorems 7–8",
+      "pdf_sha256": "e7027d579cb6020f9ae0d88614b3e69347598016898a746e3fa3688b1919a307"
+    },
+    {
+      "key": "sample26",
+      "source_authors": "Marshall Ball; Eshan Chattopadhyay; Mohit Gurumukhani; Ronen Shaltiel; Yunya Zhao",
+      "url": "https://arxiv.org/pdf/2611.07829v1",
+      "verified_dates": "2026-11-05",
+      "inspection_scope": "Theorems 1–3 and hardness assumptions",
+      "pdf_sha256": "1113332912dc303c4b53bb565a607fe06a39ed745f891c16e667dd94ea635835"
+    },
+    {
+      "key": "css18",
+      "source_authors": "Ruiwen Chen; Rahul Santhanam; Srikanth Srinivasan",
+      "url": "https://arxiv.org/pdf/1806.06290",
+      "verified_dates": "2018 ToC version",
+      "inspection_scope": "Section 2.4; Corollary 4.3",
+      "pdf_sha256": "8991ba664a23a8cd6a000f22fa8dd18fa407ec61bf73fbe0c2fa0f52c274744d"
+    },
+    {
+      "key": "cw24rev2",
+      "source_authors": "Kuan Cheng; Ruiyang Wu",
+      "url": "https://eccc.weizmann.ac.il/report/2024/040/revision/2/download/",
+      "verified_dates": "2026-05-11 revision 2",
+      "inspection_scope": "Web-rendered full text, Theorems 1.1–1.3; no local PDF"
+    },
+    {
+      "key": "ctw26",
+      "source_authors": "Lijie Chen; Avishay Tal; Yichuan Wang",
+      "url": "https://eccc.weizmann.ac.il/report/2026/039/download",
+      "verified_dates": "2026-03-14 submission; 2026-03-15 posted",
+      "inspection_scope": "Web-rendered Theorem 1.1; E^NP versus ordinary function"
+    },
+    {
+      "key": "dg26_announcement",
+      "source_authors": "Dean Doron; Jesse Goodman",
+      "url": "https://www.math.ucdavis.edu/research/seminars?talk_id=7770",
+      "verified_dates": "2026-11-05 seminar",
+      "inspection_scope": "Announcement only; no quantitative theorem located"
+    }
+  ],
+  "local_source_snapshots": [
+    {
+      "path": "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/research_backup/docs/RESEARCH_STATE.md",
+      "sha256": "6c14f1c072a33066155b3db3cacffc107c5f81c7a8ed3fec7bf983f98638a11a"
+    },
+    {
+      "path": "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/threshold_paper/paper.tex",
+      "sha256": "60bfada749cf55f47337d5012b2511853265a1e63db24a418090409f1d80ae42"
+    },
+    {
+      "path": "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/threshold_paper/novelty_search.md",
+      "sha256": "e8e234159e1d158ef6f1e7ed4e127be9d44690e3567a6132478dfe11631ab7cd"
+    },
+    {
+      "path": "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/andreev_depth_two_bounds.md",
+      "sha256": "6511778cba70c6b8af3497a916c2aeb38d71914f3dc9b9b73d694e0688379bcd"
+    },
+    {
+      "path": "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/kw_applications.md",
+      "sha256": "b6e54fac0eee5ad57c474d200470a8640f8af77f688870003fecaf194f10af2e"
+    },
+    {
+      "path": "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/kane_williams_erratum.md",
+      "sha256": "443f2f684e16751a88b5209660b86f16581cb06cbb5d158e76a123e4c0bf483f"
+    },
+    {
+      "path": "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/research_backup/experiments/one_table_bit/report.md",
+      "sha256": "07469adf5ead896c768a0511f59ea85453defafd82708a210583ed5d4731167d"
+    },
+    {
+      "path": "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/research_backup/experiments/upper_astra/report.md",
+      "sha256": "aa96cedf27c7bc6a34a7d359b36e294561b6e530a8e0953da07262cdcea971d7"
+    },
+    {
+      "path": "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/research_backup/experiments/review_lower/report.md",
+      "sha256": "61dadd6c5546077c41b512e8e829a12f4e04e28529badfb169a56114b868ff7a"
+    }
+  ],
+  "archive_synchronization": {
+    "recorded_utc": "2026-11-09T17:28:21.417975+00:00",
+    "repository": "https://github.com/chris-ai1/andreev-research",
+    "base_commit": "c2944fbde43e89607bb101a6459607d07f3232aa",
+    "scope": "Status correction from completed repository reports; no new independent review. Initial source snapshots above remain historical.",
+    "superseded_claim": "Proposition 7.1 remains valid but is weaker than the completed one-table-bit slicing lower bound.",
+    "snapshots": [
+      {
+        "repository_path": "experiments/one_table_bit/report.md",
+        "sha256": "cf2898bc23c1dfae6305c6066baebca3a2fb593af7bd187fef7abfacdfbe93ec"
+      },
+      {
+        "repository_path": "experiments/review_coherence/report.md",
+        "sha256": "226d8ccf9e2bad80678c3ae8602f31b9493930dd2543f3da67c513bc9696028c"
+      }
+    ]
+  }
+}

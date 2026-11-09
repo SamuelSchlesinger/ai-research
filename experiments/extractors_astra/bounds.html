@@ -1,0 +1,44 @@
+<!doctype html>
+<!-- Copyright (c) 2026 Christian Reitwiessner. All rights reserved. -->
+<!-- Authors: Christian Reitwiessner -->
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ordinary Andreev: known gate exponents</title>
+<style>
+:root { color-scheme:light dark; }
+body { margin:0; color:var(--foreground); font-family:var(--font-sans,system-ui,sans-serif); }
+figure { margin:0; }
+figcaption { font-size:14px; margin-bottom:12px; }
+svg { display:block; width:100%; height:270px; overflow:visible; }
+.text { fill:var(--foreground); font-size:14px; }
+.note { fill:var(--muted-foreground,var(--foreground)); font-size:12px; }
+.axis { stroke:var(--border); stroke-width:1; }
+.gap { stroke:var(--chart-2); stroke-width:10; opacity:.4; }
+.point { fill:var(--chart-1); }
+.restricted { fill:var(--chart-3); }
+p { margin:8px 0 0; font-size:12px; line-height:1.5; color:var(--muted-foreground,var(--foreground)); }
+@media(max-width:460px) { .text{font-size:13px} .note{font-size:11px} }
+</style></head><body>
+<figure aria-label="Gate exponent comparison: unrestricted exact lower 1.5 and upper 2; unrestricted constant-error exponent 1.5 up to logarithms; sign-coherent exact exponent 2 up to logarithms.">
+<figcaption>Known gate exponents · logarithmic factors suppressed</figcaption>
+<svg viewBox="0 0 680 270" role="img" aria-labelledby="title description">
+<title id="title">Ordinary Andreev gate complexity</title>
+<desc id="description">An interval remains from exponent 1.5 to 2 for exact unrestricted circuits. Constant-error unrestricted circuits have matching exponent 1.5. Exact sign-coherent circuits have matching exponent 2.</desc>
+<line class="axis" x1="290" y1="28" x2="630" y2="28"/>
+<line class="axis" x1="320" y1="28" x2="320" y2="225" stroke-dasharray="3 5"/>
+<line class="axis" x1="600" y1="28" x2="600" y2="225" stroke-dasharray="3 5"/>
+<text class="text" x="320" y="18" text-anchor="middle">1.5</text>
+<text class="text" x="600" y="18" text-anchor="middle">2</text>
+<text class="text" x="0" y="75">Exact · unrestricted</text>
+<line class="gap" x1="320" y1="70" x2="600" y2="70"/>
+<circle class="point" cx="320" cy="70" r="6"/><circle class="point" cx="600" cy="70" r="6"/>
+<text class="note" x="460" y="96" text-anchor="middle">Open exponent gap</text>
+<text class="text" x="0" y="144">Fixed error · unrestricted</text>
+<circle class="point" cx="320" cy="139" r="7"/>
+<text class="note" x="340" y="144">Matching exponent</text>
+<text class="text" x="0" y="211">Exact · sign-coherent</text>
+<circle class="restricted" cx="600" cy="206" r="7"/>
+<text class="note" x="580" y="211" text-anchor="end">Restricted model</text>
+<text class="note" x="0" y="255">Research cutoff: 9 November 2026 · Authors: Christian Reitwiessner</text>
+</svg>
+<p>These are asymptotic exponent summaries, not finite-size estimates. The report retains the logarithmic factors and accuracy regimes. No new unrestricted exponent improvement was established.</p>
+</figure></body></html>
