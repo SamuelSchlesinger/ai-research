@@ -251,10 +251,12 @@
   },
   "activity_endpoint_entropy_counterexample": {
     "gate": "[sum_3_table_bits+z>=3]",
+    "k": 2,
+    "N": 4,
     "actual_p": 0.375,
     "source_p": 0.125,
     "actual_H": 0.954434002924965,
-    "source_h_plus_p_k": 0.6685644431995964
+    "source_h_plus_p_k": 0.7935644431995964
   },
   "prop5_counterexample": {
     "M": 2,

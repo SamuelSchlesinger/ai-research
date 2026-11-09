@@ -1,3 +1,4 @@
+Authors: Christian Reitwiessner
 EXACT coherent {'max_split': '15/64', 'max_split_float': 0.234375, 'theta': 8.5, 'states': 15, 'blocks': [[1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1]]}
 EXACT biased {'max_split': '4299/12544', 'max_split_float': 0.3427136479591837, 'theta': 4.5, 'states': 15, 'blocks': [[1, 1, 1, 1, 1, 1, -1, -1], [1, 1, 1, 1, 1, 1, -1, -1]]}
 EXACT zero_drift {'max_split': '7283/15680', 'max_split_float': 0.4644770408163265, 'theta': 0.5, 'states': 15, 'blocks': [[1, 1, 1, 1, -1, -1, -1, -1], [1, 1, 1, 1, -1, -1, -1, -1]]}

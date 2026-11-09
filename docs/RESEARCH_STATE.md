@@ -348,3 +348,20 @@ The abstract, result table, technique overview, remaining-gap statement and form
 `verify_upper_updates.py` independently expands the new exact raw-gate score and checks58264 exhaustive table/block-count cases for k1..3,m1..4, plus larger spot checks up to k8,m32. Because the exact construction is block-uniform, these count checks cover every raw arrangement in those small instances. The same script exactly checks truncated staircase expansions and vanishing mixed-mask cross moments. Results are in `upper_update_checks.json`. `layout_checks.json` records19 pages, no missing/duplicate labels, no overfull boxes, no missing glyphs or undefined references, and visual inspection of the revised result pages. Universal proofs remain mathematical proofs rather than finite-test inference.
 
 See `workspace/threshold_paper/REVISION.md` for the concise revision scope and build/check commands. All new authorship headers credit Christian Reitwiessner.
+
+
+## 18. Completed coherence referee and one-table-bit lower bound
+
+The Astra referee has now completed its review; this section supersedes the earlier in-progress description of `review_coherence`. The one-table-bit and extractor snapshots remain unfinished historical captures.
+
+The drift lemma is valid under its exact **global** weight-comparability hypothesis. The repaired structural result controls only eligible blocks; it does not supersede the arbitrary-weight mixed-sign hybrid. The simultaneous marginal-entropy barrier is valid, but its purported universal limitation on all per-gate methods is not. Proposition 5.1 is false as stated because attainable values can have gaps.
+
+The review proves a table-pair reduction for the one-table-bit class:
+
+$$S\ge\frac N4\operatorname{slice}(m)=\Omega\!\left(\frac{Nm^{13/19}}{\log^{32/19}m}\right)=\widetilde\Omega(n^{32/19})$$
+
+at balance. Here `slice(m)` is the minimum number of hyperplanes slicing every edge of the m-dimensional cube. This uses the known Sauermann–Xu slicing theorem ([arXiv:2510.16592](https://arxiv.org/abs/2510.16592)); it is a consequence for a restricted circuit class, **not** an improved unrestricted Andreev lower bound. No novelty priority for the corollary is claimed. For at most t table bits per bottom gate, the same accounting loses a factor t.
+
+Proof idea: compare the actual top scores on two single-one tables whose indices differ in one address bit, and fix the other blocks. Their difference sign-represents m-bit parity. Gates reading neither table bit and all raw address terms cancel. Each surviving gate gives two halfspaces, which must collectively slice every edge. Sum over disjoint pairs of table labels. The final report supplies tie handling, hypotheses, counterexamples, and references.
+
+The final referee report and both independent checking scripts are archived in `experiments/review_coherence/`. The parent reran `transfer_checks.py`: all exact checks passed (1,252 reflection-edge cases, 8,184 raw A1 inputs, 2,046 difference-parity inputs, 1,600 random cancellation cases). These checks support the algebra; the asymptotic theorem rests on the written reduction and cited slicing theorem. No shared manuscript was changed.

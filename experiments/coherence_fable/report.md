@@ -1,6 +1,8 @@
 <!-- Copyright (c) 2026 Christian Reitwiessner. -->
 Authors: Christian Reitwiessner
 
+**Archive correction:** This source report contains claims rejected or narrowed by the completed [independent referee](../review_coherence/report.md). In particular, do not use its zero-sum supersession claim, universal method-barrier wording, Proposition 5.1, or old one-table-bit frontier without the corrections. See [the update](../../docs/UPDATE_2026-11-09.md).
+
 # Must every depth-two threshold circuit for Andreev's function be essentially sign-coherent?
 
 Directory: `/tmp/andreev_gap/coherence_fable/`. Scripts run with `python3 -I` and put `pydeps_local/` (a local numpy/scipy install, because the compiled extensions in `/tmp/pydeps` are missing) and `/tmp/pydeps` (z3) on `sys.path` themselves. Logs are in `logs/`.

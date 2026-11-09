@@ -15,6 +15,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parent
 OUT = {'authors': 'Christian Reitwiessner', 'seed': 20261109}
+print('Authors: Christian Reitwiessner', flush=True)
 
 def exact_block(weights):
     m = len(weights)
@@ -101,9 +102,10 @@ for r in range(2,31):
         pa=math.comb(r,t-1)/2**r
         ps=math.comb(r,t)/2**r
         def h(p): return -(p*math.log2(p)+(1-p)*math.log2(1-p)) if 0<p<1 else 0.
-        if h(pa)>h(ps)+ps+1e-12:
+        k=max(1,math.ceil(math.log2(r)))
+        if h(pa)>h(ps)+k*ps+1e-12:
             OUT['activity_endpoint_entropy_counterexample']={'gate':f'[sum_{r}_table_bits+z>={t}]',
-                'actual_p':pa,'source_p':ps,'actual_H':h(pa),'source_h_plus_p_k':h(ps)+ps}
+                'k':k,'N':2**k,'actual_p':pa,'source_p':ps,'actual_H':h(pa),'source_h_plus_p_k':h(ps)+k*ps}
             break
     else: continue
     break

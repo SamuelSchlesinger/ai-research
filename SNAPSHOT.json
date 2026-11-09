@@ -12,7 +12,7 @@
     "python-sat": "1.9.dev21"
   },
   "research_update_utc": "2026-11-09T16:10:48.490005+00:00",
-  "research_update_status": "Includes in-progress Astra snapshots; see docs/UPDATE_2026-11-09.md",
+  "research_update_status": "Coherence referee completed; other Astra reports remain historical in-progress snapshots",
   "research_update_sources": [
     "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/threshold_paper",
     "/tmp/andreev_gap/coherence_fable",
@@ -20,5 +20,6 @@
     "/tmp/andreev_gap/review_coherence",
     "/tmp/andreev_gap/one_table_bit",
     "/home/user/.t3/scratch/2026-11-09-research-modern-state-of-the-a62e4a60"
-  ]
+  ],
+  "coherence_referee_completed_utc": "2026-11-09T16:26:28.091793+00:00"
 }
