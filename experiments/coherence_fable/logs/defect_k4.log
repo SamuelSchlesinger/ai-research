@@ -1,0 +1,6 @@
+k=4; columns: m, coherent, k/m, defect(sqrt m), 1/sqrt(m), balanced, sqrt(k/m)  [split fractions, mean over 30 (gate, arrangement) draws]
+m=   4  coh=0.5273±0.0000 (k/m=1.0000)  def=0.9854±0.0048 (1/sqrt m=0.5000)  bal=0.8540±0.0192 (sqrt(k/m)=1.0000)
+m=   8  coh=0.3123±0.0000 (k/m=0.5000)  def=0.7208±0.0139 (1/sqrt m=0.3536)  bal=0.6356±0.0220 (sqrt(k/m)=0.7071)
+m=  16  coh=0.1638±0.0000 (k/m=0.2500)  def=0.3061±0.0055 (1/sqrt m=0.2500)  bal=0.4720±0.0186 (sqrt(k/m)=0.5000)
+m=  32  coh=0.0830±0.0000 (k/m=0.1250)  def=0.1321±0.0010 (1/sqrt m=0.1768)  bal=0.3495±0.0151 (sqrt(k/m)=0.3536)
+m=  64  coh=0.0416±0.0000 (k/m=0.0625)  def=0.0555±0.0003 (1/sqrt m=0.1250)  bal=0.2339±0.0089 (sqrt(k/m)=0.2500)

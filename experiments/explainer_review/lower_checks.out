@@ -1,0 +1,23 @@
+balanced k: smallest S with S >= m^k/(m^k-(m-1)^k) D0(S);  N(N-3k-1)/(3k^3);  ratio; D0 there; N/(2k); N/(3k)
+   4 3 0.25 12.0 1.5 2.0 1.33
+   8 76 38.5 1.974 16.87 16.0 10.67
+   16 481649 349264.0 1.379 1878.0 2048.0 1365.33
+   32 226073599024933 187649980235776.0 1.205 53900140.03 67108864.0 44739242.67
+stated bound N(N-3k-1)/(3k^3) exceeds n^{3/2} (n=2N) first at k = 38
+sharper form (smallest admissible S, m=N/k real) exceeds n^{3/2} first at k = 37
+floor-balance n, stated bound exceeds n^{3/2} first at k = 38
+exact balance (k power of two): first k = 64
+threshold 0: min over k<=12,m<=60 of P(non-const) * 2 sqrt(2km) = 1.0
+threshold = k*m (k=2,m=10): min_r P(non-constant) = 0.0
+PASS  cube restriction: live bit at c_i+1, address (c mod 2) xor z, bijective (k<=3,m<=5)
+PASS  lines: m^k-(m-1)^k lines, (m-1)^k non-starts, partition (k<=4,m<=6)
+PASS  random sign-coherent gates split <= m^k-(m-1)^k cubes (4000 trials)
+PASS  tight example attains m^k-(m-1)^k for all k<=4, m<=6
+PASS  alternating +1,-1 weights (k=1) split all m cubes
+PASS  m^k-(m-1)^k <= k m^(k-1) and 1-(1-1/m)^k <= k/m (k<=40, m<=300)
+PASS  log2 C(S,D) <= D log2 S (S<=400)
+PASS  log2(2^k+1) <= k+1 and log2(2^k-1) <= k
+PASS  S < N^2 => D0 >= (N-3k-1)/(3k)
+PASS  smallest admissible S >= N(N-3k-1)/(3k^3) (k=4..32)
+PASS  random-sign formula matches brute force (threshold 0)
+PASS  threshold 0: every restriction gives P(non-constant) >= 1/(2 sqrt(2km)) (k<=12, m<=60)

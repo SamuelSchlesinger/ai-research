@@ -1,0 +1,25 @@
+PASS  tool1 Fourier lookup k<=4
+PASS  tool2 telescoping + equal-steps remark
+PASS  ceil(u/2) changes exactly at odd u (u in [-40,40])
+PASS  ceil(u/2)^2 changes exactly at odd u (u in [-40,40])
+PASS  tool3 X(-1)^t = phi(X+t)-phi(t), X even
+PASS  tool3 fails for some odd X (so evenness needed)
+PASS  tool3 count 2N^2+kmN
+PASS  tool3 count = 3/4 n^2 at balance
+PASS  saving2 identity all integers W,t in [-40,40]
+PASS  saving2 ceilings: even t -> W+t/2, t/2; odd t -> W+(t+1)/2, (t+1)/2
+PASS  exhaustive k<=3,m<=4: c0_redundant
+PASS  exhaustive k<=3,m<=4: X_eq_4Y_minus_2absx
+PASS  exhaustive k<=3,m<=4: Y_range
+PASS  exhaustive k<=3,m<=4: saving1_sum
+PASS  exhaustive k<=3,m<=4: sumY2_formula
+PASS  exhaustive k<=3,m<=4: sumYt_formula
+PASS  exhaustive k<=3,m<=4: paper_id1
+PASS  exhaustive k<=3,m<=4: paper_id2
+PASS  exhaustive k<=3,m<=4: paper_id3
+PASS  exhaustive k<=3,m<=4: kappa_id
+PASS  exhaustive k<=3,m<=4: x0_id
+PASS  exhaustive k<=3,m<=4: shift_any_fn
+PASS  exhaustive k<=3,m<=4: lstar_range
+FAIL  sum_S Y_S^2 is a function of (|x|, sigma, x_{e_i}s_i)
+counterexample to "expressions in |x|": (1, 1, ((0, 1), (0,)), ((1, 0), (0,)), 1, 0)

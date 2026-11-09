@@ -3,6 +3,9 @@ Authors: Christian Reitwiessner
 
 # Research state
 
+Latest research snapshot: [9 November 2026 update](UPDATE_2026-11-09.md) — explainer, coherence results, and explicitly incomplete Astra investigations.
+
+
 ## 1. Common definitions and conventions
 
 Let $N=2^k$. Ordinary Andreev has independent table bits $x_c$ indexed by $c\in\{0,1\}^k$, and $k$ address blocks $a_i$ of $m$ bits. Put $s_i=\sum_j a_{i,j}$, $b_i=s_i\bmod2$, and $A_{k,m}(x,a)=x_b$. Total input length is $n=N+km$. In the exactly balanced family $km=N$, $n=2N$; exact balance with integer $m$ requires $k\mid2^k$ (so positive $k$ is a power of two). Floor/padding variants require explicit treatment.

@@ -3,6 +3,9 @@ Authors: Christian Reitwiessner
 
 # Continuing the research
 
+Latest research snapshot: [9 November 2026 update](UPDATE_2026-11-09.md) — explainer, coherence results, and explicitly incomplete Astra investigations.
+
+
 Read RESEARCH_STATE.md first. The primary objective is a smaller exact THR∘THR construction for ordinary Andreev, ultimately below quadratic size. Prioritize construction discovery over formalization; Lean verification can follow later.
 
 ## Current work

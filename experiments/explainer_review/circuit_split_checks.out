@@ -1,0 +1,4 @@
+k=3 m=4 N=8 S=150: max cubes split by one gate = 34 (bound 37); avg #splitting gates per cube: min 16.00, mean 17.25, max 18.50; kN/4 = 6.0; D0 = 0.000; method ceiling m^k*mean/bound = 29.8
+k=4 m=4 N=16 S=370: max cubes split by one gate = 155 (bound 175); avg #splitting gates per cube: min 33.25, mean 35.21, max 37.17; kN/4 = 16.0; D0 = 0.197; method ceiling m^k*mean/bound = 51.5
+k=5 m=6 N=32 S=1323: max cubes split by one gate = 3681 (bound 4651); avg #splitting gates per cube: min 86.17, mean 87.92, max 89.67; kN/4 = 40.0; D0 = 1.017; method ceiling m^k*mean/bound = 147.0
+PASS  5/16 circuit: every gate splits <= m^k-(m-1)^k cubes; E d_c >= D0

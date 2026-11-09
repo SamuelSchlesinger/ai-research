@@ -1,0 +1,9 @@
+1 resid == 3n-2k-1: True  resid/n = 2.25
+2 resid == 3n-2k-1: True  resid/n = 2.375
+4 resid == 3n-2k-1: True  resid/n = 2.71875
+8 resid == 3n-2k-1: True  resid/n = 2.966796875
+16 resid == 3n-2k-1: True  resid/n = 2.9997482299804688
+32 resid == 3n-2k-1: True  resid/n = 2.999999992433004
+64 resid == 3n-2k-1: True  resid/n = 3.0
+128 resid == 3n-2k-1: True  resid/n = 3.0
+PASS  exact balance: total = 5/16 n^2 - (n/4) log2(n/2) + 3n - 2 log2(n/2) - 1

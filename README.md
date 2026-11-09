@@ -3,6 +3,9 @@ Authors: Christian Reitwiessner
 
 # Andreev threshold-circuit research — continuation archive
 
+Latest research snapshot: [9 November 2026 update](docs/UPDATE_2026-11-09.md) — explainer, coherence results, and explicitly incomplete Astra investigations.
+
+
 This private repository preserves the research state, proofs, constructions, experiments, and paper sources needed to continue the Andreev research without the original chat or `/tmp` workspace. It is organized by mathematical content, not by timeline.
 
 **Start with [RESEARCH_STATE.md](docs/RESEARCH_STATE.md), then [CONTINUE.md](docs/CONTINUE.md).** Archived reports contain conjectures, failed candidates, obsolete counts, and old formalization statuses; the curated summary points out important corrections. A solver timeout is never an impossibility proof.
