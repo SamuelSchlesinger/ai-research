@@ -134,6 +134,15 @@ $$
 and the product is $N$ for $c=b$ and $0$ otherwise.
 \end{proof}
 
+This identity is also a change of basis. The truth-table vector
+$v_c=(-1)^{x_c}$ has unnormalized Fourier coordinates $X=Hv$, where
+$H_{S,c}=(-1)^{S\cdot c}$ is the Walsh--Hadamard matrix. Its columns
+are orthogonal: $H^{\mathsf T}H=NI$. Thus $v=N^{-1}H^{\mathsf T}X$,
+and Lemma~\ref{lem:lookup} is precisely its $b$th coordinate, since
+$(-1)^{t_S}=H_{S,b}$. Equivalently, $X_S/N$ is the coefficient of the
+parity function $c\mapsto(-1)^{S\cdot c}$ in the Fourier expansion of
+$c\mapsto(-1)^{x_c}$.
+
 Let $\varphi(u)=(-1)^u u$ for integers $u$.
 
 \begin{lemma}[Removing the parity factor]\label{lem:parity}

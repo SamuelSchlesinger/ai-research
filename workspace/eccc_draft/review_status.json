@@ -2,7 +2,7 @@
   "Authors": "Christian Reitwiessner",
   "status": "Completed two independent correctness/readability reviews and related-work audit; final local copy edits incorporated; not submitted",
   "pages": 10,
-  "source_sha256": "61e2882b42540709cbe0af12af637c1dee1aeede750945ad14c1bc22ee972b96",
+  "source_sha256": "60f48866b54a62b387bda831c376a19b36eb9c3b7273293dbd444249d3924005",
   "duplicate_labels": 0,
   "missing_labels": [],
   "overfull_boxes": 0,
@@ -29,5 +29,6 @@
   ],
   "font_size_pt": 11,
   "margins_inches": 1,
-  "visual_inspection": "Initial contact sheet and selected pages of successive 11-point revisions rendered and inspected"
+  "visual_inspection": "Initial contact sheet and selected pages of successive 11-point revisions rendered and inspected",
+  "post_review_copy_edit": "Added a change-of-basis explanation after the lookup lemma; rebuilt at ten pages without overfull boxes or undefined references."
 }

@@ -499,7 +499,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
  [2] [3] [4] [5] [6] [7] [8] [9]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 6
-32.
+41.
  (t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -508,9 +508,9 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 635.
+(Font)              <9> on input line 644.
 
-Underfull \hbox (badness 1527) in paragraph at lines 661--665
+Underfull \hbox (badness 1527) in paragraph at lines 670--674
 []\T1/lmr/m/n/10 A. Po-tukuchi. On the $[][]\OT1/lmr/m/n/10 [\OMS/lmsy/m/n/10 ^
 ^H\OT1/lmr/m/n/10 ]$ \T1/lmr/m/n/10 Com-plex-ity of An-dreev's Prob-lem. FSTTCS
 , 2019, Ar-ti-cle 25.
@@ -520,4 +520,4 @@ Underfull \hbox (badness 1527) in paragraph at lines 661--665
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 0A25C5CB66F8A465C41B924C3DCB9A16;1423.
  )
-Output written on paper.xdv (10 pages, 64404 bytes).
+Output written on paper.xdv (10 pages, 65432 bytes).
