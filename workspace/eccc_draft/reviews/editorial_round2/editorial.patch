@@ -1,0 +1,120 @@
+From: Christian Reitwiessner
+Subject: [PATCH] Resolve second-round wording and proof-layout findings
+
+--- a/paper.tex
++++ b/paper.tex
+@@ -286,7 +286,7 @@
+ and negates the reflected terms, so $e_S$ is odd in $X_S$.
+ Lemma~\ref{lem:odd} cancels the cross terms and gives
+ \begin{equation}\label{eq:odd-l2}
+-\mathbb E_{x,a}(P_R-P_*)^2=\sum_{S\ne\varnothing}\mathbb E_{x,a}e_S^2.
++\mathbb E_{x,a}(P_R-P_*)^2=\sum_{\varnothing\ne S\subseteq[r]}\mathbb E_{x,a}e_S^2.
+ \end{equation}
+ We can now bound the squared errors individually.
+ 
+@@ -361,10 +361,10 @@
+ Fixing $x$ shifts each bottom gate's threshold without changing its
+ weights on $z$. Moving this threshold gives at most $2^h-1$ nonconstant
+ functions on $\bits^h$. Specify the $D$ nonconstant gates by their
+-indices and one such function for each. Constant bottom outputs and direct table inputs only
+-shift the output threshold. With the nonconstant functions specified,
+-this gives at most $2^h+1$ output functions. The description determines
+-the output function and hence $x$.
++indices and one such function for each. Their output weights and the
++weights on direct $z$-inputs are fixed. Constant bottom outputs and
++direct table inputs only shift the output threshold, so at most $2^h+1$
++output functions remain possible. Specifying which one determines $x$.
+ Using base-two entropy,
+ \begin{align*}
+ N=H(x)&\le H(D)+\mathbb E\log_2\left[
+@@ -442,7 +442,7 @@
+ have exponents $3/2$ and $2$. Can mixed signs within address blocks
+ yield $n^{2-\eta}$ gates for fixed $\eta>0$? Can the exact wire bound
+ of $O(n^3)$ improve toward the known lower exponent $5/2$? Gate upper
+-bounds imply wire upper bounds with a factor of at most $n$; wire lower
++bounds imply wire upper bounds with a factor of $O(n)$; wire lower
+ bounds require information about which inputs each gate uses.
+ 
+ At fixed error in $(0,1/2)$, the gate exponent is determined up to
+@@ -474,8 +474,8 @@
+ is local to this appendix.
+ 
+ \begin{theorem}\label{thm:exact}
+-Put $\alpha=\lfloor(m-1)/2\rfloor$. There is an exact depth-two threshold
+-circuit for $A_{k,m}$ with at most
++Put $\alpha=\lfloor(m-1)/2\rfloor$. There is an exact sign-coherent
++depth-two threshold circuit for $A_{k,m}$ with at most
+ \begin{equation}\label{eq:bestcount}
+ \frac{N(N-1)}2+\frac{kN(m+\alpha)}2
+  +2(N-1)+2\alpha k+3km+\left\lceil\frac{km}{2}\right\rceil
+@@ -488,6 +488,7 @@
+ For $m=\lfloor N/k\rfloor$, its size is $(5/16+o(1))n^2$.
+ \end{theorem}
+ 
++\newpage % Keep the construction's local definitions together.
+ \begin{proof}
+ \emph{Affine forms and the staircase.}
+ Write $s_i=|a_i|$ and $\sigma=\sum_i s_i$, so
+@@ -498,19 +499,22 @@
+ z=\sum_{c\ne0}x_c,\quad E=\sum_i x_{e_i},\quad
+ w=2z+2\alpha E+\sigma,\quad R=2(N-1)+2\alpha k+km,\quad C=N(R+4).
+ $$
+-Thus $0\le w\le R$. For nonempty $S\subseteq[k]$, define
++Thus $0\le w\le R$. For each nonempty $S\subseteq[k]$, we use a sum over the
++$N/2$ table positions with $S\cdot c$ odd, augmented by a correction
++for singleton addresses. Define
+ $$
+ W_S=\sum_{c:S\cdot c\text{ odd}}x_c+\alpha\sum_{i\in S}x_{e_i},\quad
+ \kappa_S=-4(2\alpha+1)(k-2|S|),
+ $$
+ and put $r_S(u)=-8\lceil u/2\rceil^2+\kappa_S\lceil u/2\rceil$.
+ The forms $W_S,t_S,w,s_i$ are all affine in the input bits.
+-The identity underlying the staircase is
++For integers $W,t$, the identity underlying the staircase is
+ $$
+ 4W(-1)^t=4W-8\lceil(2W+t)/2\rceil^2+8W^2+8Wt+8\lceil t/2\rceil^2.
+ $$
+-The shifts $\kappa_S$ will correct singleton addresses without adding
+-staircase thresholds.
++The ceiling makes $r_S$ change only at odd integer levels, saving
++thresholds. The shifts $\kappa_S$ correct singleton addresses using
++those same thresholds.
+ 
+ \emph{The score and its sign.}
+ Consider
+@@ -541,7 +545,8 @@
+ When $c=d$, the second count is $N/2$. These counts give the expansion
+ of $W_S^2$ and $W_St_S$. For the last sum, use
+ $\lceil t/2\rceil=(t+[t\text{ odd}])/2$ and the same orthogonality.
+-The shifts contribute
++The shifts can be summed using $k-2|S|=\sum_i(-1)^{[i\in S]}$.
++Their parity-dependent contributions are
+ $$
+ \sum_S\kappa_S\bigl(\lceil t_S/2\rceil-t_S/2\bigr)
+  =N(2\alpha+1)\sum_i\ind{b=e_i},
+@@ -549,9 +554,7 @@
+ and their linear contributions are
+ $$\sum_S\kappa_SW_S=2N(2\alpha+1)(1+\alpha)E,\qquad
+ \frac12\sum_S\kappa_St_S=N(2\alpha+1)\sigma.$$
+-These identities follow by writing
+-$k-2|S|=\sum_i(-1)^{[i\in S]}$ and summing characters.
+-Substituting in \eqref{eq:bestscore} gives
++Substituting these identities in \eqref{eq:bestscore} gives
+ \begin{equation}\label{eq:bestclosed}
+ P=\begin{cases}
+ N(w+2)-Cx_0,&b=0,\\
+@@ -648,10 +651,10 @@
+ bits and $d$ ignored bits. Pair them and write their sign coordinates
+ $2a-1$ as $z_i,w_i$. Up to a constant sign, the target is
+ $f(z)=\prod_i z_i$.
+-To make the output score strict, add a sufficiently small positive
+-constant to $F$ in $[F\ge0]$, then orient it to match $f$. The domain
+-is finite and scores producing zero were strictly negative, so the
+-computed function is unchanged.
++Write the circuit's output as $[F\ge0]$. On inputs with output bit zero,
++$F<0$. Since the domain is finite, adding a sufficiently small positive
++constant makes the score nonzero everywhere without changing the
++output. Orient this strict score to match $f$.
+ 
+ For each $t\in\{-1,1\}^d$, impose $w_i=t_i z_i$.
+ These bit or complemented-bit identifications keep direct output

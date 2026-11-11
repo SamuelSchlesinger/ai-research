@@ -436,40 +436,40 @@ LaTeX Info: Redefining \nameref on input line 23.
 \openout3 = `paper.out'.
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 2
-7.
+5.
  (ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
-7.
+5.
  (omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-27.
+25.
 
 (omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-27.
+25.
  (omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 27.
+(Font)              <12> on input line 25.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 27.
+(Font)              <8> on input line 25.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 27.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 27.
+(Font)              <6> on input line 25.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 25.
 
  (umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 27.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 25.
 
  (umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -477,19 +477,19 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 30.
+(Font)              <10> on input line 28.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 30.
+(Font)              <7> on input line 28.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 30.
+(Font)              <5> on input line 28.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 53.
+(Font)              <10.95> on input line 52.
 
 [1
 
 ]
 LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 
-94.
+98.
  (ot1lmss.fd
 File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -499,7 +499,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
  [2] [3] [4] [5] [6]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 4
-34.
+59.
  (t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -509,6 +509,6 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
  [7] [8] [9] [10] (paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 145A069019E8475037F5604EFED67B7F;1440.
+(rerunfilecheck)             Checksum: EFD6FAB089256059E9BB47F793CD904F;1427.
  )
-Output written on paper.xdv (10 pages, 62724 bytes).
+Output written on paper.xdv (10 pages, 65984 bytes).

@@ -1,0 +1,30 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "date": "2026-11-11",
+  "pages": 10,
+  "page_size_points": [
+    612,
+    792
+  ],
+  "font_size_points": 11,
+  "geometry_margin_inches": 1,
+  "overfull_boxes": 0,
+  "underfull_boxes": 0,
+  "undefined_references": 0,
+  "abstract_margin_note_unchanged": true,
+  "labels_unchanged": true,
+  "bibliography_keys_unchanged": true,
+  "external_urls_unchanged": true,
+  "canonical_files_changed": [],
+  "sha256": {
+    "original.tex": "3625d03443417304e080043655e46b76e098fda2bda0e0cb2aab53b81971f61e",
+    "original.pdf": "a34d434b7d4182a9350147f22c9fd10597db1cea54b6cc1ef60c380598b1937c",
+    "paper.tex": "7ab9074fb3c1ad41016f22cff83790cca50a489362d7294ff458a120b24c3415",
+    "paper.pdf": "081628cf4a1db5bf70fb978b7fdbdd3ec65c9c07ce38cbe0bba02ff5e9eb9a8b",
+    "editorial.patch": "cd3e9b924309965005ac4de4d76e2dfe300c238d81ca47ba945b38d9ff767f2b",
+    "checks/approximation_checks.json": "faaec5aa7cabf59b22c10e75965e3773116057012a5280cd0219d2facb9d8661",
+    "checks/exact_results.json": "80e1e4c3d9ea6b766b76f6c55e5e4939979314bc1b14b4df2b62fbfbf25dcd16",
+    "checks/restriction_results.json": "69fce8a1fd9f8be216f0586df824835da186412e30b376ad30a455aac62eef08"
+  },
+  "audit_sha256": "eaff8c7a8eef46bf2da7191a78b33eb5ea938f9c02b81ff544f02708d4e1d229"
+}

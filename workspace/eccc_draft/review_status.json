@@ -1,8 +1,8 @@
 {
   "Authors": "Christian Reitwiessner",
-  "status": "Substantially rewritten after third Astra review; deterministic sign-coherent approximation independently checked; literature audit completed; not submitted",
+  "status": "Whole-paper wording rewrite completed after two fresh Astra editorial rounds; precision fixes integrated; abstract remains explicitly provisional; not submitted",
   "pages": 10,
-  "source_sha256": "e5d439e0badc59fec617393e8c10af3f6249738644587313ff2063e0fd048655",
+  "source_sha256": "84995c9e9338ad635f51d9ded3b5d23fe88a3323d1f8525066cb610114dcbfa9",
   "duplicate_labels": 0,
   "missing_labels": [],
   "overfull_boxes": 0,
@@ -31,12 +31,22 @@
       "status": "Completed: substantial rewrite and unmasked/coherent approximation proposed by Astra; parent verified and integrated",
       "archived_report": "reviews/revision3/astra_review.md",
       "literature_audit": "reviews/revision3/literature_audit.md"
+    },
+    {
+      "round": "editorial 1",
+      "status": "Substantial wording rewrite integrated; bounds and labels preserved; second review pending",
+      "archived_report": "reviews/editorial_round1/report.md"
+    },
+    {
+      "round": "editorial 2",
+      "status": "Independent review approved after two small precision fixes; all fixes and targeted clarity/layout improvements integrated",
+      "archived_report": "reviews/editorial_round2/report.md"
     }
   ],
   "font_size_pt": 11,
   "margins_inches": 1,
   "visual_inspection": "Rendered final ten-page contact sheet and read the approximation page at full size; no layout defects observed",
-  "post_review_copy_edit": "Integrated proposed rewrite, retained matrix explanation and cslib-frontier reference, strengthened odd-error lemma to arbitrary second factor, and added contemporary function-specific literature context.",
+  "post_review_copy_edit": "Integrated second editorial proposal: O(n) gate-to-wire factor, unambiguous strictification, explicit Fourier sum range, fixed-weight entropy explanation, and Appendix A motivation/pagination.",
   "approximation_checks": {
     "Authors": "Christian Reitwiessner",
     "status": "passed",
@@ -49,5 +59,8 @@
     "majority_agreement_cases": 135,
     "raw_gate_score_inputs": 2976
   },
-  "literature_audit": "reviews/revision3/literature_audit.md: thirteen annotated primary-source entries, scope and limitations stated"
+  "literature_audit": "reviews/revision3/literature_audit.md: thirteen annotated primary-source entries, scope and limitations stated",
+  "editorial_notes": [
+    "Abstract still needs considerable work; margin note retained during wording revision."
+  ]
 }

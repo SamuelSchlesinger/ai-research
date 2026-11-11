@@ -1,0 +1,44 @@
+{
+  "authors": [
+    "Christian Reitwiessner"
+  ],
+  "review_round": 2,
+  "hashes": {
+    "original.tex": "7ab9074fb3c1ad41016f22cff83790cca50a489362d7294ff458a120b24c3415",
+    "original.pdf": "081628cf4a1db5bf70fb978b7fdbdd3ec65c9c07ce38cbe0bba02ff5e9eb9a8b",
+    "paper.tex": "84995c9e9338ad635f51d9ded3b5d23fe88a3323d1f8525066cb610114dcbfa9",
+    "paper.pdf": "381c085e90c8aac28e0796882a9aee46ba859b32019e7c6b2f1e740eda840e13"
+  },
+  "preservation_checks": {
+    "labels_preserved": true,
+    "bibliography_keys_preserved": true,
+    "urls_preserved": true,
+    "preamble_preserved": true,
+    "abstract_preserved": true,
+    "proof_count_preserved": true,
+    "canonical_source_unchanged": true,
+    "canonical_pdf_unchanged": true
+  },
+  "proof_count": 9,
+  "page_count": 10,
+  "document_class": "11pt article",
+  "geometry": "margin=1in",
+  "warnings": [],
+  "build_environment_diagnostic": "Fontconfig error: Cannot load default config file: No such file: (null); successful exit and inspected PDF",
+  "independent_appendix_check": {
+    "cases": 30264,
+    "k_range": [
+      1,
+      6
+    ],
+    "m_range": [
+      1,
+      5
+    ],
+    "exhaustive": "k<=2, and k=3 with m<=3",
+    "other_pairs": "200 seeded cases per pair",
+    "random_seed": 20261111,
+    "result": "pass"
+  },
+  "round1_report_read_after_independent_assessment": true
+}
