@@ -1,0 +1,18 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "passed",
+  "appendix_pointwise_inputs": 25844,
+  "identities_per_input": 6,
+  "closed_form_and_margin_checks": 25844,
+  "exact_balance_size_expansions": 5,
+  "source_invariants": [
+    "abstract including margin TODO byte-identical",
+    "epsilon table and caption byte-identical",
+    "bibliography byte-identical",
+    "literature comparison prose byte-identical",
+    "all nine result statements and nine proofs retained",
+    "11pt and one-inch margins retained",
+    "cslib-frontier link retained"
+  ],
+  "scope": "Finite checks of the transcribed appendix identities; universal validity relies on the paper proofs."
+}

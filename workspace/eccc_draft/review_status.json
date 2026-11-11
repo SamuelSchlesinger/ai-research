@@ -1,8 +1,8 @@
 {
   "Authors": "Christian Reitwiessner",
-  "status": "Whole-paper wording rewrite completed after two fresh Astra editorial rounds; precision fixes integrated; abstract remains explicitly provisional; not submitted",
-  "pages": 10,
-  "source_sha256": "43aa87b88a681507a5ac1d72733194bcd52be23ae1a716bc7ff1c6f6a28375e0",
+  "status": "Whole-paper precision revision integrated after Astra audit and parent check; all numerical bounds retained; abstract provisional; not submitted",
+  "pages": 12,
+  "source_sha256": "2d52ccd838d73227dcd1be86c6b00a52f9bbe374e8193ec27f8efe8667344966",
   "duplicate_labels": 0,
   "missing_labels": [],
   "overfull_boxes": 0,
@@ -41,12 +41,17 @@
       "round": "editorial 2",
       "status": "Independent review approved after two small precision fixes; all fixes and targeted clarity/layout improvements integrated",
       "archived_report": "reviews/editorial_round2/report.md"
+    },
+    {
+      "round": "precision",
+      "status": "Astra precision proposal integrated; parent checked scope and reran 25844-input scalar-algebra audit",
+      "archived_report": "reviews/precision/report.md"
     }
   ],
   "font_size_pt": 11,
   "margins_inches": 1,
   "visual_inspection": "Rendered final ten-page contact sheet and read the approximation page at full size; no layout defects observed",
-  "post_review_copy_edit": "Added comparison table using epsilon advantage for gates and wires, explicit ranges, exact upper-bound comparison and coherent lower-bound comparison; shortened duplicated introductory text; retained ten pages and abstract TODO.",
+  "post_review_copy_edit": "Typed maps, explicit arguments and quantifiers, fixed versus random inputs, injectivity hypothesis and pointwise appendix values distinguished throughout.",
   "approximation_checks": {
     "Authors": "Christian Reitwiessner",
     "status": "passed",
@@ -62,5 +67,6 @@
   "literature_audit": "reviews/revision3/literature_audit.md: thirteen annotated primary-source entries, scope and limitations stated",
   "editorial_notes": [
     "Abstract still needs considerable work; margin note retained during wording revision."
-  ]
+  ],
+  "length_note": "12 pages including appendices and references, exceeding original 8\u201310-page target; typography and complete proofs retained."
 }

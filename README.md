@@ -3,7 +3,7 @@ Authors: Christian Reitwiessner
 
 # Andreev threshold-circuit research — continuation archive
 
-Current submission draft: [ten-page ECCC-targeted paper](workspace/eccc_draft/paper.pdf), revised 11 November 2026 after three Astra reviews. The latest revision gives explicit deterministic, sign-coherent approximation circuits; see [the literature audit](workspace/eccc_draft/reviews/revision3/literature_audit.md). No ECCC submission has been made. Earlier snapshot: [9 November update](docs/UPDATE_2026-11-09.md).
+Current submission draft: [ECCC-targeted paper](workspace/eccc_draft/paper.pdf), revised 11 November 2026 after mathematical, editorial and precision reviews. The latest precision revision is twelve pages, with explicit types, quantifiers and dependencies; it retains deterministic, sign-coherent approximation circuits; see [the literature audit](workspace/eccc_draft/reviews/revision3/literature_audit.md). No ECCC submission has been made. Earlier snapshot: [9 November update](docs/UPDATE_2026-11-09.md).
 
 
 This private repository preserves the research state, proofs, constructions, experiments, and paper sources needed to continue the Andreev research without the original chat or `/tmp` workspace. It is organized by mathematical content, not by timeline.

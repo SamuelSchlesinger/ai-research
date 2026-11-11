@@ -1,0 +1,36 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "canonical_directory": "/home/user/agents/andreev-research/workspace/eccc_draft",
+  "baseline_source_sha256": "0002fdab65e487bfdc9d945767e12d9becd5af8a93995d0f7b3fd3ed597e32f3",
+  "canonical_source_sha256_at_completion": "0002fdab65e487bfdc9d945767e12d9becd5af8a93995d0f7b3fd3ed597e32f3",
+  "canonical_pdf_sha256_unchanged": "1f8c2520670f892a53a8e33a4d2193cf73d72f1740085d7dd519f682f0cac2ee",
+  "proposal_source_sha256": "2d52ccd838d73227dcd1be86c6b00a52f9bbe374e8193ec27f8efe8667344966",
+  "proposal_pdf_sha256": "d59d55d6c7e00f8c2c7762d25afd40833e6d0ecf904c11a1fbefcd6826323378",
+  "copied_check_scripts_unchanged": {
+    "verify_results.py": true,
+    "approximation_checks.py": true,
+    "restriction_checks.py": true
+  },
+  "source_labels": {
+    "tab:bounds": 121,
+    "sec:identities": 155,
+    "lem:ladder": 156,
+    "eq:lookup": 197,
+    "thm:simple": 216,
+    "sec:approx": 241,
+    "thm:avgupper": 242,
+    "lem:odd": 260,
+    "eq:odd-l2": 354,
+    "sec:coherent": 414,
+    "lem:entropy": 415,
+    "thm:coherent": 455,
+    "sec:exact": 556,
+    "thm:exact": 559,
+    "eq:bestcount": 564,
+    "eq:bestscore": 603,
+    "eq:bestclosed": 645,
+    "sec:fullsign": 707,
+    "lem:paritydual": 711,
+    "thm:fullsign": 736
+  }
+}
