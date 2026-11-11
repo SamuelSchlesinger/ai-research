@@ -1,0 +1,63 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "All combinatorial identities passed; underlying correctness is the existing paper proof.",
+  "small_parameter_checks": 48,
+  "balanced_counts": [
+    {
+      "k": 1,
+      "m": 2,
+      "n": 4,
+      "bottoms_upper": 12,
+      "input_to_bottom_upper": 34,
+      "all_support_wires_upper": 50,
+      "ratio_to_n_cubed": 0.78125
+    },
+    {
+      "k": 2,
+      "m": 2,
+      "n": 8,
+      "bottoms_upper": 34,
+      "input_to_bottom_upper": 164,
+      "all_support_wires_upper": 206,
+      "ratio_to_n_cubed": 0.40234375
+    },
+    {
+      "k": 4,
+      "m": 4,
+      "n": 32,
+      "bottoms_upper": 374,
+      "input_to_bottom_upper": 6370,
+      "all_support_wires_upper": 6776,
+      "ratio_to_n_cubed": 0.206787109375
+    },
+    {
+      "k": 8,
+      "m": 32,
+      "n": 512,
+      "bottoms_upper": 82414,
+      "input_to_bottom_upper": 19945874,
+      "all_support_wires_upper": 20028800,
+      "ratio_to_n_cubed": 0.14922618865966797
+    },
+    {
+      "k": 16,
+      "m": 4096,
+      "n": 131072,
+      "bottoms_upper": 5368578014,
+      "input_to_bottom_upper": 323258024558626,
+      "all_support_wires_upper": 323263393267712,
+      "ratio_to_n_cubed": 0.14355778488970827
+    },
+    {
+      "k": 32,
+      "m": 134217728,
+      "n": 8589934592,
+      "bottoms_upper": 23058430049187266494,
+      "input_to_bottom_upper": 90060137716202069354596008002,
+      "all_support_wires_upper": 90060137739260499412373209088,
+      "ratio_to_n_cubed": 0.1420898435626441
+    }
+  ],
+  "asymptotic_leading_constant": 0.140625,
+  "limitations": "No subcubic bound; counts are upper bounds on literal compiled supports, not claims of minimal semantic fan-in."
+}
