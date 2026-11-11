@@ -1,0 +1,29 @@
+{
+  "authors": "Christian Reitwiessner",
+  "kernel_identities": 1088,
+  "small_exact_dual": {
+    "M": 8,
+    "directions": 4,
+    "vertices": 256,
+    "positive_masses": 248,
+    "radial_shell_equalities": 36,
+    "threshold_equalities": 40,
+    "affine_equalities": 9,
+    "largest_abs_P": "1"
+  },
+  "theorem_hypotheses": {
+    "M": 64,
+    "directions": 4,
+    "center_bitmasks": [
+      14629808393667934557,
+      9160953444244791257,
+      12049696767282301290,
+      17023094517455021013
+    ],
+    "eta": "1/81",
+    "noncenter_pointwise_bound": "74/567",
+    "all_theorem_hypotheses": true,
+    "kernel_interpolation_exact": true
+  },
+  "status": "all passed"
+}

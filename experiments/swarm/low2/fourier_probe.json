@@ -1,0 +1,42 @@
+{
+  "authors": "Christian Reitwiessner",
+  "status": "NUMERICAL diagnostics except the M12 EXACT certificate; no asymptotic theorem claimed",
+  "seed": 561832,
+  "results": [
+    {
+      "exact_certificate": {
+        "support": 24,
+        "l1_norm": "13921289/25109631"
+      },
+      "M": 12,
+      "S": 24,
+      "low_degree_rows": 286,
+      "LP_status": 0,
+      "minimum_l1_numerical": 0.5544202939501579
+    },
+    {
+      "exact_certificate": null,
+      "M": 16,
+      "S": 32,
+      "low_degree_rows": 680,
+      "LP_status": 0,
+      "minimum_l1_numerical": 0.17697760092837983
+    },
+    {
+      "exact_certificate": null,
+      "M": 20,
+      "S": 40,
+      "low_degree_rows": 1330,
+      "LP_status": 0,
+      "minimum_l1_numerical": 0.059986154168072445
+    },
+    {
+      "exact_certificate": null,
+      "M": 24,
+      "S": 96,
+      "low_degree_rows": 2300,
+      "LP_status": 0,
+      "minimum_l1_numerical": 0.02996346591910653
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "authors": "Christian Reitwiessner",
+  "seed": 20261111,
+  "rank_two": {
+    "angular_rows": 2880,
+    "split_sweeps": 1200,
+    "maximum_runs_seen": 3
+  },
+  "polynomial_rows": 1400,
+  "rank_one_cells": {
+    "cells_checked": 2081,
+    "self_consistent_tables_seen": 240
+  },
+  "dense_pair_identity_cases": 29680,
+  "symmetric_spectral": {
+    "threshold_degree_cases": 2448,
+    "middle_degree_examples": [
+      {
+        "M": 4,
+        "d": 2,
+        "max_coefficient_numerator": 1,
+        "denominator": 16,
+        "orbit_size": 6
+      },
+      {
+        "M": 8,
+        "d": 4,
+        "max_coefficient_numerator": 3,
+        "denominator": 256,
+        "orbit_size": 70
+      },
+      {
+        "M": 12,
+        "d": 6,
+        "max_coefficient_numerator": 10,
+        "denominator": 4096,
+        "orbit_size": 924
+      },
+      {
+        "M": 16,
+        "d": 8,
+        "max_coefficient_numerator": 35,
+        "denominator": 65536,
+        "orbit_size": 12870
+      }
+    ]
+  },
+  "raw_character_restriction_cases": 260,
+  "maximal_fourier": {
+    "orders_checked": 128,
+    "largest_sum_of_squared_maxima": {
+      "numerator": 117035,
+      "denominator": 65536
+    }
+  },
+  "paired_cancellation": {
+    "full_sign_rows": 5456,
+    "general_pair_rows": 1000,
+    "missing_variable_parity_correlations": 3049
+  },
+  "partial_parity_upper": {
+    "raw_inputs": 1360,
+    "raw_bottom_evaluations": 363776
+  },
+  "status": "all passed"
+}

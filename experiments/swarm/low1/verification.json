@@ -1,0 +1,293 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "hypergeometric_bound_cases": 7140,
+  "exact_rectangle_probabilities": [
+    {
+      "n": 3,
+      "h": 1,
+      "probability": "1"
+    },
+    {
+      "n": 4,
+      "h": 1,
+      "probability": "3/4"
+    },
+    {
+      "n": 4,
+      "h": 2,
+      "probability": "1/4"
+    },
+    {
+      "n": 5,
+      "h": 1,
+      "probability": "3/4"
+    },
+    {
+      "n": 5,
+      "h": 2,
+      "probability": "1/4"
+    },
+    {
+      "n": 5,
+      "h": 3,
+      "probability": "3/4"
+    },
+    {
+      "n": 6,
+      "h": 1,
+      "probability": "5/8"
+    },
+    {
+      "n": 6,
+      "h": 2,
+      "probability": "1/4"
+    },
+    {
+      "n": 6,
+      "h": 3,
+      "probability": "5/8"
+    },
+    {
+      "n": 6,
+      "h": 4,
+      "probability": "1/4"
+    },
+    {
+      "n": 7,
+      "h": 1,
+      "probability": "5/8"
+    },
+    {
+      "n": 7,
+      "h": 2,
+      "probability": "1/4"
+    },
+    {
+      "n": 7,
+      "h": 3,
+      "probability": "5/8"
+    },
+    {
+      "n": 7,
+      "h": 4,
+      "probability": "1/4"
+    },
+    {
+      "n": 7,
+      "h": 5,
+      "probability": "5/8"
+    },
+    {
+      "n": 8,
+      "h": 1,
+      "probability": "35/64"
+    },
+    {
+      "n": 8,
+      "h": 2,
+      "probability": "15/64"
+    },
+    {
+      "n": 8,
+      "h": 3,
+      "probability": "35/64"
+    },
+    {
+      "n": 8,
+      "h": 4,
+      "probability": "17/64"
+    },
+    {
+      "n": 8,
+      "h": 5,
+      "probability": "35/64"
+    },
+    {
+      "n": 8,
+      "h": 6,
+      "probability": "15/64"
+    },
+    {
+      "n": 9,
+      "h": 1,
+      "probability": "35/64"
+    },
+    {
+      "n": 9,
+      "h": 2,
+      "probability": "15/64"
+    },
+    {
+      "n": 9,
+      "h": 3,
+      "probability": "35/64"
+    },
+    {
+      "n": 9,
+      "h": 4,
+      "probability": "17/64"
+    },
+    {
+      "n": 9,
+      "h": 5,
+      "probability": "35/64"
+    },
+    {
+      "n": 9,
+      "h": 6,
+      "probability": "15/64"
+    },
+    {
+      "n": 9,
+      "h": 7,
+      "probability": "35/64"
+    },
+    {
+      "n": 10,
+      "h": 1,
+      "probability": "63/128"
+    },
+    {
+      "n": 10,
+      "h": 2,
+      "probability": "7/32"
+    },
+    {
+      "n": 10,
+      "h": 3,
+      "probability": "63/128"
+    },
+    {
+      "n": 10,
+      "h": 4,
+      "probability": "33/128"
+    },
+    {
+      "n": 10,
+      "h": 5,
+      "probability": "63/128"
+    },
+    {
+      "n": 10,
+      "h": 6,
+      "probability": "33/128"
+    },
+    {
+      "n": 10,
+      "h": 7,
+      "probability": "63/128"
+    },
+    {
+      "n": 10,
+      "h": 8,
+      "probability": "7/32"
+    },
+    {
+      "n": 11,
+      "h": 1,
+      "probability": "63/128"
+    },
+    {
+      "n": 11,
+      "h": 2,
+      "probability": "7/32"
+    },
+    {
+      "n": 11,
+      "h": 3,
+      "probability": "63/128"
+    },
+    {
+      "n": 11,
+      "h": 4,
+      "probability": "33/128"
+    },
+    {
+      "n": 11,
+      "h": 5,
+      "probability": "63/128"
+    },
+    {
+      "n": 11,
+      "h": 6,
+      "probability": "33/128"
+    },
+    {
+      "n": 11,
+      "h": 7,
+      "probability": "63/128"
+    },
+    {
+      "n": 11,
+      "h": 8,
+      "probability": "7/32"
+    },
+    {
+      "n": 11,
+      "h": 9,
+      "probability": "63/128"
+    },
+    {
+      "n": 12,
+      "h": 1,
+      "probability": "231/512"
+    },
+    {
+      "n": 12,
+      "h": 2,
+      "probability": "105/512"
+    },
+    {
+      "n": 12,
+      "h": 3,
+      "probability": "231/512"
+    },
+    {
+      "n": 12,
+      "h": 4,
+      "probability": "63/256"
+    },
+    {
+      "n": 12,
+      "h": 5,
+      "probability": "231/512"
+    },
+    {
+      "n": 12,
+      "h": 6,
+      "probability": "131/512"
+    },
+    {
+      "n": 12,
+      "h": 7,
+      "probability": "231/512"
+    },
+    {
+      "n": 12,
+      "h": 8,
+      "probability": "63/256"
+    },
+    {
+      "n": 12,
+      "h": 9,
+      "probability": "231/512"
+    },
+    {
+      "n": 12,
+      "h": 10,
+      "probability": "105/512"
+    }
+  ],
+  "ladder_identity_cases": 9548,
+  "multi_coordinate_rectangle_cases": 364,
+  "full_pool": {
+    "k": 2,
+    "m": 2,
+    "gates": 128,
+    "edges": 32,
+    "table_pairs_per_edge": 120,
+    "minimum_witness_gates": 20
+  },
+  "four_point_dual": "passed",
+  "status": "All exact finite checks passed; asymptotic claims require report proofs."
+}

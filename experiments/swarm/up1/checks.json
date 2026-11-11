@@ -1,0 +1,151 @@
+{
+  "authors": "Christian Reitwiessner",
+  "status": "all exact checks passed",
+  "mask_families_exhausted": 6294,
+  "constructive_rational_checks": [
+    {
+      "M": 16,
+      "R": 2,
+      "trial": 0,
+      "minimum_correlation": 8,
+      "proved_bound": "6"
+    },
+    {
+      "M": 16,
+      "R": 2,
+      "trial": 1,
+      "minimum_correlation": 8,
+      "proved_bound": "6"
+    },
+    {
+      "M": 16,
+      "R": 2,
+      "trial": 2,
+      "minimum_correlation": 8,
+      "proved_bound": "6"
+    },
+    {
+      "M": 16,
+      "R": 2,
+      "trial": 3,
+      "minimum_correlation": 8,
+      "proved_bound": "6"
+    },
+    {
+      "M": 32,
+      "R": 3,
+      "trial": 0,
+      "minimum_correlation": 10,
+      "proved_bound": "23/3"
+    },
+    {
+      "M": 32,
+      "R": 3,
+      "trial": 1,
+      "minimum_correlation": 10,
+      "proved_bound": "23/3"
+    },
+    {
+      "M": 32,
+      "R": 3,
+      "trial": 2,
+      "minimum_correlation": 12,
+      "proved_bound": "23/3"
+    },
+    {
+      "M": 32,
+      "R": 3,
+      "trial": 3,
+      "minimum_correlation": 14,
+      "proved_bound": "23/3"
+    },
+    {
+      "M": 64,
+      "R": 4,
+      "trial": 0,
+      "minimum_correlation": 16,
+      "proved_bound": "12"
+    },
+    {
+      "M": 64,
+      "R": 4,
+      "trial": 1,
+      "minimum_correlation": 20,
+      "proved_bound": "12"
+    },
+    {
+      "M": 64,
+      "R": 4,
+      "trial": 2,
+      "minimum_correlation": 16,
+      "proved_bound": "12"
+    },
+    {
+      "M": 64,
+      "R": 4,
+      "trial": 3,
+      "minimum_correlation": 20,
+      "proved_bound": "12"
+    },
+    {
+      "M": 128,
+      "R": 5,
+      "trial": 0,
+      "minimum_correlation": 26,
+      "proved_bound": "103/5"
+    },
+    {
+      "M": 128,
+      "R": 5,
+      "trial": 1,
+      "minimum_correlation": 28,
+      "proved_bound": "103/5"
+    },
+    {
+      "M": 128,
+      "R": 5,
+      "trial": 2,
+      "minimum_correlation": 28,
+      "proved_bound": "103/5"
+    },
+    {
+      "M": 128,
+      "R": 5,
+      "trial": 3,
+      "minimum_correlation": 26,
+      "proved_bound": "103/5"
+    },
+    {
+      "M": 256,
+      "R": 6,
+      "trial": 0,
+      "minimum_correlation": 44,
+      "proved_bound": "110/3"
+    },
+    {
+      "M": 256,
+      "R": 6,
+      "trial": 1,
+      "minimum_correlation": 42,
+      "proved_bound": "110/3"
+    },
+    {
+      "M": 256,
+      "R": 6,
+      "trial": 2,
+      "minimum_correlation": 42,
+      "proved_bound": "110/3"
+    },
+    {
+      "M": 256,
+      "R": 6,
+      "trial": 3,
+      "minimum_correlation": 44,
+      "proved_bound": "110/3"
+    }
+  ],
+  "character_tail_summands": 35824,
+  "whole_pool_four_point_duals": 18512,
+  "staircase_checks": 287,
+  "low1_collisions": 4
+}

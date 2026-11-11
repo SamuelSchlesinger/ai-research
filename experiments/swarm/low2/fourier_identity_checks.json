@@ -1,0 +1,11 @@
+{
+  "authors": "Christian Reitwiessner",
+  "status": "exact finite identities verified; asymptotic theorem relies on written proof",
+  "checks": {
+    "coefficient_identity": 4899,
+    "consecutive_nonvanishing": 4600,
+    "recurrence": 4301,
+    "mask_generating_identity": 13377,
+    "normalized_two_degree_coherence": 300
+  }
+}

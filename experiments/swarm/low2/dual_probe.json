@@ -1,0 +1,41 @@
+{
+  "authors": "Christian Reitwiessner",
+  "seed": 561831,
+  "k": 2,
+  "m": 2,
+  "results": [
+    {
+      "S": 16,
+      "four_point_rectangles": 20,
+      "primal_status": 2,
+      "dual_support": 22,
+      "rational_certificate_exact": true
+    },
+    {
+      "S": 32,
+      "four_point_rectangles": 2,
+      "primal_status": 2,
+      "dual_support": 36,
+      "rational_certificate_exact": true
+    },
+    {
+      "S": 64,
+      "four_point_rectangles": 0,
+      "primal_status": 2,
+      "dual_support": 63,
+      "rational_certificate_exact": false
+    },
+    {
+      "S": 96,
+      "four_point_rectangles": 0,
+      "primal_status": 2,
+      "dual_support": 83,
+      "rational_certificate_exact": false
+    },
+    {
+      "S": 128,
+      "four_point_rectangles": 0,
+      "primal_status": 0
+    }
+  ]
+}

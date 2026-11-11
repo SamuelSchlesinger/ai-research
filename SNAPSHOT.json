@@ -24,5 +24,6 @@
   "coherence_referee_completed_utc": "2026-11-09T16:26:28.091793+00:00",
   "one_table_bit_completed_utc": "2026-11-09T16:41:41.056006+00:00",
   "extractors_archived_utc": "2026-11-09T17:29:13.183811+00:00",
-  "extractors_archive_base_commit": "c2944fbde43e89607bb101a6459607d07f3232aa"
+  "extractors_archive_base_commit": "c2944fbde43e89607bb101a6459607d07f3232aa",
+  "swarm_completed_utc": "2026-11-11T11:40:10.160854+00:00"
 }

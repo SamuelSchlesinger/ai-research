@@ -1,0 +1,29 @@
+{
+  "authors": "Christian Reitwiessner",
+  "status": "exact finite checks",
+  "coordinate_inequalities": 443180,
+  "owner_indices_checked": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "three_gate_conversion_checks": 2496,
+  "signed_counterexample": {
+    "alpha": [
+      1,
+      -1,
+      1,
+      -1
+    ],
+    "threshold": 0,
+    "differences": [
+      1,
+      -1,
+      1,
+      -1
+    ]
+  }
+}

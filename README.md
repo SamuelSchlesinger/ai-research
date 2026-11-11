@@ -36,3 +36,5 @@ python3 -m venv .venv
 The runner stages a writable copy under `.work/` and rewrites the original machine-specific paths **in that copy**, preserving archived evidence. Some construction certificates use only the Python standard library; solver and numerical scripts need the recorded packages. A version unavailable on a fresh machine can be replaced deliberately, recording the change before interpreting numerical results.
 
 This is a continuation snapshot, not an assertion that every archived claim is correct. Proofs, exact finite checks, heuristic evidence, and unsuccessful searches are distinguished in the reports. Preserve original contributor and source credit when extending them.
+
+Completed 11 November Astra swarm: see RESEARCH_STATE.md section 21 and `experiments/swarm/` for restricted results, exact certificates and method barriers. No unrestricted exponent improvement.

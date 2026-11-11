@@ -1,0 +1,30 @@
+{
+  "authors": "Christian Reitwiessner",
+  "status": "all exact checks passed",
+  "sampled_sparse_codes": [
+    {
+      "k": 8,
+      "h": 1,
+      "q": 125,
+      "attempt": 0,
+      "max_abs_nonzero_character_sum": 35
+    },
+    {
+      "k": 10,
+      "h": 2,
+      "q": 599,
+      "attempt": 0,
+      "max_abs_nonzero_character_sum": 81
+    },
+    {
+      "k": 12,
+      "h": 3,
+      "q": 1573,
+      "attempt": 0,
+      "max_abs_nonzero_character_sum": 161
+    }
+  ],
+  "exhaustive_sparse_raw_gate_cases": 1655,
+  "guard_identity_cases": 20460,
+  "full_raw_hybrid_cases": 256
+}
