@@ -117,7 +117,7 @@ inputs. An affine score is free at the top. Wires count nonzero aggregated
 edges, not coefficient multiplicities. All logarithms are natural except
 $\log_2$ and information entropies.
 
-Only in Sections~\ref{sec:identities}--\ref{sec:approx}, use
+In Sections~\ref{sec:identities}--\ref{sec:approx}, use
 $$X_S=\sum_{c\in\bits^k}(-1)^{S\cdot c+x_c},\qquad
  t_S=\sum_{i\in S}|a_i|,\qquad S\cdot c=\sum_{i\in S}c_i.$$
 Here $S\subseteq[k]$, $X_S$ is even and lies in $[-N,N]$, and
@@ -167,10 +167,7 @@ For example, apply the last two lemmas to
 $$N(-1)^{x_b}=\sum_S\bigl(\varphi(X_S+t_S)-\varphi(t_S)\bigr).$$
 The two ranges have lengths $2N+m|S|$ and $m|S|$. Since
 $\sum_S|S|=kN/2$, this already gives $2N^2+kmN$ bottoms, or
-$3n^2/4$ at exact balance. Indeed
-$$X_S+t_S=\sum_c(-1)^{S\cdot c}(1-2x_c)
-                  +\sum_{i\in S,j}a_{i,j}$$
-is affine in the original inputs. The next section reduces the leading
+$3n^2/4$ at exact balance. The next section reduces the leading
 constant by asking only for a correct sign.
 
 \section{The sharper exact construction}\label{sec:exact}
@@ -239,7 +236,9 @@ Also
 $$
 4W(-1)^t=4W-8\lceil(2W+t)/2\rceil^2+8W^2+8Wt+8\lceil t/2\rceil^2.
 $$
-The coefficient shifts $\kappa_S$ supply the address correction because
+The shifts $\kappa_S$ change only coefficients of existing odd thresholds,
+so the singleton-address correction adds no staircase gates. They supply
+the address correction because
 $$
 \sum_S\kappa_S\bigl(\lceil t_S/2\rceil-t_S/2\bigr)
  =N(2\alpha+1)\sum_i\ind{b=e_i}.
@@ -302,7 +301,7 @@ expansion has top coefficients bounded by $O(n^3)$.
 \section{Approximation by masked staircases}\label{sec:approx}
 We now return to $X_S,t_S$ from Section~\ref{sec:identities}; the auxiliary
 variables of the exact construction are no longer in use. Agreement is
-always under uniform independent \emph{all} input bits. For this section,
+always under the uniform distribution on all input bits. For this section,
 ``balanced'' means $m=\lfloor N/k\rfloor$ or $km=N$; only $km=O(N)$ and
 $n=\Theta(N)$ enter the estimates.
 \begin{theorem}\label{thm:avgupper}
@@ -333,6 +332,9 @@ $1/2+p(L)/2$, where $p(1)=1$ and
 $$
 p(L)=2^{-L}\binom{L}{L/2}\ge(2L)^{-1/2}\qquad(L\ge2).
 $$
+For even $L$, the binomial expression satisfies
+$p(L+2)/p(L)=(L+1)/(L+2)\ge\sqrt{L/(L+2)}$; together with
+$p(2)=1/2$, induction proves the inequality.
 For $L\ge2$, $L$ is even because it is a power of two. Conditioning on
 the selected bit leaves $L-1$ independent signs; the excess agreement is
 half the probability that their sum equals $-1$. The case $L=1$ is exact.
@@ -591,9 +593,10 @@ one restriction. This proves the bound.
 \end{proof}
 
 
-The full-support assumption cannot be dropped: a parity on selected raw
-bits has a linear staircase circuit using zeros on ignored bits. Exact
-equality of magnitudes is also essential. A full-support quadratic
+The full-support assumption cannot be dropped: Section~\ref{sec:identities}
+already gives $O(n^2)$ gates for $A$ with address coefficients in $\{0,1\}$.
+Exact equality of magnitudes is also essential. Using $X_S,t_S,\varphi$
+from Section~\ref{sec:identities}, a full-support quadratic
 construction results by giving a character's selected raw coordinates odd
 weights of magnitude one and its other coordinates even weights of
 magnitude two. The resulting integer form $L_S$ obeys

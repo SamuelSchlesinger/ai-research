@@ -1,0 +1,11 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "PASS",
+  "checks": {
+    "score_identity_inputs": 27734,
+    "finite_gate_count_parameters": 396,
+    "binomial_tail_bounds": 4020,
+    "complete_joint_mask_cases": 5760
+  },
+  "scope": "Finite diagnostics; mathematical all-size audit is in round2.md."
+}

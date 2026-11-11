@@ -1,8 +1,8 @@
 {
   "Authors": "Christian Reitwiessner",
-  "status": "Ten-page draft revised after related-work audit and first correctness review; fresh second review running",
+  "status": "Completed two independent correctness/readability reviews and related-work audit; final local copy edits incorporated; not submitted",
   "pages": 10,
-  "source_sha256": "0e460a861950e0c9d55fdbf162caefaef482a01ad24085b1bc845b280757a2ac",
+  "source_sha256": "61e2882b42540709cbe0af12af637c1dee1aeede750945ad14c1bc22ee972b96",
   "duplicate_labels": 0,
   "missing_labels": [],
   "overfull_boxes": 0,
@@ -22,8 +22,9 @@
     },
     {
       "round": 2,
-      "status": "starting on revised source",
-      "focus": "standalone proofs, clarity, small local notation, citation audit"
+      "status": "completed: READY, no mathematical blockers; local copy edits incorporated",
+      "focus": "standalone proofs, clarity, small local notation, citation audit",
+      "archived_report": "reviews/round2.md"
     }
   ],
   "font_size_pt": 11,
