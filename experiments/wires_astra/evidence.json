@@ -1,0 +1,198 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "handoff_date": "2026-11-11",
+  "scope": "Arbitrary-real depth-two threshold support wires for ordinary Andreev and parity. Search cutoff is 2026-11-11, not an exhaustive latestness claim.",
+  "local_readings": [
+    {
+      "path": "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/threshold_paper/paper.tex",
+      "sha256_at_handoff": "72873e627c1ab7d3c6fe9b79a577b1631bb9e5f942cb32de7c2b8ca78c263a25",
+      "bytes": 73931
+    },
+    {
+      "path": "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/research_backup/docs/RESEARCH_STATE.md",
+      "sha256_at_handoff": "6518f32d1339db2c8bdf2f408cf57782e6705c3940e28cc02002440e60d95ed2",
+      "bytes": 69942
+    },
+    {
+      "path": "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/kw_applications.md",
+      "sha256_at_handoff": "b6e54fac0eee5ad57c474d200470a8640f8af77f688870003fecaf194f10af2e",
+      "bytes": 6602
+    },
+    {
+      "path": "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/kane_williams_erratum.md",
+      "sha256_at_handoff": "443f2f684e16751a88b5209660b86f16581cb06cbb5d158e76a123e4c0bf483f",
+      "bytes": 4495
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm/up1/report.md",
+      "sha256_at_handoff": "1f3b53da9c8cd994e5d7a4e1899ec4f3b503fc25ea438badb9ace3b53039e926",
+      "bytes": 29318
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm/up2/report.md",
+      "sha256_at_handoff": "6c72d79c53128d2829299eab2f69f9bae697b3b98322d95c2a062da19643dec7",
+      "bytes": 44233
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm/low1/report.md",
+      "sha256_at_handoff": "6296d3b8d595d362c6d6754412d31cfce9553d22628b5c6269282334fc05057c",
+      "bytes": 35973
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm/low2/report.md",
+      "sha256_at_handoff": "b1b5be32cc634dc7ee58a82c3ca04f396213c5a27f45d8f1e296ee62fcf0e9e0",
+      "bytes": 43213
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm_round2/up1/report.md",
+      "sha256_at_handoff": "f9b38e44733609ae6b9a8518f27b71c2d94acccdd162c9a2c7f69991b1bcc831",
+      "bytes": 35030
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm_round2/up2/report.md",
+      "sha256_at_handoff": "8a8b6ecbe8dce5b32ed2cf9286b6d528ad09c7ed656088bb1dfa4cc3deaf43ff",
+      "bytes": 27103
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm_round2/low1/report.md",
+      "sha256_at_handoff": "469a37dfb9c5a635ac3e149388d63c7e9e28623684530d0bd8620a78577d9bae",
+      "bytes": 26816
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm_round2/low2/report.md",
+      "sha256_at_handoff": "1bacf9b5bc0db4bf384c8f83918077cfc1e8ef294040b23f74f484c8930412d0",
+      "bytes": 26840
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm_round3/up1/report.md",
+      "sha256_at_handoff": "2c811bfd893c311f92ecd147d9f8d6c86858be51ee110f9e8980c7b75c71e25e",
+      "bytes": 35185
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm_round3/up2/report.md",
+      "sha256_at_handoff": "420156d0d2b60275e4734f1f84c0e33b2a71f2b61d597255d089e169144af7e8",
+      "bytes": 38904
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm_round3/low1/report.md",
+      "sha256_at_handoff": "91be2c97f18de1e87b18a1113f970643913167b843d0aff5b680bb05a926197f",
+      "bytes": 39838
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm_round3/low2/report.md",
+      "sha256_at_handoff": "4e4dcf9043337b22c91901726dd2ef5a9c998ba6e8b26b84cdc22d66356b0097",
+      "bytes": 39514
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm_round3/board.md",
+      "sha256_at_handoff": "56b57b047aecb2c004b667d3eafe14fddd4ea2b6bc9ef7b306a267906b327006",
+      "bytes": 74278
+    }
+  ],
+  "primary_sources": [
+    {
+      "authors": "Lisa Sauermann; Zixuan Xu",
+      "title": "Improved Lower bound for hypercube edge slicing",
+      "url": "https://arxiv.org/html/2510.16592v1",
+      "location": "Theorem 1.1 and introduction immediately after it",
+      "verified": "Unrestricted slicing exponent13/19, log exponent32/19; explicitly notes depth-two parity wire consequence.",
+      "date": "2025-10-18"
+    },
+    {
+      "authors": "Ramamohan Paturi; Michael E. Saks",
+      "title": "On Threshold Circuits for Parity",
+      "url": "https://cseweb.ucsd.edu/~paturi/myPapers/pubs/PaturiSaks_1990_focs.pdf",
+      "location": "Lemmas1-2, pp399-400; Theorem3",
+      "verified": "Gate-wire/outdegree reduction, common output-coefficient cancellation; polynomial-integer-weight wire lower bound Omega(n^2/log^2 n).",
+      "date": "1990"
+    },
+    {
+      "authors": "Daniel M. Kane; Ryan Williams",
+      "title": "Super-Linear Gate and Super-Quadratic Wire Lower Bounds for Depth-Two and Depth-Three Threshold Circuits",
+      "url": "https://cseweb.ucsd.edu/~dakane/depth2LTF.pdf",
+      "location": "Circuit definition; Theorem1.4 and Section4; restriction lemmas",
+      "verified": "99% uniform parity complexity Theta(sqrt n) gates and Theta(n^1.5) wires, raw top inputs allowed; Andreev ancestry subject to local erratum.",
+      "date": "2016"
+    },
+    {
+      "authors": "Lisa Sauermann; Zixuan Xu",
+      "title": "Nondegenerate hyperplane covers of the hypercube",
+      "url": "https://arxiv.org/html/2507.00773v2",
+      "location": "Theorem1.1, Corollary1.2, introduction attribution of skew-cover consequence",
+      "verified": "Nondegenerate cover size>=n/2; bounded integer normal edge slicing>=n/(4C), zeros allowed. Skew-cover ancestry attributed to Linial-Radhakrishnan and later observations.",
+      "date": "2026-03-04"
+    },
+    {
+      "authors": "Duncan Soiffer; Nathaniel Itty; Christopher D. Rosin; Blake Bruell; Mason DiCicco; Gabor N. Sarkozy; Ryan Offstein; Daniel Reichman",
+      "title": "Improved Upper Bounds for Slicing the Hypercube",
+      "url": "https://arxiv.org/html/2602.16807v1",
+      "location": "Introduction and Theorem1",
+      "verified": "Positive 2026 cross-check of slicing lower exponent; better slicing upper constant does not construct a parity circuit. Printed log32/12 is inconsistent with cited original log32/19.",
+      "date": "2026"
+    },
+    {
+      "authors": "Saugata Basu; Nayantara Bhatnagar; Parikshit Gopalan; Richard J. Lipton",
+      "title": "Polynomials that Sign Represent Parity and Descartes Rule of Signs",
+      "url": "https://arxiv.org/html/math/0702773",
+      "location": "Theorem6.5 and its three-pair induction",
+      "verified": "Strict parity sign representation needs at least (3/2)^d literal-conjunction terms, including constants.",
+      "date": "2007"
+    },
+    {
+      "authors": "Russell Impagliazzo; Ramamohan Paturi; Michael E. Saks",
+      "title": "Size-Depth Tradeoffs for Threshold Circuits",
+      "url": "https://cseweb.ucsd.edu/~paturi/myPapers/pubs/ImpagliazzoPaturiSaks_1993_stoc.pdf",
+      "location": "Abstract and introduction",
+      "verified": "Arbitrary-depth unrestricted-weight parity wire lower bounds; polynomial-weight depth-two ancestry; not a stronger depth-two consequence than the slicing theorem.",
+      "date": "1993"
+    },
+    {
+      "authors": "Jiatu Li; Daniel Reichman; Ryan Williams; Tony Wu",
+      "title": "New Gate, Weight and Wire Complexity Bounds for Sigmoid Neural Networks",
+      "url": "https://eccc.weizmann.ac.il/report/2026/311/",
+      "location": "Primary report page and abstract",
+      "verified": "Recent parity result concerns sigmoid networks with weight restrictions, not the requested arbitrary-real threshold model.",
+      "date": "2026-11-06"
+    },
+    {
+      "authors": "Dev Nag",
+      "title": "Almost-Everywhere Near-Cubic Wire Lower Bounds for SYM o THR and THR o THR",
+      "url": "https://eccc.weizmann.ac.il/report/2026/167/",
+      "location": "Primary report page, abstract, revision and discussion",
+      "verified": "Different hard language in E^NP, not ordinary Andreev or parity; page contains critical review discussion. No theorem from it used in the new deductions.",
+      "date": "2026"
+    },
+    {
+      "authors": "Lijie Chen; Avishay Tal; Yichuan Wang",
+      "title": "Super-quadratic Lower Bounds for Depth-2 Linear Threshold Circuits",
+      "url": "https://eccc.weizmann.ac.il/report/2026/039/",
+      "location": "Primary report abstract",
+      "verified": "Hard function in E^NP; does not establish ordinary-Andreev or parity bounds.",
+      "date": "2026-03-14"
+    }
+  ],
+  "recorded_final_search_queries": [
+    "parity depth two threshold circuits wire lower bound 2026 32/19",
+    "parity threshold circuit wires lower bound Sauermann Xu Paturi Saks arbitrary real weights",
+    "parity depth two threshold circuits polynomial weights wire lower bound 2025 2026",
+    "\"parity\" \"32/19\" wires threshold",
+    "\"parity\" \"wire\" \"2026\" threshold circuits lower bound polynomial",
+    "\"parity\" \"threshold\" \"quadratic\" \"wires\" \"2025\""
+  ],
+  "search_result_scope": "The verified parity baseline is supported directly by the 2025 source and its reduction, plus a 2026 slicing-source cross-check. Broader searches found no stronger applicable unrestricted parity theorem; this is not proof of absence. Unrelated quantum, sigmoid, and E^NP-function results were excluded by model/function.",
+  "proof_status": "New consequences have written proofs and exact small checks, with specified prior peer/literature ingredients. No new Lean build or independent referee audit.",
+  "artifacts": [
+    {
+      "path": "/tmp/andreev_gap/wires_astra/report.md",
+      "sha256": "823584a624692a355668c808cb8a316ad6c7d613f5be529cd084bdbd83718e34"
+    },
+    {
+      "path": "/tmp/andreev_gap/wires_astra/checks.py",
+      "sha256": "f968b5f824aa45df4a531860e145881a364820ebcf8d34b7f15ae8846f35a43d"
+    },
+    {
+      "path": "/tmp/andreev_gap/wires_astra/checks.json",
+      "sha256": "34614d149887e2ead25239810544a03571631aeb657fb9eee779c5c9d2095904"
+    }
+  ]
+}

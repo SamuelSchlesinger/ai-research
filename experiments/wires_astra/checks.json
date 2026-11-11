@@ -1,0 +1,101 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "all exact finite checks passed",
+  "scope": "Finite algebra/support checks; asymptotic theorems remain written proofs, not formal proofs.",
+  "script_sha256": "f968b5f824aa45df4a531860e145881a364820ebcf8d34b7f15ae8846f35a43d",
+  "results": {
+    "parity": {
+      "inputs": 1020,
+      "raw_top_safe_differences": 4096,
+      "sliced_derivative_edges": 14846
+    },
+    "andreev": {
+      "raw_inputs": 3512,
+      "character_differences": 338,
+      "four_restriction_derivatives": 338,
+      "covered_derivative_edges": 638,
+      "circuits": [
+        {
+          "k": 1,
+          "m": 1,
+          "bottoms": 10,
+          "bottom_input_wires": 24,
+          "total_support_wires": 34
+        },
+        {
+          "k": 1,
+          "m": 2,
+          "bottoms": 12,
+          "bottom_input_wires": 36,
+          "total_support_wires": 48
+        },
+        {
+          "k": 1,
+          "m": 3,
+          "bottoms": 14,
+          "bottom_input_wires": 52,
+          "total_support_wires": 66
+        },
+        {
+          "k": 1,
+          "m": 4,
+          "bottoms": 16,
+          "bottom_input_wires": 72,
+          "total_support_wires": 88
+        },
+        {
+          "k": 2,
+          "m": 1,
+          "bottoms": 40,
+          "bottom_input_wires": 188,
+          "total_support_wires": 228
+        },
+        {
+          "k": 2,
+          "m": 2,
+          "bottoms": 48,
+          "bottom_input_wires": 272,
+          "total_support_wires": 320
+        },
+        {
+          "k": 2,
+          "m": 3,
+          "bottoms": 56,
+          "bottom_input_wires": 380,
+          "total_support_wires": 436
+        },
+        {
+          "k": 3,
+          "m": 1,
+          "bottoms": 152,
+          "bottom_input_wires": 1360,
+          "total_support_wires": 1512
+        }
+      ]
+    },
+    "semantic_pruning": {
+      "gates": 1600,
+      "gates_pruned": 907,
+      "address_dependent_gates": 683,
+      "semantic_middle_cut_checks": 1776
+    },
+    "incidence": {
+      "profiles": 3276,
+      "dense_separated_middle_cuts": 3936,
+      "table_support_pair_charges": 800
+    },
+    "monotone_owner": {
+      "complementary_singleton_slab_cases": 4352,
+      "owned_cases": 756
+    },
+    "point_helpers": {
+      "exact_rational_helper_identities": 624,
+      "omission_coefficients": 33,
+      "helper_essential_edges": 922
+    },
+    "lex_compiler": {
+      "compiled_raw_inputs": 131580,
+      "thresholds": 773
+    }
+  }
+}

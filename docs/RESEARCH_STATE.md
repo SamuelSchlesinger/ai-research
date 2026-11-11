@@ -441,3 +441,16 @@ All four round-three reports, their shared board and exact artifacts are archive
 - UP1 characterizes amplitude normalization on the punctured integer square for the entire class $f(u+v)+g(u-v)+h(u)+j(v)$: optimal signed amplitude ratio is $r=\lfloor(R+1)/2\rfloor$, optimal additive product error is $(r-1)/(r+1)$, achieved by a 4r-gate witness. A finite-direction-budget obstruction extends the specified exact-product dead end; large/irrational slopes escape. This is a local identity theorem, not an unrestricted Andreev lower bound.
 
 A separate user-requested Astra max-effort agent now studies actual support-wire bounds for both ordinary Andreev and parity in `/tmp/andreev_gap/wires_astra/`. It will verify current exact/average-case baselines and test whether the profile/helper mechanisms strengthen wire bounds. That work is ongoing and excluded from this completed-round snapshot. No gate lower bound is multiplied by n without a proved density requirement.
+
+
+## 25. Completed wire investigation
+
+Report, primary-source evidence and exact checks are in `experiments/wires_astra/`. Wires count actual nonzero aggregated input-to-bottom, bottom-to-top and raw-to-top edges; coefficient magnitudes and majority multiplicities are different resources. No unrestricted exact Andreev wire exponent improvement was obtained; the shared paper was not edited.
+
+Verified unrestricted baselines: exact ordinary Andreev has $\Omega(n^{5/2}/\log^{5/2}n)$ to $O(n^3)$ support wires. Fixed-error exponent 2.5 is matched. The documented epsilon-squared lower regime requires $\varepsilon\ge3(k+2)/\sqrt N$; gate-only small-advantage improvements are not wire improvements. Exact parity has $\Omega(n^{32/19}/\log^{32/19}n)$ to $O(n^2)$ wires by the classical Paturi-Saks input-differentiation reduction and the known Sauermann-Xu slicing theorem. Polynomially bounded integer weights admit the stronger classical $\Omega(n^2/\log^2n)$ lower bound. Uniform 99-percent parity approximation has matched gate/wire exponents 1/2 and 3/2.
+
+Strongest restricted deduction: bounded integer address magnitudes constant within each block force wire exponent three, matching the exact cubic upper exponent. The proof semantically removes irrelevant magnitude classes, then shows gates charged on middle character cuts have at least a constant fraction of all address variables essential. Only then is gate incidence multiplied by that density. It permits dense signed table normals, unrestricted masks/top weights and the report's specified helpers. This is not a blanket inference $W\ge nS$.
+
+For arbitrary-real two-scale block profiles with at most R masks per profile, the same semantic transfer gives $\Omega(n^3/(R\log^3n))$ under the stated $R^2\le h/2$ hypothesis. Fixed/polylogarithmic R gives exponent three; replacing the cap by an unrestricted gate count recovers only exponent 2.5. Other table-pair/semantic-character support inequalities give restricted exponent 51/19. Full hypotheses and helper qualifications are in sections 4-6.
+
+The parent reran the standard-library exact checker: parity, Andreev, semantic pruning, incidence, monotone-owner, point-helper and lex-compiler groups all passed. These are finite guardrails for written proofs, not Lean formalizations, exhaustive priority findings or independent theorem certifications.
