@@ -2,7 +2,7 @@
   "Authors": "Christian Reitwiessner",
   "status": "Whole-paper wording rewrite completed after two fresh Astra editorial rounds; precision fixes integrated; abstract remains explicitly provisional; not submitted",
   "pages": 10,
-  "source_sha256": "84995c9e9338ad635f51d9ded3b5d23fe88a3323d1f8525066cb610114dcbfa9",
+  "source_sha256": "43aa87b88a681507a5ac1d72733194bcd52be23ae1a716bc7ff1c6f6a28375e0",
   "duplicate_labels": 0,
   "missing_labels": [],
   "overfull_boxes": 0,
@@ -46,7 +46,7 @@
   "font_size_pt": 11,
   "margins_inches": 1,
   "visual_inspection": "Rendered final ten-page contact sheet and read the approximation page at full size; no layout defects observed",
-  "post_review_copy_edit": "Integrated second editorial proposal: O(n) gate-to-wire factor, unambiguous strictification, explicit Fourier sum range, fixed-weight entropy explanation, and Appendix A motivation/pagination.",
+  "post_review_copy_edit": "Added comparison table using epsilon advantage for gates and wires, explicit ranges, exact upper-bound comparison and coherent lower-bound comparison; shortened duplicated introductory text; retained ten pages and abstract TODO.",
   "approximation_checks": {
     "Authors": "Christian Reitwiessner",
     "status": "passed",

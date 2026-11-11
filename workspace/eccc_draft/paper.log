@@ -484,22 +484,21 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 28.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 52.
-
-[1
-
-]
 LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 
-98.
- (ot1lmss.fd
+113.
+
+(ot1lmss.fd
 File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmss' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [2] [3] [4] [5] [6]
+ [1
+
+] [2] [3] [4] [5] [6]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 4
-59.
+73.
  (t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -511,4 +510,4 @@ Package microtype Info: Loading generic protrusion settings for font family
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: EFD6FAB089256059E9BB47F793CD904F;1427.
  )
-Output written on paper.xdv (10 pages, 65984 bytes).
+Output written on paper.xdv (10 pages, 66844 bytes).

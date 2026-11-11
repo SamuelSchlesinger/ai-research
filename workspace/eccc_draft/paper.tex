@@ -62,46 +62,60 @@ We also consider \emph{exact balance}, $km=N$, when $k\mid2^k$.
 Finite-parameter results state their hypotheses separately.
 
 \paragraph{Results and methods.}
-Section~\ref{sec:identities} gives an $O(n^2)$ exact construction.
 Fourier inversion expresses lookup as a sum of table coefficients times
-address parities. Each product is a difference of functions of affine
-forms in the input bits. Successive differences give a \emph{threshold
-staircase} realizing each function with bottom gates, without intermediate
-parity gates. Appendix~\ref{sec:exact} reduces the size to
-$(5/16+o(1))n^2$; the other results do not use that refinement.
+address parities. Section~\ref{sec:identities} compiles each product directly
+into bottom thresholds, giving quadratic exact size; Appendix~\ref{sec:exact}
+refines the constant to $5/16$. Section~\ref{sec:approx} truncates the
+Fourier terms symmetrically. A table symmetry makes their errors
+orthogonal, yielding deterministic approximation circuits. Table~\ref{tab:bounds}
+summarizes the main comparisons.
 
-Section~\ref{sec:approx} gives deterministic circuits of size
-$O(n^{3/2}\sqrt{\log(1/\delta)})$ at uniform-input error $\delta$.
-Symmetric truncation makes each error odd in its table coefficient.
-A table symmetry makes these errors orthogonal, so their squared errors
-add in expectation. A partial Fourier sum gives agreement
-$1/2+\varepsilon$ with
-$O(\varepsilon^2n^{3/2}\sqrt{\log(1/\varepsilon)})$ gates for
-$N^{-1/2}\le\varepsilon\le1/8$.
+A bottom gate is \emph{sign-coherent} if its weights within each address
+block are all nonnegative or all nonpositive; signs may vary by block and
+gate. Our upper bounds use such gates. Their exact complexity has exponent
+$2$, while their fixed-error complexity has exponent $3/2$, up to logarithms.
 
-A bottom gate is \emph{sign-coherent} if, within each address block,
-its weights are all nonnegative or all nonpositive. The choice of sign
-may vary between blocks and gates. Both upper-bound constructions are
-sign-coherent. Section~\ref{sec:coherent} proves that exact computation
-by such circuits requires $\Omega(n^2/\log^3 n)$ gates, with arbitrary
-real table and output weights and direct input wires to the output.
-Together with the known approximation lower bound, this gives exponents
-$2$ for exact computation and $3/2$ for fixed error in $(0,1/2)$, up to
-logarithmic factors, within the sign-coherent class.
+\begin{table}[t]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Setting and resource & Earlier bound~\cite{KW} & Bound here \\
+\midrule
+Exact, gate upper bound
+ & $O(n^3/\log n)$ & $(5/16+o(1))n^2$ \\
+Advantage $\varepsilon$, gates
+ & $\Omega\!\left(\frac{\varepsilon^3n^{3/2}}{\log^3 n}\right)$
+ & $O\!\left(\varepsilon^2n^{3/2}\sqrt{\log(1/\varepsilon)}\right)$ \\
+Advantage $\varepsilon$, wires
+ & $\Omega\!\left(\frac{\varepsilon^3n^{5/2}}{\log^{7/2}n}\right)$
+ & $O\!\left(\varepsilon^2n^{5/2}\sqrt{\log(1/\varepsilon)}\right)$ \\
+Exact, coherent lower bound
+ & $\Omega(n^{3/2}/\log^3 n)$ & $\Omega(n^2/\log^3 n)$ \\
+\bottomrule
+\end{tabular}
+\caption{Balanced ordinary Andreev lookup. Advantage $\varepsilon$ means
+uniform-input agreement at least $1/2+\varepsilon$. The approximation rows
+compare earlier lower bounds with our upper bounds, matching up to logarithms
+at fixed advantage. Earlier bounds require $\varepsilon\gg\sqrt{\log n/n}$;
+our displayed upper bounds hold for $N^{-1/2}\le\varepsilon\le1/8$.
+Theorem~\ref{thm:avgupper} also handles larger advantage and gives the error
+parameterization. All upper bounds here are sign-coherent. The last row
+compares our restricted lower bound with the earlier unrestricted bound.}
+\label{tab:bounds}
+\end{table}
 
 \paragraph{Relation to earlier work.}
-Kane and Williams~\cite[Theorems~1.1--1.2]{KW} prove lower bounds of
-$\Omega(\varepsilon^3n^{3/2}/\log^3 n)$ gates and
-$\Omega(\varepsilon^3n^{5/2}/\log^{7/2}n)$ wires for agreement
-$1/2+\varepsilon$, when $\varepsilon\gg\sqrt{\log n/n}$.
-Their Section~5.2 states an $O(n^3/\log n)$ threshold upper bound and
-a quadratic bound in the different $\mathsf{MOD}_3\circ\mathsf{MOD}_2$
-basis. Their threshold construction expands lookup tests into parities
-and simulates them separately; ours first groups terms by address
-character. Their Section~4 approximates parity by central-window
-staircases, and Section~6 notes the $\Omega(N^{-1/2})$ correlation with
-table majority. Our approximation adds odd-error orthogonality and
-applies it to partial table votes.
+Kane and Williams~\cite[Theorems~1.1--1.2]{KW} give the earlier bounds
+in Table~\ref{tab:bounds}. Their Section~5.2 also gives a quadratic bound
+in the different $\mathsf{MOD}_3\circ\mathsf{MOD}_2$ basis. Their threshold
+construction expands lookup tests into parities and simulates them
+separately; ours first groups by address character. Their Section~4
+approximates parity by central-window staircases, and Section~6 notes
+correlation with table majority. Our approximation adds odd-error
+orthogonality and applies it to partial table votes.
 
 Threshold staircases are classical; see Hajnal et al.~\cite[Proposition~2.1]{HMPST}
 for symmetric functions and Hansen--Podolskii~\cite[Theorem~5]{HP} for a
@@ -488,7 +502,6 @@ $$
 For $m=\lfloor N/k\rfloor$, its size is $(5/16+o(1))n^2$.
 \end{theorem}
 
-\newpage % Keep the construction's local definitions together.
 \begin{proof}
 \emph{Affine forms and the staircase.}
 Write $s_i=|a_i|$ and $\sigma=\sum_i s_i$, so
