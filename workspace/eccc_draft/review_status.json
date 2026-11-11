@@ -2,7 +2,7 @@
   "Authors": "Christian Reitwiessner",
   "status": "Completed two independent correctness/readability reviews and related-work audit; final local copy edits incorporated; not submitted",
   "pages": 10,
-  "source_sha256": "60f48866b54a62b387bda831c376a19b36eb9c3b7273293dbd444249d3924005",
+  "source_sha256": "30f20971ea6ed393b5b77e6a82e2d4749978f251aca18064f5d0105bd3f48e2a",
   "duplicate_labels": 0,
   "missing_labels": [],
   "overfull_boxes": 0,
@@ -30,5 +30,5 @@
   "font_size_pt": 11,
   "margins_inches": 1,
   "visual_inspection": "Initial contact sheet and selected pages of successive 11-point revisions rendered and inspected",
-  "post_review_copy_edit": "Added a change-of-basis explanation after the lookup lemma; rebuilt at ten pages without overfull boxes or undefined references."
+  "post_review_copy_edit": "Added change-of-basis explanation and renamed the formalization repository to cslib-frontier; rebuilt at ten pages."
 }
