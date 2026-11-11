@@ -6,7 +6,7 @@ Authors: Christian Reitwiessner
 This note explains two results from the paper *Depth-Two Threshold Circuits for Andreev's Function: Sharper Bounds* (`paper.tex`):
 
 - **Upper bound** (Theorem 5): an exact depth-two threshold circuit with $(\tfrac5{16}+o(1))n^2$ gates.
-- **Lower bound** (Appendix B, Theorem 18): every depth-two circuit whose *bottom* gates each have a single sign inside every address block needs $\Omega(n^2/\log^3 n)$ gates. The top gate is arbitrary.
+- **Lower bound** (Section 6, Theorem 12): every depth-two circuit whose *bottom* gates each have a single sign inside every address block needs $\Omega(n^2/\log^3 n)$ gates. The top gate is arbitrary.
 
 Together they say that the quadratic circuit is optimal, up to polylogarithmic factors, among circuits of the kind it belongs to. To beat $n^2$ by more than a polylogarithmic factor, a circuit needs bottom gates whose weights mix signs inside a block.
 

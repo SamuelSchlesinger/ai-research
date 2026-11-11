@@ -1,19 +1,15 @@
 {
   "Authors": "Christian Reitwiessner",
-  "pages": 19,
+  "pages": 20,
   "missing_labels": [],
   "duplicate_labels": false,
   "overfull_boxes": false,
   "undefined_references": false,
   "missing_glyphs": false,
-  "proof_status": "New upper-bound refinements are mathematical hand proofs, not Lean formalized",
+  "proof_status": "New upper-bound refinements and the sign-coherent lower bound are mathematical hand proofs, not Lean formalized",
   "visually_inspected_pages": [
     1,
     2,
-    6,
-    7,
-    8,
-    9,
-    14
+    13
   ]
 }
