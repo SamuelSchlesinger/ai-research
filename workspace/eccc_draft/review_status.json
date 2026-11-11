@@ -1,0 +1,30 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "Initial nine-page draft; multiple review rounds required, not final",
+  "pages": 10,
+  "source_sha256": "93c1b56223902cea4e3a5ab2ab2416fe3df351a60d0c19a3020789eb5b3db556",
+  "duplicate_labels": 0,
+  "missing_labels": [],
+  "overfull_boxes": 0,
+  "exact_checker": "verify_results.py passed: 58,264 exhaustive table/count cases plus larger sampled cases and exact cross-mask moments",
+  "reviews": [
+    {
+      "round": "related work",
+      "status": "running",
+      "report": "/tmp/andreev_gap/eccc_reviews/related_work.md"
+    },
+    {
+      "round": 1,
+      "status": "running",
+      "report": "/tmp/andreev_gap/eccc_reviews/round1.md"
+    },
+    {
+      "round": 2,
+      "status": "planned: fresh reviewer after round-one revisions",
+      "focus": "standalone proofs, clarity, small local notation, citation audit"
+    }
+  ],
+  "font_size_pt": 11,
+  "margins_inches": 1,
+  "visual_inspection": "Initial 9-page contact sheet checked; 11-point 10-page revision rendered for inspection."
+}

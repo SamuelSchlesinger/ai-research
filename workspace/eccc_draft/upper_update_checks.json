@@ -1,0 +1,152 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "exact_construction": [
+    {
+      "k": 1,
+      "m": 1,
+      "bottoms": 6,
+      "bound": 8,
+      "cases": 8,
+      "minimum_signed_score": 2
+    },
+    {
+      "k": 1,
+      "m": 2,
+      "bottoms": 10,
+      "bound": 12,
+      "cases": 12,
+      "minimum_signed_score": 2
+    },
+    {
+      "k": 1,
+      "m": 3,
+      "bottoms": 16,
+      "bound": 20,
+      "cases": 16,
+      "minimum_signed_score": 2
+    },
+    {
+      "k": 1,
+      "m": 4,
+      "bottoms": 20,
+      "bound": 24,
+      "cases": 20,
+      "minimum_signed_score": 2
+    },
+    {
+      "k": 2,
+      "m": 1,
+      "bottoms": 21,
+      "bound": 23,
+      "cases": 64,
+      "minimum_signed_score": 4
+    },
+    {
+      "k": 2,
+      "m": 2,
+      "bottoms": 31,
+      "bound": 34,
+      "cases": 144,
+      "minimum_signed_score": 4
+    },
+    {
+      "k": 2,
+      "m": 3,
+      "bottoms": 49,
+      "bound": 53,
+      "cases": 256,
+      "minimum_signed_score": 4
+    },
+    {
+      "k": 2,
+      "m": 4,
+      "bottoms": 59,
+      "bound": 64,
+      "cases": 400,
+      "minimum_signed_score": 4
+    },
+    {
+      "k": 3,
+      "m": 1,
+      "bottoms": 65,
+      "bound": 65,
+      "cases": 2048,
+      "minimum_signed_score": 8
+    },
+    {
+      "k": 3,
+      "m": 2,
+      "bottoms": 87,
+      "bound": 87,
+      "cases": 6912,
+      "minimum_signed_score": 8
+    },
+    {
+      "k": 3,
+      "m": 3,
+      "bottoms": 128,
+      "bound": 128,
+      "cases": 16384,
+      "minimum_signed_score": 8
+    },
+    {
+      "k": 3,
+      "m": 4,
+      "bottoms": 150,
+      "bound": 150,
+      "cases": 32000,
+      "minimum_signed_score": 8
+    },
+    {
+      "k": 4,
+      "m": 4,
+      "bottoms": 370,
+      "bound": 374,
+      "sampled_cases": 20
+    },
+    {
+      "k": 5,
+      "m": 6,
+      "bottoms": 1323,
+      "bound": 1323,
+      "sampled_cases": 20
+    },
+    {
+      "k": 6,
+      "m": 10,
+      "bottoms": 5072,
+      "bound": 5088,
+      "sampled_cases": 20
+    },
+    {
+      "k": 8,
+      "m": 32,
+      "bottoms": 82350,
+      "bound": 82414,
+      "sampled_cases": 20
+    }
+  ],
+  "masked_moments": [
+    {
+      "radius": 1,
+      "cross_moments_zero": true,
+      "mean_square_error": "171/4"
+    },
+    {
+      "radius": 2,
+      "cross_moments_zero": true,
+      "mean_square_error": "501/16"
+    },
+    {
+      "radius": 3,
+      "cross_moments_zero": true,
+      "mean_square_error": "69/4"
+    },
+    {
+      "radius": 4,
+      "cross_moments_zero": true,
+      "mean_square_error": "21/4"
+    }
+  ],
+  "scope": "Finite exact checks of raw gate formulas and paper algebra; not a substitute for universal proofs"
+}
