@@ -1,0 +1,12 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "passed",
+  "odd_pair_moments": 140,
+  "table_involutions": 7268,
+  "conditional_error_moments": 14820,
+  "full_score_inputs": 514200,
+  "compiled_values": 671,
+  "average_tail_bounds": 135,
+  "majority_agreement_cases": 135,
+  "raw_gate_score_inputs": 2976
+}

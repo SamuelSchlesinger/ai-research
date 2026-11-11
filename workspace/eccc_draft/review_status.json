@@ -1,8 +1,8 @@
 {
   "Authors": "Christian Reitwiessner",
-  "status": "Completed two independent correctness/readability reviews and related-work audit; final local copy edits incorporated; not submitted",
+  "status": "Substantially rewritten after third Astra review; deterministic sign-coherent approximation independently checked; literature audit completed; not submitted",
   "pages": 10,
-  "source_sha256": "30f20971ea6ed393b5b77e6a82e2d4749978f251aca18064f5d0105bd3f48e2a",
+  "source_sha256": "e5d439e0badc59fec617393e8c10af3f6249738644587313ff2063e0fd048655",
   "duplicate_labels": 0,
   "missing_labels": [],
   "overfull_boxes": 0,
@@ -25,10 +25,29 @@
       "status": "completed: READY, no mathematical blockers; local copy edits incorporated",
       "focus": "standalone proofs, clarity, small local notation, citation audit",
       "archived_report": "reviews/round2.md"
+    },
+    {
+      "round": 3,
+      "status": "Completed: substantial rewrite and unmasked/coherent approximation proposed by Astra; parent verified and integrated",
+      "archived_report": "reviews/revision3/astra_review.md",
+      "literature_audit": "reviews/revision3/literature_audit.md"
     }
   ],
   "font_size_pt": 11,
   "margins_inches": 1,
-  "visual_inspection": "Initial contact sheet and selected pages of successive 11-point revisions rendered and inspected",
-  "post_review_copy_edit": "Added change-of-basis explanation and renamed the formalization repository to cslib-frontier; rebuilt at ten pages."
+  "visual_inspection": "Rendered final ten-page contact sheet and read the approximation page at full size; no layout defects observed",
+  "post_review_copy_edit": "Integrated proposed rewrite, retained matrix explanation and cslib-frontier reference, strengthened odd-error lemma to arbitrary second factor, and added contemporary function-specific literature context.",
+  "approximation_checks": {
+    "Authors": "Christian Reitwiessner",
+    "status": "passed",
+    "odd_pair_moments": 140,
+    "table_involutions": 7268,
+    "conditional_error_moments": 14820,
+    "full_score_inputs": 514200,
+    "compiled_values": 671,
+    "average_tail_bounds": 135,
+    "majority_agreement_cases": 135,
+    "raw_gate_score_inputs": 2976
+  },
+  "literature_audit": "reviews/revision3/literature_audit.md: thirteen annotated primary-source entries, scope and limitations stated"
 }

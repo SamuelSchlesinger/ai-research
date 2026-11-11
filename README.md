@@ -3,7 +3,7 @@ Authors: Christian Reitwiessner
 
 # Andreev threshold-circuit research — continuation archive
 
-Latest research snapshot: [9 November 2026 update](docs/UPDATE_2026-11-09.md) — completed coherence, one-table-bit, and extractor investigations; proof and review status retained.
+Current submission draft: [ten-page ECCC-targeted paper](workspace/eccc_draft/paper.pdf), revised 11 November 2026 after three Astra reviews. The latest revision gives explicit deterministic, sign-coherent approximation circuits; see [the literature audit](workspace/eccc_draft/reviews/revision3/literature_audit.md). No ECCC submission has been made. Earlier snapshot: [9 November update](docs/UPDATE_2026-11-09.md).
 
 
 This private repository preserves the research state, proofs, constructions, experiments, and paper sources needed to continue the Andreev research without the original chat or `/tmp` workspace. It is organized by mathematical content, not by timeline.
@@ -16,7 +16,8 @@ The main open objective is an exact **subquadratic** depth-two threshold circuit
 
 - [`docs/RESEARCH_STATE.md`](docs/RESEARCH_STATE.md): definitions, strongest results, proof status, corrections, and open directions.
 - [`docs/CONTINUE.md`](docs/CONTINUE.md): current work, precise generator-SMT specification, reproducibility, and user preferences.
-- [`workspace/threshold_paper/paper.pdf`](workspace/threshold_paper/paper.pdf) and [`paper.tex`](workspace/threshold_paper/paper.tex): updated research paper, including the strongest general exact upper bound and improved average-case upper bounds, with corrected Lean coverage. Exploratory and finite-instance results remain in the research reports.
+- [`workspace/eccc_draft/paper.pdf`](workspace/eccc_draft/paper.pdf) and [`paper.tex`](workspace/eccc_draft/paper.tex): compact current paper, full proofs including appendices, explicit approximation construction, reviews and three checking scripts.
+- [`workspace/threshold_paper/paper.pdf`](workspace/threshold_paper/paper.pdf) and [`paper.tex`](workspace/threshold_paper/paper.tex): longer earlier research paper, including the strongest general exact upper bound and improved average-case upper bounds, with corrected Lean coverage. Exploratory and finite-instance results remain in the research reports.
 - [`workspace/`](workspace/): original explanatory notes, earlier PDFs, errata, and checking scripts.
 - [`experiments/`](experiments/): preserved research directories, including construction code, exact witnesses, reports, reviews, and solver logs. Python caches and installed dependencies are excluded.
 - [`formalization/`](formalization/): public Lean PR references, pinned commits, and a snapshot patch of the remaining open PR.

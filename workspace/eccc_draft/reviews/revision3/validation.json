@@ -1,0 +1,14 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "pages": 10,
+  "documentclass": "article 11pt",
+  "margins": "1in",
+  "overfull": false,
+  "undefined_references": false,
+  "hashes": {
+    "reviewed_source.tex": "30f20971ea6ed393b5b77e6a82e2d4749978f251aca18064f5d0105bd3f48e2a",
+    "reviewed_source.pdf": "09a0fdd8c445203eff947e11d3f78ba80eb2a01fc157e4838c37964555948141",
+    "paper.tex": "5c58b32d48d57d77434a22c3019a76c0c668da1ac18bd1ab5d96178b56c436a8",
+    "paper.pdf": "9a7e755395637ab0a1034d3d338ae1819b141d6823e33eaf68b1c1dc605f7f88"
+  }
+}

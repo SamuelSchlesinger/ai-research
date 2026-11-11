@@ -436,40 +436,40 @@ LaTeX Info: Redefining \nameref on input line 23.
 \openout3 = `paper.out'.
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 2
-5.
+7.
  (ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
-5.
+7.
  (omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-25.
+27.
 
 (omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-25.
+27.
  (omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 25.
+(Font)              <12> on input line 27.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 25.
+(Font)              <8> on input line 27.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 25.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 25.
+(Font)              <6> on input line 27.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 27.
 
  (umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 25.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 27.
 
  (umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -477,19 +477,19 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 28.
+(Font)              <10> on input line 30.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 28.
+(Font)              <7> on input line 30.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 28.
+(Font)              <5> on input line 30.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 49.
+(Font)              <10.95> on input line 53.
 
 [1
 
 ]
 LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 
-89.
+94.
  (ot1lmss.fd
 File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -497,9 +497,9 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmss' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [2] [3] [4] [5] [6] [7] [8] [9]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 6
-41.
+ [2] [3] [4] [5] [6]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 4
+34.
  (t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -507,17 +507,8 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 644.
-
-Underfull \hbox (badness 1527) in paragraph at lines 670--674
-[]\T1/lmr/m/n/10 A. Po-tukuchi. On the $[][]\OT1/lmr/m/n/10 [\OMS/lmsy/m/n/10 ^
-^H\OT1/lmr/m/n/10 ]$ \T1/lmr/m/n/10 Com-plex-ity of An-dreev's Prob-lem. FSTTCS
-, 2019, Ar-ti-cle 25.
- []
-
-[10] (paper.aux)
+ [7] [8] [9] [10] (paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 0A25C5CB66F8A465C41B924C3DCB9A16;1423.
+(rerunfilecheck)             Checksum: 145A069019E8475037F5604EFED67B7F;1440.
  )
-Output written on paper.xdv (10 pages, 65436 bytes).
+Output written on paper.xdv (10 pages, 62724 bytes).
