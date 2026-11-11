@@ -1,0 +1,23 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "exact_score_identity_and_margin_cases": 119110,
+  "explicit_raw_gate_evaluations": 2800,
+  "majority_agreements": {
+    "1": 1.0,
+    "2": 0.75,
+    "4": 0.6875,
+    "8": 0.63671875,
+    "16": 0.5981903076171875
+  },
+  "tail_checks": {
+    "cases": 7800,
+    "maximum_ratio": [
+      0.06300510073161524,
+      [
+        8,
+        1,
+        1
+      ]
+    ]
+  }
+}

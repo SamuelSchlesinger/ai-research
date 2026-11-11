@@ -1,8 +1,8 @@
 {
   "Authors": "Christian Reitwiessner",
-  "status": "Initial nine-page draft; multiple review rounds required, not final",
+  "status": "Ten-page draft revised after related-work audit and first correctness review; fresh second review running",
   "pages": 10,
-  "source_sha256": "93c1b56223902cea4e3a5ab2ab2416fe3df351a60d0c19a3020789eb5b3db556",
+  "source_sha256": "0e460a861950e0c9d55fdbf162caefaef482a01ad24085b1bc845b280757a2ac",
   "duplicate_labels": 0,
   "missing_labels": [],
   "overfull_boxes": 0,
@@ -10,21 +10,23 @@
   "reviews": [
     {
       "round": "related work",
-      "status": "running",
-      "report": "/tmp/andreev_gap/eccc_reviews/related_work.md"
+      "status": "completed; citation and attribution corrections incorporated",
+      "report": "/tmp/andreev_gap/eccc_reviews/related_work.md",
+      "archived_report": "reviews/related_work.md"
     },
     {
       "round": 1,
-      "status": "running",
-      "report": "/tmp/andreev_gap/eccc_reviews/round1.md"
+      "status": "completed: no fatal defect; limited repairs incorporated",
+      "report": "/tmp/andreev_gap/eccc_reviews/round1.md",
+      "archived_report": "reviews/round1.md"
     },
     {
       "round": 2,
-      "status": "planned: fresh reviewer after round-one revisions",
+      "status": "starting on revised source",
       "focus": "standalone proofs, clarity, small local notation, citation audit"
     }
   ],
   "font_size_pt": 11,
   "margins_inches": 1,
-  "visual_inspection": "Initial 9-page contact sheet checked; 11-point 10-page revision rendered for inspection."
+  "visual_inspection": "Initial contact sheet and selected pages of successive 11-point revisions rendered and inspected"
 }

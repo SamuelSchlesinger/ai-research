@@ -26,10 +26,11 @@
 Andreev's function reads an arbitrary table at an address obtained by taking
 parities of disjoint input blocks. We give an exact depth-two threshold
 circuit with $(5/16+o(1))n^2$ gates, improving the previously stated
-$O(n^3/\log n)$ upper bound. For uniform inputs, error $\delta$ needs
+$O(n^3/\log n)$ upper bound. For uniform inputs and $0<\delta\le1/2$, error $\delta$ needs
 $O(n^{3/2}\sqrt{\log(1/\delta)})$ gates; a tunable version attains advantage
-$\varepsilon$ with $O(\varepsilon^2n^{3/2}\sqrt{\log(1/\varepsilon)})$ gates.
-For fixed error the upper exponent matches known lower bounds up to
+$\varepsilon$ with $O(\varepsilon^2n^{3/2}\sqrt{\log(1/\varepsilon)})$ gates
+for $N^{-1/2}\le\varepsilon\le1/8$, where $N$ is the table length.
+For fixed $0<\delta<1/2$, the upper exponent matches known lower bounds up to
 logarithms. We also prove an $\Omega(n^2/\log^3n)$ lower bound when every
 bottom gate has weights of one sign within each address block. The exact
 construction belongs to this class. In a different restricted class, where
@@ -89,7 +90,9 @@ different $\mathsf{MOD}_3\circ\mathsf{MOD}_2$ basis. They Fourier-expand the
 lookup tests and separately simulate the resulting parities. Fourier
 inversion itself is standard; the savings here come from grouping terms
 by address character before compiling them. The staircase representation
-of a bounded integer linear form is also standard~\cite{HMPST,HP}.
+of a bounded integer linear form is also standard; see the symmetric-function
+construction of Hajnal et al.~\cite[Proposition~2.1]{HMPST} and the related
+representation theorem of Hansen and Podolskii~\cite{HP}.
 Kane--Williams use concentration-window staircases for approximate parity;
 our approximation proof combines that tool with lookup and cancellation
 of cross-character errors.
@@ -101,10 +104,8 @@ cubes. Kabanets, Kane and Lu~\cite{KKL} extend restriction methods to
 polynomial threshold functions. Chen, Santhanam and Srinivasan~\cite{CSS}
 study average-case threshold hardness, including a \emph{generalized}
 Andreev function with encoded rather than independent table entries.
-These are distinct parameterized functions. Potukuchi's polynomial-graph
-containment ``Andreev's Problem''~\cite{Pot} is different again. Neither
-its $\mathsf{AC}^0[\oplus]$ lower bounds nor results for encoded lookup
-transfer here without a size- and model-preserving reduction.
+These are distinct parameterized functions, as is polynomial-containment
+``Andreev's Problem''~\cite{Pot}.
 We make no exhaustive priority claim for the elementary identities or
 restricted-class corollaries in this note.
 
@@ -133,7 +134,7 @@ $$
 and the product is $N$ for $c=b$ and $0$ otherwise.
 \end{proof}
 
-Let $\varphi(u)=(-1)^u u$ for integers $\theta$.
+Let $\varphi(u)=(-1)^u u$ for integers $u$.
 
 \begin{lemma}[Removing the parity factor]\label{lem:parity}
 If $X$ is an even integer and $t$ is an integer, then
@@ -194,15 +195,14 @@ For $m=\lfloor N/k\rfloor$, its size is $(5/16+o(1))n^2$.
 \begin{proof}
 \emph{Forms used only in this proof.}
 Write $s_i=|a_i|$, $\sigma=\sum_i s_i$, and let $e_i$ be the address with
-only coordinate $i$ equal to one. Put
+only coordinate $i$ equal to one; $x_0$ means the all-zero address entry. Put
 $$
 z=\sum_{c\ne0}x_c,\quad E=\sum_i x_{e_i},\quad
 w=2z+2\alpha E+\sigma,\quad R=2(N-1)+2\alpha k+km,\quad C=N(R+4).
 $$
 Thus $0\le w\le R$. For each nonempty $S\subseteq[k]$, define
 $$
-Y_S=\sum_{c:S\cdot c\text{ odd}}x_c,\quad
-W_S=Y_S+\alpha\sum_{i\in S}x_{e_i},\quad
+W_S=\sum_{c:S\cdot c\text{ odd}}x_c+\alpha\sum_{i\in S}x_{e_i},\quad
 \kappa_S=-4(2\alpha+1)(k-2|S|),
 $$
 and let $r_S(u)=-8\lceil u/2\rceil^2+\kappa_S\lceil u/2\rceil$.
@@ -229,9 +229,12 @@ characters; all sums over $S$ are over nonempty sets:
  &=\frac N2\left(\sigma^2+\sum_i s_i^2\right)
    +N(\sigma+1)\ind{b\ne0}+N\sum_i s_i\ind{b=e_i}.
 \end{align*}
-For example, the first is character orthogonality applied to $Y_S$ and to
-$\ind{i\in S}$; the other two use the same identity and
-$\lceil t/2\rceil=(t+\ind{t\text{ odd}})/2$.
+To check the quadratic expansion, for distinct nonzero addresses $c,d$ use
+$$\sum_S[S\cdot c\text{ odd}]=N/2,\qquad
+\sum_S[S\cdot c\text{ odd}][S\cdot d\text{ odd}]=N/4.$$
+For $c=d$ the second sum is $N/2$. These counts expand $W_S^2$ directly;
+the other terms use the same orthogonality and
+$\lceil t/2\rceil=(t+[t\text{ odd}])/2$.
 Also
 $$
 4W(-1)^t=4W-8\lceil(2W+t)/2\rceil^2+8W^2+8Wt+8\lceil t/2\rceil^2.
@@ -241,7 +244,11 @@ $$
 \sum_S\kappa_S\bigl(\lceil t_S/2\rceil-t_S/2\bigr)
  =N(2\alpha+1)\sum_i\ind{b=e_i}.
 $$
-Substitution in \eqref{eq:bestscore} now gives the simple closed form
+The remaining linear shifts satisfy
+$$\sum_S\kappa_SW_S=2N(2\alpha+1)(1+\alpha)E,\qquad
+\frac12\sum_S\kappa_St_S=N(2\alpha+1)\sigma.$$
+These follow by writing $k-2|S|=\sum_i(-1)^{[i\in S]}$ and applying the
+same orthogonality. Substitution in \eqref{eq:bestscore} gives
 \begin{equation}\label{eq:bestclosed}
 P=\begin{cases}
 N(w+2)-Cx_0,&b=0,\\
@@ -326,9 +333,10 @@ $1/2+p(L)/2$, where $p(1)=1$ and
 $$
 p(L)=2^{-L}\binom{L}{L/2}\ge(2L)^{-1/2}\qquad(L\ge2).
 $$
-Indeed, conditioning on the selected bit leaves a sum of $L-1$ independent
-signs; the excess agreement is half the probability that this sum equals
-$-1$. This is the subcube-majority calculation used by the earlier circuit.
+For $L\ge2$, $L$ is even because it is a power of two. Conditioning on
+the selected bit leaves $L-1$ independent signs; the excess agreement is
+half the probability that their sum equals $-1$. The case $L=1$ is exact.
+The vote is $[-P_*\ge2q]$ if $q<N$, and $[-P_*\ge0]$ if $q=N$.
 
 \emph{Masked, truncated staircases.}
 Independently for each nonempty $S\subseteq[r]$, choose a uniform mask $z_S$
@@ -362,7 +370,7 @@ $\eta_S=(-1)^{t_S}(-1)^{D_S}$. Therefore
 $$
 \mathbb E_{z_S}[e_S\mid x,a]=(-1)^{t_S}g_S(X_S)
 $$
-for a function $g_S$ of the table alone. For $S\ne T$, averaging the product
+for a function $g_S:\mathbb Z\to\mathbb R$ independent of $a$. For $S\ne T$, averaging the product
 over masks and then uniform raw addresses gives
 $$
 \mathbb E_{z,x,a}[e_Se_T]
@@ -382,10 +390,13 @@ $$
 \mathbb E\bigl[U^2\ind{|U|>R}\bigr]
  \le16v_S\exp\bigl(-R^2/(16v_S)\bigr).
 $$
-For example, integrate
-$\Pr(|U-\mathbb EU|>t)\le2e^{-t^2/(2v_S)}$ from $t=R/2$;
-the polynomial factor is absorbed by doubling the denominator in the
-exponent. Put $v=N+rm/4$. Since zero truncation removes only tail values,
+Here are the constants explicitly. Put $V=U-\mathbb EU$. Since
+$|\mathbb EU|\le1/2$ and $R\ge1$, $|U|>R$ implies $|V|>R/2$ and
+$U^2\le2V^2+1/2$. Integrating the tail
+$\Pr(|V|>t)\le2e^{-t^2/(2v_S)}$ gives
+$$\mathbb E[U^2[|U|>R]]\le(R^2+8v_S+1)e^{-R^2/(8v_S)}
+ \le16v_Se^{-R^2/(16v_S)}.$$
+The last step uses $v_S\ge2$ and $1+t\le e^t$. Put $v=N+rm/4$. Since zero truncation removes only tail values,
 \eqref{eq:maskl2} implies
 $$
 \mathbb E_{z,x,a}(P_z-P_*)^2
@@ -414,7 +425,9 @@ $q\ge32\varepsilon^2N$ and set $\delta=\varepsilon$.
 Then $q<64\varepsilon^2N$, $q\le N$, and the vote's advantage is at least
 $\sqrt{q/(8N)}\ge2\varepsilon$. Its truncated circuit has the required
 advantage, with $\log(16v/(q\delta))=O(\log(1/\varepsilon))$.
-Every bottom has at most $n$ input wires, proving the stated wire bound.
+With $G$ bottoms the full wire count is at most $nG+G+n$, including
+raw top wires and gate-to-top edges. The parameter range absorbs the
+additive terms, proving the stated wire bound.
 \end{proof}
 \section{A near-quadratic bound for coherent gates}\label{sec:coherent}
 This section uses only the original parameters $N,k,m$, the table $x$, and
@@ -458,8 +471,8 @@ Likewise the top gate computes
 $\ind{\sum_jv_jg_j+\mu\cdot z\ge\kappa}$, where $v_j$ are its weights on the
 bottom gates and $\mu$ its weights on the live positions; the gates that
 do not split $q$ are constant and are absorbed, together with the table and
-the fixed address bits, into $\kappa$. So only $\tau_j$ and $\kappa$ depend
-on $x$.
+the fixed address bits, into $\kappa$. After absorption the sum is over the splitting set $I$ only.
+Thus only $\tau_j$ and $\kappa$ depend on $x$.
 
 Therefore the function $z\mapsto x_{(q\bmod2)\oplus z}$, and with it $x$, is
 determined by: the set $I$ of splitting gates; for each $j\in I$ the
@@ -510,14 +523,17 @@ giving the claimed asymptotic bound. Exact balance gives the same estimate.
 A different restriction permits mixed signs but requires every nonzero
 address coefficient in a gate to have the same absolute value, with no
 address coordinates omitted. This is much more restrictive than allowing
-arbitrary integer weights. The argument below uses elementary literal
-identification and parity orthogonality.
+arbitrary integer weights. The argument below combines literal identifications with the classical
+parity-order obstruction of Minsky and Papert~\cite[Section~3.1]{MP}:
+a threshold of predicates computing parity must contain a predicate
+depending on every variable. We give the short orthogonality proof inside
+the argument, including the treatment of raw top inputs.
 \begin{theorem}\label{thm:fullsign}
 Let $k\ge2$, $m\ge1$, and $d=m\lfloor k/2\rfloor\ge2$. Suppose a depth-two
 threshold circuit computes $A_{k,m}$ exactly, and every bottom gate's address
 normal is either zero or of the form
 $$
-\gamma_j=G_j\sigma_j,\qquad G_j>0,\quad
+\gamma_j=\rho_j\sigma_j,\qquad \rho_j>0,\quad
 \sigma_j\in\{-1,1\}^{km}.
 $$
 Table coefficients, thresholds, top coefficients, and direct raw-input
@@ -530,7 +546,8 @@ Put $r=\lfloor k/2\rfloor$. Fix the table to
 $x_c=\bigoplus_{i=1}^r c_i$. If $k$ is odd, also fix one block outside
 $\{1,\ldots,r\}$ to zero. There remain $2r$ live blocks: the output is
 parity on the $d=rm$ bits in the first $r$ blocks and ignores the other
-$d$ bits. Use sign coordinates $z_i,w_i\in\{-1,1\}$, pairing these selected
+$d$ bits. Write each sign coordinate as $2a-1$, and call the resulting selected
+and ignored coordinates $z_i,w_i\in\{-1,1\}$. Pair these selected
 and ignored bits arbitrarily. After possibly reversing its orientation,
 the circuit's top score has the sign of
 $$
@@ -595,8 +612,8 @@ result also rules out relying exclusively on full-support equal-magnitude
 address normals.
 \item Can the exact wire upper bound be made $o(n^3)$, ideally
 $O(n^{3-\eta})$? The known unrestricted wire lower exponent is $5/2$.
-A gate bound cannot simply be multiplied by $n$ without proving essential
-input dependence.
+The gate upper bound gives $O(n^3)$ wires. Transferring a gate
+\emph{lower} bound to wires requires additional support information.
 \item What is the optimal size as error tends to zero? The upper bound
 $O(n^{3/2}\sqrt{\log(1/\delta)})$ interpolates to quadratic size at
 exponentially small error, but the known lower bounds do not give a
@@ -608,10 +625,12 @@ proof averages over independently chosen masks.
 
 \paragraph{Proof status and reproducibility.}
 The claims here are mathematical proofs. Exact finite checking scripts
-accompany the source to check the refined score, raw-gate counts, threshold
-ties, and the pairing identities; these computations do not replace the
-all-size arguments. Earlier simpler exact and windowed constructions have
-Lean formalizations, but this note does not claim formal verification of
+accompany the source to check the refined score, raw-gate counts and threshold ties
+(\texttt{verify\_results.py}), and masked restrictions, coherent cubes and
+pairing identities (\texttt{restriction\_checks.py}). These computations
+do not replace the all-size arguments. The earlier $3n^2/4$ construction
+has a merged Lean formalization\footnote{\url{https://github.com/cslib-community/complexitylib/pull/2813}.},
+but this note does not claim formal verification of
 the refined constant, the mean-square improvement, or the restricted lower
 bounds. The research and exposition were developed with AI assistance.
 
@@ -625,6 +644,9 @@ Threshold circuits of bounded depth. J. Comput. Syst. Sci. 46(2):129--154, 1993.
 \bibitem{HP} K.~A. Hansen and V.~V. Podolskii.
 Polynomial threshold functions and Boolean threshold circuits.
 Information and Computation 240:56--73, 2015.
+\bibitem{MP} M.~L. Minsky and S.~A. Papert.
+\emph{Perceptrons: An Introduction to Computational Geometry}.
+MIT Press, 1969; expanded edition, 1988. Section~3.1.
 \bibitem{IPS} R.~Impagliazzo, R.~Paturi, and M.~Saks.
 Size--depth tradeoffs for threshold circuits. SIAM J. Comput. 26(3):693--707, 1997.
 \bibitem{KKL} V.~Kabanets, D.~M. Kane, and Z.~Lu.

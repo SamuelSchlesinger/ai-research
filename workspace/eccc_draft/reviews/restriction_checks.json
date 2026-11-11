@@ -1,0 +1,7 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "mask_identity_cases": 354304,
+  "cross_character_sums": "exactly zero for each pair, k=2, m=1,2,3, radii 1,2,3,5",
+  "coherent_cube_threshold_tests": 7430,
+  "pairing_and_missing_coordinate_correlation_checks": 112320
+}
