@@ -1,0 +1,14 @@
+{
+  "authors": "Christian Reitwiessner",
+  "status": "VERIFIED",
+  "checks": {
+    "paired_audit": 2400,
+    "compiler_inputs": 6200,
+    "near_equal_ratios": 125,
+    "semantic_stability": 1550,
+    "one_survivor_parity": 124,
+    "compiled_partial_parity": 336,
+    "near_equal_walsh_scores": 768,
+    "near_equal_raw_bottom_evaluations": 165888
+  }
+}

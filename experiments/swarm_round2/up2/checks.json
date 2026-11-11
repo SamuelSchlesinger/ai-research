@@ -1,0 +1,47 @@
+{
+  "authors": "Christian Reitwiessner",
+  "status": "VERIFIED",
+  "table_pair_gate_values": 10400,
+  "half_open_slab_checks": 10400,
+  "exact_channel_cancellations": 7184,
+  "semantic_activation_subset_checks": 50,
+  "compiled_lookup_inputs": 19728,
+  "raw_bottom_evaluations": 4241536,
+  "character_pair_selected_edges": 587,
+  "instances": [
+    {
+      "k": 1,
+      "m": 2,
+      "bottoms": 8,
+      "min_signed_margin": 2
+    },
+    {
+      "k": 2,
+      "m": 2,
+      "bottoms": 56,
+      "min_signed_margin": 4
+    },
+    {
+      "k": 2,
+      "m": 3,
+      "bottoms": 72,
+      "min_signed_margin": 4
+    },
+    {
+      "k": 3,
+      "m": 1,
+      "bottoms": 172,
+      "min_signed_margin": 8
+    },
+    {
+      "k": 3,
+      "m": 2,
+      "bottoms": 232,
+      "min_signed_margin": 8
+    }
+  ],
+  "hypergeometric_overlap_checks": 10415,
+  "mixed_support_matching_formula_checks": 340,
+  "hybrid_bad_baseline_checks": 31952,
+  "hybrid_integer_interval_embeddings": 5775
+}

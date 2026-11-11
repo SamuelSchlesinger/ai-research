@@ -1,0 +1,13 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "VERIFIED: exact finite guardrails, not asymptotic evidence",
+  "exact_layer_identities": 5148,
+  "raw_gate_scores": 1020,
+  "exact_permanent_survival_cases": 40,
+  "literal_restrictions": 42800,
+  "zero_parity_correlations": 6172,
+  "exact_hypergeometric_moment_bounds": 10411,
+  "exact_binary_bregman_instances": 66064,
+  "exact_bernoulli_permanent_averages": 60,
+  "exact_balanced_histogram_energy_bounds": 653
+}

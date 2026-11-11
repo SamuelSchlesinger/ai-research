@@ -1,0 +1,26 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "all exact checks passed",
+  "checks": {
+    "incidence_table_address_cases": 18792,
+    "signed_square_staircases": 2197,
+    "exact_kernel_endpoint_cases": 8728,
+    "dyadic_sign_inputs": 5564,
+    "dyadic_active_count_range": [
+      1,
+      16
+    ],
+    "low_degree_parity_orthogonalities": 246,
+    "product_bank": {
+      "raw_thresholds_before_merging": 32768,
+      "grid_pairs": 256,
+      "minimum_absolute_kernel_sum": 189,
+      "maximum_absolute_kernel_sum": 247,
+      "rational_top_scale": "1/218",
+      "exact_uniform_error": "29/218",
+      "hybrid_inputs": 256,
+      "maximum_exact_hybrid_score_error": "29/218"
+    },
+    "arbitrary_weight_parity_correlation_cases": 3935
+  }
+}

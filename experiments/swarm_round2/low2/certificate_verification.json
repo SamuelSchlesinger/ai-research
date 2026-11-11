@@ -1,0 +1,10 @@
+{
+  "authors": "Christian Reitwiessner",
+  "status": "VERIFIED EXACT",
+  "signed_feature_equations": 57,
+  "positive_rational_rectangle_weights": 49,
+  "oriented_rows_checked": 1536,
+  "ordinary_rows_checked": 3840,
+  "minimum_ordinary_witnesses": 4,
+  "semantic_exclusions": 48
+}
