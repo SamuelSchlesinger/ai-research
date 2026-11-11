@@ -1,0 +1,217 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "all exact checks passed",
+  "script_sha256": "93151283b79a7d8dfe4eb3434835900660720588f209effbc1728c461dc7c66a",
+  "results": {
+    "prefix_chunk_compiler": {
+      "circuits": 17,
+      "all_independent_inputs": 12272,
+      "semantic_coordinate_witnesses": 1650,
+      "records": [
+        {
+          "k": 1,
+          "m": 1,
+          "prefix_bits": 0,
+          "bottoms": 6,
+          "main_input_wires": 15,
+          "correction_input_wires": 1,
+          "total_support_wires": 24
+        },
+        {
+          "k": 1,
+          "m": 1,
+          "prefix_bits": 1,
+          "bottoms": 6,
+          "main_input_wires": 12,
+          "correction_input_wires": 0,
+          "total_support_wires": 20
+        },
+        {
+          "k": 1,
+          "m": 2,
+          "prefix_bits": 0,
+          "bottoms": 8,
+          "main_input_wires": 24,
+          "correction_input_wires": 4,
+          "total_support_wires": 38
+        },
+        {
+          "k": 1,
+          "m": 2,
+          "prefix_bits": 1,
+          "bottoms": 8,
+          "main_input_wires": 24,
+          "correction_input_wires": 0,
+          "total_support_wires": 34
+        },
+        {
+          "k": 2,
+          "m": 1,
+          "prefix_bits": 0,
+          "bottoms": 32,
+          "main_input_wires": 150,
+          "correction_input_wires": 6,
+          "total_support_wires": 192
+        },
+        {
+          "k": 2,
+          "m": 1,
+          "prefix_bits": 1,
+          "bottoms": 33,
+          "main_input_wires": 108,
+          "correction_input_wires": 1,
+          "total_support_wires": 146
+        },
+        {
+          "k": 2,
+          "m": 1,
+          "prefix_bits": 2,
+          "bottoms": 40,
+          "main_input_wires": 96,
+          "correction_input_wires": 0,
+          "total_support_wires": 140
+        },
+        {
+          "k": 2,
+          "m": 2,
+          "prefix_bits": 0,
+          "bottoms": 40,
+          "main_input_wires": 216,
+          "correction_input_wires": 24,
+          "total_support_wires": 284
+        },
+        {
+          "k": 2,
+          "m": 2,
+          "prefix_bits": 1,
+          "bottoms": 42,
+          "main_input_wires": 192,
+          "correction_input_wires": 4,
+          "total_support_wires": 242
+        },
+        {
+          "k": 2,
+          "m": 2,
+          "prefix_bits": 2,
+          "bottoms": 56,
+          "main_input_wires": 216,
+          "correction_input_wires": 0,
+          "total_support_wires": 276
+        },
+        {
+          "k": 2,
+          "m": 3,
+          "prefix_bits": 0,
+          "bottoms": 48,
+          "main_input_wires": 294,
+          "correction_input_wires": 54,
+          "total_support_wires": 400
+        },
+        {
+          "k": 2,
+          "m": 3,
+          "prefix_bits": 1,
+          "bottoms": 51,
+          "main_input_wires": 300,
+          "correction_input_wires": 9,
+          "total_support_wires": 364
+        },
+        {
+          "k": 2,
+          "m": 3,
+          "prefix_bits": 2,
+          "bottoms": 72,
+          "main_input_wires": 384,
+          "correction_input_wires": 0,
+          "total_support_wires": 460
+        },
+        {
+          "k": 3,
+          "m": 1,
+          "prefix_bits": 0,
+          "bottoms": 136,
+          "main_input_wires": 1208,
+          "correction_input_wires": 24,
+          "total_support_wires": 1376
+        },
+        {
+          "k": 3,
+          "m": 1,
+          "prefix_bits": 1,
+          "bottoms": 140,
+          "main_input_wires": 784,
+          "correction_input_wires": 6,
+          "total_support_wires": 938
+        },
+        {
+          "k": 3,
+          "m": 1,
+          "prefix_bits": 2,
+          "bottoms": 161,
+          "main_input_wires": 608,
+          "correction_input_wires": 1,
+          "total_support_wires": 778
+        },
+        {
+          "k": 3,
+          "m": 1,
+          "prefix_bits": 3,
+          "bottoms": 208,
+          "main_input_wires": 592,
+          "correction_input_wires": 0,
+          "total_support_wires": 808
+        }
+      ]
+    },
+    "haar_decoder": {
+      "all_table_coefficient_checks": 5460,
+      "explicit_table_address_checks": 2120
+    },
+    "affine_guard_compiler": {
+      "gated_threshold_inputs": 25394,
+      "paired_table_sign_inputs": 50788,
+      "gated_entire_scores": 25394
+    },
+    "monochromatic_midpoint_bound": {
+      "blockwise_forms": 1960,
+      "monochromatic_levels": 17976,
+      "heterogeneous_scope_counterexample": [
+        [
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          0
+        ]
+      ]
+    },
+    "affine_plane_decoder": {
+      "exact_all_table_coefficient_checks": 4368,
+      "geometries": [
+        {
+          "q": 2,
+          "points": 4,
+          "lines": 6,
+          "table_support_per_line": 2
+        },
+        {
+          "q": 4,
+          "points": 16,
+          "lines": 20,
+          "table_support_per_line": 4
+        },
+        {
+          "q": 8,
+          "points": 64,
+          "lines": 72,
+          "table_support_per_line": 8
+        }
+      ]
+    }
+  }
+}

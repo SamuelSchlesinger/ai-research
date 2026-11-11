@@ -1,0 +1,81 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "date": "2026-11-11",
+  "outcome": "No generic o(n^3) exact upper established. Completed exact compilers, specified-architecture obstructions, and a sparse decoder with a precisely costed open module target.",
+  "local_readings": [
+    {
+      "path": "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/threshold_paper/paper.tex",
+      "sha256": "72873e627c1ab7d3c6fe9b79a577b1631bb9e5f942cb32de7c2b8ca78c263a25",
+      "bytes": 73931
+    },
+    {
+      "path": "/home/user/.t3/scratch/2026-11-02-improve-upper-bound-of-andreevs-93c6aee6/research_backup/docs/RESEARCH_STATE.md",
+      "sha256": "34348196ede1329516983685c11dfca8808a4d7f9f194f7c234fc9b819c6ec58",
+      "bytes": 76564
+    },
+    {
+      "path": "/tmp/andreev_gap/wires_astra/report.md",
+      "sha256": "823584a624692a355668c808cb8a316ad6c7d613f5be529cd084bdbd83718e34",
+      "bytes": 48584
+    },
+    {
+      "path": "/tmp/andreev_gap/wire_recount/recount.py",
+      "sha256": "28db37b11bda56d3e634b62353c604898492b3c9722e6caf38f3923882646294",
+      "bytes": 2743
+    },
+    {
+      "path": "/tmp/andreev_gap/wire_recount/checks.json",
+      "sha256": "ba8c3264f1864f643846e31491b4443c59afb434a0e8ae8527ee6a2d23093afa",
+      "bytes": 1712
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm_round3/up1/report.md",
+      "sha256": "2c811bfd893c311f92ecd147d9f8d6c86858be51ee110f9e8980c7b75c71e25e",
+      "bytes": 35185
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm_round3/up2/report.md",
+      "sha256": "420156d0d2b60275e4734f1f84c0e33b2a71f2b61d597255d089e169144af7e8",
+      "bytes": 38904
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm_round3/low1/report.md",
+      "sha256": "91be2c97f18de1e87b18a1113f970643913167b843d0aff5b680bb05a926197f",
+      "bytes": 39838
+    },
+    {
+      "path": "/tmp/andreev_gap/swarm_round3/low2/report.md",
+      "sha256": "4e4dcf9043337b22c91901726dd2ef5a9c998ba6e8b26b84cdc22d66356b0097",
+      "bytes": 39514
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/tmp/andreev_gap/wires_upper_astra/report.md",
+      "sha256": "098f3869bb95898c800d91967399351ffc3f39ec4c0173a265e6118b4a7fbcad",
+      "bytes": 21283
+    },
+    {
+      "path": "/tmp/andreev_gap/wires_upper_astra/checks.py",
+      "sha256": "93151283b79a7d8dfe4eb3434835900660720588f209effbc1728c461dc7c66a",
+      "bytes": 10890
+    },
+    {
+      "path": "/tmp/andreev_gap/wires_upper_astra/checks.json",
+      "sha256": "d37b92ea40714f875eab67d7b8f2fa669ba9d7cbc2a8083162dfc5be67cf857e",
+      "bytes": 5176
+    },
+    {
+      "path": "/tmp/andreev_gap/wires_upper_astra/probe.py",
+      "sha256": "c8168ec61367b30a557440135696d0aff61793421ed86f0f8797d34d92950a41",
+      "bytes": 2702
+    },
+    {
+      "path": "/tmp/andreev_gap/wires_upper_astra/probe.json",
+      "sha256": "3b64f7bbd79a2d4fade43307ed146cb69a5b9327ba8edd64656945d6e5bd530a",
+      "bytes": 4103
+    }
+  ],
+  "primary_source_rechecked": "https://cseweb.ucsd.edu/~dakane/depth2LTF.pdf",
+  "proof_status": "Written proofs and exact finite checks; no independent review, formalization, or novelty-priority claim."
+}

@@ -1,0 +1,226 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "results": [
+    {
+      "k": 2,
+      "m": 3,
+      "coefficient_bound": 4,
+      "profile_orbits": 210,
+      "monochromatic_levels": 1002,
+      "largest_section": {
+        "size": 9,
+        "level": 4,
+        "label": 3,
+        "block_weights": [
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            3,
+            3,
+            3
+          ]
+        ]
+      },
+      "product_central_binomial": 9,
+      "fiber_size": 16,
+      "exceeds_product_bound": false
+    },
+    {
+      "k": 2,
+      "m": 4,
+      "coefficient_bound": 4,
+      "profile_orbits": 630,
+      "monochromatic_levels": 2538,
+      "largest_section": {
+        "size": 36,
+        "level": 8,
+        "label": 0,
+        "block_weights": [
+          [
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            3,
+            3,
+            3,
+            3
+          ]
+        ]
+      },
+      "product_central_binomial": 36,
+      "fiber_size": 64,
+      "exceeds_product_bound": false
+    },
+    {
+      "k": 2,
+      "m": 5,
+      "coefficient_bound": 4,
+      "profile_orbits": 1596,
+      "monochromatic_levels": 5756,
+      "largest_section": {
+        "size": 100,
+        "level": 10,
+        "label": 0,
+        "block_weights": [
+          [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            4,
+            4,
+            4,
+            4,
+            4
+          ]
+        ]
+      },
+      "product_central_binomial": 100,
+      "fiber_size": 256,
+      "exceeds_product_bound": false
+    },
+    {
+      "k": 2,
+      "m": 6,
+      "coefficient_bound": 3,
+      "profile_orbits": 406,
+      "monochromatic_levels": 1182,
+      "largest_section": {
+        "size": 90,
+        "level": 7,
+        "label": 2,
+        "block_weights": [
+          [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          [
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        ]
+      },
+      "product_central_binomial": 400,
+      "fiber_size": 1024,
+      "exceeds_product_bound": false
+    },
+    {
+      "k": 3,
+      "m": 3,
+      "coefficient_bound": 4,
+      "profile_orbits": 1540,
+      "monochromatic_levels": 4872,
+      "largest_section": {
+        "size": 9,
+        "level": 5,
+        "label": 3,
+        "block_weights": [
+          [
+            2,
+            2,
+            2
+          ],
+          [
+            3,
+            3,
+            3
+          ],
+          [
+            4,
+            4,
+            4
+          ]
+        ]
+      },
+      "product_central_binomial": 27,
+      "fiber_size": 64,
+      "exceeds_product_bound": false
+    },
+    {
+      "k": 3,
+      "m": 4,
+      "coefficient_bound": 3,
+      "profile_orbits": 680,
+      "monochromatic_levels": 1706,
+      "largest_section": {
+        "size": 6,
+        "level": 2,
+        "label": 0,
+        "block_weights": [
+          [
+            1,
+            1,
+            1,
+            1
+          ],
+          [
+            3,
+            3,
+            3,
+            3
+          ],
+          [
+            3,
+            3,
+            3,
+            3
+          ]
+        ]
+      },
+      "product_central_binomial": 216,
+      "fiber_size": 512,
+      "exceeds_product_bound": false
+    },
+    {
+      "k": 4,
+      "m": 2,
+      "coefficient_bound": 4,
+      "profile_orbits": 715,
+      "monochromatic_levels": 2226,
+      "largest_section": {
+        "size": 4,
+        "level": 3,
+        "label": 3,
+        "block_weights": [
+          [
+            1,
+            1
+          ],
+          [
+            2,
+            2
+          ],
+          [
+            4,
+            4
+          ],
+          [
+            4,
+            4
+          ]
+        ]
+      },
+      "product_central_binomial": 16,
+      "fiber_size": 16,
+      "exceeds_product_bound": false
+    }
+  ],
+  "status": "finite search only; no asymptotic conclusion"
+}
