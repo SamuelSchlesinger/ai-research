@@ -1,0 +1,15 @@
+{
+  "authors": [
+    "Christian Reitwiessner"
+  ],
+  "counts": {
+    "connected_profile_tests": 86360,
+    "rational_bad_baseline_slices": 115567,
+    "exhaustive_pairing_survival_tests": 708,
+    "explicit_dual_inputs": 512,
+    "exact_feature_annihilation_equations": 326,
+    "positive_oriented_rectangle_rows": 128,
+    "nonzero_oriented_rectangle_rows": 116,
+    "dense_semantic_character_activities": 119
+  }
+}

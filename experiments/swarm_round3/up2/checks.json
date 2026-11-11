@@ -1,0 +1,15 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "VERIFIED EXACT",
+  "counts": {
+    "grouped_gate_inputs": 384520,
+    "grouped_thresholds": 2976,
+    "face_coefficients": 21844,
+    "conjunction_support_averages": 35,
+    "identification_rows": 2300,
+    "two_baseline_cases": 3997,
+    "grouped_identification_rows": 1660,
+    "colliding_final_group_inputs": 21504,
+    "bridge_occupation_identities": 64158
+  }
+}

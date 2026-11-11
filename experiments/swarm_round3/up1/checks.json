@@ -1,0 +1,15 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "all exact checks passed",
+  "counts": {
+    "conjunction_gate": 3920,
+    "polynomial_score": 3920,
+    "cocycle": 420,
+    "witness_inputs": 88560,
+    "optimum_error": 40,
+    "hull_witness": 5,
+    "bridge_localtime": 1368,
+    "difference_stencil": 120
+  },
+  "scope": "Finite algebraic guardrails, not asymptotic inference or an Andreev circuit."
+}

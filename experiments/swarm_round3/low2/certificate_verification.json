@@ -1,0 +1,13 @@
+{
+  "authors": [
+    "Christian Reitwiessner"
+  ],
+  "status": "VERIFIED EXACT",
+  "input_count": 512,
+  "feature_equations": 326,
+  "positive_rectangle_rows": 128,
+  "nonzero_rectangle_rows": 116,
+  "model_mask_cap": 1,
+  "unrestricted_pure_address_helpers": 3,
+  "pure_table_helpers": 2
+}

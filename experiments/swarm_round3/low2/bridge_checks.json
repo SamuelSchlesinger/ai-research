@@ -1,0 +1,10 @@
+{
+  "authors": [
+    "Christian Reitwiessner"
+  ],
+  "counts": {
+    "exact_marked_walk_identities_and_bounds": 94423,
+    "common_reorientation_mask_cases": 97,
+    "exact_random_prefix_interval_probabilities": 5760
+  }
+}

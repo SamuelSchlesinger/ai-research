@@ -1,0 +1,15 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "all exact checks passed",
+  "checks": {
+    "strict_parity_face_coefficients": 109200,
+    "superincreasing_pair_identifications": 4340,
+    "lex_threshold_average_support": 536,
+    "helper_permanent_restrictions": 59920,
+    "magnitude_class_cut_incidences": 164682,
+    "profile_graph_survival_products": 750,
+    "integer_bad_baseline_bands": 8712,
+    "quadratic_helper_layer_identities": 525
+  },
+  "scope": "Finite algebraic guardrails only. Universal claims use the report proofs and cited hyperplane-cover theorem."
+}
