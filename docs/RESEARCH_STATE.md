@@ -408,3 +408,12 @@ All four reports, their append-only idea board, scripts and certificates are arc
 - UP1: an exact sparse-table promise circuit has size $O((km+h)\min\{2^k,h^2k\})$. An exact guard compiler repairs tables of weight at most h (or co-weight at most h) inside an approximate score with size $\widetilde O(N^{3/2}h+Nh^3)$. This stays subquadratic for $h=N^\beta$, $\beta<1/3$, but unresolved exceptional inputs remain. Character-table collisions refute the entire central-window Fourier gate library even with arbitrary top-weight refitting.
 
 Exact rational common-top infeasibility certificates and the completed numerical checks are retained beside the reports. The next proposed direction is a common-score dual handling structured unequal-magnitude or support-dependent address directions, together with corrections coupling several table statistics. No successful construction or unrestricted bound in that direction is claimed.
+
+
+## 22. Exponential restricted bound incorporated into the paper; Astra round 2 started
+
+The paper now includes a self-contained main section (Section 7, Theorem 16) proving $S\ge2^{m\lfloor k/2\rfloor}$ when every nonzero bottom address normal has full support and equal absolute coefficients within that gate; pure-table bottoms are allowed. Table weights, thresholds, real top weights and raw top inputs are unrestricted. The literal-pairing proof, strict-threshold treatment and general paired-cancellation covering inequality are included. The abstract, result overview, technique table and formalization table are synchronized. The theorem is a research-agent-checked hand proof, not Lean formalized; no novelty priority or unrestricted exponent improvement is claimed. Section 6's coherent result and Theorem 5's 5/16 upper bound remain intact.
+
+The PDF builds at 22 pages, with no missing/duplicate labels, undefined references or overfull boxes. UP2's standard-library exact checker passed again. Visual inspection of the new PDF was unavailable because the installed PyMuPDF extension could not be imported; layout_checks.json records this explicitly.
+
+At the user's request, a second round of four OpenAI Astra max-effort research agents has started in /tmp/andreev_gap/swarm_round2/, sharing an append-only board. UP1 studies shared tail corrections, UP2 structured unequal-weight architectures, LOW1 common-top lower bounds, and LOW2 generalizations of paired cancellation and signed-table reductions. Their work is ongoing and is not incorporated into this paper revision.

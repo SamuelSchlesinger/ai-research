@@ -70,7 +70,10 @@ depth-two threshold circuits we show:
 \item a lower bound of $\Omega(n^2/\log^3n)$ gates for circuits whose bottom
       gates each have weights of a single sign inside every address block.
       The quadratic circuit is of this kind, so within this class it is
-      optimal up to polylogarithmic factors.
+      optimal up to polylogarithmic factors;
+\item an exponential lower bound when every nonzero bottom address normal
+      has full support and equal absolute coefficients within that gate:
+      at least $2^{m\lfloor k/2\rfloor}$ bottom gates are required.
 \end{itemize}
 In depth three we improve the top fan-in bound for Andreev's function. For
 the depth-three function $B_n$ of Kane and Williams we outline improved
@@ -178,7 +181,15 @@ Notes on the table:
       $n^2$ holds for Andreev's function, so the $n^{5/2-\delta}$ bound
       of~\cite{CTW} cannot hold for it.
 \end{itemize}
-The remaining gap for Andreev's function is the worst case: between
+For a different restricted class, Theorem~\ref{thm:fullsign} gives an
+exponential bound: if every nonzero address normal has full support and
+equal absolute coefficients within that gate, at least
+$2^{m\lfloor k/2\rfloor}$ bottoms are necessary for $m\lfloor k/2\rfloor\ge2$.
+Table coefficients and all top weights remain arbitrary real numbers.
+This does not apply to the quadratic construction, whose address supports
+depend on the character.
+
+The remaining gap for unrestricted Andreev circuits is the worst case: between
 $n^{3/2}/\log^2n$ and $(5/16+o(1))n^2$ gates. For circuits with sign-coherent
 bottom gates the gap is only polylogarithmic. So a circuit with $n^{2-\delta}$
 gates needs bottom gates whose weights have mixed signs inside a block.
@@ -187,7 +198,8 @@ gates needs bottom gates whose weights have mixed signs inside a block.
 Section~\ref{sec:tech} explains which techniques are new.
 Sections~\ref{sec:upper}--\ref{sec:avgupper} (upper bounds) and
 Section~\ref{sec:lower} (lower bounds) can be read independently;
-Section~\ref{sec:coherent} (sign-coherent circuits) is self-contained;
+Sections~\ref{sec:coherent} (sign-coherent circuits) and~\ref{sec:fullsign}
+(full-support equal-magnitude address normals) are self-contained;
 Section~\ref{sec:depth3} uses Section~\ref{sec:lower}. Each lemma uses only
 its own local variables plus the notation in the boxes, and each box says
 where its notation is valid.
@@ -218,6 +230,7 @@ Grouping by character and removing the parity factor (Lemmas~\ref{lem:lookup},~\
 Shared quadratic corrections and sign margins at exceptional addresses & refinement proved here & Thm.~\ref{thm:exact}\\
 Independent address masks cancel cross-character error moments & mean-square refinement proved here & Thm.~\ref{thm:avgupper}\\
 \textbf{Majority vote over a subcube} (sum over $S\subseteq\{1,\dots,k_0\}$) & \textbf{new in this context} & Thm.~\ref{thm:avgupper}\\
+Pairing selected and ignored address variables; full-parity orthogonality & elementary restriction argument & Thm.~\ref{thm:fullsign}\\
 Random restrictions with Littlewood--Offord & \cite[Lemmas~1.1, 3.1]{KW} & Thm.~\ref{thm:lower}\\
 Counting threshold functions over fixed features & \cite{RSO}, \cite[Thm.~2.3]{KW} & Thm.~\ref{thm:lower}\\
 \textbf{Fixed-weight counting} (Lemma~\ref{lem:count}) & structural fact standard~\cite{KW,CSS}; \textbf{its use for counting new, to our knowledge} & one $\log$ in Thm.~\ref{thm:lower}\\
@@ -1001,6 +1014,97 @@ $m\le11$. The construction of (b) is checked as described. All three checks
 were run independently twice.
 
 %===================================================================
+%===================================================================
+\sect{An exponential bound for full-support equal-magnitude address normals}\label{sec:fullsign}
+
+The near-quadratic bound of Section~\ref{sec:coherent} restricts signs.
+Here signs are arbitrary, but every nonzero address normal must use all
+address variables with the same absolute coefficient within that gate.
+The restriction is substantial: zero coefficients or unequal magnitudes
+can avoid the cancellation used below. The proof uses only literal
+substitutions and orthogonality to parity; no novelty priority is claimed
+for these elementary tools or this restricted-class consequence.
+
+\begin{theorem}\label{thm:fullsign}
+Let $k\ge2$, $m\ge1$, and $d=m\lfloor k/2\rfloor\ge2$. Suppose a depth-two
+threshold circuit computes $A_{k,m}$ exactly, and every bottom gate's address
+normal is either zero or of the form
+$$
+\gamma_j=G_j\sigma_j,\qquad G_j>0,\quad
+\sigma_j\in\{-1,1\}^{km}.
+$$
+Table coefficients, thresholds, top coefficients, and direct raw-input
+coefficients at the top may be arbitrary real numbers. Then the circuit
+has at least $2^d$ bottom gates. If $km=\Theta(2^k)$, this is $2^{\Omega(n)}$.
+\end{theorem}
+
+\begin{proof}
+Put $r=\lfloor k/2\rfloor$. Fix the table to
+$x_c=\bigoplus_{i=1}^r c_i$. If $k$ is odd, also fix one block outside
+$\{1,\ldots,r\}$ to zero. There remain $2r$ live blocks: the output is
+parity on the $d=rm$ bits in the first $r$ blocks and ignores the other
+$d$ bits. Use sign coordinates $z_i,w_i\in\{-1,1\}$, pairing these selected
+and ignored bits arbitrarily. After possibly reversing its orientation,
+the circuit's top score has the sign of
+$$
+f(z,w)=\prod_{i=1}^d z_i.
+$$
+We may take this score strictly sign-correct on the finite domain: for
+output convention $[F\ge0]$, add a sufficiently small positive constant
+to $F$ before reversing orientation if necessary. Negative-class scores
+were already strictly negative. This preserves all classifications and
+all gate counts.
+
+For each $t\in\{-1,1\}^d$, substitute
+$$
+w_i=t_i z_i\qquad(1\le i\le d).
+$$
+In bit coordinates these are identifications or complemented
+identifications, so every bottom remains a threshold gate and each raw
+top term remains affine. The target stays $f(z)=\prod_i z_i$.
+
+For a gate with nonzero address normal, let $\sigma_i,\tau_i$ denote its
+signs on the paired selected and ignored coordinates. Its coefficient
+on $z_i$ after substitution is a common positive scale times
+$\sigma_i+t_i\tau_i$. This is nonzero exactly when
+$t_i=\sigma_i\tau_i$. Hence that gate can depend on all $d$ live variables
+on at most one of the $2^d$ choices of $t$. A pure-table gate is constant
+after fixing the table and serves none of them.
+
+For each fixed $t$, some bottom must depend on every live variable.
+Otherwise every bottom misses at least one coordinate, and therefore
+has zero correlation with $f$ under the uniform live cube: summing over
+that missing coordinate cancels the two signs of $f$. Every affine raw
+top term also has zero correlation with $f$, since $d\ge2$. Thus the
+whole top score $F_t$ would satisfy $\mathbb E[fF_t]=0$. Strict sign
+correctness instead gives
+$$
+\mathbb E[f(z)F_t(z)]=\mathbb E[|F_t(z)|]>0,
+$$
+a contradiction. Each of the $2^d$ restrictions therefore needs a bottom
+that depends on every live variable, and each bottom can serve at most
+one restriction. This proves the bound.
+\end{proof}
+
+\smalltitle{Scope and a more general necessary condition.}
+For arbitrary address coefficients, write $u_{j,i},v_{j,i}$ for gate $j$'s
+coefficients on the same selected--ignored pair. The identical argument
+shows
+$$
+\sum_j\prod_{i=1}^d
+ \frac{\#\{t_i\in\{-1,1\}:u_{j,i}+t_iv_{j,i}\ne0\}}{2}\ \ge\ 1.
+$$
+Indeed, for each $t$ some gate must retain all live variables; average
+this covering requirement over independent uniform signs $t_i$.
+If a pair has two zero coefficients its factor is zero; equal nonzero
+absolute coefficients give factor $1/2$; unequal magnitudes give factor
+one. The theorem is the case in which every useful gate has $d$ factors
+of $1/2$. Generic unequal magnitudes can make every factor one, so this
+condition yields no unrestricted exponential bound. Character-dependent
+zero supports in Theorem~\ref{thm:exact} also escape it. The new result is
+an exact hand proof, checked by independent research agents; it is not
+Lean formalized, and it does not improve the unrestricted exponent.
+
 \sect{Depth three}\label{sec:depth3}
 
 \subsect{Top fan-in for Andreev's function}
@@ -1218,6 +1322,7 @@ Lemma~\ref{lem:surv} & formalized, merged & \texttt{RandomRestriction.lean}, \te
 Lemmas~\ref{lem:count},~\ref{lem:avg}, Theorem~\ref{thm:lower} & formalized, merged & PR \#2377; \texttt{AndreevLowerBound.lean}\\
 Corollary~\ref{cor:fanin} & formalized, merged & PR \#2814; \texttt{AndreevApproxMajority.lean}\\
 Theorem~\ref{thm:coherent} & proof here; not formalized & refereed independently\\
+Theorem~\ref{thm:fullsign} & proof here; not formalized & paired cancellation; agent checks\\
 Lemma~\ref{lem:gram}, Theorem~\ref{thm:B} & formalized, merged & PR \#2816; \texttt{KaneWilliamsB.lean}, \texttt{NearlyOrthogonal.lean}\\
 \bottomrule
 \end{tabular}

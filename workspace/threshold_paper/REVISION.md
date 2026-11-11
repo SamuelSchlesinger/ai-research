@@ -27,3 +27,7 @@ The revised PDF is 19 pages (previously 18). All labels resolve, no overfull box
 The $\Omega(n^2/\log^3 n)$ lower bound for circuits with sign-coherent bottom gates was an appendix note marked preliminary. It is now Section 6 (Theorem 12, Lemmas 13 and 14, Proposition 15), listed in the abstract, the results table, the technique table and the formalization table. The mathematics is unchanged. The section uses its own notation ($G$ bottom gates, cubes $q$) so that no symbol of earlier sections is reused. The explainer cites the new numbers.
 
 PR #2816 was merged on 9 November 2026; the formalization section now says so. The PDF is 20 pages; all labels resolve and there are no overfull boxes or undefined references. Pages 1, 2 and 13 were inspected visually.
+
+## Full-support equal-magnitude address lower bound
+
+Added a main section with the exponential bottom-gate lower bound, its complete literal-pairing/parity proof, and the general paired-cancellation covering inequality. Both full support and equal absolute magnitudes within each gate are explicit hypotheses. Table coefficients and raw top weights remain unrestricted. The abstract, result overview, technique table and formalization status include the result. This is a hand proof checked by research agents; no Lean formalization or novelty priority is claimed. The unrestricted exponent gap is unchanged.

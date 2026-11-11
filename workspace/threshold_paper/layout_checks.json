@@ -1,15 +1,11 @@
 {
   "Authors": "Christian Reitwiessner",
-  "pages": 20,
-  "missing_labels": [],
-  "duplicate_labels": false,
-  "overfull_boxes": false,
+  "pages": 22,
+  "duplicate_labels": 0,
+  "unresolved_labels": [],
+  "overfull_boxes": 0,
   "undefined_references": false,
-  "missing_glyphs": false,
-  "proof_status": "New upper-bound refinements and the sign-coherent lower bound are mathematical hand proofs, not Lean formalized",
-  "visually_inspected_pages": [
-    1,
-    2,
-    13
-  ]
+  "proof_status": "New equal-magnitude full-support theorem is a hand proof, peer checked by research agents; not Lean formalized.",
+  "visual_inspection": "Not performed for this revision: installed PyMuPDF extension could not be imported.",
+  "exact_checks": "UP2 checks.py rerun passed: 5456 full-sign cancellation rows, 1000 general paired-weight cases, 3049 missing-variable parity correlations, 1360 raw construction inputs."
 }
