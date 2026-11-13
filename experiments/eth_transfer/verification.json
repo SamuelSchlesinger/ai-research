@@ -1,0 +1,66 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "passed",
+  "scope": "Finite exact identities, not an improved Andreev upper bound",
+  "cube_transfer": [
+    {
+      "k": 8,
+      "interval": [
+        2,
+        6
+      ],
+      "dimension": 256,
+      "correction_rank": 18,
+      "spatial_support": 99,
+      "reversed_character_tables": 16,
+      "eigenvalue_at_singleton": "-31"
+    },
+    {
+      "k": 12,
+      "interval": [
+        3,
+        9
+      ],
+      "dimension": 4096,
+      "correction_rank": 158,
+      "spatial_support": 1486,
+      "reversed_character_tables": 134,
+      "eigenvalue_at_singleton": "769"
+    },
+    {
+      "k": 16,
+      "interval": [
+        4,
+        12
+      ],
+      "dimension": 65536,
+      "correction_rank": 1394,
+      "spatial_support": 22819,
+      "reversed_character_tables": 1152,
+      "eigenvalue_at_singleton": "-18943"
+    }
+  ],
+  "original_swap_matrix": {
+    "register_pairs": 4,
+    "dimension": 256,
+    "interval": [
+      0,
+      2
+    ],
+    "correction_rank": 13,
+    "exact_eigenvectors_checked": 256,
+    "nonzero_matrix_entries": 800
+  },
+  "fourier_residual": {
+    "k": 3,
+    "m": 2,
+    "tables": 256,
+    "raw_addresses": 64,
+    "exact_table_address_checks": 16384,
+    "meaning": "Exact residual only; main term My still needs a circuit."
+  },
+  "affine_slice_compiler": {
+    "gate_identity_checks": 82,
+    "radix_packing_checks": 3125
+  }
+}

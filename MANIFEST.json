@@ -9,8 +9,8 @@
     "tools/verify_archive.py": "a8224196011db890f0c63b670cdb530d2e72f50263907683080eb348cf258c9a",
     "tools/run_experiment.py": "be0390a16bfeb2d9ed2f0bc079e4acad61b3527ac60a2970df68f732959ba20d",
     "docs/UPDATE_2026-11-09.md": "b99b3d082bec1a6d7fe1fde73e72d36b44ab3a97838a7dd90f1d77e1b363814a",
-    "docs/CONTINUE.md": "b889c039835d824add0421242326b9fa2599e609c381866c235e3e2cecaa8d91",
-    "docs/RESEARCH_STATE.md": "82864309bd7c66afe255655cc763eff6dc01cefcc276f77c2333d15eea0d3ad0",
+    "docs/CONTINUE.md": "7cf81cb3b509a180a6561a071f7a795968f5368fbff5097588bbd2ed50925781",
+    "docs/RESEARCH_STATE.md": "bfa756bbbd4ae3c7a6f0c239a36d5b867f7ce3bcde1ce8086a0851437b1931be",
     "formalization/pr-2816.patch": "d26e0d3c607a7fe8fb742a7dec03a687d5818a238062e1c38082596695747678",
     "formalization/pull_requests.json": "001ff164568cc7c8a5b91b435f38415bd5ce33c89b9dcf9fff0c06cb6014eba7",
     "workspace/verify_construction.py": "909b7538027b2b5ccb3cea4ad9b65e3d66417b898cc022a460791bbd797313dd",
@@ -1164,6 +1164,10 @@
     "workspace/eccc_draft/reviews/precision/manifest.json": "33e8c4249be09c46906e1fa5c73715f54bf52e013427b6dfb253d33eed453920",
     "workspace/eccc_draft/reviews/precision/paper.tex": "2d52ccd838d73227dcd1be86c6b00a52f9bbe374e8193ec27f8efe8667344966",
     "workspace/eccc_draft/reviews/precision/validation/precision_audit.json": "abaaef275407fbee1fe981141832fcaa35a6a268a1f881d58e1255f0e99aad2b",
-    "workspace/eccc_draft/reviews/precision/validation/precision_audit.py": "c8b0119b355492c31cfaaf97955118eeb6149b2dff23a15b70328f1c80c006e4"
+    "workspace/eccc_draft/reviews/precision/validation/precision_audit.py": "c8b0119b355492c31cfaaf97955118eeb6149b2dff23a15b70328f1c80c006e4",
+    "experiments/eth_transfer/report.md": "46d0381f89ac8bcb3d8ca0265264c54f65fd1eed718d08b52d5a7d291258da8d",
+    "experiments/eth_transfer/sources.json": "756b931ef39e4901452ae98862b7c78001b3d0940f51463fbd39f936b3f20641",
+    "experiments/eth_transfer/verification.json": "db917ec0041a53783fcae18dd2cc4f16c30983c9598094666339d95b33a65a9c",
+    "experiments/eth_transfer/verify.py": "31d538dce2e9bcd4313f8d5cff22c0e5ba0d0201550591f913860a9fbbcfee00"
   }
 }

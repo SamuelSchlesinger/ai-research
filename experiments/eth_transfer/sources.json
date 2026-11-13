@@ -1,0 +1,15 @@
+{
+  "retrieved": "2026-11-13",
+  "sources": [
+    {
+      "title": "OpenAI matrix construction",
+      "url": "https://raw.githubusercontent.com/openai/math/main/preprints/The-Exponential-Time-Hypothesis-is-False-October-25-2026/build/main_full_version.tex",
+      "sha256": "b2e6159d4fb7ea6aa4f89ac15605152b0333a5f7cafe93323492bc20a5c066aa"
+    },
+    {
+      "title": "O Donnell exposition",
+      "url": "https://hexagonmath.org/pdf/2610.00572v1",
+      "sha256": "85b54ea5dce595d2ae7df8d660186bfb6ce3a065a72e47e2e84d607c9e44dbb2"
+    }
+  ]
+}
