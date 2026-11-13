@@ -807,25 +807,32 @@ let $x$ be uniformly random. Then $\mathbb E_x[d_q(x)]\ge D_0$ for every cube
 $q$.
 \end{lemma}
 \begin{proof}
-Fix $q$. On the inputs $(x,a(q+z))$, bottom gate $j$ computes
-$\ind{\lambda_j\cdot z\ge\tau_j}$, where $\lambda_j\in\mathbb R^k$ lists its
-weights on the live positions and only the number $\tau_j$ depends on $x$.
+Fix $q$ and $x$, and consider bottom gate $j$ as a function of $z$ alone.
+It computes $\ind{\lambda_j\cdot z\ge\tau_j(x)}$, where
+$\lambda_j\in\mathbb R^k$ lists its fixed weights on the live positions,
+and $\tau_j(x)$ absorbs the contributions of the table bits and fixed
+address bits.
 Likewise the top gate computes
-$\ind{\sum_jv_jg_j+\mu\cdot z\ge\kappa}$, where $v_j$ are its weights on the
+$\ind{\sum_jv_jg_j+\mu\cdot z\ge\kappa(x)}$, where $v_j$ are its weights on the
 bottom gates and $\mu$ its weights on the live positions; the gates that
 do not split $q$ are constant and are absorbed, together with the table and
-the fixed address bits, into $\kappa$. So only $\tau_j$ and $\kappa$ depend
+the fixed address bits, into $\kappa(x)$. So only $\tau_j$ and $\kappa$ depend
 on $x$.
 
 Therefore the function $z\mapsto x_{(q\bmod2)\oplus z}$, and with it $x$, is
 determined by: the set $I$ of splitting gates; for each $j\in I$ the
 non-constant function $\ind{\lambda_j\cdot z\ge\tau_j}$, one of at most $2^k-1$
 (only the position of $\tau_j$ among the $\le2^k$ values $\lambda_j\cdot z$
-matters); and the position of $\kappa$, one of at most $2^k+1$. With
-$D=|I|=d_q(x)$, entropy gives
+matters); and the position of $\kappa(x)$. After the restricted bottom-gate
+functions have been specified, the top gate's score is fixed at each of the
+$2^k$ inputs $z$, so at most $2^k+1$ positions of $\kappa(x)$ matter.
+Encoding $|I|=d_q(x)$ first, the entropy chain rule gives
 \[
-N=H(x)\le H(D)+\mathbb E\log_2\Bigl[\tbinom GD(2^k-1)^D(2^k+1)\Bigr]
-\le\log_2(G+1)+\mathbb E[D]\,(\log_2(G+1)+k)+k+1,
+\begin{aligned}
+N=H(x)&\le H(d_q(x))+\mathbb E_x\!\left[\log_2\!\left(
+\binom{G}{d_q(x)}(2^k-1)^{d_q(x)}(2^k+1)\right)\right]\\
+&\le\log_2(G+1)+\mathbb E_x[d_q(x)]\,(\log_2(G+1)+k)+k+1,
+\end{aligned}
 \]
 which rearranges to the claim; a negative numerator is replaced by the
 trivial lower bound zero.
@@ -835,22 +842,42 @@ trivial lower bound zero.
 For every table $x$, a sign-coherent gate splits at most $m^k-(m-1)^k$ cubes.
 \end{lemma}
 \begin{proof}
-Let $\varepsilon_i=+1$ if the gate's weights in block $i$ are $\ge0$ and
-$\varepsilon_i=-1$ otherwise. Its linear form on $(x,a(s))$ is a constant plus
-$\sum_iF_i(s_i)$, where $F_i(s_i)$ is the sum of its weights on the first
-$s_i$ positions of block $i$. So the form $F(s)$ does not decrease when
-$s_i$ moves by one step in direction $\varepsilon_i$.
+Fix the table $x$ and a sign-coherent gate with threshold $\theta$.
+Write $w_{i\ell}$ for its weight on position $\ell$ of block $i$.
+On the input $(x,a(s))$, its score is
+\[
+F(s)=c(x)+\sum_{i=1}^k\sum_{\ell=1}^{s_i}w_{i\ell},
+\]
+where $c(x)$ is the contribution of the table bits. Let $\varepsilon_i=+1$
+if all weights in block $i$ are nonnegative, and $\varepsilon_i=-1$
+otherwise. By sign-coherence, moving $s_i$ one step in direction
+$\varepsilon_i$ never decreases $F$.
 
-On the cube $q$ the form is smallest at $q^-=q+(\mathbf1-\varepsilon)/2$ and
-largest at $q^+=q+(\mathbf1+\varepsilon)/2$. The gate with threshold $\theta$
-splits $q$ exactly when $F(q^-)<\theta\le F(q^+)$.
+For a cube $q$, define the two opposite vertices
+\[
+q^-=q+(\mathbf1-\varepsilon)/2,
+\qquad q^+=q+(\mathbf1+\varepsilon)/2.
+\]
+These minimize and maximize $F$ on the cube, respectively. Thus the gate
+splits $q$ if and only if $F(q^-)<\theta\le F(q^+)$.
 
-Group the cubes into \emph{lines} $q,\,q+\varepsilon,\,q+2\varepsilon,\dots$.
-For consecutive cubes on a line, the largest vertex of one is the smallest
-vertex of the next, so the intervals $(F(q^-),F(q^+)]$ along a line are
-disjoint, and $\theta$ lies in at most one of them. Each line starts at a cube
-$q$ for which $q-\varepsilon$ is not a cube, and exactly $(m-1)^k$ cubes $q$
-have $q-\varepsilon$ a cube. So there are $m^k-(m-1)^k$ lines.
+Let $Q=\{0,\dots,m-1\}^k$ be the set of cubes. Partition $Q$ into maximal
+\emph{lines} $q,\,q+\varepsilon,\,q+2\varepsilon,\dots$ contained in $Q$.
+For consecutive cubes, the identity
+\[
+(q+\varepsilon)^-=q^+
+\]
+shows that the largest score on one cube equals the smallest score on the
+next. Hence their half-open intervals $(F(q^-),F(q^+)]$ are disjoint
+along each line, and the fixed threshold $\theta$ can split at most one
+cube per line.
+
+Each line has exactly one starting cube: a $q\in Q$ with
+$q-\varepsilon\notin Q$. To count these, note that $q-\varepsilon\in Q$
+requires $q_i\in\{1,\dots,m-1\}$ when $\varepsilon_i=+1$, and
+$q_i\in\{0,\dots,m-2\}$ when $\varepsilon_i=-1$. There are $m-1$ choices
+in each coordinate, hence $(m-1)^k$ cubes with a predecessor.
+The remaining $m^k-(m-1)^k$ cubes start lines, proving the bound.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:coherent}]
@@ -861,15 +888,13 @@ $D_0\ge(N-3k-1)/(3k)$. In the balanced case $m=N/k$.
 \end{proof}
 
 \begin{remark}
-(1) For gates that see each block only through its number of ones, a slab argument with
-Ball's cube-slicing bound improves the denominator to $6\sqrt2\,k^{5/2}$ for
-$k\ge8$. (2) Lemma~\ref{lem:diag} is tight for all $k,m$. The fact that a
+(1) Lemma~\ref{lem:diag} is tight for all $k,m$. The fact that a
 unate function changes at most once along a chain compatible with its
-orientation is classical~\cite[Lemma~2.1]{IPS}; the cube restriction and the quadratic bound appear to be new,
-but our literature search was limited. (3) Theorem~\ref{thm:coherent} is
+orientation is classical~\cite[Lemma~2.1]{IPS}; to the best of our knowledge,
+the cube restriction and the resulting quadratic lower bound are new. (2) Theorem~\ref{thm:coherent} is
 asymptotic. It exceeds $n^{3/2}$ only from about $k=37$, and the method
 (Lemma~\ref{lem:entropy} plus a uniform bound as in Lemma~\ref{lem:diag})
-cannot give more than $O(n^2/\log n)$. (4) Lemma~\ref{lem:entropy} holds for
+cannot give more than $O(n^2/\log n)$. (3) Lemma~\ref{lem:entropy} holds for
 all circuits. For general gates, the limit of survivor counting noted after
 Theorem~\ref{thm:lower} does not depend on the choice of restrictions: under
 every distribution of restrictions that leaves one live bit per block, a
@@ -909,7 +934,8 @@ the gap between $n^{3/2}$ and $n^2$ lies.
 \smalltitle{Formalization.}
 The Lean~4 proofs are in
 \href{https://github.com/cslib-community/cslib-frontier}{cslib-frontier}.
-All numbered results are formalized there, as explicit finite inequalities:
+The formalization proves explicit bounds in the parameters; the asymptotic
+consequences are derived in the text. All numbered results are formalized there:
 Proposition~\ref{prop:basic} in pull request \#2813;
 Theorem~\ref{thm:exact} in \#4720 and \#4773;
 Lemma~\ref{lem:odd} and Theorem~\ref{thm:avgupper} in \#4721 and \#4722;
