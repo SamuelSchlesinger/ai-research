@@ -9,8 +9,8 @@
     "tools/verify_archive.py": "a8224196011db890f0c63b670cdb530d2e72f50263907683080eb348cf258c9a",
     "tools/run_experiment.py": "be0390a16bfeb2d9ed2f0bc079e4acad61b3527ac60a2970df68f732959ba20d",
     "docs/UPDATE_2026-11-09.md": "b99b3d082bec1a6d7fe1fde73e72d36b44ab3a97838a7dd90f1d77e1b363814a",
-    "docs/CONTINUE.md": "7cf81cb3b509a180a6561a071f7a795968f5368fbff5097588bbd2ed50925781",
-    "docs/RESEARCH_STATE.md": "bfa756bbbd4ae3c7a6f0c239a36d5b867f7ce3bcde1ce8086a0851437b1931be",
+    "docs/CONTINUE.md": "6afeaffe8ab47faba950c5d5a4e468744316d9847b04d5da87965a93bcd924e1",
+    "docs/RESEARCH_STATE.md": "00ed36a00e6d66750a63a231c4ae979927d71870fadfbb8e34eee8524b62d32e",
     "formalization/pr-2816.patch": "d26e0d3c607a7fe8fb742a7dec03a687d5818a238062e1c38082596695747678",
     "formalization/pull_requests.json": "001ff164568cc7c8a5b91b435f38415bd5ce33c89b9dcf9fff0c06cb6014eba7",
     "workspace/verify_construction.py": "909b7538027b2b5ccb3cea4ad9b65e3d66417b898cc022a460791bbd797313dd",
@@ -1168,6 +1168,9 @@
     "experiments/eth_transfer/report.md": "46d0381f89ac8bcb3d8ca0265264c54f65fd1eed718d08b52d5a7d291258da8d",
     "experiments/eth_transfer/sources.json": "756b931ef39e4901452ae98862b7c78001b3d0940f51463fbd39f936b3f20641",
     "experiments/eth_transfer/verification.json": "db917ec0041a53783fcae18dd2cc4f16c30983c9598094666339d95b33a65a9c",
-    "experiments/eth_transfer/verify.py": "31d538dce2e9bcd4313f8d5cff22c0e5ba0d0201550591f913860a9fbbcfee00"
+    "experiments/eth_transfer/verify.py": "31d538dce2e9bcd4313f8d5cff22c0e5ba0d0201550591f913860a9fbbcfee00",
+    "experiments/noncoherent_routes/report.md": "bf039b5bd97db4d2f04c466ccc5afa8da58043d20f35485567730c9c37d1fa4e",
+    "experiments/noncoherent_routes/verification.json": "c5b76845f1fdfd377ced3466542da3fce8a9f3ea9b0c321c39fa837f18e1dbf2",
+    "experiments/noncoherent_routes/verify.py": "960a2c5a26e5736d25cdfeb4d8ec903616f28d9b74762b68962f79d114c58bef"
   }
 }

@@ -1,0 +1,41 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "passed",
+  "scope": "Exact identities and quadratic constructions; no improved asymptotic bound",
+  "mixed_ladders": [
+    {
+      "k": 2,
+      "m": 4,
+      "bottom_gates_unmerged": 56,
+      "exact_inputs": 4096,
+      "no_common_coherent_reorientation": true,
+      "address_magnitudes": [
+        1
+      ]
+    },
+    {
+      "k": 2,
+      "m": 4,
+      "bottom_gates_unmerged": 88,
+      "exact_inputs": 4096,
+      "no_common_coherent_reorientation": true,
+      "address_magnitudes": [
+        1,
+        3
+      ]
+    }
+  ],
+  "joint_atoms": {
+    "adaptive_slab_checks": 1312,
+    "diagonal_packing_checks": 475,
+    "dense_five_bit_table_active_widths": [
+      1,
+      3,
+      5
+    ]
+  },
+  "walsh_masks": {
+    "all_order_and_reorientation_checks": 384,
+    "distinct_column_checks": 651
+  }
+}
