@@ -1,0 +1,581 @@
+{
+  "date": "2026-11-13",
+  "paper": "workspace/eccc_draft/paper.tex",
+  "paper_sha256": "90673743569de55c5abcfd8726259ad6a5f3fefac172ad9d3ef06bd9d18cb5ca",
+  "lean_repository": "https://github.com/cslib-community/cslib-frontier",
+  "lean_commit": "89ed4de0e54b4953fcc15b8c5d33fad4a344ea84",
+  "commit_verified_ancestor_of_main": true,
+  "scope": "All 17 numbered statements, relevant proof formulas, definitions, circuit model and counting conventions.",
+  "method": "Source-level comparison of actual definitions, theorem signatures and relevant proofs at the exact pinned commit; parallel independent checks of exact, approximate and general lower bounds, with parent audit of sign coherence and circuit model. No new Lean build or wrapper proofs. Paper and Lean sources unchanged by this audit.",
+  "conclusion": "All main circuit bounds are covered. The blanket claim that every numbered statement is formalized needs two domain qualifications; approximation witnesses also differ in harmless details.",
+  "needed_clarifications": [
+    {
+      "paper_result": "Lemma 3",
+      "issue": "Paper g:Z->R is broader than named Lean staircase theorem f:Z->Z.",
+      "minimal_paper_change": "Use g:Z->Z; every application here is integer-valued.",
+      "alternative": "Generalize the Lean staircase theorem or add a real-valued wrapper, and update the pinned commit after merge."
+    },
+    {
+      "paper_result": "Lemma 10",
+      "issue": "Paper leaves codomains of fixed features unspecified, whereas Lean requires Boolean-valued features.",
+      "minimal_paper_change": "Explicitly state f_j:Omega->{0,1}; every application already has Boolean features.",
+      "alternative": "If arbitrary real-valued features are intended, supply their separate formal counting theorem or qualify coverage."
+    }
+  ],
+  "construction_variants": [
+    {
+      "kind": "Tie convention",
+      "severity": "Construction-level mismatch, not theorem gap",
+      "lean": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevOddErrors.lean:288-293",
+      "paper": "Majority ties go to 0; output [-P_R>=2q] for q<N and [-P_R>=0] for q=N.",
+      "formal": "Threshold = 2q if q<N else 0; output [P_R<threshold]. Thus majority ties go to 1; q=N threshold equality also handled oppositely.",
+      "explanation": "The normalized untruncated majority agreement is unchanged. Full-table Boolean complementation sends P_R to -P_R and A to 1-A; complementing Lean output yields paper convention, preserving uniform agreement and circuit size/coherence. This symmetry corollary is not explicitly packaged in cited file."
+    },
+    {
+      "kind": "Radius and constant",
+      "severity": "Benign stronger bound",
+      "lean": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevOddErrors.lean:627,742",
+      "paper": "loss <=(32v/q)exp(-R^2/(16v)); R=ceil(4sqrt(v ln(32v/(qdelta)))).",
+      "formal": "loss <=(16v/q)exp(-R^2/(16v)); R=Nat.ceil(4sqrt(v ln(16v/(qdelta)))).",
+      "explanation": "Same order and parameter ranges, but not literally the same circuit chosen in paper. Formal result stronger constant at loss level."
+    }
+  ],
+  "exact_results": [
+    {
+      "paper": "Lemma 1 (lem:lookup)",
+      "status": "matches after notation rewrites",
+      "references": [
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean",
+          "line": 425,
+          "declaration": "sum_andreevTableScore_mul_chi",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean#L425"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean",
+          "line": 300,
+          "declaration": "negOnePow_andreevBlockSum",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean#L300"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean",
+          "line": 170,
+          "declaration": "andreev_eq_table_parities",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean#L170"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean",
+          "line": 226,
+          "declaration": "andreevTableScore",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean#L226"
+        }
+      ],
+      "comparison": "Lean b is paper k. andreevTableScore is the unnormalized Walsh sum X_S. negOnePow_andreevBlockSum identifies (-1)^t_S with chi S of the parity address. Fourier inversion theorem over real casts is the displayed paper equality. Lean permits b,m=0, stronger than paper k,m>=1. No additional mathematical hypothesis."
+    },
+    {
+      "paper": "Lemma 2 (lem:parity)",
+      "status": "direct specialization of stronger existing theorem",
+      "references": [
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/DepthTwo.lean",
+          "line": 275,
+          "declaration": "altLinear",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/DepthTwo.lean#L275"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/DepthTwo.lean",
+          "line": 290,
+          "declaration": "negOnePow_mul_altLinear_add_sub_altLinear",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/DepthTwo.lean#L290"
+        }
+      ],
+      "comparison": "For all integers X,t Lean proves (-1)^X phi(X+t)-phi(t)=X(-1)^t. For even X the leading parity factor is 1, precisely the paper statement. The use of Int.negOnePow implements integer exponents including negatives."
+    },
+    {
+      "paper": "Lemma 3 (lem:ladder)",
+      "status": "paper has strictly broader codomain than named formalization",
+      "references": [
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/DepthTwo.lean",
+          "line": 352,
+          "declaration": "sum_sub_mul_decide_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/DepthTwo.lean#L352"
+        }
+      ],
+      "comparison": "Paper has g:Z->R; Lean has f:Z->Z. Lean proves f(l)+sum_{j:Fin L}(f(l+j+1)-f(l+j))*[l+j+1<=u]=f(u) under l<=u<=l+L. With integer-valued g, L=(h-l).toNat and reindexing give exact match. Arbitrary real g is not a specialization of this declaration. A real/generic staircase proof or wrapper is required; generic telescoping theorems would still need indicator truncation/reindexing. All actual paper uses are integer-valued, so no construction bound is affected.",
+      "suggested_resolution": "Either add a generic/real-valued Lean wrapper, or explicitly qualify this auxiliary generalization in the formalization claim. Narrowing the paper to integer g would suffice mathematically but is a separate editorial decision."
+    },
+    {
+      "paper": "Proposition 4 (prop:basic)",
+      "status": "matches; exact weight subsets are definition-level consequences",
+      "references": [
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean",
+          "line": 649,
+          "declaration": "exists_depthTwo_computes_andreev",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean#L649"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean",
+          "line": 520,
+          "declaration": "computes_andreevCircuit",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean#L520"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean",
+          "line": 528,
+          "declaration": "size_andreevCircuit",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean#L528"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean",
+          "line": 259,
+          "declaration": "andreevStairWeightInt",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean#L259"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean",
+          "line": 590,
+          "declaration": "abs_andreevTopWeightInt_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean#L590"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean",
+          "line": 611,
+          "declaration": "abs_weight_andreevTopOp_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/Andreev.lean#L611"
+        }
+      ],
+      "comparison": "Exact total size 2*4^k+k*m*2^k+1, hence 2N^2+kmN bottom gates plus output; depth<=2 and computes every input. Top weights are integer by definition and bounded exactly by 2n-1. Lean membership theorem at line 551 only packages {-2,-1,0,1,2}, but definition at 259 has table coefficient either 0 or -2*chi (hence 0,+/-2), and address coefficient either 0 or 1, matching paper. Identity argument maps avoid duplicate-wire issues. Balanced 3n^2/4+1 is a direct algebraic substitution."
+    },
+    {
+      "paper": "Theorem 5 (thm:exact)",
+      "status": "matches, with stronger exact finite size statements",
+      "references": [
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSharp.lean",
+          "line": 725,
+          "declaration": "computes_andreevSharpCircuit",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSharp.lean#L725"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSharp.lean",
+          "line": 743,
+          "declaration": "depth_andreevSharpCircuit_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSharp.lean#L743"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSharp.lean",
+          "line": 787,
+          "declaration": "card_andreevSharpIndex",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSharp.lean#L787"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSharp.lean",
+          "line": 811,
+          "declaration": "size_andreevSharpCircuit",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSharp.lean#L811"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSharp.lean",
+          "line": 859,
+          "declaration": "andreevSharpCircuit_int_weights",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSharp.lean#L859"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSharp.lean",
+          "line": 1205,
+          "declaration": "abs_weight_andreevSharpCircuit_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSharp.lean#L1205"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSharp.lean",
+          "line": 1224,
+          "declaration": "abs_threshold_andreevSharpCircuit_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSharp.lean#L1224"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSharp.lean",
+          "line": 1267,
+          "declaration": "size_andreevSharpCircuit_of_balanced",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSharp.lean#L1267"
+        }
+      ],
+      "comparison": "andreevSharpAmp m=(m-1)/2 in Nat equals paper floor((m-1)/2) for m>=1. card_andreevSharpIndex is exactly the paper bottom-gate formula; Nat divisions are exact for first two halved terms, and (km+1)/2 is ceil(km/2). size adds one output. The depthTwoInputs model allows direct raw inputs at top exactly as paper does. Integer weights and thresholds are proved. Uniform explicit bound 27|w|<=2n^3+54(n+1)(n+4) supplies polynomial weight magnitude. At balance Lean proves exact 16size=5n^2-4nk+48n-32k-16, implying paper size=5n^2/16-nk/4+O(n), with k=log2(n/2). No missing positivity hypotheses: Lean supports all naturals, paper k,m>=1."
+    }
+  ],
+  "approximation_results": {
+    "commit": "89ed4de0e54b4953fcc15b8c5d33fad4a344ea84",
+    "scope": "Paper Lemma 6, Theorem 7 and approximation proof",
+    "method": "Read actual pinned definitions, theorem signatures and relevant proof bodies; no fresh Lean build",
+    "lemma_6": {
+      "verdict": "Equivalent after normalization",
+      "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevOddErrors.lean",
+      "line": 199,
+      "theorem": "sum_mul_andreevTableScore_eq_zero_of_odd",
+      "details": "Same S != T, g,h : Z -> R, g(-x)=-g(x). Lean sums over all inputs; paper averages over table. Since X_S depends only on table, divide by 2^(N+km) or cancel address multiplicity. General address-dependent version at line 162 also yields conditional statement."
+    },
+    "theorem_7_part_1": {
+      "verdict": "Direct finite bounds imply paper asymptotic statement",
+      "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevTruncatedCircuit.lean",
+      "theorems": {
+        "293": "card_eval_andreevTruncatedCircuit_ne_andreev_le",
+        "340": "size_andreevTruncatedCircuit_le_of_balanced",
+        "238": "depth_andreevTruncatedCircuit_le",
+        "257": "isSignCoherent_andreevTruncatedBottomOp"
+      },
+      "details": "Same balance k*m=2^k and 0<delta<=1/2. Agreement >=1-delta and total gates <=64*n*sqrt(n*ln(1/delta))."
+    },
+    "theorem_7_part_2": {
+      "verdict": "Direct finite bounds imply paper asymptotic statement",
+      "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevTruncatedCircuit.lean",
+      "line": 439,
+      "theorem": "andreevTruncatedCircuit_part_two_of_balanced",
+      "details": "Same balance and 1/sqrt(N)<=epsilon<=1/8. Agreement >=1/2+epsilon, total gates <=2600 epsilon^2*n*sqrt(n*ln(1/epsilon)), active wires <=5300 epsilon^2*n^2*sqrt(n*ln(1/epsilon)). Depth/sign coherence supplied by general theorems. Real.log vs paper log_2 only changes absolute constants."
+    },
+    "proof_differences": [
+      {
+        "kind": "Tie convention",
+        "severity": "Construction-level mismatch, not theorem gap",
+        "lean": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevOddErrors.lean:288-293",
+        "paper": "Majority ties go to 0; output [-P_R>=2q] for q<N and [-P_R>=0] for q=N.",
+        "formal": "Threshold = 2q if q<N else 0; output [P_R<threshold]. Thus majority ties go to 1; q=N threshold equality also handled oppositely.",
+        "explanation": "The normalized untruncated majority agreement is unchanged. Full-table Boolean complementation sends P_R to -P_R and A to 1-A; complementing Lean output yields paper convention, preserving uniform agreement and circuit size/coherence. This symmetry corollary is not explicitly packaged in cited file."
+      },
+      {
+        "kind": "Radius and constant",
+        "severity": "Benign stronger bound",
+        "lean": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevOddErrors.lean:627,742",
+        "paper": "loss <=(32v/q)exp(-R^2/(16v)); R=ceil(4sqrt(v ln(32v/(qdelta)))).",
+        "formal": "loss <=(16v/q)exp(-R^2/(16v)); R=Nat.ceil(4sqrt(v ln(16v/(qdelta)))).",
+        "explanation": "Same order and parameter ranges, but not literally the same circuit chosen in paper. Formal result stronger constant at loss level."
+      }
+    ],
+    "gate_and_wire_accounting": {
+      "size": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevTruncatedCircuit.lean:234",
+      "details": "Exact size 4(q-1)(R+1)+1 includes top gate. Wire upper bound at line 244 includes direct input/top connections; not just bottom input wires."
+    },
+    "recommendation": "Keep statement that Theorem 7 is formalized, but add short note that Lean uses a different majority tie convention and a slightly sharper truncation constant if asserting proof-level match. Do not call these missing main results."
+  },
+  "general_lower_results": [
+    {
+      "paper": "Theorem 8 and equations lower-general/lower-simple",
+      "status": "matches via explicit finite bounds; asymptotic conversion in paper",
+      "evidence": [
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevLowerBound.lean",
+          "line": 558,
+          "declaration": "size_ge_of_card_eval_eq_andreev_ge_of_le_eps",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevLowerBound.lean#L558"
+        },
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevLowerBound.lean",
+          "line": 624,
+          "declaration": "wireCount_ge_of_card_eval_eq_andreev_ge_of_le_eps",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevLowerBound.lean#L624"
+        },
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevLowerBound.lean",
+          "line": 710,
+          "declaration": "size_ge_of_card_eval_eq_andreev_ge_of_le_two_pow",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevLowerBound.lean#L710"
+        },
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevLowerBound.lean",
+          "line": 740,
+          "declaration": "wireCount_ge_of_card_eval_eq_andreev_ge_of_le_two_pow",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevLowerBound.lean#L740"
+        }
+      ],
+      "notes": [
+        "Lean b = paper k, Real.log = natural logarithm, c.size = total gates, c.wireCount = active wires.",
+        "Exact constants 36 and 144, same epsilon lower bound. Simplified Lean result assumes epsilon <= 1, implied by paper epsilon <= 1/2.",
+        "Balanced substitution m=N/k, n=2N yields claimed powers and polylogarithms; Big-Omega itself is not a Lean conclusion."
+      ]
+    },
+    {
+      "paper": "Lemma 9 (Few survivors)",
+      "status": "matches; fixed-table assertion is a specialization rather than a literal circuit theorem signature",
+      "evidence": [
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean",
+          "line": 843,
+          "declaration": "sum_circuitUnforcedConstCount_blockLiveSet_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean#L843"
+        },
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean",
+          "line": 859,
+          "declaration": "sum_circuitUnforcedAtMostOneCount_blockLiveSet_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean#L859"
+        },
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/RandomRestriction.lean",
+          "line": 491,
+          "declaration": "sum_card_not_forcedToConst_blockLiveSet_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/RandomRestriction.lean#L491"
+        },
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/RandomRestriction.lean",
+          "line": 507,
+          "declaration": "sum_card_not_forcedToAtMostOne_blockLiveSet_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/RandomRestriction.lean#L507"
+        }
+      ],
+      "notes": [
+        "Circuit-level statements average live choices and all ambient assignments, which represents uniform fixings since survival ignores assigned values at live positions.",
+        "For every fixed table x: absorb table contributions into gate thresholds and use the single-LTF theorems on address coordinates only. Sum over bottom gates; support <= km <= n and sum of address supports <= wires.",
+        "Lean circuit survivor counts only top-connected active bottom gates; paper may count all bottom gates. Full count bounds follow by summing single-gate inequalities, and agreement bounds with the full count are weaker."
+      ]
+    },
+    {
+      "paper": "Lemma 10 (RSO threshold count)",
+      "status": "scope ambiguity / mismatch requiring Boolean codomain",
+      "evidence": [
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean",
+          "line": 63,
+          "declaration": "IsThresholdOver",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean#L63"
+        },
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean",
+          "line": 126,
+          "declaration": "card_isThresholdOver_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean#L126"
+        }
+      ],
+      "notes": [
+        "Lean has g : iota -> X -> Bool; paper says any fixed functions f_j on Omega without specifying codomain.",
+        "Arbitrary real-valued feature generalization is not proved by this Lean statement. Every application in paper uses Boolean gate outputs and input coordinates.",
+        "Recommend explicitly writing fixed Boolean functions f_1,...,f_q : Omega -> {0,1}. The displayed bound is identical."
+      ]
+    },
+    {
+      "paper": "Lemma 11 (Counting restricted circuits)",
+      "status": "matches as direct combination of restriction-collapse and counting theorems",
+      "evidence": [
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean",
+          "line": 455,
+          "declaration": "card_isDepthTwoOverWeights_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean#L455"
+        },
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean",
+          "line": 738,
+          "declaration": "isDepthTwoOverWeights_eval_embedUpdate_const",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean#L738"
+        },
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean",
+          "line": 611,
+          "declaration": "card_circuitLiveWeights_le_size",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/ThresholdCounting.lean#L611"
+        }
+      ],
+      "notes": [
+        "Finite live set k, q nonnegative; #W <= s; Lean bound has min(#W+1,(2^k+1)^k) <= s+1 and so is at least as strong.",
+        "At-most-q survivor count is covered by padding monotonicity. Top features include direct live input bits via depthTwoFeatures; arbitrary top real weights and threshold."
+      ]
+    },
+    {
+      "paper": "Lemma 12 (Agreement for all survivor counts)",
+      "status": "matches as specialization of generic theorem and tail estimate",
+      "evidence": [
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevLowerBound.lean",
+          "line": 269,
+          "declaration": "card_eval_eq_andreev_le_of_unforced_mean_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevLowerBound.lean#L269"
+        },
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevLowerBound.lean",
+          "line": 370,
+          "declaration": "andreevWeightScale",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevLowerBound.lean#L370"
+        },
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevLowerBound.lean",
+          "line": 389,
+          "declaration": "andreevWeightTail_scale_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevLowerBound.lean#L389"
+        }
+      ],
+      "notes": [
+        "Choose M=s+1, B=E[U], alpha=sqrt(N(k+2+ln(s+1))), beta=(k+2)sqrt(N).",
+        "Lean bounds bad-table tail by (1/2)^(k+6) exactly. Generic bound handles actual E[U], rather than only substituted restriction upper estimate.",
+        "Uniform cardinal sums divided by m^k 2^n equal paper expectation."
+      ]
+    },
+    {
+      "paper": "Lemma 16 (Littlewood-Offord)",
+      "status": "matches by specialization; Lean square-root bound is stronger",
+      "evidence": [
+        {
+          "file": "CslibFrontier/Foundations/Combinatorics/LittlewoodOfford.lean",
+          "line": 93,
+          "declaration": "card_filter_sum_bool_le_choose_of_forall_le_abs",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Foundations/Combinatorics/LittlewoodOfford.lean#L93"
+        },
+        {
+          "file": "CslibFrontier/Foundations/Combinatorics/LittlewoodOfford.lean",
+          "line": 48,
+          "declaration": "choose_half_le_two_pow_div_sqrt",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Foundations/Combinatorics/LittlewoodOfford.lean#L48"
+        }
+      ],
+      "notes": [
+        "Set index type Fin R and P to membership in either half-open interval of length mu; distinct points have distance < mu.",
+        "First bound is exact binomial count. Lean proves central binomial / 2^R <= 1/sqrt(R+1), implying paper <= 1/sqrt(R) for R>=1."
+      ]
+    },
+    {
+      "paper": "Lemma 17 (single restriction, fixed table)",
+      "status": "matches via address-coordinate specialization",
+      "evidence": [
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/RandomRestriction.lean",
+          "line": 249,
+          "declaration": "card_not_forcedToConst_ltfEval_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/RandomRestriction.lean#L249"
+        },
+        {
+          "file": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/LTF.lean",
+          "line": 51,
+          "declaration": "ltfWeightRank",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/LTF.lean#L51"
+        }
+      ],
+      "notes": [
+        "Lean bound is 2 * sum over live nonzero weights of 1/sqrt(rank), same constant and ranks including ties.",
+        "Instantiate ambient index with address coordinates after absorbing fixed table contribution into theta, so Lean rank exactly equals paper rho defined using Lambda.",
+        "Divide count by 2^(km); live assignment values are ignored, so this equals probability over only fixed address bits. This bridge is not separately named in the pinned source."
+      ]
+    }
+  ],
+  "sign_coherent_results": [
+    {
+      "paper": "Theorem 13 (thm:coherent)",
+      "status": "matches after division by positive factors; finite bounds directly formalized",
+      "references": [
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean",
+          "line": 401,
+          "declaration": "pow_mul_andreevCubeSplitBound_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean#L401"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean",
+          "line": 449,
+          "declaration": "mul_andreevCubeSplitBound_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean#L449"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean",
+          "line": 473,
+          "declaration": "min_le_card_outputBottomGates",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean#L473"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean",
+          "line": 518,
+          "declaration": "le_card_outputBottomGates_of_balanced",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean#L518"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean",
+          "line": 551,
+          "declaration": "pow_mul_andreevCubeSplitBound_le_of_depthTwoInputs",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean#L551"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean",
+          "line": 576,
+          "declaration": "le_of_balanced_of_depthTwoInputs",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean#L576"
+        }
+      ],
+      "comparison": "Same D0, including max(0,...), base-two logarithm, real arbitrary weights and unrestricted top input wires. Lean gives m^k D0 <= (m^k-(m-1)^k)G and m D0 <= kG, plus the exact min and balanced bounds. Positive denominators follow from the paper k,m>=1. Polynomial/asymptotic wording follows by substitution n=2N. Lean also handles more degenerate natural parameters."
+    },
+    {
+      "paper": "Lemma 14 (lem:entropy)",
+      "status": "matches after normalization; inactive bottom gates require monotonicity comparison",
+      "references": [
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean",
+          "line": 158,
+          "declaration": "andreevCubeSplitBound",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean#L158"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean",
+          "line": 194,
+          "declaration": "card_andreevCubeSplitCount_eq_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean#L194"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean",
+          "line": 265,
+          "declaration": "two_pow_mul_andreevCubeSplitBound_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean#L265"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean",
+          "line": 166,
+          "declaration": "andreevCubeSplitBound_anti",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean#L166"
+        }
+      ],
+      "comparison": "The formal theorem sums over all 2^N truth tables and states 2^N D0 <= sum_x d_q(x), exactly the expected-value inequality after division. The fiber count C(G,D)(2^k-1)^D(2^k+1) also matches. The entropy step is implemented via a finite-fiber Jensen/log inequality, not an abstract Shannon entropy interface. Lean counts bottom gates with nonzero top weights. If paper includes inactive gates, its d_q and G are larger; the former inequality and antitonicity of D0 transfer the conclusion."
+    },
+    {
+      "paper": "Lemma 15 (lem:diag)",
+      "status": "matches, including standalone single-gate version",
+      "references": [
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean",
+          "line": 290,
+          "declaration": "sum_mul_andreevCubePoint",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean#L290"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean",
+          "line": 308,
+          "declaration": "monotone_or_antitone_blockForm",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean#L308"
+        },
+        {
+          "path": "CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean",
+          "line": 360,
+          "declaration": "card_cubes_mem_circuitSplitGates_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold/AndreevSignCoherent.lean#L360"
+        },
+        {
+          "path": "CslibFrontier/Foundations/Combinatorics/CubeSplitting.lean",
+          "line": 145,
+          "declaration": "Cslib.Combinatorics.card_cubeSplits_le",
+          "url": "https://github.com/cslib-community/cslib-frontier/blob/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Foundations/Combinatorics/CubeSplitting.lean#L145"
+        }
+      ],
+      "comparison": "IsSignCoherent requires independently in each address block all weights >=0 or all <=0, with no condition on table weights. Fixed table shifts the threshold. Generic CubeSplits is existence of scores <theta and >=theta on cube vertices; card_cubeSplits_le proves at most m^k-(m-1)^k for arbitrary monotone/antitone separable real block forms. The circuit specialization applies it to prefix sums of weights. No sign or equal-magnitude assumption is missing."
+    }
+  ],
+  "model_notes": [
+    "Lean b is paper k; BitString b and BitString (2^b) encode addresses and truth tables with a fixed indexing equivalence.",
+    "size_depthTwoInputs counts G bottom gates plus one output gate; top gates can read original input bits.",
+    "Lean wireCount counts nonzero aggregated connections, including direct inputs and gate-to-gate wires. Multiple syntactic slots for one input are aggregated; the paper uses one weight per connection.",
+    "Theorems based on outputBottomGates omit inactive bottom gates. Inclusion of such gates in the paper either weakens lower bounds or is handled by summing single-gate restriction estimates.",
+    "Fixed-table versions of restriction estimates follow by shifting thresholds and specializing generic LTF theorems to address-only coordinates; the named circuit-average theorems average all ambient bits.",
+    "Natural logarithms in Lean approximation constants imply the paper base-two asymptotic bounds by a fixed factor. Lower-bound ln and sign-coherent log_2 agree exactly with their Lean counterparts."
+  ],
+  "post_audit_resolution": {
+    "status": "Both recommended paper-domain clarifications applied.",
+    "changes": [
+      "Lemma 3 now requires g:Z->Z.",
+      "Lemma 10 now explicitly requires Boolean functions f_j:Omega->{0,1}."
+    ],
+    "paper_sha256": "d26db24b2814244622a067f4639e8f5ec107a832e10e8527c824725b7b21dd4c",
+    "note": "The original audit findings and audited source hash above are retained as the historical record. Approximation construction variants are unchanged."
+  }
+}

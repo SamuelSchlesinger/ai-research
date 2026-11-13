@@ -2,29 +2,12 @@
 \documentclass[11pt,letterpaper]{article}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[margin=1in,headheight=15pt]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
-\usepackage{microtype,booktabs,enumitem,xcolor,fancyhdr,hyperref}
-\usepackage[most]{tcolorbox}
-\usepackage{array}
-\usepackage{needspace}
-\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
-\definecolor{ink}{HTML}{203B55}
-\definecolor{accent}{HTML}{176C65}
-\definecolor{boxbg}{HTML}{F2F6F8}
-\hypersetup{colorlinks=true,linkcolor=ink,urlcolor=accent,citecolor=ink,
- pdftitle={Depth-Two Threshold Circuits for Andreev's Function},
+\usepackage{microtype,booktabs,hyperref}
+\hypersetup{hidelinks,
+ pdftitle={Improved Bounds for Depth-Two Threshold Circuits Computing Andreev's Function},
  pdfauthor={Christian Reitwiessner}}
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\small\color{ink}Threshold circuits for Andreev's function}
-\fancyhead[R]{\small\thepage}
-\renewcommand{\headrulewidth}{0.3pt}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0.4em}
-\setlength{\emergencystretch}{2em}
-\setlist[itemize]{leftmargin=1.5em,itemsep=0.2em,topsep=0.2em}
-\setlist[enumerate]{leftmargin=1.8em,itemsep=0.2em,topsep=0.2em}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
@@ -33,24 +16,16 @@
 \newtheorem*{remark}{Remark}
 \newcommand{\bits}{\{0,1\}}
 \newcommand{\ind}[1]{\bigl[\,#1\,\bigr]}
-\newcommand{\sect}[1]{\section{\texorpdfstring{\color{ink}#1}{#1}}}
-\newcommand{\subsect}[1]{\subsection*{\texorpdfstring{\color{ink}#1}{#1}}}
-\newcommand{\smalltitle}[1]{\textbf{\color{ink}#1}\quad}
 \newcommand{\THR}{\mathsf{THR}}
 \newcommand{\cH}{\mathcal H}
-\newtcolorbox{keybox}[1][]{breakable,colback=boxbg,colframe=ink!40,boxrule=0.4pt,
-  arc=2pt,left=8pt,right=8pt,top=5pt,bottom=5pt,#1}
+\title{Improved Bounds for Depth-Two Threshold Circuits Computing Andreev's Function}
+\author{Christian Reitwiessner}
+\date{November 2026}
 \begin{document}
-\thispagestyle{empty}
-{\raggedright\color{ink}\LARGE\bfseries Depth-Two Threshold Circuits for\\[0.15em]
-Andreev's Function\par}
-\vspace{0.5em}
-{\large Christian Reitwiessner\par}
-{\small November 2026\par}
-\vspace{0.8em}
+\maketitle
 
-\begin{keybox}
-\textbf{Abstract.} Andreev's function on $n$ input bits reads a bit from a
+\begin{abstract}
+Andreev's function on $n$ input bits reads a bit from a
 table at an address given by the parities of blocks of input bits. Kane and
 Williams used it for the first superlinear gate lower bounds against
 depth-two threshold circuits and asked for tight bounds. We improve the bounds by showing:
@@ -59,7 +34,7 @@ depth-two threshold circuits and asked for tight bounds. We improve the bounds b
       weights (previously $O(n^3/\log n)$);
 \item for agreement on a $\tfrac12+\varepsilon$ fraction of inputs, matching
       bounds of $\varepsilon^2n^{3/2}$ gates up to polylogarithmic factors
-      in the parameter range stated below:
+      (for some $\varepsilon$, see below):
       an explicit circuit with $O(\varepsilon^2n^{3/2}\sqrt{\log(1/\varepsilon)})$
       gates, and a lower bound of $\Omega(\varepsilon^2n^{3/2}/\log^2n)$
       (previously $\varepsilon^3$ and $\log^3n$);
@@ -71,14 +46,14 @@ In our circuits, and in that of Kane and Williams, each bottom gate's weights
 have a single sign within every address block. We show that such circuits
 for Andreev's function need $\Omega(n^2/\log^3n)$ gates. Within this class our
 exact circuit is therefore optimal up to polylogarithmic factors, and beating
-$n^2$ by more than a polylogarithmic factor requires mixed signs.
+$n^2$ by more than that requires mixed signs.
 
 All numbered results are formalized in Lean; the asymptotic consequences
 are derived from explicit bounds in the parameters.
-\end{keybox}
+\end{abstract}
 
 %===================================================================
-\sect{Setting and results}
+\section{Setting and results}
 
 Lower bounds for depth-two threshold circuits are a classical frontier of
 circuit complexity: for explicit functions in $\mathsf P$, nothing beyond
@@ -93,7 +68,7 @@ sign inside each address block, then $\Omega(n^2/\log^3n)$ gates are
 necessary, so a substantially subquadratic circuit must have bottom gates
 with weights of both signs inside some address block.
 
-\smalltitle{Andreev's function.}
+\paragraph*{Andreev's function.}
 Fix integers $k,m\ge1$. The input consists of
 \begin{itemize}
 \item a \emph{table} $x$ of $2^k$ bits $x_c$, one for each address
@@ -112,7 +87,7 @@ $k$ to be a power of two. Asymptotic statements refer to this balanced
 sequence; statements for general $k,m$ do not require this assumption.
 We use $\log$ for the base-two logarithm and $\ln$ for the natural logarithm.
 
-\smalltitle{Threshold circuits.}
+\paragraph*{Threshold circuits.}
 For a statement $P$, the bracket $\ind{P}$ is $1$ if $P$ holds and $0$
 otherwise. A \emph{threshold gate} with inputs $z_j\in\bits$, real weights
 $\omega_j$ and threshold $\tau$ computes $\ind{\sum_j\omega_jz_j\ge\tau}$. In a \emph{depth-two threshold
@@ -125,7 +100,7 @@ Boolean function if it outputs the function's value on at least a
 $\tfrac12+\varepsilon$ fraction of all inputs. Agreement fractions are
 measured under the uniform distribution on inputs.
 
-\smalltitle{Results and the state of the art.}
+\paragraph*{Results and the state of the art.}
 Stronger lower bounds against $\THR\circ\THR$ are known for functions in the
 much larger class $\mathsf E^{\mathsf{NP}}$; they are proved by the
 algorithmic method~\cite{Tam,ACW,CTW}. For functions in $\mathsf P$, which
@@ -135,7 +110,6 @@ Tal and Wang~\cite{CTW}. Our bounds improve the explicit polylogarithmic factors
 the dependence on $\varepsilon$.
 \begin{center}
 \small
-\renewcommand{\arraystretch}{1.25}
 \setlength{\tabcolsep}{5pt}
 \begin{tabular}{@{}lllll@{}}
 \toprule
@@ -186,7 +160,7 @@ circuit of Kane and Williams~\cite[Thm.~1.2]{KW} builds each of its parities
 from gates that threshold the plain sum of the parity's
 variables~\cite[Prop.~2.1]{HMPST}, so it is sign-coherent as well.
 
-\smalltitle{Related work.}
+\paragraph*{Related work.}
 Andreev's function comes from formula complexity: for De Morgan formulas,
 shrinkage gives it a lower bound of $n^{3-o(1)}$, the best known for an
 explicit function~\cite{And87,Has98,Tal14}. For depth-two threshold circuits,
@@ -200,14 +174,14 @@ bounds for functions in $\mathsf E^{\mathsf{NP}}$~\cite{Tam,ACW,CTW}.
 Sign-coherent gates are unate in each address block; unateness also drives
 the parity lower bounds of Impagliazzo, Paturi and Saks~\cite{IPS}.
 
-\smalltitle{How to read this article.}
+\paragraph*{How to read this article.}
 Section~\ref{sec:tech} lists the new techniques and where they are
 used. Sections~\ref{sec:upper}--\ref{sec:avgupper} (upper bounds),
 Section~\ref{sec:lower} (lower bounds) and Section~\ref{sec:coherent}
 (sign-coherent circuits) can be read independently. Section~\ref{sec:open} lists open questions.
 
 %===================================================================
-\sect{New techniques}\label{sec:tech}
+\section{New techniques}\label{sec:tech}
 
 The proofs combine standard tools, namely Fourier expansion of the lookup,
 threshold staircases for functions of a linear form (as for symmetric
@@ -229,11 +203,11 @@ new ingredients.
       $(-1)^{S\cdot b}$ leaves only $N$ terms, each with an integer
       coefficient $X_S$, and saves a factor $n/\log n$. Sharing quadratic corrections across characters and
       absorbing errors at a few special addresses gives the constant $5/16$.
-\item \textbf{Odd errors are orthogonal.} Used for the upper bounds for
+\item \textbf{Odd error functions are orthogonal.} Used for the upper bounds for
       approximate computation (Lemma~\ref{lem:odd},
       Theorem~\ref{thm:avgupper}). For each Fourier coefficient, we pair two
       reflected forms and truncate them to the same symmetric window.
-      Their combined error is odd in that coefficient. A symmetry of the uniform table flips one coefficient and
+      Their combined error is an odd function of that coefficient. A symmetry of the uniform table flips one coefficient and
       fixes another, so the errors of different characters are orthogonal
       although the coefficients are not independent. Their squares add, and
       no union bound over characters is needed. Keeping only the characters of
@@ -267,10 +241,9 @@ new ingredients.
 \end{itemize}
 
 %===================================================================
-\sect{Exact quadratic circuits}\label{sec:upper}
+\section{Exact quadratic circuits}\label{sec:upper}
 
-\begin{keybox}
-\textbf{Notation for Sections~\ref{sec:upper} and~\ref{sec:avgupper}.}
+\paragraph*{Notation for Sections~\ref{sec:upper} and~\ref{sec:avgupper}.}
 Let $|a_i|$ be the number of ones in block $i$, so the address is $b$
 with $b_i=|a_i|\bmod2$.
 For $S\subseteq\{1,\dots,k\}$ and $c\in\bits^k$ write $S\cdot c=\sum_{i\in S}c_i$, and
@@ -282,9 +255,8 @@ $X_S(x)$ is $N$ times the Fourier coefficient at $S$ of $c\mapsto(-1)^{x_c}$;
 it is even and lies in $[-N,N]$. $t_S(a)$ is the number of ones in the blocks in
 $S$, and lies in $[0,|S|m]$. We drop the arguments when they are clear.
 We write $[r]=\{1,\dots,r\}$, and $c_{[r]}$ for the first $r$ coordinates of $c$.
-\end{keybox}
 
-\smalltitle{Plan.}
+\paragraph*{Plan.}
 Testing the sign of the score $N(-1)^{x_b}$ computes Andreev's function.
 Lemma~\ref{lem:lookup} writes it as a sum of products,
 Lemma~\ref{lem:parity} removes the products, and Lemma~\ref{lem:ladder}
@@ -323,7 +295,7 @@ Because $X$ is even, $X+t$ has the parity of $t$, so $\varphi(X+t)=(-1)^t(X+t)$.
 
 \begin{lemma}[Threshold staircase]\label{lem:ladder}
 Let $L$ be an integer-valued quantity with $\ell\le L\le h$, where
-$\ell,h$ are integers, and let $g:\mathbb Z\to\mathbb R$. Then
+$\ell,h$ are integers, and let $g:\mathbb Z\to\mathbb Z$. Then
 \[
 g(L)=g(\ell)+\sum_{\theta=\ell+1}^{h}\bigl(g(\theta)-g(\theta-1)\bigr)\ind{L\ge\theta}.
 \]
@@ -378,7 +350,7 @@ circuit of size $O(n^2)$~\cite[Thm.~1.2]{KW}, in a different basis.
 
 % Copyright (c) 2026 Christian Reitwiessner.
 % Authors: Christian Reitwiessner
-\subsect{A sharper score: the \texorpdfstring{$5/16$}{5/16} bound}
+\subsection*{A sharper score: the \texorpdfstring{$5/16$}{5/16} bound}
 
 \begin{theorem}\label{thm:exact}
 Put $\alpha=\lfloor(m-1)/2\rfloor$. There is an exact depth-two threshold
@@ -394,7 +366,7 @@ polynomial in $n$. In the balanced case its total size is
 \]
 \end{theorem}
 
-\smalltitle{Idea of the proof.}
+\paragraph*{Idea of the proof.}
 Since the top gate only tests the sign of $N(-1)^{x_b}$, any score that is
 at least $N$ when $x_b=0$ and at most $-N$ when $x_b=1$ serves. With
 $Y_S=\sum_{c:\,S\cdot c\text{ odd}}x_c$ we have $X_S=4Y_S-2\sum_cx_c$ for
@@ -423,16 +395,16 @@ sign-coherent.
 %===================================================================
 % Copyright (c) 2026 Christian Reitwiessner.
 % Authors: Christian Reitwiessner
-\sect{Agreeing on most inputs with fewer gates}\label{sec:avgupper}
+\section{Agreeing on most inputs with fewer gates}\label{sec:avgupper}
 
 Under uniform inputs every form $X_S\pm t_S$ concentrates in a window of
 width $O(\sqrt n)$, so each staircase can be cut to its window. The question
 is how the $N$ cut-off errors add up. They are not independent, but with a
 symmetric truncation they are orthogonal.
 
-\begin{lemma}[Odd errors are orthogonal]\label{lem:odd}
+\begin{lemma}[Odd error functions are orthogonal]\label{lem:odd}
 Let the table be uniformly random. For distinct sets $S,T\subseteq\{1,\dots,k\}$ and functions
-$g,h:\mathbb Z\to\mathbb R$ with $g$ odd, that is, $g(-y)=-g(y)$ for all $y$, we have
+$g,h:\mathbb Z\to\mathbb R$ with $g$ an odd function, that is, $g(-y)=-g(y)$ for all $y$, we have
 $\mathbb E\bigl[g(X_S)\,h(X_T)\bigr]=0$.
 \end{lemma}
 \begin{proof}
@@ -450,12 +422,11 @@ and in the same way $X_T(x')=X_T(x)$. Since $x'$ is uniform,
 \mathbb E_x[g(X_S(x))h(X_T(x))]=\mathbb E_{x'}[g(X_S(x'))h(X_T(x'))]
 =\mathbb E_x[g(-X_S(x))h(X_T(x))].
 \]
-As $g$ is odd, the right side is the negative of the left side, so both are zero.
+As $g$ is an odd function, the right side is the negative of the left side, so both are zero.
 \end{proof}
 $X_S$ and $X_T$ are not independent; the lemma only uses this
 pairwise sign symmetry.
 
-\Needspace{10\baselineskip}
 \begin{theorem}\label{thm:avgupper}
 There are explicit depth-two threshold circuits for Andreev's function $A$
 with $m=N/k$ (the balanced case) as follows:
@@ -517,10 +488,11 @@ $D_S$ and $\eta_S$ are constants and
 e_S=-\eta_S\bigl(\varphi(X_S+D_S)\ind{|X_S+D_S|>R}+\varphi(X_S-D_S)\ind{|X_S-D_S|>R}\bigr)
 \eqqcolon g_S(X_S)
 \]
-is a function of $X_S$ alone. This $g_S$ is odd: $\varphi(u)\ind{|u|>R}$ is odd
-since $\varphi(-u)=-\varphi(u)$, and $y\mapsto-y$ sends $y+D_S$ to $-(y-D_S)$
-and $y-D_S$ to $-(y+D_S)$, so the two summands are exchanged and
-$g_S(-y)=-g_S(y)$. The table stays uniform when the address input is fixed,
+is a function of $X_S$ alone. The function $g_S$ is odd because
+$u\mapsto\varphi(u)\ind{|u|>R}$ is an odd function: $\varphi(-u)=-\varphi(u)$
+and the cutoff depends only on $|u|$. Replacing $y$ by $-y$ sends $y+D_S$
+to $-(y-D_S)$ and $y-D_S$ to $-(y+D_S)$, so the two summands are exchanged
+and negated, giving $g_S(-y)=-g_S(y)$. The table stays uniform when the address input is fixed,
 so by Lemma~\ref{lem:odd} with $g=g_S$ and $h=g_T$ we get
 $\mathbb E[e_Se_T]=0$ for all $S\ne T$, first for each fixed address and then
 on average. Therefore
@@ -569,7 +541,7 @@ wire bound.
 
 
 %===================================================================
-\sect{Lower bounds}\label{sec:lower}
+\section{Lower bounds}\label{sec:lower}
 
 This section proves lower bounds on the gates and wires of an arbitrary
 depth-two threshold circuit that agrees with Andreev's function on at least a
@@ -594,7 +566,7 @@ Taking $\varepsilon=\tfrac12$,
 allowed when $N\ge36(k+2)^2$, gives the worst-case bounds.
 \end{theorem}
 
-\smalltitle{Plan.}
+\paragraph*{Plan.}
 We follow Kane and Williams~\cite{KW}. Fix all but one bit per block at
 random. The restricted target function is a lookup in a \emph{random} table
 indexed by the $k$ remaining bits, and only a few bottom gates still depend
@@ -603,7 +575,7 @@ on those bits (Lemma~\ref{lem:surv}). There are few such restricted circuits
 table (Lemma~\ref{lem:avg}). Averaging over all restrictions proves the
 theorem.
 
-\smalltitle{Restrictions.}
+\paragraph*{Restrictions.}
 The lemmas below hold for all $k,m\ge1$, not only in the balanced case.
 Throughout, $C$ is a depth-two threshold circuit of size $s$ with $w$ wires.
 A \emph{restriction} consists of a choice $\sigma$ of one \emph{live}
@@ -636,7 +608,8 @@ Srinivasan~\cite[Lemma~9.1]{CSS} prove analogues with polylogarithmic and
 $n^{o(1)}$ losses.
 
 \begin{lemma}[Roychowdhury, Siu, Orlitsky~\cite{RSO}; see {\cite[Thm.~2.3]{KW}}]\label{fact:rso}
-For any fixed functions $f_1,\dots,f_q$ on a finite set $\Omega$, at most
+For any fixed Boolean functions $f_1,\dots,f_q:\Omega\to\bits$ on a finite
+set $\Omega$, at most
 $(|\Omega|+1)^{q+1}$ functions on $\Omega$ have the form
 $\ind{\sum_j\omega_jf_j\ge\tau}$.
 \end{lemma}
@@ -767,13 +740,13 @@ $n^{3/2}/\log n$ gates.
 %===================================================================
 % Copyright (c) 2026 Christian Reitwiessner.
 % Authors: Christian Reitwiessner
-\sect{A near-quadratic lower bound for sign-coherent circuits}\label{sec:coherent}
+\section{A near-quadratic lower bound for sign-coherent circuits}\label{sec:coherent}
 
 The upper bound circuit of Theorem~\ref{thm:exact} uses only bottom gates of a special
 kind. This section shows that with such gates it cannot be improved by more
 than a polylogarithmic factor.
 
-\smalltitle{Sign-coherence.}
+\paragraph*{Sign-coherence.}
 A bottom gate is \emph{sign-coherent} if, inside every address block, its
 weights are either all $\ge0$ or all $\le0$; its table weights are
 arbitrary. A depth-two threshold circuit is \emph{sign-coherent} if all its
@@ -798,14 +771,14 @@ optimal up to a polylogarithmic factor. The earlier circuit of Kane and
 Williams~\cite[Thm.~1.2]{KW} is sign-coherent as well. A polynomial-exponent improvement below quadratic therefore requires
 gates whose weights have mixed signs inside a block.
 
-\smalltitle{Plan.}
+\paragraph*{Plan.}
 We walk through all unit cubes of the grid of block counts. On each cube,
 the circuit reveals the whole table, so many gates must be non-constant there
 (Lemma~\ref{lem:entropy}). A sign-coherent gate is non-constant on at most a
 $k/m$ fraction of the cubes (Lemma~\ref{lem:diag}). Comparing the two counts
 gives the theorem.
 
-\smalltitle{The cube restriction.}
+\paragraph*{The cube restriction.}
 Fix an order of the positions inside every block. For a vector
 $s\in\{0,\dots,m\}^k$ let $a(s)$ be the address part in which block $i$ has
 ones exactly at its first $s_i$ positions. A \emph{cube} is a vector
@@ -930,7 +903,7 @@ the gap between $n^{3/2}$ and $n^2$ lies.
 
 
 %===================================================================
-\sect{Open questions}\label{sec:open}
+\section{Open questions}\label{sec:open}
 
 \begin{enumerate}
 \item \emph{Mixed signs.} Is there an exact circuit with $n^{2-\Omega(1)}$
@@ -956,8 +929,10 @@ the gap between $n^{3/2}$ and $n^2$ lies.
   constant?
 \end{enumerate}
 
-\smalltitle{Formalization.}
-The Lean~4 proofs are in \texttt{cslib-frontier}, at commit\\
+\paragraph*{Formalization.}
+The Lean~4 proofs are in the \texttt{cslib-frontier} repository at
+\url{https://github.com/cslib-community/cslib-frontier}.
+We refer to commit\\
 \href{https://github.com/cslib-community/cslib-frontier/commit/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84}{\texttt{89ed4de0e54b4953fcc15b8c5d33fad4a344ea84}}\\
 on the \texttt{main} branch. The files are in
 \href{https://github.com/cslib-community/cslib-frontier/tree/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold}{\texttt{WeightedThreshold/}}
@@ -976,13 +951,12 @@ All numbered results are covered by these files and their dependencies.
 The formalization proves explicit bounds in the parameters; the asymptotic
 consequences are derived in the text. The remarks are not formalized.
 
-\smalltitle{Acknowledgements.}
+\paragraph*{Acknowledgements.}
 The results, the formalization and this note were developed with AI
 assistance.
 
 \appendix
-\renewcommand{\thesection}{\Alph{section}}
-\sect{Proof of Theorem~\ref{thm:exact}}\label{app:exact}
+\section{Proof of Theorem~\ref{thm:exact}}\label{app:exact}
 
 
 \begin{proof}
@@ -1084,8 +1058,7 @@ Bottom coefficients and thresholds are $O(n)$; the displayed
 expansion has top coefficients bounded by $O(n^3)$.
 \end{proof}
 
-\renewcommand{\thesection}{\Alph{section}}
-\sect{Proof of Lemma~\ref{lem:surv}}\label{app:surv}
+\section{Proof of Lemma~\ref{lem:surv}}\label{app:surv}
 
 \begin{lemma}[Erd\H{o}s~\cite{Erdos}]\label{fact:lo}
 Let $R\ge1$ be an integer, let $z_1,\dots,z_R$ be independent uniform
@@ -1159,8 +1132,7 @@ with all non-live positions random),
 \texttt{sum\_circuitUnforcedConstCount\_blockLiveSet\_le} and
 \texttt{sum\_circuitUnforcedAtMostOneCount\_blockLiveSet\_le}.
 
-\renewcommand{\refname}{\texorpdfstring{\color{ink}References}{References}}
-\begin{thebibliography}{HMPST93}\setlength{\itemsep}{0pt}\footnotesize
+\begin{thebibliography}{HMPST93}
 
 \bibitem[ACW16]{ACW} J.~Alman, T.~M. Chan, and R.~Williams.
 \emph{Polynomial Representations of Threshold Functions and Algorithmic
