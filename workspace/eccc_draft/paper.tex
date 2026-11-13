@@ -58,7 +58,8 @@ depth-two threshold circuits and asked for tight bounds. We improve the bounds b
 \item an exact circuit with $(5/16+o(1))n^2$ gates and polynomial integer
       weights (previously $O(n^3/\log n)$);
 \item for agreement on a $\tfrac12+\varepsilon$ fraction of inputs, matching
-      bounds of $\varepsilon^2n^{3/2}$ gates up to polylogarithmic factors:
+      bounds of $\varepsilon^2n^{3/2}$ gates up to polylogarithmic factors
+      in the parameter range stated below:
       an explicit circuit with $O(\varepsilon^2n^{3/2}\sqrt{\log(1/\varepsilon)})$
       gates, and a lower bound of $\Omega(\varepsilon^2n^{3/2}/\log^2n)$
       (previously $\varepsilon^3$ and $\log^3n$);
@@ -69,10 +70,11 @@ depth-two threshold circuits and asked for tight bounds. We improve the bounds b
 In our circuits, and in that of Kane and Williams, each bottom gate's weights
 have a single sign within every address block. We show that such circuits
 for Andreev's function need $\Omega(n^2/\log^3n)$ gates. Within this class our
-circuits are therefore optimal up to polylogarithmic factors, and beating
+exact circuit is therefore optimal up to polylogarithmic factors, and beating
 $n^2$ by more than a polylogarithmic factor requires mixed signs.
 
-All results are formalized in Lean.
+All numbered results are formalized in Lean; the asymptotic consequences
+are derived from explicit bounds in the parameters.
 \end{keybox}
 
 %===================================================================
@@ -105,9 +107,10 @@ A(x,a)=x_b,\qquad\text{where }b_i=\left(\sum_{j=1}^m a_{i,j}\right)\bmod 2\quad\
 \]
 Write $N=2^k$ for the length of the table, so the input length is $n=N+km$.
 In the \emph{balanced case} the table and the address part have equal
-length, $km=N$, so $n=2N$ and $k=\log_2(n/2)$. We assume that
-$k$ is a power of two. Asymptotic statements refer to the
-balanced case.
+length, $km=N$, so $n=2N$ and $k=\log_2(n/2)$. Exact balance requires
+$k$ to be a power of two. Asymptotic statements refer to this balanced
+sequence; statements for general $k,m$ do not require this assumption.
+We use $\log$ for the base-two logarithm and $\ln$ for the natural logarithm.
 
 \smalltitle{Threshold circuits.}
 For a statement $P$, the bracket $\ind{P}$ is $1$ if $P$ holds and $0$
@@ -116,9 +119,11 @@ $\omega_j$ and threshold $\tau$ computes $\ind{\sum_j\omega_jz_j\ge\tau}$. In a 
 circuit} ($\THR\circ\THR$) some \emph{bottom} gates read input bits, and a
 single \emph{top} gate reads the bottom gates and input bits. Its
 \emph{size} is its total number of gates, top gate included; its
-\emph{wires} are its nonzero weights. A circuit
-\emph{$\varepsilon$-agrees} with a boolean function if it outputs the function's value on at least a
-$\tfrac12+\varepsilon$ fraction of all inputs.
+\emph{wire count} is the number of connections with nonzero weight.
+For $0<\varepsilon\le1/2$, a circuit \emph{$\varepsilon$-agrees} with a
+Boolean function if it outputs the function's value on at least a
+$\tfrac12+\varepsilon$ fraction of all inputs. Agreement fractions are
+measured under the uniform distribution on inputs.
 
 \smalltitle{Results and the state of the art.}
 Stronger lower bounds against $\THR\circ\THR$ are known for functions in the
@@ -160,9 +165,9 @@ Notes on the table:
       $\varepsilon\ge3\sqrt2(\log_2n+1)/\sqrt n$. Below this, a single
       majority gate over the table already agrees on a
       $\tfrac12+\Omega(1/\sqrt n)$ fraction. The upper bound is stated for
-      $\varepsilon\le\tfrac18$; for larger $\varepsilon$ the factor
-      $\varepsilon^2$ is a constant, and the circuits for agreement
-      $1-\delta$ in Theorem~\ref{thm:avgupper} take over.
+      $\varepsilon\le\tfrac18$. For $\tfrac18<\varepsilon<\tfrac12$, use
+      Part~1 of Theorem~\ref{thm:avgupper} with $\delta=\tfrac12-\varepsilon$;
+      at $\varepsilon=\tfrac12$, use the exact construction.
 \item $^\dagger$For a variant of Andreev's function whose table is four times
       as long as the address part.
 \item $^\ddagger$For circuits whose bottom gates are \emph{sign-coherent}:
@@ -171,10 +176,11 @@ Notes on the table:
       Theorem~\ref{thm:exact} is of this kind.
 \end{itemize}
 
-The remaining gap for unrestricted Andreev circuits is the worst case: between
+The remaining gap for unrestricted Andreev circuits concerns exact computation: between
 $n^{3/2}/\log^2n$ and $(5/16+o(1))n^2$ gates. For circuits with sign-coherent
-bottom gates the gap is only polylogarithmic. So a circuit with $n^{2-\delta}$
-gates needs bottom gates whose weights have mixed signs inside a block. The two
+bottom gates the gap is only polylogarithmic. For any fixed $\delta>0$, a circuit with $n^{2-\delta}$
+gates therefore needs, for sufficiently large $n$, bottom gates whose
+weights have mixed signs inside a block. The two
 polynomial-size constructions we know of avoid such gates: besides ours, the
 circuit of Kane and Williams~\cite[Thm.~1.2]{KW} builds each of its parities
 from gates that threshold the plain sum of the parity's
@@ -216,17 +222,18 @@ new ingredients.
       expansion writes the lookup as a sum of products ``table coefficient
       $\times$ address parity''. For $\varphi(u)\coloneqq(-1)^uu$ and even $X$,
       $X(-1)^t=\varphi(X+t)-\varphi(t)$, so every
-      product becomes the difference of two functions of single linear forms, each one
-      staircase. Kane and Williams build each of about $n^2/\log n$ parities
+      product becomes the difference of two functions of affine forms,
+      each implemented by a threshold staircase. Kane and Williams build each
+      of about $n^2/\log n$ parities
       separately. Collecting the terms that share the same address parity
       $(-1)^{S\cdot b}$ leaves only $N$ terms, each with an integer
       coefficient $X_S$, and saves a factor $n/\log n$. Sharing quadratic corrections across characters and
       absorbing errors at a few special addresses gives the constant $5/16$.
 \item \textbf{Odd errors are orthogonal.} Used for the upper bounds for
       approximate computation (Lemma~\ref{lem:odd},
-      Theorem~\ref{thm:avgupper}). Truncating each staircase to a window
-      symmetrically makes its error an odd function of its own Fourier
-      coefficient. A symmetry of the uniform table flips one coefficient and
+      Theorem~\ref{thm:avgupper}). For each Fourier coefficient, we pair two
+      reflected forms and truncate them to the same symmetric window.
+      Their combined error is odd in that coefficient. A symmetry of the uniform table flips one coefficient and
       fixes another, so the errors of different characters are orthogonal
       although the coefficients are not independent. Their squares add, and
       no union bound over characters is needed. Keeping only the characters of
@@ -255,8 +262,8 @@ new ingredients.
       reveals the whole table, while a sign-coherent gate moves monotonically
       through the grid and changes value at most once along each diagonal
       line, a classical fact for unate functions~\cite[Lemma~2.1]{IPS}. So it
-      is non-constant on only a $k/m$ fraction of the cubes, against
-      $1/\sqrt m$ for a random restriction.
+      is non-constant on at most a $k/m$ fraction of the cubes, compared
+      with the $O(\sqrt n/m)$ survival bound for random restrictions.
 \end{itemize}
 
 %===================================================================
@@ -315,8 +322,8 @@ Because $X$ is even, $X+t$ has the parity of $t$, so $\varphi(X+t)=(-1)^t(X+t)$.
 \end{proof}
 
 \begin{lemma}[Threshold staircase]\label{lem:ladder}
-Let $L$ be an integer that always lies in $\{\ell,\dots,h\}$, and let $g$
-be any function on the integers. Then
+Let $L$ be an integer-valued quantity with $\ell\le L\le h$, where
+$\ell,h$ are integers, and let $g:\mathbb Z\to\mathbb R$. Then
 \[
 g(L)=g(\ell)+\sum_{\theta=\ell+1}^{h}\bigl(g(\theta)-g(\theta-1)\bigr)\ind{L\ge\theta}.
 \]
@@ -325,7 +332,7 @@ g(L)=g(\ell)+\sum_{\theta=\ell+1}^{h}\bigl(g(\theta)-g(\theta-1)\bigr)\ind{L\ge\
 The brackets equal $1$ exactly for $\theta\le L$, and the sum telescopes.
 \end{proof}
 
-When $L$ is a linear form in the input bits, each $\ind{L\ge\theta}$ is one
+When $L$ is an affine form in the input bits, each $\ind{L\ge\theta}$ is one
 threshold gate, so $g(L)$ costs one gate per value of $\theta$, i.e.\ $h-\ell$
 gates. Both $t_S$ and $X_S+t_S$ are such forms, since
 $(-1)^{x_c}=1-2x_c$:
@@ -393,7 +400,8 @@ at least $N$ when $x_b=0$ and at most $-N$ when $x_b=1$ serves. With
 $Y_S=\sum_{c:\,S\cdot c\text{ odd}}x_c$ we have $X_S=4Y_S-2\sum_cx_c$ for
 $S\ne\varnothing$, so replacing $X_S$ by $4Y_S$ in Lemma~\ref{lem:lookup}
 changes the sum only by an affine term and a multiple of $\ind{b=0}$, and
-$u_S=2Y_S+t_S$ has half the range of $X_S+t_S$. Further, $4Y_S(-1)^{t_S}$
+$u_S=2Y_S+t_S$ reduces the width of the table-dependent part of the range
+from $2N$ to $N$. Further, $4Y_S(-1)^{t_S}$
 equals $-8\lceil u_S/2\rceil^2$ up to a polynomial in $Y_S$, $t_S$ and
 $\lceil t_S/2\rceil$, and the square changes only at odd $u_S$, so its
 staircase needs only odd thresholds. Summed over $S$, the polynomials collapse
@@ -424,7 +432,7 @@ symmetric truncation they are orthogonal.
 
 \begin{lemma}[Odd errors are orthogonal]\label{lem:odd}
 Let the table be uniformly random. For distinct sets $S,T\subseteq\{1,\dots,k\}$ and functions
-$g,h$ on the integers with $g$ odd, that is, $g(-y)=-g(y)$ for all $y$, we have
+$g,h:\mathbb Z\to\mathbb R$ with $g$ odd, that is, $g(-y)=-g(y)$ for all $y$, we have
 $\mathbb E\bigl[g(X_S)\,h(X_T)\bigr]=0$.
 \end{lemma}
 \begin{proof}
@@ -522,8 +530,10 @@ on average. Therefore
 \]
 
 \emph{Diagonal terms.}
+Here the expectations are over both the table and the address bits.
 For $U=X_S\pm D_S$ we have $|\mathbb EU|\le1/2$, and $U-\mathbb EU$ is a sum
-of $N$ independent signs and $m|S|$ half-signs, so Hoeffding's inequality
+of $N$ independent uniform signs and $m|S|$ independent uniform
+variables in $\{-1/2,1/2\}$, so Hoeffding's inequality
 gives $\Pr\bigl[|U-\mathbb EU|\ge\lambda\bigr]\le2\exp(-\lambda^2/(2v))$ with
 $v=N+km/4$. As $|U|>R$ implies $|U-\mathbb EU|>R/2$ and
 $U^2\le4(U-\mathbb EU)^2$, integrating this tail from $R/2$ gives
@@ -534,8 +544,10 @@ gives
 \mathbb E(P_R-P_*)^2=\sum_{S\ne\varnothing}\mathbb E\,e_S^2
 \le128(q-1)v\exp\bigl(-R^2/(16v)\bigr).
 \]
-Since $P_*/(2q)$ is a sum of $L$ signs with $L$ even when $q<N$, the values
-of $P_*$ lie at distance at least $2q$ from the threshold, so the truncated circuit
+For $q<N$, the sum $P_*/(2q)$ contains an even number $L$ of signs, so
+$P_*$ is a multiple of $4q$ and lies at distance at least $2q$ from the
+threshold $-2q$. For $q=N$, the two scores $\pm2N$ have the same margin
+from the threshold $0$. Thus the truncated circuit
 differs from the vote only if $|P_R-P_*|\ge2q$. By Markov's inequality this
 has probability at most $(32v/q)\exp(-R^2/(16v))$, which is at most $\delta$
 for
@@ -550,7 +562,9 @@ $q\ge32\varepsilon^2N$ and $\delta=\varepsilon$. Then $32\le q\le N/2$
 because $N^{-1/2}\le\varepsilon\le1/8$, and $q<64\varepsilon^2N$; the vote
 agrees on at least a $1/2+\sqrt{q/(8N)}\ge1/2+2\varepsilon$ fraction, and
 truncation loses at most $\varepsilon$. Every bottom gate has at most $n$
-input wires.
+input wires and one wire to the top
+gate, which also has at most $n$ direct input wires. This gives the stated
+wire bound.
 \end{proof}
 
 
@@ -558,8 +572,8 @@ input wires.
 \sect{Lower bounds}\label{sec:lower}
 
 This section proves lower bounds on the gates and wires of an arbitrary
-depth-two threshold circuit that agrees with Andreev's function on a
-$1/2+\varepsilon$ fraction of inputs; $\varepsilon=1/2$ is the worst case.
+depth-two threshold circuit that agrees with Andreev's function on at least a
+$1/2+\varepsilon$ fraction of inputs; $\varepsilon=1/2$ means exact computation.
 For gates, the bound matches Theorem~\ref{thm:avgupper} up to
 polylogarithmic factors. The argument is the random restriction method of
 Kane and Williams~\cite{KW} with two changes taken from
@@ -582,10 +596,10 @@ allowed when $N\ge36(k+2)^2$, gives the worst-case bounds.
 
 \smalltitle{Plan.}
 We follow Kane and Williams~\cite{KW}. Fix all but one bit per block at
-random. The restricted circuit computes a lookup in a \emph{random} table
+random. The restricted target function is a lookup in a \emph{random} table
 indexed by the $k$ remaining bits, and only a few bottom gates still depend
 on those bits (Lemma~\ref{lem:surv}). There are few such restricted circuits
-(Lemma~\ref{lem:count}), and none of them correlates well with a random
+(Lemma~\ref{lem:count}), and with high probability none correlates well with a random
 table (Lemma~\ref{lem:avg}). Averaging over all restrictions proves the
 theorem.
 
@@ -594,8 +608,11 @@ The lemmas below hold for all $k,m\ge1$, not only in the balanced case.
 Throughout, $C$ is a depth-two threshold circuit of size $s$ with $w$ wires.
 A \emph{restriction} consists of a choice $\sigma$ of one \emph{live}
 position in every block, and a \emph{fixing}: values for all other input
-bits, table included. For a uniformly random restriction, every fixed bit
-is uniform and independent. Write $u\in\bits^k$ for the live bits and
+bits, table included. For a uniformly random restriction, the live position
+in each block is
+chosen uniformly and independently, and all fixed bits are independent
+uniform bits, independent of these choices. Write $u\in\bits^k$ for the
+live bits and
 $o_i$ for the parity of the $m-1$ fixed bits of block $i$ (the
 \emph{offset}). Then the address is $b=u\oplus o$, and the restricted
 function is $u\mapsto x_{u\oplus o}$. A bottom gate \emph{survives} if it
@@ -604,8 +621,9 @@ still depends on $u$. Let $U$ be the number of surviving gates.
 \begin{lemma}[Few survivors]\label{lem:surv}
 For a uniformly random restriction, $\mathbb E[U]\le4s\sqrt n/m$. The
 expected number of bottom gates that depend on at least two live bits is at
-most $4w/m^{3/2}$. Both bounds hold for every fixed table, since they use
-only the randomness of the fixed address bits.
+most $4w/m^{3/2}$. Both bounds also hold for every fixed table, averaging
+over the live
+positions and the fixed address bits.
 \end{lemma}
 These are the random restriction lemmas of Kane and
 Williams~\cite[Lemmas~1.1 and~3.1]{KW}, with explicit constants.
@@ -625,8 +643,8 @@ $\ind{\sum_j\omega_jf_j\ge\tau}$.
 
 \begin{lemma}[Counting restricted circuits]\label{lem:count}
 Fix $C$ and $\sigma$. Every fixing turns $C$ into a function of the live
-bits $u\in\bits^k$. Let $\cH_q$ be the set of functions that arise in this
-way from fixings with at most $q$ survivors. Then
+bits $u\in\bits^k$. For an integer $q\ge0$, let $\cH_q$ be the set of
+functions that arise in this way from fixings with at most $q$ survivors. Then
 \[
 |\cH_q|\le\bigl((2^k+1)(s+1)\bigr)^q\,(2^k+1)^{q+k+1}.
 \]
@@ -664,8 +682,9 @@ For one function $f$ of $u$ and $\Delta\ge0$, Hoeffding's inequality gives
 \Pr\bigl[f\text{ agrees with }u\mapsto x_{u\oplus o}\text{ on}\ge N/2+\Delta\text{ points}\bigr]
 \le e^{-2\Delta^2/N}.
 \]
-Call the fixing \emph{bad} if some $q<N$ and some $f\in\cH_q$ violate this
-with $\Delta_q=\alpha\sqrt q+\beta$. Using $\Delta_q^2\ge\alpha^2q+\beta^2$,
+Put $\Delta_q=\alpha\sqrt q+\beta$. Call the table \emph{bad} if, for some
+integer $0\le q<N$, a function $f\in\cH_q$ agrees with
+$u\mapsto x_{u\oplus o}$ on more than $N/2+\Delta_q$ points. Using $\Delta_q^2\ge\alpha^2q+\beta^2$,
 $\ln(2^k+1)\le k+1$ and Lemma~\ref{lem:count},
 \begin{align*}
 \Pr[\text{bad}]&\le\sum_{q\ge0}|\cH_q|\,e^{-2\Delta_q^2/N}
@@ -675,9 +694,9 @@ $\ln(2^k+1)\le k+1$ and Lemma~\ref{lem:count},
 \end{align*}
 which is at most $1.2\,e^{-(k^2+6k+7)}\le2^{-(k+6)}$.
 
-On a good fixing with $U<N$ survivors, the agreement on the $N$ points $u$
+For a good table with $U<N$ survivors, the agreement on the $N$ points $u$
 is at most $N/2+\alpha\sqrt U+\beta$. This also holds for $U\ge N$, because
-then $\alpha\sqrt U\ge\sqrt{2N}\sqrt N>N/2$. Averaging over all restrictions
+then $\alpha\sqrt U\ge N>N/2$. Averaging over all restrictions
 and using $\mathbb E\sqrt U\le\sqrt{\mathbb E U}$ (Cauchy--Schwarz) proves
 the lemma, since the average agreement over all restrictions equals the
 agreement over all inputs.
@@ -758,9 +777,9 @@ than a polylogarithmic factor.
 A bottom gate is \emph{sign-coherent} if, inside every address block, its
 weights are either all $\ge0$ or all $\le0$; its table weights are
 arbitrary. A depth-two threshold circuit is \emph{sign-coherent} if all its
-bottom gates are; its top gate is arbitrary. Every gate that sees each block only through its number of ones is
-sign-coherent, and so is every gate that is monotone in the address bits.
-All gates of the circuit in Theorem~\ref{thm:exact} are of this kind.
+bottom gates are; its top gate is arbitrary. Every gate whose address
+weights are constant within each block is sign-coherent, as is every gate
+with nonnegative address weights. All bottom gates of the circuit in Theorem~\ref{thm:exact} are of this kind.
 
 \begin{theorem}\label{thm:coherent}
 Let $C$ be a sign-coherent depth-two threshold circuit for $A$ with $G$
@@ -780,9 +799,9 @@ Williams~\cite[Thm.~1.2]{KW} is sign-coherent as well. A polynomial-exponent imp
 gates whose weights have mixed signs inside a block.
 
 \smalltitle{Plan.}
-We walk through all unit cubes of the grid of block weights. On each cube,
+We walk through all unit cubes of the grid of block counts. On each cube,
 the circuit reveals the whole table, so many gates must be non-constant there
-(Lemma~\ref{lem:entropy}). A sign-coherent gate is non-constant on only a
+(Lemma~\ref{lem:entropy}). A sign-coherent gate is non-constant on at most a
 $k/m$ fraction of the cubes (Lemma~\ref{lem:diag}). Comparing the two counts
 gives the theorem.
 
@@ -812,20 +831,24 @@ It computes $\ind{\lambda_j\cdot z\ge\tau_j(x)}$, where
 $\lambda_j\in\mathbb R^k$ lists its fixed weights on the live positions,
 and $\tau_j(x)$ absorbs the contributions of the table bits and fixed
 address bits.
-Likewise the top gate computes
-$\ind{\sum_jv_jg_j+\mu\cdot z\ge\kappa(x)}$, where $v_j$ are its weights on the
-bottom gates and $\mu$ its weights on the live positions; the gates that
-do not split $q$ are constant and are absorbed, together with the table and
-the fixed address bits, into $\kappa(x)$. So only $\tau_j$ and $\kappa$ depend
-on $x$.
+Let $I$ be the set of gates that split $q$ for this $x$, and write $g_j(z)$
+for their restricted functions. Absorb the constant gates, the table bits
+and the fixed address bits into the top threshold $\kappa(x)$. The top gate
+then computes
+$\ind{\sum_{j\in I}v_jg_j(z)+\mu\cdot z\ge\kappa(x)}$, where $v_j$ are its
+fixed weights on the bottom gates and $\mu$ lists its fixed weights on the
+live positions. So among the weights and thresholds, only $\tau_j$ and
+$\kappa$ depend on $x$.
 
 Therefore the function $z\mapsto x_{(q\bmod2)\oplus z}$, and with it $x$, is
 determined by: the set $I$ of splitting gates; for each $j\in I$ the
-non-constant function $\ind{\lambda_j\cdot z\ge\tau_j}$, one of at most $2^k-1$
-(only the position of $\tau_j$ among the $\le2^k$ values $\lambda_j\cdot z$
-matters); and the position of $\kappa(x)$. After the restricted bottom-gate
+non-constant function $\ind{\lambda_j\cdot z\ge\tau_j(x)}$, one of at most
+$2^k-1$ (only the position of $\tau_j(x)$ among the $\le2^k$ values
+$\lambda_j\cdot z$ matters, and the two constant functions are excluded);
+and the position of $\kappa(x)$. After the restricted bottom-gate
 functions have been specified, the top gate's score is fixed at each of the
 $2^k$ inputs $z$, so at most $2^k+1$ positions of $\kappa(x)$ matter.
+Now let $x$ be uniformly random, and write $H$ for Shannon entropy in bits.
 Encoding $|I|=d_q(x)$ first, the entropy chain rule gives
 \[
 \begin{aligned}
@@ -882,7 +905,8 @@ The remaining $m^k-(m-1)^k$ cubes start lines, proving the bound.
 
 \begin{proof}[Proof of Theorem~\ref{thm:coherent}]
 Sum Lemma~\ref{lem:entropy} over all cubes and compare with
-Lemma~\ref{lem:diag}: $m^kD_0\le\sum_q\mathbb E[d_q]\le G\,(m^k-(m-1)^k)$.
+Lemma~\ref{lem:diag}:
+$m^kD_0\le\sum_q\mathbb E_x[d_q(x)]\le G\,(m^k-(m-1)^k)$.
 Then use $1-(1-1/m)^k\le k/m$. If $G\ge N^2$ there is nothing to prove. Otherwise $\log_2(G+1)\le2k$ and
 $D_0\ge(N-3k-1)/(3k)$. In the balanced case $m=N/k$.
 \end{proof}
@@ -891,8 +915,9 @@ $D_0\ge(N-3k-1)/(3k)$. In the balanced case $m=N/k$.
 (1) Lemma~\ref{lem:diag} is tight for all $k,m$. The fact that a
 unate function changes at most once along a chain compatible with its
 orientation is classical~\cite[Lemma~2.1]{IPS}; to the best of our knowledge,
-the cube restriction and the resulting quadratic lower bound are new. (2) Theorem~\ref{thm:coherent} is
-asymptotic. It exceeds $n^{3/2}$ only from about $k=37$, and the method
+the cube restriction and the resulting near-quadratic lower bound are new.
+(2) The explicit balanced bound in Theorem~\ref{thm:coherent} first exceeds
+$n^{3/2}$ at $k=64$ among the admissible powers of two. The method
 (Lemma~\ref{lem:entropy} plus a uniform bound as in Lemma~\ref{lem:diag})
 cannot give more than $O(n^2/\log n)$. (3) Lemma~\ref{lem:entropy} holds for
 all circuits. For general gates, the limit of survivor counting noted after
@@ -932,18 +957,24 @@ the gap between $n^{3/2}$ and $n^2$ lies.
 \end{enumerate}
 
 \smalltitle{Formalization.}
-The Lean~4 proofs are in
-\href{https://github.com/cslib-community/cslib-frontier}{cslib-frontier}.
+The Lean~4 proofs are in \texttt{cslib-frontier}, at commit\\
+\href{https://github.com/cslib-community/cslib-frontier/commit/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84}{\texttt{89ed4de0e54b4953fcc15b8c5d33fad4a344ea84}}\\
+on the \texttt{main} branch. The files are in
+\href{https://github.com/cslib-community/cslib-frontier/tree/89ed4de0e54b4953fcc15b8c5d33fad4a344ea84/CslibFrontier/Computability/Circuit/Boolean/WeightedThreshold}{\texttt{WeightedThreshold/}}
+under \nolinkurl{CslibFrontier/Computability/Circuit/Boolean/}.
+The main files are:
+\begin{itemize}
+\item \texttt{Andreev.lean} and \texttt{AndreevSharp.lean} for the exact
+      constructions (Proposition~\ref{prop:basic} and Theorem~\ref{thm:exact});
+\item \texttt{AndreevOddErrors.lean} and \texttt{AndreevTruncatedCircuit.lean}
+      for Lemma~\ref{lem:odd} and Theorem~\ref{thm:avgupper};
+\item \texttt{AndreevLowerBound.lean} for Theorem~\ref{thm:lower};
+\item \texttt{AndreevSignCoherent.lean} for Theorem~\ref{thm:coherent} and
+      Lemmas~\ref{lem:entropy}--\ref{lem:diag}.
+\end{itemize}
+All numbered results are covered by these files and their dependencies.
 The formalization proves explicit bounds in the parameters; the asymptotic
-consequences are derived in the text. All numbered results are formalized there:
-Proposition~\ref{prop:basic} in pull request \#2813;
-Theorem~\ref{thm:exact} in \#4720 and \#4773;
-Lemma~\ref{lem:odd} and Theorem~\ref{thm:avgupper} in \#4721 and \#4722;
-Theorem~\ref{thm:lower} with Lemmas~\ref{lem:surv}--\ref{lem:avg} in \#2368,
-\#2372 and \#2377; Theorem~\ref{thm:coherent} with
-Lemmas~\ref{lem:entropy} and~\ref{lem:diag} in \#4709 and \#4718; and the
-bounds for two address blocks in \#4774 (all merged). The remarks are
-not formalized.
+consequences are derived in the text. The remarks are not formalized.
 
 \smalltitle{Acknowledgements.}
 The results, the formalization and this note were developed with AI
@@ -1038,8 +1069,8 @@ $\sum_S\ind{t_S\text{ odd}}=(N/2)\ind{b\ne0}$.
 The even-level $\sigma$ gates coincide with the $S=[k]$ gates, saving
 $\lfloor km/2\rfloor$ gates. Everything else in $P$ is an affine top term.
 
-Since $\sum_{S\ne\varnothing}|S|=kN/2$, the main-ridge and last-correction
-counts together are
+Since $\sum_{S\ne\varnothing}|S|=kN/2$, the gate counts for the $r_S$
+staircases and the last correction sum to
 \[
 \sum_{S\ne\varnothing}\left(
  \left\lceil\frac{N+2\alpha|S|+|S|m}{2}\right\rceil
@@ -1057,8 +1088,8 @@ expansion has top coefficients bounded by $O(n^3)$.
 \sect{Proof of Lemma~\ref{lem:surv}}\label{app:surv}
 
 \begin{lemma}[Erd\H{o}s~\cite{Erdos}]\label{fact:lo}
-Let $z_1,\dots,z_R$ be independent uniform bits, let $\omega_1,\dots,\omega_R$
-satisfy $|\omega_j|\ge\mu>0$, and let $I$ be a half-open interval of length
+Let $R\ge1$ be an integer, let $z_1,\dots,z_R$ be independent uniform
+bits, and let real weights $\omega_1,\dots,\omega_R$ satisfy $|\omega_j|\ge\mu>0$, and let $I$ be a half-open interval of length
 $\mu$. Then
 $\Pr\bigl[\sum_j\omega_jz_j\in I\bigr]\le\binom{R}{\lfloor R/2\rfloor}2^{-R}\le1/\sqrt R$.
 \end{lemma}
@@ -1078,7 +1109,7 @@ $2\sum_{j}\rho(j)^{-1/2}$, the sum over the live positions $j\in \Lambda$.
 \begin{proof}
 Let $\Phi$ be the contribution of the fixed bits. The restricted gate is
 $\ind{\sum_{j\text{ live}}\omega_ju_j\ge\tau-\Phi}$, and it is non-constant
-exactly when $\tau-\Phi$ lies in a half-open interval of length
+if and only if $\tau-\Phi$ lies in a half-open interval of length
 $\sum_{j\text{ live}}|\omega_j|$. Split this interval into consecutive
 half-open pieces of lengths $|\omega_j|$, one for each live $j\in \Lambda$.
 

@@ -870,7 +870,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 
-82.
+84.
  (ot1lmss.fd
 File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -882,18 +882,18 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 ]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 135.
+(Font)              <10> on input line 140.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 135.
+(Font)              <7> on input line 140.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 135.
+(Font)              <5> on input line 140.
  [2] [3] [4]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 374.
+(Font)              <12> on input line 381.
  [5] [6]
-[7] [8] [9] [10] [11] [12] [13] [14] [15]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-126.
+[7] [8] [9] [10] [11] [12]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9
+60.
  (t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -901,10 +901,11 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
+ [13] [14] [15]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 1138.
+(Font)              <9> on input line 1169.
  [16] [17] (paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: E9776530169284C196447028409B445E;1524.
  )
-Output written on paper.xdv (17 pages, 143496 bytes).
+Output written on paper.xdv (17 pages, 146248 bytes).
