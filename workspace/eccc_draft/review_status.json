@@ -1,8 +1,8 @@
 {
   "Authors": "Christian Reitwiessner",
   "status": "Whole-paper precision revision integrated after Astra audit and parent check; all numerical bounds retained; abstract provisional; not submitted",
-  "pages": 12,
-  "source_sha256": "2d52ccd838d73227dcd1be86c6b00a52f9bbe374e8193ec27f8efe8667344966",
+  "pages": 16,
+  "source_sha256": "f156ffe88ea8a9a50a4e6462b2c28172cf3d430dc9c27ed097e87e63c5dafe55",
   "duplicate_labels": 0,
   "missing_labels": [],
   "overfull_boxes": 0,
@@ -51,7 +51,7 @@
   "font_size_pt": 11,
   "margins_inches": 1,
   "visual_inspection": "Rendered final ten-page contact sheet and read the approximation page at full size; no layout defects observed",
-  "post_review_copy_edit": "Typed maps, explicit arguments and quantifiers, fixed versus random inputs, injectivity hypothesis and pointwise appendix values distinguished throughout.",
+  "post_review_copy_edit": "Added unnumbered global Proof ideas section, preserving theorem numbering and user definitions. Recompiled with no overfull boxes or undefined references. Removed the Two address blocks remark and recompiled.",
   "approximation_checks": {
     "Authors": "Christian Reitwiessner",
     "status": "passed",
@@ -68,5 +68,5 @@
   "editorial_notes": [
     "Abstract still needs considerable work; margin note retained during wording revision."
   ],
-  "length_note": "12 pages including appendices and references, exceeding original 8\u201310-page target; typography and complete proofs retained."
+  "length_note": "16 pages including appendices and references; original 8\u201310-page target remains exceeded."
 }

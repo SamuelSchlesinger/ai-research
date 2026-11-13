@@ -29,7 +29,6 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{fact}[theorem]{Fact}
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 \newcommand{\bits}{\{0,1\}}
@@ -409,7 +408,8 @@ $x_{e_i}=1$. The full proof is in Appendix~\ref{app:exact}.
 The sharper construction remains sign-coherent: every bottom gate sees a block
 through its sum with a nonnegative coefficient. Mixed-sign weights
 are therefore not needed for this bound. Section~\ref{sec:coherent} shows
-that improving the quadratic exponent requires leaving that class.
+that improving the quadratic exponent requires gates that are not
+sign-coherent.
 
 
 %===================================================================
@@ -553,46 +553,30 @@ truncation loses at most $\varepsilon$. Every bottom gate has at most $n$
 input wires.
 \end{proof}
 
-The circuit is deterministic: no random choices or averaging over circuits
-are needed, because the centered reflection makes each error odd. For error
-below $2^{-n}$ the radius becomes linear in $n$ and the bound is quadratic
-again; in this construction, exactness costs more than any fixed error.
-
 
 %===================================================================
 \sect{Lower bounds}\label{sec:lower}
 
-\begin{keybox}
-\textbf{Notation for Section~\ref{sec:lower}.}
-$C$ is a depth-two threshold circuit of size $s$ with $w$ wires.
-A \emph{restriction} consists of a choice $\sigma$ of one \emph{live}
-position in every block, and a \emph{fixing}: values for all other input
-bits, table included. For a uniformly random restriction, every fixed bit
-is uniform and independent. Write $u\in\bits^k$ for the live bits and
-$o_i$ for the parity of the $m-1$ fixed bits of block $i$ (the
-\emph{offset}). Then the address is $b=u\oplus o$, and the restricted
-function is
-\[
-u\mapsto x_{u\oplus o}.
-\]
-A bottom gate \emph{survives} if it still depends on $u$. Let $U$ be the
-number of surviving gates.
-\end{keybox}
+This section proves lower bounds on the gates and wires of an arbitrary
+depth-two threshold circuit that agrees with Andreev's function on a
+$1/2+\varepsilon$ fraction of inputs; $\varepsilon=1/2$ is the worst case.
+For gates, the bound matches Theorem~\ref{thm:avgupper} up to
+polylogarithmic factors. The argument is the random restriction method of
+Kane and Williams~\cite{KW} with two changes taken from
+Section~\ref{sec:tech}: a sharper count of restricted circuits saves a
+logarithm, and a union bound over all survivor counts improves
+$\varepsilon^3$ to $\varepsilon^2$.
 
 \begin{theorem}\label{thm:lower}
-Let $C$ be a depth-two threshold circuit of size $s$ with $w$ wires that
-$\varepsilon$-agrees with Andreev's function, where
-$\varepsilon\ge3(k+2)/\sqrt N$. Then
+Let $C$ be a depth-two threshold circuit with $s$
+gates and $w$ wires that $\varepsilon$-agrees with Andreev's function, where
+$\varepsilon\ge3(k+2)/\sqrt N$. Then, in the balanced case ($km=N$),
 \[
-m\,N\,\varepsilon^2\le 36\,\bigl(k+2+\ln(s+1)\bigr)\,s\sqrt n
+s=\Omega\bigl(\varepsilon^2n^{3/2}/\log^2n\bigr)
 \quad\text{and}\quad
-m^{3/2}N\varepsilon^2\le 36\,\bigl(k+2+\ln(w+1)\bigr)\,w .
+w=\Omega\bigl(\varepsilon^2n^{5/2}/\log^{5/2}n\bigr).
 \]
-If moreover $m\le N$, the first factor can be replaced by $4(k+2)$, giving
-$mN\varepsilon^2\le144(k+2)\,s\sqrt n$ and
-$m^{3/2}N\varepsilon^2\le144(k+2)\,w$. In the balanced case,
-$s=\Omega(\varepsilon^2n^{3/2}/\log^2n)$ and
-$w=\Omega(\varepsilon^2n^{5/2}/\log^{5/2}n)$. Taking $\varepsilon=\tfrac12$,
+Taking $\varepsilon=\tfrac12$,
 allowed when $N\ge36(k+2)^2$, gives the worst-case bounds.
 \end{theorem}
 
@@ -604,6 +588,18 @@ on those bits (Lemma~\ref{lem:surv}). There are few such restricted circuits
 (Lemma~\ref{lem:count}), and none of them correlates well with a random
 table (Lemma~\ref{lem:avg}). Averaging over all restrictions proves the
 theorem.
+
+\smalltitle{Restrictions.}
+The lemmas below hold for all $k,m\ge1$, not only in the balanced case.
+Throughout, $C$ is a depth-two threshold circuit of size $s$ with $w$ wires.
+A \emph{restriction} consists of a choice $\sigma$ of one \emph{live}
+position in every block, and a \emph{fixing}: values for all other input
+bits, table included. For a uniformly random restriction, every fixed bit
+is uniform and independent. Write $u\in\bits^k$ for the live bits and
+$o_i$ for the parity of the $m-1$ fixed bits of block $i$ (the
+\emph{offset}). Then the address is $b=u\oplus o$, and the restricted
+function is $u\mapsto x_{u\oplus o}$. A bottom gate \emph{survives} if it
+still depends on $u$. Let $U$ be the number of surviving gates.
 
 \begin{lemma}[Few survivors]\label{lem:surv}
 For a uniformly random restriction, $\mathbb E[U]\le4s\sqrt n/m$. The
@@ -621,16 +617,16 @@ Lu~\cite[Lemma~6.1]{KKL} and Chen, Santhanam and
 Srinivasan~\cite[Lemma~9.1]{CSS} prove analogues with polylogarithmic and
 $n^{o(1)}$ losses.
 
-\begin{fact}[Roychowdhury, Siu, Orlitsky~\cite{RSO}; see {\cite[Thm.~2.3]{KW}}]\label{fact:rso}
+\begin{lemma}[Roychowdhury, Siu, Orlitsky~\cite{RSO}; see {\cite[Thm.~2.3]{KW}}]\label{fact:rso}
 For any fixed functions $f_1,\dots,f_q$ on a finite set $\Omega$, at most
 $(|\Omega|+1)^{q+1}$ functions on $\Omega$ have the form
 $\ind{\sum_j\omega_jf_j\ge\tau}$.
-\end{fact}
+\end{lemma}
 
 \begin{lemma}[Counting restricted circuits]\label{lem:count}
-Fix $C$ and $\sigma$, and let $\cH_q$ be the set of functions
-$u\mapsto C(\text{restricted})$ over all fixings with at most $q$
-survivors. Then
+Fix $C$ and $\sigma$. Every fixing turns $C$ into a function of the live
+bits $u\in\bits^k$. Let $\cH_q$ be the set of functions that arise in this
+way from fixings with at most $q$ survivors. Then
 \[
 |\cH_q|\le\bigl((2^k+1)(s+1)\bigr)^q\,(2^k+1)^{q+k+1}.
 \]
@@ -644,7 +640,7 @@ $\tau$ grows, so there are at most $2^k+1$ of them. Pad the list of survivors
 with constant functions to length exactly $q$. Then each entry of the list is
 one of at most $(2^k+1)(s+1)$ functions: choose one of the at most $s$ gates
 or ``constant'', then the threshold. The top gate is a threshold function of
-the $q$ entries and the $k$ live bits. By Fact~\ref{fact:rso} with
+the $q$ entries and the $k$ live bits. By Lemma~\ref{fact:rso} with
 $|\Omega|=2^k$, there are at most $(2^k+1)^{q+k+1}$ such functions for each
 list.
 \end{proof}
@@ -692,6 +688,29 @@ by Markov's inequality and then use a single survivor count. That loses a
 factor of $\varepsilon$; the uniform bound with Cauchy--Schwarz does not.
 
 \begin{proof}[Proof of Theorem~\ref{thm:lower}]
+We prove more generally, for all $k,m\ge1$ and
+$\varepsilon\ge3(k+2)/\sqrt N$, that
+\begin{equation}\label{eq:lower-general}
+m\,N\,\varepsilon^2\le 36\,\bigl(k+2+\ln(s+1)\bigr)\,s\sqrt n
+\quad\text{and}\quad
+m^{3/2}N\varepsilon^2\le 36\,\bigl(k+2+\ln(w+1)\bigr)\,w ,
+\end{equation}
+and that for $m\le N$ the factors $k+2+\ln(s+1)$ and $k+2+\ln(w+1)$ can
+both be replaced by $4(k+2)$:
+\begin{equation}\label{eq:lower-simple}
+mN\varepsilon^2\le144(k+2)\,s\sqrt n
+\quad\text{and}\quad
+m^{3/2}N\varepsilon^2\le144(k+2)\,w .
+\end{equation}
+In the balanced case $m=N/k\le N$ and $n=2N$, so \eqref{eq:lower-simple}
+reads
+\[
+s\ge\frac{\varepsilon^2N^{3/2}}{144\sqrt2\,k(k+2)}
+\quad\text{and}\quad
+w\ge\frac{\varepsilon^2N^{5/2}}{144\,k^{3/2}(k+2)},
+\]
+which is the theorem, since $N=n/2$ and $k=\log_2(n/2)$.
+
 By hypothesis, $\beta/N=(k+2)/\sqrt N\le\varepsilon/3$ and
 $2^{-(k+6)}\le\varepsilon/192$. So Lemma~\ref{lem:avg} gives
 $\varepsilon/3\le\alpha\sqrt{\mathbb E[U]}/N$. Squaring and inserting
@@ -700,7 +719,7 @@ Lemma~\ref{lem:surv},
 \varepsilon^2N^2\le9\alpha^2\,\mathbb E[U]\le
 9N\bigl(k+2+\ln(s+1)\bigr)\cdot\frac{4s\sqrt n}{m},
 \]
-which is the first bound.
+which is the first bound of~\eqref{eq:lower-general}.
 
 For wires, count as survivors only the gates that depend on at least two
 live bits. A gate depending on at most one live bit computes that bit, its
@@ -710,25 +729,20 @@ so there are at most $w$ candidate gates, and Lemmas~\ref{lem:count}
 and~\ref{lem:avg} hold with $s$ replaced by $w$. Now use the second bound of
 Lemma~\ref{lem:surv}.
 
-Finally, let $m\le N$. If $\ln(s+1)\le3(k+2)$, then $k+2+\ln(s+1)\le4(k+2)$.
-Otherwise $s\ge e^{3(k+2)}-1>N^{5/2}\ge mN$, so the claim with $4(k+2)$ holds
+For~\eqref{eq:lower-simple}, let $m\le N$. If $\ln(s+1)\le3(k+2)$, then $k+2+\ln(s+1)\le4(k+2)$.
+Otherwise $s\ge e^{3(k+2)}-1>N^{5/2}\ge mN$, so the first bound holds
 trivially. The same argument works for $w$, since $N^{5/2}\ge m^{3/2}N$.
 \end{proof}
 
-\begin{remark}[Limits of the method; informal]
-After a restriction with one live bit per block, the function
-$u\mapsto x_{u\oplus o}$ is an OR of at most $N$ ANDs of literals, which is a
-depth-two circuit with $N$ bottom gates. Gates such as $\ind{t_S\ge\theta}$
-survive with probability $\Theta(k/\sqrt N)$. So no argument that counts
-survivors of a single restriction can give more than about $n^{3/2}/\log n$,
-one logarithm above Theorem~\ref{thm:lower}. Kane and Williams already observe
-that their restriction lemma is tight for majority gates~\cite[Section~3]{KW}.
-Rectangle methods (discrepancy, sign rank) cannot reach $n^{2-o(1)}$ either:
-for every split of the inputs between two players, Andreev's function has a
-protocol with $O(k)$ bits of communication. One player sends its partial
-block parities, and the other then knows $b$ and either announces $x_b$ or
-sends $b$ back. Sign rank is also known to be too weak against
-$\THR\circ\THR$ in general~\cite{CM}.
+\begin{remark}[Limits of the method]
+Theorem~\ref{thm:lower} is within one logarithm of what survivor counting
+can give. After a restriction with one live bit per block, the function
+$u\mapsto x_{u\oplus o}$ has a depth-two circuit with $N$ bottom gates, and
+gates such as $\ind{t_S\ge\theta}$ survive with probability
+$\Theta(k/\sqrt N)$; Kane and Williams already observe that their
+restriction lemma is tight for majority gates~\cite[Section~3]{KW}. So
+counting the survivors of a single restriction cannot give more than about
+$n^{3/2}/\log n$ gates.
 \end{remark}
 
 %===================================================================
@@ -736,28 +750,21 @@ $\THR\circ\THR$ in general~\cite{CM}.
 % Authors: Christian Reitwiessner
 \sect{A near-quadratic lower bound for sign-coherent circuits}\label{sec:coherent}
 
-\begin{keybox}
-\textbf{Notation for this section.} $G$ is the number of bottom gates.
-A \emph{cube} is a vector $q\in\{0,\dots,m-1\}^k$ of block counts, defined
-below. The symbols $s$, $z$, $\varepsilon$ and $F$ are local to this section.
-\end{keybox}
-
-The circuit of Theorem~\ref{thm:exact} uses only bottom gates of a special
+The upper bound circuit of Theorem~\ref{thm:exact} uses only bottom gates of a special
 kind. This section shows that with such gates it cannot be improved by more
-than a polylogarithmic factor. The proofs are complete and were checked by an
-independent referee and by computer on small cases; the constants are not
-optimized, and the result is not formalized in Lean.
+than a polylogarithmic factor.
 
-\smalltitle{The class.}
+\smalltitle{Sign-coherence.}
 A bottom gate is \emph{sign-coherent} if, inside every address block, its
-weights are either all $\ge0$ or all $\le0$. Its table weights and the top
-gate are arbitrary. Every gate that sees each block only through its number of ones is
+weights are either all $\ge0$ or all $\le0$; its table weights are
+arbitrary. A depth-two threshold circuit is \emph{sign-coherent} if all its
+bottom gates are; its top gate is arbitrary. Every gate that sees each block only through its number of ones is
 sign-coherent, and so is every gate that is monotone in the address bits.
 All gates of the circuit in Theorem~\ref{thm:exact} are of this kind.
 
 \begin{theorem}\label{thm:coherent}
-Let $C$ be a depth-two threshold circuit for $A$ whose $G$ bottom gates are
-all sign-coherent. Put $D_0=\max\{0,N-k-1-\log_2(G+1)\}/\bigl(k+\log_2(G+1)\bigr)$. Then
+Let $C$ be a sign-coherent depth-two threshold circuit for $A$ with $G$
+bottom gates. Put $D_0=\max\{0,N-k-1-\log_2(G+1)\}/\bigl(k+\log_2(G+1)\bigr)$. Then
 \[
 G\ \ge\ \frac{m^k}{m^k-(m-1)^k}\,D_0\ \ge\ \frac mk\,D_0 .
 \]
@@ -767,9 +774,9 @@ G\ \ge\ \frac{N(N-3k-1)}{3k^3}\ =\ \Omega\!\left(\frac{n^2}{\log^3 n}\right).
 \]
 \end{theorem}
 
-So within this class the circuit of Theorem~\ref{thm:exact} is optimal up to a
-polylogarithmic factor. The class also contains the earlier circuit of Kane
-and Williams~\cite[Thm.~1.2]{KW}. A polynomial-exponent improvement below quadratic therefore requires
+So among sign-coherent circuits the circuit of Theorem~\ref{thm:exact} is
+optimal up to a polylogarithmic factor. The earlier circuit of Kane and
+Williams~\cite[Thm.~1.2]{KW} is sign-coherent as well. A polynomial-exponent improvement below quadratic therefore requires
 gates whose weights have mixed signs inside a block.
 
 \smalltitle{Plan.}
@@ -863,20 +870,13 @@ but our literature search was limited. (3) Theorem~\ref{thm:coherent} is
 asymptotic. It exceeds $n^{3/2}$ only from about $k=37$, and the method
 (Lemma~\ref{lem:entropy} plus a uniform bound as in Lemma~\ref{lem:diag})
 cannot give more than $O(n^2/\log n)$. (4) Lemma~\ref{lem:entropy} holds for
-all circuits. For general gates, the survival-type arguments of
-Section~\ref{sec:lower} cannot exceed $O(n^{3/2})$: under every
-distribution of restrictions that leaves one live bit per block, a gate with
-random $\pm1$ weights is non-constant with probability at least
-$1/(2\sqrt{2km})$. Gates with mixed signs inside a block are exactly where
+all circuits. For general gates, the limit of survivor counting noted after
+Theorem~\ref{thm:lower} does not depend on the choice of restrictions: under
+every distribution of restrictions that leaves one live bit per block, a
+gate with random $\pm1$ weights is non-constant with probability at least
+$1/(2\sqrt{2km})$, so such arguments cannot exceed $O(n^{3/2})$. Gates with mixed signs inside a block are exactly where
 the gap between $n^{3/2}$ and $n^2$ lies.
 \end{remark}
-
-
-\smalltitle{Two address blocks.}
-For $k=2$ the bounds are linear in $m$ on both sides: sign-coherent circuits
-need at least $m-1$ bottom gates (the boundary of a monotone region in the
-grid $\{0,\dots,m\}^2$ cuts corners of at most four border squares), and a
-circuit with $4\lceil m/2\rceil+m$ block-symmetric bottom gates exists.
 
 
 %===================================================================
@@ -888,6 +888,10 @@ circuit with $4\lceil m/2\rceil+m$ block-symmetric bottom gates exists.
   have mixed signs inside a block. Conversely, can the exact lower bound beat
   $n^{3/2}$? Such a proof must handle gates whose address weights nearly
   cancel, since those defeat both survival counting and the cube restriction.
+  Rectangle methods (discrepancy, sign rank) do not reach $n^{2-o(1)}$
+  either: for every split of the inputs between two players, Andreev's
+  function has a protocol with $O(k)$ bits of communication, and sign rank
+  is too weak against $\THR\circ\THR$ in general~\cite{CM}.
 \item \emph{Parity.} Fixing the table to $x_c=y\oplus c_1\oplus\dots\oplus c_k$
   turns a circuit for $A$ into one for parity of $km+1$ bits. With
   sign-coherent gates parity needs about half as many gates as bits; with
@@ -905,10 +909,15 @@ circuit with $4\lceil m/2\rceil+m$ block-symmetric bottom gates exists.
 \smalltitle{Formalization.}
 The Lean~4 proofs are in
 \href{https://github.com/cslib-community/cslib-frontier}{cslib-frontier}.
-Proposition~\ref{prop:basic} is formalized in pull request \#2813, and
-Theorem~\ref{thm:lower} with Lemmas~\ref{lem:surv}--\ref{lem:avg} in pull
-request \#2377 (both merged). The other results are proved here and checked
-by computer on small cases.
+All numbered results are formalized there, as explicit finite inequalities:
+Proposition~\ref{prop:basic} in pull request \#2813;
+Theorem~\ref{thm:exact} in \#4720 and \#4773;
+Lemma~\ref{lem:odd} and Theorem~\ref{thm:avgupper} in \#4721 and \#4722;
+Theorem~\ref{thm:lower} with Lemmas~\ref{lem:surv}--\ref{lem:avg} in \#2368,
+\#2372 and \#2377; Theorem~\ref{thm:coherent} with
+Lemmas~\ref{lem:entropy} and~\ref{lem:diag} in \#4709 and \#4718; and the
+bounds for two address blocks in \#4774 (all merged). The remarks are
+not formalized.
 
 \smalltitle{Acknowledgements.}
 The results, the formalization and this note were developed with AI
@@ -1021,12 +1030,12 @@ expansion has top coefficients bounded by $O(n^3)$.
 \renewcommand{\thesection}{\Alph{section}}
 \sect{Proof of Lemma~\ref{lem:surv}}\label{app:surv}
 
-\begin{fact}[Erd\H{o}s~\cite{Erdos}]\label{fact:lo}
+\begin{lemma}[Erd\H{o}s~\cite{Erdos}]\label{fact:lo}
 Let $z_1,\dots,z_R$ be independent uniform bits, let $\omega_1,\dots,\omega_R$
 satisfy $|\omega_j|\ge\mu>0$, and let $I$ be a half-open interval of length
 $\mu$. Then
 $\Pr\bigl[\sum_j\omega_jz_j\in I\bigr]\le\binom{R}{\lfloor R/2\rfloor}2^{-R}\le1/\sqrt R$.
-\end{fact}
+\end{lemma}
 
 Fix one bottom gate $\ind{\sum_j\omega_jz_j\ge\tau}$, where $j$ runs over
 all input positions. Let $\Lambda$ be the set of address positions with
@@ -1049,7 +1058,7 @@ half-open pieces of lengths $|\omega_j|$, one for each live $j\in \Lambda$.
 
 For a live $j\in \Lambda$, let $R_j$ be the number of \emph{fixed} positions
 $j'\in \Lambda$ with $|\omega_{j'}|\ge|\omega_j|$. If $R_j\ge\rho(j)/4$ for every live
-$j\in \Lambda$, then Fact~\ref{fact:lo}, applied to these $R_j$ positions and
+$j\in \Lambda$, then Lemma~\ref{fact:lo}, applied to these $R_j$ positions and
 conditioned on all other fixed bits, bounds the probability of piece $j$ by
 $R_j^{-1/2}\le2\rho(j)^{-1/2}$, and summing over the pieces proves the lemma.
 
