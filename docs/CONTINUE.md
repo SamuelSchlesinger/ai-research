@@ -135,3 +135,6 @@ Read `experiments/eth_transfer/report.md` and RESEARCH_STATE.md section 34 befor
 ## Further mixed-sign routes examined
 
 Read `experiments/noncoherent_routes/report.md` and RESEARCH_STATE.md section 35. The strongest proposed relaxation is a sum of dense-table adaptive slabs, where two bottom gates let a table form control a signed address window's width. Diagonal packing can share changing table thresholds across address slices. Exact identities and quadratic noncoherent baselines are checked; a subquadratic all-table decoder remains unproved. Walsh masks provide a family with no common bounded-run ordering/reorientation. Do not treat either the primitives or the mask generator as a new upper bound.
+
+
+The adaptive-slab follow-up is in `experiments/noncoherent_routes/followup.md`. Exact dense-table decoding produces a binomial window. Plain alternating shifts vanish; degree-(t-1) polynomial weights restore parity but retain linear address-range cost. Two finite LP witnesses prove complete feasibility of a dense-table atom pool, with large noncompetitive gate counts and independently verified integer margins. The next useful question is sharing across decoded products, not larger unstructured pool fitting. All search processes completed.

@@ -10,6 +10,8 @@ This pass gives explicit exact quadratic circuits with incompatible within-block
 
 The strongest candidate is a joint sum of dense-table adaptive slabs with row-dependent address normals, potentially allowing diagonal sharing. Its unresolved requirement is a strict correct sign on every independent table and every raw address. No global decoder satisfying that requirement was obtained. The finite checks verify the identities and the quadratic circuits; no solver search or claimed small-instance improvement is hidden in them.
 
+A subsequent pass in [Exact decoding from adaptive slabs](followup.md) proves a dense-table decoder and a parity-restoration identity, and supplies two independently checked finite circuits from a specified atom dictionary. Neither improves the known bounds.
+
 ## Model and inherited constraints
 
 Write $N=2^k$, $y_c=1-2x_c$, $b_i(a)=\sum_j a_{i,j}\pmod2$, and $n=N+km$, with $km\asymp N$. The circuit receives the raw bits $x,a$, not computed block parities, table codewords, or mask choices. Every gate and coefficient is fixed before the input is known.
@@ -123,4 +125,4 @@ These routes are distinct from adding copies of a coherent circuit or introducin
 
 It checks all 4,096 raw inputs of $A_{2,4}$ for each explicit mixed odd-weight circuit, including the staircase gate outputs and the absence of a common coherent reorientation. It checks the adaptive slab on 1,312 integer pairs, diagonal packing on 475 pairs, all 384 order/reorientation combinations for the four-column Walsh masks, and 651 distinct-column checks for larger masks. The symbolic proofs explain their general scope.
 
-These are exact arithmetic checks of building blocks and baseline circuits. There is no fitted solver certificate, new finite gate record, improved asymptotic bound, or independent formal verification. No manuscript changes are warranted by these results.
+These are exact arithmetic checks of building blocks and baseline circuits. This initial pass had no fitted solver certificate. The linked follow-up adds finite certificates, but neither pass establishes a new finite gate record, improved asymptotic bound, or independent formal verification. No manuscript changes are warranted by these results.

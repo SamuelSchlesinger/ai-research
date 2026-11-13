@@ -1,0 +1,40 @@
+{
+  "Authors": "Christian Reitwiessner",
+  "status": "passed",
+  "dense_code": {
+    "exact_decoding_checks": 9304,
+    "parity_annihilation": [
+      {
+        "table_bits": 3,
+        "alternating_kernel_sum": 0
+      },
+      {
+        "table_bits": 5,
+        "alternating_kernel_sum": 0
+      },
+      {
+        "table_bits": 7,
+        "alternating_kernel_sum": 0
+      }
+    ],
+    "higher_degree_parity_restoration_checks": 63
+  },
+  "certificates": [
+    {
+      "file": "slab_certificate_m3.json",
+      "atoms": 189,
+      "bottom_gates_unmerged": 378,
+      "raw_inputs_checked": 1024,
+      "exact_integer_margin": 999998,
+      "no_common_coherent_reorientation": true
+    },
+    {
+      "file": "slab_certificate_m4_centered.json",
+      "atoms": 461,
+      "bottom_gates_unmerged": 922,
+      "raw_inputs_checked": 4096,
+      "exact_integer_margin": 999988,
+      "no_common_coherent_reorientation": true
+    }
+  ]
+}

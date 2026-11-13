@@ -1,0 +1,20 @@
+{
+  "m": 3,
+  "k": 2,
+  "table_rows": "all signed sums of three of four table signs, modulo overall sign",
+  "address_rows": "mixed +/-1 in block one, mixed +/-s in block two, s=1,2,3; modulo global sign",
+  "candidate_atoms": 8640,
+  "constraints_after_table_complement": 512,
+  "time_limit_seconds": 30.0,
+  "status": 0,
+  "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)",
+  "elapsed_seconds": 1.909548619762063,
+  "objective": "L1 norm of atom coefficients; not gate count",
+  "atoms": 189,
+  "bottom_gates_unmerged": 378,
+  "exact_integer_margin": 999998,
+  "checked_raw_inputs": 1024,
+  "numpy_version": "2.5.4",
+  "scipy_version": "1.18.1",
+  "centered_only": false
+}
