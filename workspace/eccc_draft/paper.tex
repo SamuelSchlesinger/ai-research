@@ -793,7 +793,7 @@ ones exactly at its first $s_i$ positions. A \emph{cube} is a vector
 $q\in\{0,\dots,m-1\}^k$; there are $m^k$ cubes. For $z\in\bits^k$ the input
 $(x,a(q+z))$ differs from $(x,a(q))$ exactly in the live positions
 $q_i+1$ of the blocks $i$ with $z_i=1$, and its address is
-$(q\bmod2)\oplus z$. Hence
+$(q\bmod2)\oplus z$. Hence, for every cube $q$,
 \[
 z\mapsto A\bigl(x,a(q+z)\bigr)=x_{(q\bmod 2)\oplus z}
 \]
