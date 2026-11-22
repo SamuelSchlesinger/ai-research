@@ -39,6 +39,18 @@ At distance one, add an output XOR with the differing raw to a minimizing single
 
 Wittcop's Lemma 4.2 gives the distance-one-or-two criterion for a table supported on two points at threshold $n-1$. Here the two changes are measured from the parity extension at the threshold set by its odd faults. [Wittcop, *2N Circuit Lower Bounds for the Minimum Circuit Size Problem*](https://www.academia.edu/180415409/2N_Circuit_Lower_Bounds_for_the_Minimum_Circuit_Size_Problem)
 
+There is also a matching upper bound $A_m=s+1$ at distances three and four. More generally, at distance $D\ge2$ the pair costs at most
+
+$$
+ A_m+\lceil D/2\rceil-2.
+$$
+
+Translate the two sites to zero and the indicator of their $D$ differing coordinates. Group those coordinates into $t=\lfloor D/2\rfloor$ disjoint pairs and use the XOR of each pair as one new parity input. Keep all parity coordinates outside this group. Start with a minimizing singleton at zero on the resulting $m-D+t\ge1$ parity inputs. To make all $D$ original bits equal at the faults, pick one representative of each pair, and also the unpaired bit when $D$ is odd. Test a representative against each other representative for equality and AND these tests into an existing selector. Each comparison added to the selector costs two gates. The singleton forces equality within every pair and fixes the outside coordinates. The selector enforces equality between the pairs. Exactly the desired two faults remain.
+
+For even $D=2t$ the baseline is unchanged and the construction adds $t+2(t-1)$ gates to $A_{m-t}$. For odd $D=2t+1$ append one final XOR with the unpaired bit to restore the baseline, giving $t+2t+1$ gates beyond $A_{m-t-1}$. The odd-error recurrence gives the displayed bound in both cases. Together with the distance-three lower bound this determines the cost exactly for $D=3,4$.
+
+**Affine planes on four varying axes.** Any four-point affine plane varying in at most four coordinates stays within $s$, for every core. Its three nonzero directions have total Hamming weight at most eight, since every varying coordinate occurs in exactly two directions. Pick a direction of weight one or two. Quotienting by it maps the plane to two distinct points differing in at most three surviving coordinates. At weight one drop that axis and restore it by an output XOR. At weight two replace the two coordinates by their XOR, substituting this one gate into the quotient circuit. The original plane is the full preimage of the pair. The pair on $m-1$ bits costs at most $A_{m-1}$ and the added gate gives at most $s$. For $m=2$ the quotient pair is the whole one-bit fiber; fixing the parity raw in a minimizing one-fault circuit to the value retaining its fault saves a gate and computes $h$ with that fiber toggled, and appending the raw by XOR costs one. Thus this quotient also costs at most $A_1$.
+
 ### Proof for the union
 
 Apply the circuit reduction with $I=\operatorname{supp}(d)\cup\operatorname{supp}(e)$. Each pair shares its own $W$-value, so throughout preparation the two directions remain $d$ and $e$. The XOR of the four addresses remains $d+e\ne0$. A four-element set invariant under any nonzero translation consists of two pairs with the same displacement and has XOR zero. This verifies the required exclusion after every shear.
