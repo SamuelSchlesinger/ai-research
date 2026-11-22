@@ -47,6 +47,16 @@ If the coordinate fixed in the reduction belongs to just one direction, that pai
 
 If the coordinate belongs to both directions, one fault from each pair survives. Under condition 2 the survivors still differ on at least three $W$-coordinates after restoration. The single-pair lower bound again gives $A_{m-1}$. Condition 1 only permits the odd case. Adding back the two saved gates gives $A_m$.
 
+### Two distance-two pairs with a common coordinate
+
+Suppose $d=e_c+e_i$ and $e=e_c+e_j$, with $c,i,j$ distinct. Write $t$ for the number of separating coordinates. The same lower bound holds if $t\ge2$, or if $t=1$ and the two pairs have opposite address parities. Both points of each pair have the same parity.
+
+Use $I=\{c,i,j\}$. When $t\ge1$ the two pairs have different $W$-values. At every fixed $x=(y,q,W)$ the function is three-bit parity up to a sign and at most two faults. Each active raw is essential on every such slice, since a function independent of it would differ from parity on exactly four positions. This persists after all shears. A private nonlinear gate with partner $H(x)$ is now impossible unless $H$ is constant. Otherwise $H$ attains its own canalizing value on some slice and the raw is inessential there. A constant partner can be bypassed with a signed wire. Consequently the terminal restriction in the circuit reduction fixes a raw with at least two readers, and we may choose either branch.
+
+Fixing $i$ or $j$ leaves an odd number of faults. If the raw is $c$, apply the same tag correction on a surviving input in both branches. From one branch to the other the survivor of the first pair changes in coordinate $i$, and that of the second changes in coordinate $j$. The two residual distances are therefore $t+v$ and $t+2-v$ for some $0\le v\le2$. Their maximum is at least three if $t\ge2$.
+
+For $t=1$, the parity of these distances is the original cross-pair parity difference. Indeed the preliminary translations have total parity shift equal to the tag sum on each slice. The correction on the surviving raw adds that same sum, so the effective translation, including the subsequently fixed coordinate $c$, preserves address parity. Dropping $c$ does not affect distances within a branch. Opposite pair parities thus force distances one and three. Take the branch of distance three and apply the single-pair lower bound.
+
 ## Consequences at a quadratic budget
 
 One can realize $s=n^2$ for all sufficiently large $n$, with $m=n-O(\log n)$ parity coordinates in the same baseline. Use the [threshold interpolation in the odd-error manuscript](papers/probabilistic/main.tex) with $r=\lceil4\log_2 n\rceil$ core bits. The path of cores starts with $A_1(1)=O(r)$, ends with $A_1(1)=\Omega(2^r/r)$, and has upward steps bounded by an absolute constant. Here $A_1(1)$ is minimized over $u$ with one selector. At each core, varying $l$ over the integers from 3 to a sufficiently large absolute constant gives a consecutive interval of budgets
@@ -61,7 +71,17 @@ Take four distinct neighbors of one parity address in this fiber. Their six pair
 
 ## The remaining local configurations
 
-For individually affordable pairs the two directions have weight one or two. If they overlap and are different, they share exactly one coordinate and their union has at most three. If condition 2 also fails, at most two additional coordinates vary. Thus every case still needed for the conjecture varies in at most five parity coordinates. All the constant parity coordinates may be moved into the core by replacing $h$ with its XOR with their parity and fixing the enlarged core value. The baseline and the one-fault functions at that enlarged value are identical as functions of the original inputs, so the threshold remains the same. This reduces the unresolved part to finitely many address configurations with an arbitrary core.
+For individually affordable pairs, different overlapping directions share exactly one coordinate. A distance-one and a distance-two pair then vary on at most four axes unless there are three separating coordinates. Two distance-two pairs sharing a coordinate can have at most one separating coordinate left to consider. All the constant parity coordinates can be moved into the core by replacing $h$ with its XOR with their parity and fixing the enlarged core value. The baseline and the one-fault functions there are identical as functions of the original inputs, so the threshold remains the same.
+
+Up to translating and permuting the varying axes, only the following three configurations still need an arbitrary-core proof.
+
+| Pair distances | Separating coordinates | Four addresses |
+| --- | --- | --- |
+| 1 and 2 | 1 | 000, 001, 010, 111 |
+| 1 and 2 | 2 | 0000, 0001, 1100, 1111 |
+| 2 and 2 | 1, all four addresses of the same parity | 0000, 0011, 1010, 1100 |
+
+For the first two rows the shared coordinate runs along the edge. Flipping it preserves that edge as a set and interchanges the two placements of the other pair's diagonal once its passive coordinates are fixed. With zero separators, four distinct sites cannot fit this pattern in two dimensions. For the last row, translate one pair to $\{0,d\}$. Translation by $d$ still preserves that pair and lets one choose the constant value of the $i$-coordinate on the other pair. Its address parity then specifies its diagonal on $(c,j)$. With zero separators, regroup the sites by their $c$ value. The other two coordinates each vary in exactly one of the two new pairs, giving disjoint supports.
 
 A tempting shortcut is to fix a coordinate leaving three faults and charge an extra gate for the triple. Three faults can attain the odd minimum. With three parity inputs $x,y,z$, a constant zero core and one selector $q$, the five-gate function
 
