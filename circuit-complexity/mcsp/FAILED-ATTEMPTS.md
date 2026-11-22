@@ -19,6 +19,8 @@ These are the approaches from the 22 November 2026 MCSP session that did not wor
 **Constant error at the stronger deterministic coefficient.** The tilted gate-elimination argument gives 2.5226N for deterministic circuits and extends to error 2^(−0.00564N).
 *Why it failed:* the relative-entropy bound that drives it fails at constant error. At constant error, only the weaker (2.5−o(1))N bound from the dense manuscript survives.
 
+**Finding affine spaces inside quadratic elimination paths.** The dense MCSP proof gives a small-circuit truth table in each affine space of sufficiently small codimension. An attempt to reuse it after quadratic substitutions fails even with disjoint products of raw bits. A path with $2^{\lfloor N/10\rfloor}$ tables can contain no affine plane. The same note gives a positive criterion when the product input pairs have a small vertex cover. [Quadratic elimination paths](papers/tilted/quadratic-paths.md)
+
 ## Using the new RH and ETH results
 
 **Riemann hypothesis.** The session monitored the Lean-verified proof and Alpöge's note throughout.
