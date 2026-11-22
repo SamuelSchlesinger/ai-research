@@ -10,7 +10,7 @@ Summary of a research session that ended on 22 November 2026, together with a li
 - [`formal/`](formal/): Lean files for the row-marginal, teaching-projection and pivot/overlap lemmas.
 - [`communication.md`](communication.md): the interactive-communication proof that the sign-rank manuscript cites.
 - [`FAILED-ATTEMPTS.md`](FAILED-ATTEMPTS.md): approaches that did not work, and why.
-- [Four flips in a parity extension](four-flips.md) gives exact pair costs at distances one and two and a lower bound for the union of two pairs in different directions.
+- [Four flips in a parity extension](four-flips.md) gives exact pair costs at distances one and two and a lower bound for two pairs with disjoint direction supports or three separating coordinates.
 
 ## Claimed results (written proofs, not independently checked)
 

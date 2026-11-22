@@ -63,4 +63,12 @@ Take four distinct neighbors of one parity address in this fiber. Their six pair
 
 For individually affordable pairs the two directions have weight one or two. If they overlap and are different, they share exactly one coordinate and their union has at most three. If condition 2 also fails, at most two additional coordinates vary. Thus every case still needed for the conjecture varies in at most five parity coordinates. All the constant parity coordinates may be moved into the core by replacing $h$ with its XOR with their parity and fixing the enlarged core value. The baseline and the one-fault functions at that enlarged value are identical as functions of the original inputs, so the threshold remains the same. This reduces the unresolved part to finitely many address configurations with an arbitrary core.
 
+A tempting shortcut is to fix a coordinate leaving three faults and charge an extra gate for the triple. Three faults can attain the odd minimum. With three parity inputs $x,y,z$, a constant zero core and one selector $q$, the five-gate function
+
+$$
+ (x\oplus y)\oplus\bigl(z\lor(q\land\neg(x\land y))\bigr)
+$$
+
+differs from parity precisely when $q=1$, $z=0$ and $(x,y)\ne(1,1)$. Here $A_1=1$ and $A_3=5$.
+
 For comparison, take four parity bits, a single selector, and a constant zero core. The threshold is six. Exact synthesis on the selector-one fiber finds that all 140 four-point affine planes stay within budget and all 1,680 other quadruples exceed it. Address translations and permutations give 19 cases in total. The [synthesis script](check_four_flips.py) checks all cases, including the case verdicts underlying both counts. The computation treats this one core and budget. The arbitrary-core assertion for the remaining nearby pairs is open.
