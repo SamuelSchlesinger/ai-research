@@ -9,6 +9,7 @@ Summary of a research session that ended on 22 November 2026, together with a li
 - [`papers/`](papers/): the 17 manuscripts, each as LaTeX source and PDF.
 - [`formal/`](formal/): Lean files for the row-marginal, teaching-projection and pivot/overlap lemmas.
 - [`communication.md`](communication.md): the interactive-communication proof that the sign-rank manuscript cites.
+- [One flipped entry distinguishes cores of identical size](core-faults.md) gives exact costs for a family at the quadratic threshold.
 - [`FAILED-ATTEMPTS.md`](FAILED-ATTEMPTS.md): approaches that did not work, and why.
 
 ## Claimed results (written proofs, not independently checked)
