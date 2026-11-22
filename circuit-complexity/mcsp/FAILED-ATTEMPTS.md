@@ -51,6 +51,8 @@ These are the approaches from the 22 November 2026 MCSP session that did not wor
 **Ordinary approximate degree for gap MCSP (s = N^a versus t = N^b).** The aim was degree of order s√(N/t), matching the quantum query bound.
 *Why it is still open:* the replicated-mask construction proves only Ω(max{s, max(1, s²/t)·√(N/t)}). Threshold, rational and postselected degrees are all Θ(s), but none of these arguments controls bounded polynomials at the quantum scale.
 
+**Choosing the sign that deletes two gates at every merge.** For a matching of address pairs with a common difference, both constant sign patterns retain $2^{(1+o(1))s\log_2s}$ easy tables when $n=o(s)$ and $s=o(2^n/n)$. Optimizing the signs with exact fiber counts still gives the same $0.45689339\ldots$ deficit coefficient as the signed-merge proof when the favorable sign is constant. The obstruction concerns the gate savings and the terminal population estimate used in that proof. [Fiber counts and the sharp coefficient](papers/deterministic/parallel-derivatives.md)
+
 ## Priority corrections (claims that turned out not to be new)
 
 - **Testing the whole size-s circuit class.** Alon–Blais–Chakraborty–García-Soriano–Matsliah already prove Ω(s^(1/c)) directly. The degree manuscript first credited them only for isomorphism testing and was corrected.
