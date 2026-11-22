@@ -12,7 +12,7 @@ $$
 
 After $T$ such substitutions the solution set has $2^{N-T}$ points, since every assignment to the remaining bits extends uniquely in reverse order. An affine plane consists of four distinct points $x,x+s,x+t,x+s+t$.
 
-This product occurs in Lemma 5.3, case 4.2.2.2, of Golovnev, Kulikov, Smal and Tamaki. Their Corollary 5.4 obtains a correlation bound up to $(2.6-o(1))N$ gates under a quadratic extractor hypothesis. Here we examine what follows from the forms of the substitutions alone. Whether their circuit-dependent rules select a given sequence on an MCSP circuit is a further restriction. [Gate Elimination: Circuit Size Lower Bounds and #SAT Upper Bounds, §5.2](https://www.golovnev.org/papers/gate_elimination.pdf)
+This product occurs in Lemma 5.3, case 4.2.2.2, of Golovnev, Kulikov, Smal and Tamaki. Their Corollary 5.4 obtains a correlation bound up to $(2.6-o(1))N$ gates under a quadratic extractor hypothesis. The second construction below realizes a plane-free path under their gate-selection rules on a small circuit. Whether such a path arises on a circuit deciding MCSP is a further question. [Gate Elimination: Circuit Size Lower Bounds and #SAT Upper Bounds, §5.2](https://www.golovnev.org/papers/gate_elimination.pdf)
 
 ## A path with no affine plane
 
@@ -38,15 +38,27 @@ $$
 
 Some fixed choice detects every pair. The determinant is independent of the base point, so that one choice rules out all affine planes at once.
 
-## A small circuit for membership in the path
+## An accepting leaf of a small circuit
 
-**Proposition.** For every fixed $\varepsilon>0$ there are infinitely many truth-table lengths $N=2^n$ and paths of the same form with $2^{\Omega_\varepsilon(N)}$ points, no affine plane, and an unrestricted full-binary-basis circuit of size at most $(1+\varepsilon)N$ for membership in the path.
+**Proposition.** For every fixed $\varepsilon>0$ there are infinitely many truth-table lengths $N=2^n$ and unrestricted full-binary-basis circuits of size at most $(1+\varepsilon)N$ with the following property. A legal choice of topological order and pivots in Lemma 5.3 gives one accepting leaf containing $2^{\Omega_\varepsilon(N)}$ points and no affine plane. This leaf is the circuit's whole accepting set.
 
 Use a family of binary linear encoders $E:\mathbb F_2^d\to\mathbb F_2^\ell$ of constant rate, relative distance at least $\delta>0$, and linear-size encoding circuits. Spielman's construction supplies such a family. Choose each pair of forms by sampling two coordinates of $E$ independently and uniformly, with replacement. Use fresh $a_i,b_i$ in each triple, even when code coordinates repeat. [Spielman, Linear-Time Encodable and Decodable Error-Correcting Codes](https://www.cs.yale.edu/homes/spielman/PAPERS/linearTimeIT.pdf)
 
 For independent directions $s,t$, write $v_j=(E(s)_j,E(t)_j)$. A random $j$ has $v_j\ne0$ with probability at least $\delta$ because $E(s)$ has weight at least $\delta\ell$. Fix such a $j$. A nonzero linear functional annihilating $v_j$ maps the columns $v_k$ to the codeword of a nonzero combination of $s,t$. At least a $\delta$ fraction of the $v_k$ therefore lie outside the span of $v_j$. The probability of a nonzero determinant is at least $\delta^2$. Set $m=Kd$ for a fixed integer $K$ with $4(1-\delta^2)^K<1$. The same union bound supplies a plane-free graph.
 
-On its $N_0=d+3m$ inputs a membership circuit computes $E(u)$ once, compares each $a_i,b_i$ with its selected code coordinate, checks $z_i=a_ib_i$, and conjoins the answers. Its size $G_0$ is $O(d)$. Choose the least power of two $N$ above or equal to both $N_0$ and $(G_0-N_0)/\varepsilon$. Requiring each of the $N-N_0$ new bits to be zero costs one further binary gate per bit. The size is at most $G_0+N-N_0\le(1+\varepsilon)N$. Since $N=\Theta_\varepsilon(d)$, padding preserves positive entropy rate. Projection away from the zero coordinates preserves the absence of planes.
+To realize the leaf, use a linear-size XOR encoder for $E$. Spielman's recursive encoding composes fixed-width linear maps at the check nodes, each implementable by a constant number of binary XORs. Omit identically zero code coordinates before sampling, which can only improve relative distance. Add one raw bit for the output of each encoder gate and one further bit $w$ with $w=u_1$. Each new coordinate is determined by $u$. Projection to the original graph is one-to-one, so these additional coordinates preserve the absence of planes. [Spielman, §§2 and 5, especially Definition 16 and Proposition 17](https://www.cs.yale.edu/homes/spielman/Research/ITsuperc.pdf)
+
+Build the membership circuit as a chain of ANDs, starting with the equality $w=u_1$. Its successive tests are the following.
+
+1. Check all equalities between $a_i,b_i$ and their designated raw encoder coordinates (or message bits). Use a distinct XNOR gate for each equality.
+2. Check each encoder gate equation in reverse topological order. Use a separate XOR tree for each equality between a raw output and the sum of its two raw predecessors. Insert any zero-padding literal tests after these equations.
+3. Check every equation $z_i=a_ib_i$, with a private AND $A_i$ for the product and a private XNOR $D_i$ comparing it with $z_i$.
+
+There are $N_0=O(d)$ unpadded bits and $G_0=O(d)$ unpadded gates. Choose the least power of two $N$ at least both $N_0$ and $(G_0-N_0)/\varepsilon$. Each padding literal costs one more binary gate in the chain, so $G_0+N-N_0\le(1+\varepsilon)N$ and $N=\Theta_\varepsilon(d)$.
+
+Order all product gates $A_i$ first. Each of its two inputs feeds exactly that gate and its own copy check from step 1. Both copy checks are XOR-type. The only successor of $A_i$ is the XOR-type gate $D_i$, whose other input $z_i$ has fanout one. These are exactly the hypotheses of case 4.2.2.2. Take the branch $z_i=a_ib_i$, so $D_i$ passes and its conjunction gate disappears. All other triples retain their wiring. Repeat until the product tests are gone.
+
+The first remaining AND now combines the check $w=u_1$ on the left with the next test on the right. Every internal gate of either input tree has fanout one. The left tree contains a fanout-one input $w$, so case 3.1 permits trivializing the right test. Choose its copy bit, encoder output bit, or padding bit as the pivot. This pivot has no other remaining use, since the copy checks precede the encoder checks and the encoder checks are in reverse topological order. On the passing branch the AND disappears and $w=u_1$ becomes the left side of the next AND. Finally the affine terminal case enforces $w=u_1$. Every assignment to $u$ followed these same branches, and every accepted input satisfies all their equations. [Elimination cases 3.1 and 4.2.2.2, Lemma 5.3](https://www.golovnev.org/papers/gate_elimination.pdf)
 
 ## Which affine information survives
 
@@ -61,4 +73,4 @@ $$
 
 Let $U$ be uniform on all tables. Conditioning $U$ to avoid $\Pi$ changes the mass of every $k$-flat by a multiplicative factor $1+O(2^{-k/2})$. Even a distribution with support at most $2^{cN}$ can exhibit this behavior at the ranks relevant to dense MCSP. For fixed $0<c<1$, draw $2^{\lfloor cN\rfloor}$ independent samples from the conditional law. Every flat of codimension $r\le cN-10\log_2 N$ has expected count $\Omega(N^{10})$. The multiplicative Chernoff bound with tolerance $1/N$ and a union bound over at most $2^{N(N+1)}$ flats give a single empirical distribution with mass $(1+o(1))2^{-r}$ on every such flat and zero on $\Pi$.
 
-The unshifted graph contains the all-zero truth table, so MCSP accepts a point of this very example. The obstruction concerns the inference from affine subspaces or affine-test statistics. A transfer to MCSP could still use additional restrictions on paths reached by the elimination algorithm, or synthesize an easy table using the quadratic equations directly.
+The unshifted graph contains the all-zero truth table, so MCSP accepts a point of this very example. The obstruction concerns the inference from affine subspaces or affine-test statistics. A transfer to MCSP could still exploit additional constraints on its own accepting or rejecting paths, choose different elimination steps, or synthesize an easy table using the quadratic equations directly.
