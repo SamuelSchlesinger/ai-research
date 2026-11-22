@@ -2,6 +2,8 @@
 
 Let $N=2^n$. At the fixed inner threshold $\lfloor0.99365N/n\rfloor$, every deterministic full-binary-basis circuit deciding MCSP has **more than $2.52307N$ gates** for sufficiently large $n$. The same holds for randomized circuits with pointwise two-sided error at most $2^{-0.0104N}$. Inputs are the $N$ table entries and fanout is unrestricted.
 
+A second construction puts the pivots in one part of an address partition and raises the coefficient at this same threshold to $2.52435$. [Address partition](address-split.md)
+
 At a private AND-type gate, three pairs of input values give the common output. The tilted proof uses a line through two of these pairs to produce an affine certificate. To use all three, we first satisfy the restrictions on individual entries and disjoint pairs. We then correct one pivot entry for each remaining parity query. When there are many such queries, their stronger gate decrements already give the desired bound. This uses the separate cases of Chen and Kabanets and the MCSP manuscript's synthesis theorem for relations on small cells. [Chen and Kabanets, Section 4.1](https://www2.cs.sfu.ca/~kabanets/papers/linsize-eccc.pdf) · [Tilted proof](main.tex) · [Small-cell synthesis](../witnesses/local.tex)
 
 ## The cost of satisfying a path

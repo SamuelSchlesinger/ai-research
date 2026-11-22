@@ -1,4 +1,4 @@
-"""Verify the gate and entropy margins in private-pairs.md with fractions."""
+"""Verify the sparse repair and address split bounds with exact fractions."""
 
 from fractions import Fraction as F
 
@@ -52,6 +52,43 @@ def check(a, b, p, q, pivot_limit, kappa_bound, gate_floor):
     assert kappa_high + entropy_high < F(".0104")
 
 
+def check_split(a, b, p, q, theta, gate_floor, error_exponent):
+    d_low, d_high = divergence(p, F(1, 2))
+    _, private_high = divergence(q, F(3, 4))
+    kappa_high = d_high + max(0, private_high - 2 * d_low) * a / q
+    ordinary = 3 + p
+    private = (2 + 2 * p) / q
+    tau_high = -log_bounds(theta)[0]
+    effective_low = 1 + log_bounds(F(3, 2))[0] * (1 - theta**2)
+    assert kappa_high < b
+    assert private < ordinary * effective_low
+    assert ordinary * tau_high < 1 - p
+    assert 2 + p - ordinary * a > gate_floor
+    confidence_loss = tau_high * a * max(0, private - ordinary) / (1 - p)
+    assert kappa_high + confidence_loss < error_exponent
+
+
+def check_split_optimum():
+    p_low, p_high = F(".54835424254"), F(".54835424256")
+    q, theta = F(".802"), F(".92")
+    for p, increasing in [(p_low, True), (p_high, False)]:
+        d_low, d_high = divergence(p, F(1, 2))
+        slope_low, slope_high = log_bounds(p / (1 - p))
+        if increasing:
+            assert 1 - d_high > (3 + p) * slope_high
+        else:
+            assert 1 - d_low < (3 + p) * slope_low
+    d_low = divergence(p_low, F(1, 2))[0]
+    d_high = divergence(p_high, F(1, 2))[1]
+    assert divergence(q, F(3, 4))[1] < 2 * d_low
+    effective_low = 1 + log_bounds(F(3, 2))[0] * (1 - theta**2)
+    assert (2 + 2 * p_high) / q < (3 + p_low) * effective_low
+    assert (3 + p_high) * -log_bounds(theta)[0] < 1 - p_high
+    assert F(".9932430193") < 1 - d_high < 1 - d_low < F(".9932430194")
+    assert F("2.5243780814") < (3 + p_low) * (1 - d_high) - 1
+    assert (3 + p_high) * (1 - d_low) - 1 < F("2.5243780816")
+
+
 if __name__ == "__main__":
     rows = [
         (".00635", ".00635", ".545836", "6/7", ".000305", ".0063495", "2.52307"),
@@ -60,4 +97,14 @@ if __name__ == "__main__":
     ]
     for row in rows:
         check(*map(F, row))
-    print("Verified all three gate bounds and the common confidence exponent.")
+    split_rows = [
+        (".00675", ".00675", ".548329", ".802", ".92", "2.52437", ".0074"),
+        (".00635", ".00635", ".546877", ".802", ".92", "2.52435", ".0069"),
+        (".00565", ".00565", ".544221", ".802", ".92", "2.52419", ".0062"),
+        (".007", ".00565", ".544221", ".802", ".92", "2.51941", ".0063"),
+        (".00565", ".00565", ".543250", ".8398", ".9676", "2.52323", ".00564"),
+    ]
+    for row in split_rows:
+        check_split(*map(F, row))
+    check_split_optimum()
+    print("Verified sparse repair, address splitting, and the limiting coefficient.")
